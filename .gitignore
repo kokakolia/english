@@ -1,0 +1,20 @@
+# Данные пайплайна (сырые страницы, промежуточные и собранные файлы)
+pipeline/data/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Node (появится на этапе 3)
+node_modules/
+dist/
+.vite/
+
+# IDE / OS
+.idea/
+.vscode/
+Thumbs.db
+desktop.ini
