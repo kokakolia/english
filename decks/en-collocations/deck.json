@@ -1,0 +1,51 @@
+{
+ "id": "en-collocations",
+ "name": "Английские коллокации",
+ "version": "745b3fbb26c7",
+ "language": "en",
+ "card_type": "cloze",
+ "built_at": "2026-09-16T18:42:18+00:00",
+ "source": {
+  "dict": "ozdic",
+  "note": "Словарные статьи ozdic (материал восходит к Oxford Collocations Dictionary); примеры и уровни — из данных того же сайта."
+ },
+ "count": 993,
+ "chunk_size": 250,
+ "chunks": [
+  "cards-000.json",
+  "cards-001.json",
+  "cards-002.json",
+  "cards-003.json"
+ ],
+ "stats": {
+  "relation": {
+   "verb+obj": 223,
+   "phrase": 116,
+   "adv+verb": 39,
+   "adj+noun": 229,
+   "verb+adj": 36,
+   "adv+adj": 37,
+   "prep": 246,
+   "noun+noun": 44,
+   "noun+verb": 23
+  },
+  "band": {
+   "core": 655,
+   "common": 239,
+   "extended": 72,
+   "rare": 27
+  },
+  "cefr": {
+   "None": 598,
+   "A2": 172,
+   "A1": 34,
+   "B1": 148,
+   "B2": 39,
+   "C1": 2
+  },
+  "ambiguity": {
+   "low": 660,
+   "medium": 333
+  }
+ }
+}

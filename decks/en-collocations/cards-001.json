@@ -1,0 +1,4971 @@
+[
+ {
+  "id": "c_147442c1ab9f2cff",
+  "type": "cloze",
+  "text": "Growing families often ___ a need for larger homes.",
+  "answer": "create",
+  "accept": [
+   "create"
+  ],
+  "hint": "c_____",
+  "phrase": "create need",
+  "relation": "verb+obj",
+  "headword": "need",
+  "sense": "situation where sth is needed/necessary",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 322
+ },
+ {
+  "id": "c_dec8bde367342c67",
+  "type": "cloze",
+  "text": "She's a ___ great teacher who makes difficult math concepts easy to understand.",
+  "answer": "really",
+  "accept": [
+   "really",
+   "truly",
+   "very"
+  ],
+  "hint": "r_____",
+  "phrase": "really great",
+  "relation": "adv+adj",
+  "headword": "great",
+  "sense": "admired",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 325
+ },
+ {
+  "id": "c_55d2a66024a16d75",
+  "type": "cloze",
+  "text": "Your advice has been an ___ help as I prepared for my new job.",
+  "answer": "invaluable",
+  "accept": [
+   "big",
+   "enormous",
+   "great",
+   "invaluable",
+   "real",
+   "substantial",
+   "tremendous",
+   "valuable"
+  ],
+  "hint": "i_________",
+  "phrase": "big help",
+  "relation": "adj+noun",
+  "headword": "help",
+  "sense": null,
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 327
+ },
+ {
+  "id": "c_1a0523a673c9c1a4",
+  "type": "cloze",
+  "text": "My brother played a ___ game of tennis yesterday afternoon.",
+  "answer": "good",
+  "accept": [
+   "good",
+   "great"
+  ],
+  "hint": "g___",
+  "phrase": "good game",
+  "relation": "adj+noun",
+  "headword": "game",
+  "sense": "how sb plays",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 331
+ },
+ {
+  "id": "c_6a679ec30584a42f",
+  "type": "cloze",
+  "text": "That's the loudest noise ___, so wear your earplugs at the concert.",
+  "answer": "known to man",
+  "accept": [
+   "known to man"
+  ],
+  "hint": "k____ t_ m__",
+  "phrase": "known to man",
+  "relation": "phrase",
+  "headword": "man",
+  "sense": "human beings",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 332
+ },
+ {
+  "id": "c_94e8a8c449eb344a",
+  "type": "cloze",
+  "text": "She found a ___ place to park her car near the shopping center.",
+  "answer": "suitable",
+  "accept": [
+   "right",
+   "suitable"
+  ],
+  "hint": "s_______",
+  "phrase": "right place",
+  "relation": "adj+noun",
+  "headword": "place",
+  "sense": "particular position/area",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 334
+ },
+ {
+  "id": "c_a50453486eb71e5a",
+  "type": "cloze",
+  "text": "The old ___ house had belonged to the same family for over two hundred years.",
+  "answer": "manor",
+  "accept": [
+   "great",
+   "manor",
+   "mansion"
+  ],
+  "hint": "m____",
+  "phrase": "great house",
+  "relation": "adj+noun",
+  "headword": "house",
+  "sense": "building that is made for one family to live in",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 335
+ },
+ {
+  "id": "c_7691375fd5a4577c",
+  "type": "cloze",
+  "text": "My new apartment is ___ the same as my old one, but I like it better.",
+  "answer": "not quite",
+  "accept": [
+   "not altogether",
+   "not quite"
+  ],
+  "hint": "n__ q____",
+  "phrase": "not altogether same",
+  "relation": "adv+adj",
+  "headword": "same",
+  "sense": null,
+  "cefr": "A2",
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 336
+ },
+ {
+  "id": "c_fc246ac1e87b7913",
+  "type": "cloze",
+  "text": "Despite feeling nervous, he ___ a show of confidence during the job interview.",
+  "answer": "made",
+  "accept": [
+   "make",
+   "put on"
+  ],
+  "hint": "m___",
+  "phrase": "make show",
+  "relation": "verb+obj",
+  "headword": "show",
+  "sense": "outward expression of an emotion/attitude",
+  "cefr": "B2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 337
+ },
+ {
+  "id": "c_061d0db8b7dad883",
+  "type": "cloze",
+  "text": "After trying many different restaurants, we settled on pizza ___ end.",
+  "answer": "in the",
+  "accept": [
+   "in the ~"
+  ],
+  "hint": "i_ t__",
+  "phrase": "in the end",
+  "relation": "adj+noun",
+  "headword": "end",
+  "sense": "furthest part of sth",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 338
+ },
+ {
+  "id": "c_adc5e07b2b07637d",
+  "type": "cloze",
+  "text": "My grandmother spent three weeks in the hospital, but she's ___ better every day now.",
+  "answer": "getting",
+  "accept": [
+   "get"
+  ],
+  "hint": "g______",
+  "phrase": "get better",
+  "relation": "verb+adj",
+  "headword": "better",
+  "sense": "recovered from an illness",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 341
+ },
+ {
+  "id": "c_75d155d2a99b9c43",
+  "type": "cloze",
+  "text": "My parents ___ a family of four children while working full-time jobs.",
+  "answer": "raised",
+  "accept": [
+   "bring up",
+   "raise"
+  ],
+  "hint": "r_____",
+  "phrase": "bring up family",
+  "relation": "verb+obj",
+  "headword": "family",
+  "sense": "children",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 342
+ },
+ {
+  "id": "c_f805dd3251aa292b",
+  "type": "cloze",
+  "text": "My grandmother ___ old, but she still runs marathons every month.",
+  "answer": "seems",
+  "accept": [
+   "be",
+   "feel",
+   "look",
+   "seem"
+  ],
+  "hint": "s____",
+  "phrase": "be old",
+  "relation": "verb+adj",
+  "headword": "old",
+  "sense": "age",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 344
+ },
+ {
+  "id": "c_cbeaa8ff7b3e209a",
+  "type": "cloze",
+  "text": "The two companies formed a ___ team to develop the new software project.",
+  "answer": "joint",
+  "accept": [
+   "joint"
+  ],
+  "hint": "j____",
+  "phrase": "joint team",
+  "relation": "adj+noun",
+  "headword": "team",
+  "sense": "group of people who work together",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 345
+ },
+ {
+  "id": "c_3cfd591f7d61c177",
+  "type": "cloze",
+  "text": "Sometimes parents make difficult choices because they believe it's best ___ their children's future.",
+  "answer": "for",
+  "accept": [
+   "for"
+  ],
+  "hint": "f__",
+  "phrase": "for best",
+  "relation": "prep",
+  "headword": "best",
+  "sense": null,
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 346
+ },
+ {
+  "id": "c_5da1ad9cf80f148c",
+  "type": "cloze",
+  "text": "She froze in a ___ second when she saw the car sliding toward her.",
+  "answer": "heart-stopping",
+  "accept": [
+   "heart-stopping"
+  ],
+  "hint": "h____________",
+  "phrase": "heart-stopping second",
+  "relation": "adj+noun",
+  "headword": "second",
+  "sense": "very short moment of time",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 347
+ },
+ {
+  "id": "c_113d9b77dc3a666f",
+  "type": "cloze",
+  "text": "She had ___ longed for a chance to leave her job and travel abroad.",
+  "answer": "secretly",
+  "accept": [
+   "secretly"
+  ],
+  "hint": "s_______",
+  "phrase": "secretly long",
+  "relation": "adv+verb",
+  "headword": "long",
+  "sense": null,
+  "cefr": "B2",
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 348
+ },
+ {
+  "id": "c_bd5695a912efcb41",
+  "type": "cloze",
+  "text": "My daughter ___ play soccer when she was five years old.",
+  "answer": "learned to",
+  "accept": [
+   "learn to"
+  ],
+  "hint": "l______ t_",
+  "phrase": "learn to play",
+  "relation": "verb+obj",
+  "headword": "play",
+  "sense": "music",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 350
+ },
+ {
+  "id": "c_fe72bd7d85e05879",
+  "type": "cloze",
+  "text": "My parents ___ company over for dinner last weekend.",
+  "answer": "had",
+  "accept": [
+   "expect",
+   "have"
+  ],
+  "hint": "h__",
+  "phrase": "expect company",
+  "relation": "verb+obj",
+  "headword": "company",
+  "sense": "visitor or visitors",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 351
+ },
+ {
+  "id": "c_8a2f00904c6326aa",
+  "type": "cloze",
+  "text": "I always ___ free so I can spend time with my family.",
+  "answer": "keep my evenings",
+  "accept": [
+   "keep sth"
+  ],
+  "hint": "k___ m_ e_______",
+  "phrase": "keep sth free",
+  "relation": "verb+adj",
+  "headword": "free",
+  "sense": "not busy",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 354
+ },
+ {
+  "id": "c_56f627b1d542c202",
+  "type": "cloze",
+  "text": "The kitchen sink sits ___ left of the window where we can see the garden.",
+  "answer": "to the",
+  "accept": [
+   "to the ~ of"
+  ],
+  "hint": "t_ t__",
+  "phrase": "to the left of",
+  "relation": "prep",
+  "headword": "left",
+  "sense": "side",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 355
+ },
+ {
+  "id": "c_d5ba276643361af9",
+  "type": "cloze",
+  "text": "After the concert, we ___ and didn't get home until dawn.",
+  "answer": "made a night of it",
+  "accept": [
+   "make a night of it"
+  ],
+  "hint": "m___ a n____ o_ i_",
+  "phrase": "make a night of it",
+  "relation": "phrase",
+  "headword": "night",
+  "sense": "evening when a special event happens",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 357
+ },
+ {
+  "id": "c_e617d063721d6d71",
+  "type": "cloze",
+  "text": "My hometown has a ___ city in France that we exchange students with every year.",
+  "answer": "twin",
+  "accept": [
+   "twin"
+  ],
+  "hint": "t___",
+  "phrase": "twin city",
+  "relation": "adj+noun",
+  "headword": "city",
+  "sense": null,
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 358
+ },
+ {
+  "id": "c_05aa35fab1872ffa",
+  "type": "cloze",
+  "text": "I'm not entirely sure ___ the restaurant's opening hours, so let me call them first.",
+  "answer": "of",
+  "accept": [
+   "of"
+  ],
+  "hint": "o_",
+  "phrase": "of sure",
+  "relation": "prep",
+  "headword": "sure",
+  "sense": null,
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 359
+ },
+ {
+  "id": "c_8278e84e50467fe2",
+  "type": "cloze",
+  "text": "Both teams scored an ___ number of points in the final match.",
+  "answer": "equal",
+  "accept": [
+   "equal"
+  ],
+  "hint": "e____",
+  "phrase": "equal number",
+  "relation": "adj+noun",
+  "headword": "number",
+  "sense": "quantity/amount",
+  "cefr": "B1",
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 360
+ },
+ {
+  "id": "c_eec8c05f051d3896",
+  "type": "cloze",
+  "text": "The restaurant offers an ___ set of menu choices that customers can customize.",
+  "answer": "open",
+  "accept": [
+   "closed",
+   "open"
+  ],
+  "hint": "o___",
+  "phrase": "closed set",
+  "relation": "adj+noun",
+  "headword": "set",
+  "sense": "group of similar things",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 362
+ },
+ {
+  "id": "c_6c4a203ec78dbb9e",
+  "type": "cloze",
+  "text": "Her new job felt ___ different from anything she had done before.",
+  "answer": "markedly",
+  "accept": [
+   "distinctly",
+   "markedly",
+   "radically",
+   "significantly",
+   "strikingly"
+  ],
+  "hint": "m_______",
+  "phrase": "distinctly different",
+  "relation": "adv+adj",
+  "headword": "different",
+  "sense": null,
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 369
+ },
+ {
+  "id": "c_7e0ad6459ab4dffe",
+  "type": "cloze",
+  "text": "Years of caring for her sick parent had slowly ___ her will to pursue her own dreams.",
+  "answer": "drained",
+  "accept": [
+   "break",
+   "drain",
+   "sap"
+  ],
+  "hint": "d______",
+  "phrase": "break will",
+  "relation": "verb+obj",
+  "headword": "will",
+  "sense": "power to choose; desire",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 373
+ },
+ {
+  "id": "c_d2df1d4ff3605294",
+  "type": "cloze",
+  "text": "My daughter finally learned to ___ the time when she was five years old.",
+  "answer": "tell",
+  "accept": [
+   "tell"
+  ],
+  "hint": "t___",
+  "phrase": "tell time",
+  "relation": "verb+obj",
+  "headword": "time",
+  "sense": "time shown on a clock",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 375
+ },
+ {
+  "id": "c_b627fa94cfc13471",
+  "type": "cloze",
+  "text": "We all need to work together for the ___ good of our community.",
+  "answer": "common",
+  "accept": [
+   "common"
+  ],
+  "hint": "c_____",
+  "phrase": "common good",
+  "relation": "adj+noun",
+  "headword": "good",
+  "sense": null,
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 376
+ },
+ {
+  "id": "c_d2345e0d82f2c6df",
+  "type": "cloze",
+  "text": "That building was ___ known as the Central Hotel before it became a museum.",
+  "answer": "formerly",
+  "accept": [
+   "formerly"
+  ],
+  "hint": "f_______",
+  "phrase": "formerly know",
+  "relation": "adv+verb",
+  "headword": "know",
+  "sense": "be familiar with sb/sth",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 377
+ },
+ {
+  "id": "c_c27837a23823689d",
+  "type": "cloze",
+  "text": "My children ___ see the new animated movie that just came out last week.",
+  "answer": "want to",
+  "accept": [
+   "want to"
+  ],
+  "hint": "w___ t_",
+  "phrase": "want to see",
+  "relation": "verb+obj",
+  "headword": "see",
+  "sense": "find out",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 378
+ },
+ {
+  "id": "c_0f7ba91575ce44c9",
+  "type": "cloze",
+  "text": "Things didn't ___ right for them until they changed their approach to the problem.",
+  "answer": "come",
+  "accept": [
+   "come",
+   "turn out"
+  ],
+  "hint": "c___",
+  "phrase": "come right",
+  "relation": "verb+adj",
+  "headword": "right",
+  "sense": null,
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 381
+ },
+ {
+  "id": "c_9cdb39ca4c9f3034",
+  "type": "cloze",
+  "text": "This color goes perfectly ___ the blue walls in my bedroom.",
+  "answer": "with",
+  "accept": [
+   "with"
+  ],
+  "hint": "w___",
+  "phrase": "with go",
+  "relation": "prep",
+  "headword": "go",
+  "sense": "look/taste good with sth",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 382
+ },
+ {
+  "id": "c_c53e9a4e3c21e272",
+  "type": "cloze",
+  "text": "Social media companies have ___ the world in just the last ten years.",
+  "answer": "taken over",
+  "accept": [
+   "take over"
+  ],
+  "hint": "t____ o___",
+  "phrase": "take over world",
+  "relation": "verb+obj",
+  "headword": "world",
+  "sense": "the earth/its people",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 383
+ },
+ {
+  "id": "c_5bdb11f9734fd9ea",
+  "type": "cloze",
+  "text": "After a ___ while of waiting in the doctor's office, Sarah finally heard her name called.",
+  "answer": "long",
+  "accept": [
+   "fair",
+   "good",
+   "long",
+   "some"
+  ],
+  "hint": "l___",
+  "phrase": "fair while",
+  "relation": "adj+noun",
+  "headword": "while",
+  "sense": null,
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 387
+ },
+ {
+  "id": "c_925b98103ce6073c",
+  "type": "cloze",
+  "text": "Music has always been my ___ love, even before I learned to play an instrument.",
+  "answer": "first",
+  "accept": [
+   "first"
+  ],
+  "hint": "f____",
+  "phrase": "first love",
+  "relation": "adj+noun",
+  "headword": "love",
+  "sense": null,
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 390
+ },
+ {
+  "id": "c_be4a60b594d307ca",
+  "type": "cloze",
+  "text": "That old typewriter finally ___ use when everyone switched to computers.",
+  "answer": "went out of",
+  "accept": [
+   "go out of"
+  ],
+  "hint": "w___ o__ o_",
+  "phrase": "go out of use",
+  "relation": "verb+obj",
+  "headword": "use",
+  "sense": "using/being used",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 391
+ },
+ {
+  "id": "c_2fa1278a87d76bef",
+  "type": "cloze",
+  "text": "An elderly neighbor recently hired a home ___ to assist with cooking and housework.",
+  "answer": "help",
+  "accept": [
+   "help"
+  ],
+  "hint": "h___",
+  "phrase": "home help",
+  "relation": "noun+noun",
+  "headword": "home",
+  "sense": "place where sb/sth lives",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 392
+ },
+ {
+  "id": "c_efd59dc72c95618d",
+  "type": "cloze",
+  "text": "The ___ look of her new apartment was modern and comfortable.",
+  "answer": "overall",
+  "accept": [
+   "overall"
+  ],
+  "hint": "o______",
+  "phrase": "overall look",
+  "relation": "adj+noun",
+  "headword": "look",
+  "sense": "sb/sth's appearance",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 393
+ },
+ {
+  "id": "c_b3dad477457a5228",
+  "type": "cloze",
+  "text": "My grandfather spent years working in ___ parts before he finally returned home.",
+  "answer": "foreign",
+  "accept": [
+   "foreign"
+  ],
+  "hint": "f______",
+  "phrase": "foreign part",
+  "relation": "adj+noun",
+  "headword": "part",
+  "sense": "piece/area/period/division, etc. of sth",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 396
+ },
+ {
+  "id": "c_f4c7ce1eb33aadec",
+  "type": "cloze",
+  "text": "The team's performance this season has been ___ great, winning almost every match.",
+  "answer": "very",
+  "accept": [
+   "very"
+  ],
+  "hint": "v___",
+  "phrase": "very great",
+  "relation": "adv+adj",
+  "headword": "great",
+  "sense": "large in amount/degree/size, etc.",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 397
+ },
+ {
+  "id": "c_b7f533144adbe58e",
+  "type": "cloze",
+  "text": "She ran to ___ help when her neighbor collapsed on the sidewalk.",
+  "answer": "fetch",
+  "accept": [
+   "bring",
+   "enlist",
+   "fetch",
+   "find",
+   "get"
+  ],
+  "hint": "f____",
+  "phrase": "bring help",
+  "relation": "verb+obj",
+  "headword": "help",
+  "sense": null,
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 399
+ },
+ {
+  "id": "c_ffc775e7bfe8da9e",
+  "type": "cloze",
+  "text": "After winning the championship, the team wanted to end their season ___ high.",
+  "answer": "on a",
+  "accept": [
+   "on a ~"
+  ],
+  "hint": "o_ a",
+  "phrase": "on a high",
+  "relation": "prep",
+  "headword": "high",
+  "sense": "feeling of great pleasure or happiness",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 400
+ },
+ {
+  "id": "c_db6a62c699341d3e",
+  "type": "cloze",
+  "text": "I need to ___ my things before the taxi arrives tomorrow morning.",
+  "answer": "pack",
+  "accept": [
+   "get together",
+   "pack"
+  ],
+  "hint": "p___",
+  "phrase": "get together thing",
+  "relation": "verb+obj",
+  "headword": "thing",
+  "sense": "things: objects/clothing/tools",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 401
+ },
+ {
+  "id": "c_1abbda3b701226d7",
+  "type": "cloze",
+  "text": "Playing chess is a ___ game for developing your thinking skills.",
+  "answer": "good",
+  "accept": [
+   "good"
+  ],
+  "hint": "g___",
+  "phrase": "good game",
+  "relation": "adj+noun",
+  "headword": "game",
+  "sense": "activity/sport",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 403
+ },
+ {
+  "id": "c_5647712c4e37d9e1",
+  "type": "cloze",
+  "text": "Tom was a ___ man when he won the lottery and could finally buy his dream house.",
+  "answer": "lucky",
+  "accept": [
+   "lucky"
+  ],
+  "hint": "l____",
+  "phrase": "lucky man",
+  "relation": "adj+noun",
+  "headword": "man",
+  "sense": "male person",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 404
+ },
+ {
+  "id": "c_aa404d312c26a018",
+  "type": "cloze",
+  "text": "Working in a different country was new ___ him, so he asked lots of questions.",
+  "answer": "to",
+  "accept": [
+   "to"
+  ],
+  "hint": "t_",
+  "phrase": "to new",
+  "relation": "prep",
+  "headword": "new",
+  "sense": "different/not familiar",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 405
+ },
+ {
+  "id": "c_3a66b89c702f48f2",
+  "type": "cloze",
+  "text": "The weather today feels the same ___ it was last week.",
+  "answer": "as",
+  "accept": [
+   "as"
+  ],
+  "hint": "a_",
+  "phrase": "as same",
+  "relation": "prep",
+  "headword": "same",
+  "sense": null,
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 408
+ },
+ {
+  "id": "c_563f5fdc2f57be16",
+  "type": "cloze",
+  "text": "My brother always dreamed of having ___ show on the radio.",
+  "answer": "his own",
+  "accept": [
+   "sb's own"
+  ],
+  "hint": "h__ o__",
+  "phrase": "sb's own show",
+  "relation": "adj+noun",
+  "headword": "show",
+  "sense": "type of entertainment",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 409
+ },
+ {
+  "id": "c_2292e79bde95f02f",
+  "type": "cloze",
+  "text": "My apartment is in the ___ end of the city from my workplace.",
+  "answer": "opposite",
+  "accept": [
+   "far",
+   "opposite",
+   "other"
+  ],
+  "hint": "o_______",
+  "phrase": "far end",
+  "relation": "adj+noun",
+  "headword": "end",
+  "sense": "furthest part of sth",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 410
+ },
+ {
+  "id": "c_5e27605cf735d26c",
+  "type": "cloze",
+  "text": "We should enjoy this discount ___ before the store changes its prices.",
+  "answer": "while it lasts",
+  "accept": [
+   "while sth lasts"
+  ],
+  "hint": "w____ i_ l____",
+  "phrase": "while sth lasts",
+  "relation": "phrase",
+  "headword": "last",
+  "sense": null,
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 412
+ },
+ {
+  "id": "c_ea3d85e23b8f8c6d",
+  "type": "cloze",
+  "text": "A good night's sleep will ___ better before your important meeting tomorrow.",
+  "answer": "get you",
+  "accept": [
+   "get sb",
+   "make sb"
+  ],
+  "hint": "g__ y__",
+  "phrase": "get sb better",
+  "relation": "verb+adj",
+  "headword": "better",
+  "sense": "recovered from an illness",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 413
+ },
+ {
+  "id": "c_8fd383326a62fc11",
+  "type": "cloze",
+  "text": "Many ___ families in the city struggle to pay for their children's education.",
+  "answer": "poor",
+  "accept": [
+   "hard-up",
+   "low-income",
+   "poor"
+  ],
+  "hint": "p___",
+  "phrase": "hard-up family",
+  "relation": "adj+noun",
+  "headword": "family",
+  "sense": "group of people related to each other",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 414
+ },
+ {
+  "id": "c_9048fb9bbb799c48",
+  "type": "cloze",
+  "text": "My grandmother ___ old very suddenly after she retired from teaching.",
+  "answer": "became",
+  "accept": [
+   "become",
+   "get",
+   "grow"
+  ],
+  "hint": "b_____",
+  "phrase": "become old",
+  "relation": "verb+adj",
+  "headword": "old",
+  "sense": "not young",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 416
+ },
+ {
+  "id": "c_9e5a793fc04da343",
+  "type": "cloze",
+  "text": "The success of our charity event depended on the team ___ of volunteers working together.",
+  "answer": "effort",
+  "accept": [
+   "effort"
+  ],
+  "hint": "e_____",
+  "phrase": "team effort",
+  "relation": "noun+noun",
+  "headword": "team",
+  "sense": "group of people who work together",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 417
+ },
+ {
+  "id": "c_5c994ccb3234ce79",
+  "type": "cloze",
+  "text": "My older sister is best ___ cooking delicious meals for our family.",
+  "answer": "at",
+  "accept": [
+   "at"
+  ],
+  "hint": "a_",
+  "phrase": "at best",
+  "relation": "prep",
+  "headword": "best",
+  "sense": null,
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 418
+ },
+ {
+  "id": "c_cafc892d7cdcd55a",
+  "type": "cloze",
+  "text": "The newspaper ___ the play and gave it an excellent rating.",
+  "answer": "reviewed",
+  "accept": [
+   "review"
+  ],
+  "hint": "r_______",
+  "phrase": "review play",
+  "relation": "verb+obj",
+  "headword": "play",
+  "sense": "drama",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 422
+ },
+ {
+  "id": "c_d77aa7a93dc0b991",
+  "type": "cloze",
+  "text": "The technology company ___ tablets for customers around the world.",
+  "answer": "makes smartphones and",
+  "accept": [
+   "make sth",
+   "produce sth"
+  ],
+  "hint": "m____ s__________ a__",
+  "phrase": "company make sth",
+  "relation": "noun+verb",
+  "headword": "company",
+  "sense": "business organization",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 423
+ },
+ {
+  "id": "c_d7cc68edf3ce198e",
+  "type": "cloze",
+  "text": "Maybe we could invite Sarah to the party—___ though.",
+  "answer": "just a thought",
+  "accept": [
+   "just a thought"
+  ],
+  "hint": "j___ a t______",
+  "phrase": "just a thought",
+  "relation": "phrase",
+  "headword": "thought",
+  "sense": "sth that you think",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 424
+ },
+ {
+  "id": "c_cd43af8ba096eef5",
+  "type": "cloze",
+  "text": "We always ___ free at the dinner table for guests.",
+  "answer": "keep a chair",
+  "accept": [
+   "keep sth"
+  ],
+  "hint": "k___ a c____",
+  "phrase": "keep sth free",
+  "relation": "verb+adj",
+  "headword": "free",
+  "sense": "not being used",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 426
+ },
+ {
+  "id": "c_6fd5b9e69443acd5",
+  "type": "cloze",
+  "text": "The bathroom is ___ left of the kitchen when you enter the apartment.",
+  "answer": "on the",
+  "accept": [
+   "on the ~ of"
+  ],
+  "hint": "o_ t__",
+  "phrase": "on the left of",
+  "relation": "prep",
+  "headword": "left",
+  "sense": "side",
+  "cefr": "A1",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 427
+ },
+ {
+  "id": "c_4e28a0206b6bf968",
+  "type": "cloze",
+  "text": "After working all week, she decided to have a ___ night and watch her favorite movies.",
+  "answer": "late",
+  "accept": [
+   "early",
+   "late"
+  ],
+  "hint": "l___",
+  "phrase": "early night",
+  "relation": "adj+noun",
+  "headword": "night",
+  "sense": "when it is dark and most people sleep",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 429
+ },
+ {
+  "id": "c_35291cd90a506263",
+  "type": "cloze",
+  "text": "I'm not sure ___ the train schedule, so we should check online before leaving.",
+  "answer": "about",
+  "accept": [
+   "about"
+  ],
+  "hint": "a____",
+  "phrase": "about sure",
+  "relation": "prep",
+  "headword": "sure",
+  "sense": null,
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 431
+ },
+ {
+  "id": "c_bac95d950465bbd0",
+  "type": "cloze",
+  "text": "Nobody knows the ___ number of people who watched the concert online last night.",
+  "answer": "exact",
+  "accept": [
+   "exact",
+   "precise"
+  ],
+  "hint": "e____",
+  "phrase": "exact number",
+  "relation": "adj+noun",
+  "headword": "number",
+  "sense": "quantity/amount",
+  "cefr": "B1",
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 432
+ },
+ {
+  "id": "c_63be9eb508a81f0b",
+  "type": "cloze",
+  "text": "The runners ___ set at the starting line before the coach blew the whistle.",
+  "answer": "got",
+  "accept": [
+   "get (used when starting a race)"
+  ],
+  "hint": "g__",
+  "phrase": "get used when starting a race set",
+  "relation": "verb+adj",
+  "headword": "set",
+  "sense": "ready",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 434
+ },
+ {
+  "id": "c_e23facfe9ab954b4",
+  "type": "cloze",
+  "text": "Stopping smoking took ___, but she finally managed it last year.",
+  "answer": "an act of will",
+  "accept": [
+   "an act of will"
+  ],
+  "hint": "a_ a__ o_ w___",
+  "phrase": "an act of will",
+  "relation": "phrase",
+  "headword": "will",
+  "sense": "power to choose; desire",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 442
+ },
+ {
+  "id": "c_efd8272138445be5",
+  "type": "cloze",
+  "text": "My sister ___ likes chocolate cake, so we always bake one for her birthday.",
+  "answer": "particularly",
+  "accept": [
+   "enormously",
+   "a lot",
+   "particularly",
+   "really"
+  ],
+  "hint": "p___________",
+  "phrase": "enormously like",
+  "relation": "adv+verb",
+  "headword": "like",
+  "sense": null,
+  "cefr": "A2",
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 443
+ },
+ {
+  "id": "c_0c5fb7c89d216b37",
+  "type": "cloze",
+  "text": "She studied harder than ever before, and ___ time she finally passed the exam.",
+  "answer": "this",
+  "accept": [
+   "that",
+   "this"
+  ],
+  "hint": "t___",
+  "phrase": "that time",
+  "relation": "adj+noun",
+  "headword": "time",
+  "sense": "occasion",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 444
+ },
+ {
+  "id": "c_4b89aa3d8bb0b233",
+  "type": "cloze",
+  "text": "The pizza we had last night was ___ good.",
+  "answer": "extremely",
+  "accept": [
+   "dead",
+   "extremely",
+   "really",
+   "very"
+  ],
+  "hint": "e________",
+  "phrase": "dead good",
+  "relation": "adv+adj",
+  "headword": "good",
+  "sense": null,
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 445
+ },
+ {
+  "id": "c_f5db2a58baa4fe26",
+  "type": "cloze",
+  "text": "I ___ see the mountains from my bedroom window on clear days.",
+  "answer": "can",
+  "accept": [
+   "be able to",
+   "can/could"
+  ],
+  "hint": "c__",
+  "phrase": "be able to see",
+  "relation": "verb+obj",
+  "headword": "see",
+  "sense": "become aware of sth using your eyes",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 447
+ },
+ {
+  "id": "c_d806f8a4510fefa0",
+  "type": "cloze",
+  "text": "After six months of recovery, he finally ___ work last Monday.",
+  "answer": "went back to",
+  "accept": [
+   "go back to",
+   "return to"
+  ],
+  "hint": "w___ b___ t_",
+  "phrase": "go back to work",
+  "relation": "verb+obj",
+  "headword": "work",
+  "sense": "job",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 449
+ },
+ {
+  "id": "c_655c2d9d1b010bb0",
+  "type": "cloze",
+  "text": "You can't ___ right just by pretending the problem doesn't exist.",
+  "answer": "make something",
+  "accept": [
+   "make sth"
+  ],
+  "hint": "m___ s________",
+  "phrase": "make sth right",
+  "relation": "verb+adj",
+  "headword": "right",
+  "sense": null,
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 450
+ },
+ {
+  "id": "c_acccb4edbf222fec",
+  "type": "cloze",
+  "text": "My sister always goes on ___ how much she loves her new job.",
+  "answer": "about",
+  "accept": [
+   "about"
+  ],
+  "hint": "a____",
+  "phrase": "about go",
+  "relation": "prep",
+  "headword": "go",
+  "sense": "look/taste good with sth",
+  "cefr": "B2",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 451
+ },
+ {
+  "id": "c_d09e700ad83ce144",
+  "type": "cloze",
+  "text": "She dreams of becoming a doctor to ___ the world and help people in poor countries.",
+  "answer": "change",
+  "accept": [
+   "change"
+  ],
+  "hint": "c_____",
+  "phrase": "change world",
+  "relation": "verb+obj",
+  "headword": "world",
+  "sense": "life/society",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 452
+ },
+ {
+  "id": "c_cbc666ac6e1bde23",
+  "type": "cloze",
+  "text": "The movie was based on ___-life events that happened in our small town twenty years ago.",
+  "answer": "real",
+  "accept": [
+   "real"
+  ],
+  "hint": "r___",
+  "phrase": "real life",
+  "relation": "adj+noun",
+  "headword": "life",
+  "sense": "activity in the world",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 453
+ },
+ {
+  "id": "c_3aa8d45b43f0b29b",
+  "type": "cloze",
+  "text": "She felt nervous at first, but ___ while she felt more comfortable speaking English in class.",
+  "answer": "after a",
+  "accept": [
+   "after a ~"
+  ],
+  "hint": "a____ a",
+  "phrase": "after a while",
+  "relation": "prep",
+  "headword": "while",
+  "sense": null,
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 456
+ },
+ {
+  "id": "c_fc03c223ccf5d72a",
+  "type": "cloze",
+  "text": "The small business failed ___ want of sufficient capital to expand.",
+  "answer": "for",
+  "accept": [
+   "for ~ of"
+  ],
+  "hint": "f__",
+  "phrase": "for want of",
+  "relation": "prep",
+  "headword": "want",
+  "sense": null,
+  "cefr": "B2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 458
+ },
+ {
+  "id": "c_f584c1755d070865",
+  "type": "cloze",
+  "text": "My old laptop still ___ some use, so I'm keeping it as a backup computer.",
+  "answer": "has",
+  "accept": [
+   "have"
+  ],
+  "hint": "h__",
+  "phrase": "have use",
+  "relation": "verb+obj",
+  "headword": "use",
+  "sense": "how useful sth is",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 460
+ },
+ {
+  "id": "c_a50af7a4d273d479",
+  "type": "cloze",
+  "text": "My sister decided to become a home ___ after her baby was born last year.",
+  "answer": "worker",
+  "accept": [
+   "work",
+   "worker"
+  ],
+  "hint": "w_____",
+  "phrase": "home work",
+  "relation": "noun+noun",
+  "headword": "home",
+  "sense": "place where sb/sth lives",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 461
+ },
+ {
+  "id": "c_03783318b566f06b",
+  "type": "cloze",
+  "text": "We need to take a ___ look at why our project failed so badly.",
+  "answer": "serious",
+  "accept": [
+   "critical",
+   "hard",
+   "honest",
+   "radical",
+   "realistic",
+   "serious",
+   "uncompromising"
+  ],
+  "hint": "s______",
+  "phrase": "critical look",
+  "relation": "adj+noun",
+  "headword": "look",
+  "sense": "act of looking at/considering sth",
+  "cefr": "A2",
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 462
+ },
+ {
+  "id": "c_6b8d5a92164501db",
+  "type": "cloze",
+  "text": "If you want to succeed in this job, you ___ need to work some weekends.",
+  "answer": "may well",
+  "accept": [
+   "be expected to",
+   "be likely to",
+   "may well"
+  ],
+  "hint": "m__ w___",
+  "phrase": "be expected to need",
+  "relation": "verb+obj",
+  "headword": "need",
+  "sense": null,
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 463
+ },
+ {
+  "id": "c_6d3ba57829fea257",
+  "type": "cloze",
+  "text": "Learning to read was the ___ part for my younger brother.",
+  "answer": "difficult",
+  "accept": [
+   "difficult",
+   "hard"
+  ],
+  "hint": "d________",
+  "phrase": "difficult part",
+  "relation": "adj+noun",
+  "headword": "part",
+  "sense": "piece/area/period/division, etc. of sth",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 465
+ },
+ {
+  "id": "c_cffb7897bb97228d",
+  "type": "cloze",
+  "text": "The new coffee shop in town is ___ great for studying.",
+  "answer": "absolutely",
+  "accept": [
+   "absolutely"
+  ],
+  "hint": "a_________",
+  "phrase": "absolutely great",
+  "relation": "adv+adj",
+  "headword": "great",
+  "sense": "very good/pleasant",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 466
+ },
+ {
+  "id": "c_ff25dd3638d080be",
+  "type": "cloze",
+  "text": "The company ___ state why they were closing the factory.",
+  "answer": "failed to",
+  "accept": [
+   "fail to"
+  ],
+  "hint": "f_____ t_",
+  "phrase": "fail to state",
+  "relation": "verb+obj",
+  "headword": "state",
+  "sense": null,
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 467
+ },
+ {
+  "id": "c_d68bfe29004948b5",
+  "type": "cloze",
+  "text": "When the company faced serious financial problems, they had to seek ___ help from investment experts.",
+  "answer": "outside",
+  "accept": [
+   "outside"
+  ],
+  "hint": "o______",
+  "phrase": "outside help",
+  "relation": "adj+noun",
+  "headword": "help",
+  "sense": null,
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 468
+ },
+ {
+  "id": "c_041bd5c3c4896f58",
+  "type": "cloze",
+  "text": "There is ___ as a free lunch in the business world.",
+  "answer": "no such thing",
+  "accept": [
+   "no such thing"
+  ],
+  "hint": "n_ s___ t____",
+  "phrase": "no such thing",
+  "relation": "phrase",
+  "headword": "thing",
+  "sense": "fact/event/situation/action",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 470
+ },
+ {
+  "id": "c_d665af1b9368dd0e",
+  "type": "cloze",
+  "text": "The long hours of practice and occasional failures are ___ when you're learning a sport.",
+  "answer": "all part of the game",
+  "accept": [
+   "all part of the game"
+  ],
+  "hint": "a__ p___ o_ t__ g___",
+  "phrase": "all part of the game",
+  "relation": "phrase",
+  "headword": "game",
+  "sense": "business/activity",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 472
+ },
+ {
+  "id": "c_c5f5fe75fb236b9a",
+  "type": "cloze",
+  "text": "An ___ man was sitting on the park bench feeding pigeons.",
+  "answer": "elderly",
+  "accept": [
+   "elderly",
+   "middle-aged",
+   "old",
+   "older",
+   "young"
+  ],
+  "hint": "e______",
+  "phrase": "elderly man",
+  "relation": "adj+noun",
+  "headword": "man",
+  "sense": "male person",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 473
+ },
+ {
+  "id": "c_48ee13d4e53f2b1e",
+  "type": "cloze",
+  "text": "The charity workers conducted ___ visits to collect donations for the homeless shelter.",
+  "answer": "house-to-house",
+  "accept": [
+   "house-to-house"
+  ],
+  "hint": "h___________",
+  "phrase": "house-to-house",
+  "relation": "phrase",
+  "headword": "house",
+  "sense": "building that is made for one family to live in",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 476
+ },
+ {
+  "id": "c_3f653721298065ca",
+  "type": "cloze",
+  "text": "She arrived late and only saw the ___ end of the concert.",
+  "answer": "back",
+  "accept": [
+   "back",
+   "rear",
+   "tail"
+  ],
+  "hint": "b___",
+  "phrase": "back end",
+  "relation": "adj+noun",
+  "headword": "end",
+  "sense": "furthest part of sth",
+  "cefr": "A1",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 479
+ },
+ {
+  "id": "c_739d7195d7e66a45",
+  "type": "cloze",
+  "text": "She ___ better to apologize in person rather than sending an email.",
+  "answer": "considered it",
+  "accept": [
+   "consider sth",
+   "deem sth",
+   "judge sth",
+   "think sth"
+  ],
+  "hint": "c_________ i_",
+  "phrase": "consider sth better",
+  "relation": "verb+adj",
+  "headword": "better",
+  "sense": "comparative of good",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 482
+ },
+ {
+  "id": "c_464626b9e063894f",
+  "type": "cloze",
+  "text": "My sister decided to move closer to her parents because she has a ___ family to support.",
+  "answer": "young",
+  "accept": [
+   "young"
+  ],
+  "hint": "y____",
+  "phrase": "young family",
+  "relation": "adj+noun",
+  "headword": "family",
+  "sense": "children",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 483
+ },
+ {
+  "id": "c_680ff293f1675848",
+  "type": "cloze",
+  "text": "My ___ dog can barely climb the stairs anymore.",
+  "answer": "poor old",
+  "accept": [
+   "poor old"
+  ],
+  "hint": "p___ o__",
+  "phrase": "poor old",
+  "relation": "phrase",
+  "headword": "old",
+  "sense": "shows affection/lack of respect",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 485
+ },
+ {
+  "id": "c_053dc58bde471791",
+  "type": "cloze",
+  "text": "That restaurant is a ___ name in our city because they make the best pizza.",
+  "answer": "household",
+  "accept": [
+   "big",
+   "famous",
+   "household",
+   "well-known"
+  ],
+  "hint": "h________",
+  "phrase": "big name",
+  "relation": "adj+noun",
+  "headword": "name",
+  "sense": "famous person/thing",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 489
+ },
+ {
+  "id": "c_f130cadfbb45ad7e",
+  "type": "cloze",
+  "text": "The referee stopped the match because of the ___ play from both teams.",
+  "answer": "dangerous",
+  "accept": [
+   "dangerous",
+   "dirty",
+   "foul",
+   "rough",
+   "violent"
+  ],
+  "hint": "d________",
+  "phrase": "dangerous play",
+  "relation": "adj+noun",
+  "headword": "play",
+  "sense": "in sport",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 490
+ },
+ {
+  "id": "c_fd387e00a942367d",
+  "type": "cloze",
+  "text": "The bank is a large ___ company owned by a family for many generations.",
+  "answer": "private",
+  "accept": [
+   "associated",
+   "commercial",
+   "joint-stock",
+   "limited",
+   "private",
+   "public"
+  ],
+  "hint": "p______",
+  "phrase": "associated company",
+  "relation": "adj+noun",
+  "headword": "company",
+  "sense": "business organization",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 491
+ },
+ {
+  "id": "c_f2ea5f9987c1d284",
+  "type": "cloze",
+  "text": "She didn't give a ___ thought to leaving her old job for a better opportunity.",
+  "answer": "second",
+  "accept": [
+   "second"
+  ],
+  "hint": "s_____",
+  "phrase": "second thought",
+  "relation": "adj+noun",
+  "headword": "thought",
+  "sense": "process/act of thinking",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 492
+ },
+ {
+  "id": "c_f57c3ff0496fc469",
+  "type": "cloze",
+  "text": "Will you ___ free next weekend to help me move into my new apartment?",
+  "answer": "be",
+  "accept": [
+   "be"
+  ],
+  "hint": "b_",
+  "phrase": "be free",
+  "relation": "verb+adj",
+  "headword": "free",
+  "sense": "not busy",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 494
+ },
+ {
+  "id": "c_76c93d11611c4fab",
+  "type": "cloze",
+  "text": "The liberal candidates are positioned ___ left side of the political spectrum.",
+  "answer": "on the",
+  "accept": [
+   "on the ~"
+  ],
+  "hint": "o_ t__",
+  "phrase": "on the left",
+  "relation": "prep",
+  "headword": "left",
+  "sense": "the left: political groups",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 495
+ },
+ {
+  "id": "c_68cbd326deed71ad",
+  "type": "cloze",
+  "text": "After the concert, we ___ the night at my cousin's house in the city.",
+  "answer": "spent",
+  "accept": [
+   "spend"
+  ],
+  "hint": "s____",
+  "phrase": "spend night",
+  "relation": "verb+obj",
+  "headword": "night",
+  "sense": "when it is dark and most people sleep",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 497
+ },
+ {
+  "id": "c_c7030548e23a3321",
+  "type": "cloze",
+  "text": "The tennis champion defeated her opponent ___ at the championship final.",
+  "answer": "in straight sets",
+  "accept": [
+   "in straight sets"
+  ],
+  "hint": "i_ s_______ s___",
+  "phrase": "in straight sets",
+  "relation": "phrase",
+  "headword": "set",
+  "sense": "in tennis",
+  "cefr": "A2",
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 502
+ },
+ {
+  "id": "c_bc769969a8ae573d",
+  "type": "cloze",
+  "text": "The company showed strong ___ will to support environmental protection measures.",
+  "answer": "political",
+  "accept": [
+   "political"
+  ],
+  "hint": "p________",
+  "phrase": "political will",
+  "relation": "adj+noun",
+  "headword": "will",
+  "sense": "power to choose; desire",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 509
+ },
+ {
+  "id": "c_443f3ede8722cdff",
+  "type": "cloze",
+  "text": "The restaurant serves ___ good Italian food, and the prices are reasonable too.",
+  "answer": "fairly",
+  "accept": [
+   "fairly",
+   "pretty",
+   "quite"
+  ],
+  "hint": "f_____",
+  "phrase": "fairly good",
+  "relation": "adv+adj",
+  "headword": "good",
+  "sense": null,
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 511
+ },
+ {
+  "id": "c_44b21d143545554b",
+  "type": "cloze",
+  "text": "Let me ___ if the children are ready for bed.",
+  "answer": "go and see",
+  "accept": [
+   "go and see"
+  ],
+  "hint": "g_ a__ s__",
+  "phrase": "go and see",
+  "relation": "phrase",
+  "headword": "see",
+  "sense": "find out",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 513
+ },
+ {
+  "id": "c_e547e0bb14ff0fae",
+  "type": "cloze",
+  "text": "When the teacher asked a difficult question, several students ___ my way hoping I would answer.",
+  "answer": "looked",
+  "accept": [
+   "look"
+  ],
+  "hint": "l_____",
+  "phrase": "look way",
+  "relation": "verb+obj",
+  "headword": "way",
+  "sense": "direction/position",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 514
+ },
+ {
+  "id": "c_d88c960659512d55",
+  "type": "cloze",
+  "text": "My father ___ work at 65 and now he travels around the world.",
+  "answer": "stopped",
+  "accept": [
+   "stop"
+  ],
+  "hint": "s______",
+  "phrase": "stop work",
+  "relation": "verb+obj",
+  "headword": "work",
+  "sense": "job",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 515
+ },
+ {
+  "id": "c_6f50add1a4f3d70f",
+  "type": "cloze",
+  "text": "Something ___ right about moving to the new city, even though I was nervous at first.",
+  "answer": "felt",
+  "accept": [
+   "be",
+   "feel",
+   "look",
+   "seem",
+   "sound",
+   "taste"
+  ],
+  "hint": "f___",
+  "phrase": "be right",
+  "relation": "verb+adj",
+  "headword": "right",
+  "sense": null,
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 516
+ },
+ {
+  "id": "c_8bead00a56ca7233",
+  "type": "cloze",
+  "text": "After recovering from his illness, he felt confident enough to ___ the world again.",
+  "answer": "face",
+  "accept": [
+   "face"
+  ],
+  "hint": "f___",
+  "phrase": "face world",
+  "relation": "verb+obj",
+  "headword": "world",
+  "sense": "life/society",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 518
+ },
+ {
+  "id": "c_d1bab6fccf00cac3",
+  "type": "cloze",
+  "text": "She traveled through Asia to ___ before returning home to study.",
+  "answer": "see something of life",
+  "accept": [
+   "see sth of life"
+  ],
+  "hint": "s__ s________ o_ l___",
+  "phrase": "see sth of life",
+  "relation": "phrase",
+  "headword": "life",
+  "sense": "activity in the world",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 519
+ },
+ {
+  "id": "c_bf0d17dcb63d1c7e",
+  "type": "cloze",
+  "text": "I ___ think how much money we wasted on that broken car.",
+  "answer": "dread to",
+  "accept": [
+   "dread to",
+   "hate to",
+   "shudder to",
+   "tremble to"
+  ],
+  "hint": "d____ t_",
+  "phrase": "dread to think",
+  "relation": "verb+obj",
+  "headword": "think",
+  "sense": "consider/reflect",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 520
+ },
+ {
+  "id": "c_43877d7f1cbefd5d",
+  "type": "cloze",
+  "text": "Since ___, she has been trying to get fit by going to the gym twice a week.",
+  "answer": "the turn of the year",
+  "accept": [
+   "the turn of the year"
+  ],
+  "hint": "t__ t___ o_ t__ y___",
+  "phrase": "the turn of the year",
+  "relation": "phrase",
+  "headword": "year",
+  "sense": null,
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [
+   "sentence_long"
+  ],
+  "position": 521
+ },
+ {
+  "id": "c_ea53201a8688b5bd",
+  "type": "cloze",
+  "text": "The doctor said she would see me ___ while after finishing with another patient.",
+  "answer": "in a",
+  "accept": [
+   "in a ~"
+  ],
+  "hint": "i_ a",
+  "phrase": "in a while",
+  "relation": "prep",
+  "headword": "while",
+  "sense": null,
+  "cefr": "B2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 522
+ },
+ {
+  "id": "c_ff39547cf7d49158",
+  "type": "cloze",
+  "text": "Many families in rural areas lived ___ want during the economic crisis.",
+  "answer": "in",
+  "accept": [
+   "in ~"
+  ],
+  "hint": "i_",
+  "phrase": "in want",
+  "relation": "prep",
+  "headword": "want",
+  "sense": null,
+  "cefr": "B2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 524
+ },
+ {
+  "id": "c_6a317af3ed006c51",
+  "type": "cloze",
+  "text": "She hoped he would eventually ___ her love after so many years apart.",
+  "answer": "return",
+  "accept": [
+   "return"
+  ],
+  "hint": "r_____",
+  "phrase": "return love",
+  "relation": "verb+obj",
+  "headword": "love",
+  "sense": null,
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 525
+ },
+ {
+  "id": "c_143ee148d77fe7b0",
+  "type": "cloze",
+  "text": "Many families prefer to buy smaller appliances designed for ___ use in their kitchens.",
+  "answer": "home",
+  "accept": [
+   "home"
+  ],
+  "hint": "h___",
+  "phrase": "home use",
+  "relation": "adj+noun",
+  "headword": "use",
+  "sense": "using/being used",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 526
+ },
+ {
+  "id": "c_ada7c8c1583c38a3",
+  "type": "cloze",
+  "text": "My parents bought a small printer for home ___ in their office.",
+  "answer": "use",
+  "accept": [
+   "use"
+  ],
+  "hint": "u__",
+  "phrase": "home use",
+  "relation": "noun+noun",
+  "headword": "home",
+  "sense": "place where sb/sth lives",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 527
+ },
+ {
+  "id": "c_9db87f2302e37c86",
+  "type": "cloze",
+  "text": "She decided to take a ___ look at the old recipe and made some interesting changes.",
+  "answer": "fresh",
+  "accept": [
+   "fresh"
+  ],
+  "hint": "f____",
+  "phrase": "fresh look",
+  "relation": "adj+noun",
+  "headword": "look",
+  "sense": "act of looking at/considering sth",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 528
+ },
+ {
+  "id": "c_91260507f0d5bb87",
+  "type": "cloze",
+  "text": "By working from home, she ___ the need for a long daily commute.",
+  "answer": "eliminated",
+  "accept": [
+   "avoid",
+   "eliminate",
+   "obviate",
+   "remove"
+  ],
+  "hint": "e_________",
+  "phrase": "avoid need",
+  "relation": "verb+obj",
+  "headword": "need",
+  "sense": "situation where sth is needed/necessary",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 529
+ },
+ {
+  "id": "c_52bc39467a4f6025",
+  "type": "cloze",
+  "text": "The ___ part of the job is cleaning up at the end of each day.",
+  "answer": "worst",
+  "accept": [
+   "worst"
+  ],
+  "hint": "w____",
+  "phrase": "worst part",
+  "relation": "adj+noun",
+  "headword": "part",
+  "sense": "piece/area/period/division, etc. of sth",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 531
+ },
+ {
+  "id": "c_0f28bb92402453fb",
+  "type": "cloze",
+  "text": "This new software ___ help students organize their homework and study schedules.",
+  "answer": "is designed to",
+  "accept": [
+   "be designed to"
+  ],
+  "hint": "i_ d_______ t_",
+  "phrase": "be designed to help",
+  "relation": "verb+obj",
+  "headword": "help",
+  "sense": "make sth easier/better",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 534
+ },
+ {
+  "id": "c_2faa604bd45adf3e",
+  "type": "cloze",
+  "text": "After the argument, she wanted to ___ with her best friend.",
+  "answer": "put things right",
+  "accept": [
+   "put things right"
+  ],
+  "hint": "p__ t_____ r____",
+  "phrase": "put things right",
+  "relation": "phrase",
+  "headword": "thing",
+  "sense": "things: general situation, as it affects sb",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 536
+ },
+ {
+  "id": "c_95661f62291be04b",
+  "type": "cloze",
+  "text": "Even though it was noon, the classroom remained ___ still while everyone waited for the test results.",
+  "answer": "strangely",
+  "accept": [
+   "strangely"
+  ],
+  "hint": "s________",
+  "phrase": "strangely still",
+  "relation": "adv+adj",
+  "headword": "still",
+  "sense": "calm and quiet",
+  "cefr": "B1",
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 537
+ },
+ {
+  "id": "c_ec71e86e7ca32862",
+  "type": "cloze",
+  "text": "My daughter enjoys ___ games because she likes playing with her friends at recess.",
+  "answer": "team",
+  "accept": [
+   "team"
+  ],
+  "hint": "t___",
+  "phrase": "team game",
+  "relation": "adj+noun",
+  "headword": "game",
+  "sense": "activity/sport",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 538
+ },
+ {
+  "id": "c_bfc1227d63d4b44c",
+  "type": "cloze",
+  "text": "My grandmother always occupied a ___ place in our family's heart.",
+  "answer": "special",
+  "accept": [
+   "special"
+  ],
+  "hint": "s______",
+  "phrase": "special place",
+  "relation": "adj+noun",
+  "headword": "place",
+  "sense": "role/position/function",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 541
+ },
+ {
+  "id": "c_58c7515439c4e889",
+  "type": "cloze",
+  "text": "My brother and I ___ a house in the city center with our two cousins.",
+  "answer": "share",
+  "accept": [
+   "share"
+  ],
+  "hint": "s____",
+  "phrase": "share house",
+  "relation": "verb+obj",
+  "headword": "house",
+  "sense": "building that is made for one family to live in",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 542
+ },
+ {
+  "id": "c_1e25fa8a97508b10",
+  "type": "cloze",
+  "text": "The new medical test ___ show whether the treatment actually works.",
+  "answer": "is expected to",
+  "accept": [
+   "be expected to",
+   "be likely to"
+  ],
+  "hint": "i_ e_______ t_",
+  "phrase": "be expected to show",
+  "relation": "verb+obj",
+  "headword": "show",
+  "sense": "make sth clear; let sb see sth",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 543
+ },
+ {
+  "id": "c_13ee99db04e39884",
+  "type": "cloze",
+  "text": "The battery lasted ___ the afternoon before the phone finally died.",
+  "answer": "into",
+  "accept": [
+   "into"
+  ],
+  "hint": "i___",
+  "phrase": "into last",
+  "relation": "prep",
+  "headword": "last",
+  "sense": null,
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 546
+ },
+ {
+  "id": "c_8badf4e5b8d86dda",
+  "type": "cloze",
+  "text": "When the child fell down, his mother ___ better and he stopped crying.",
+  "answer": "kissed his knee",
+  "accept": [
+   "kiss sth"
+  ],
+  "hint": "k_____ h__ k___",
+  "phrase": "kiss sth better",
+  "relation": "verb+adj",
+  "headword": "better",
+  "sense": "recovered from an illness",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 547
+ },
+ {
+  "id": "c_a44e7caad5374d66",
+  "type": "cloze",
+  "text": "She spent the holidays surrounded by ___ who made her feel welcome.",
+  "answer": "family and friends",
+  "accept": [
+   "family and friends"
+  ],
+  "hint": "f_____ a__ f______",
+  "phrase": "family and friends",
+  "relation": "phrase",
+  "headword": "family",
+  "sense": "group of people related to each other",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 548
+ },
+ {
+  "id": "c_669f7393b998cf4a",
+  "type": "cloze",
+  "text": "That's a ___ way to organize your kitchen, but it seems to work for you.",
+  "answer": "funny old",
+  "accept": [
+   "funny old"
+  ],
+  "hint": "f____ o__",
+  "phrase": "funny old",
+  "relation": "phrase",
+  "headword": "old",
+  "sense": "shows affection/lack of respect",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 550
+ },
+ {
+  "id": "c_c9d143d60b3790a3",
+  "type": "cloze",
+  "text": "She ___ longed for a quiet weekend after months of stressful work.",
+  "answer": "desperately",
+  "accept": [
+   "desperately"
+  ],
+  "hint": "d__________",
+  "phrase": "desperately long",
+  "relation": "adv+verb",
+  "headword": "long",
+  "sense": null,
+  "cefr": "B2",
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 553
+ },
+ {
+  "id": "c_5e77860f534d60de",
+  "type": "cloze",
+  "text": "The ___ company announced new routes connecting the city center to the airport.",
+  "answer": "bus",
+  "accept": [
+   "bus",
+   "record"
+  ],
+  "hint": "b__",
+  "phrase": "bus company",
+  "relation": "adj+noun",
+  "headword": "company",
+  "sense": "business organization",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 556
+ },
+ {
+  "id": "c_bbf06b7488f93db2",
+  "type": "cloze",
+  "text": "It was a ___ thought to bring your friend soup when she was sick.",
+  "answer": "nice",
+  "accept": [
+   "kind",
+   "kindly",
+   "nice"
+  ],
+  "hint": "n___",
+  "phrase": "kind thought",
+  "relation": "adj+noun",
+  "headword": "thought",
+  "sense": "kindness",
+  "cefr": "B2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 557
+ },
+ {
+  "id": "c_62d017404ed54dea",
+  "type": "cloze",
+  "text": "The teacher decided to ___ free to choose their own research topics.",
+  "answer": "leave the students",
+  "accept": [
+   "leave sb"
+  ],
+  "hint": "l____ t__ s_______",
+  "phrase": "leave sb free",
+  "relation": "verb+adj",
+  "headword": "free",
+  "sense": "not controlled by rules",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 558
+ },
+ {
+  "id": "c_8353d49c72694fa7",
+  "type": "cloze",
+  "text": "Her political views are slightly ___ left compared to most people in her community.",
+  "answer": "to the",
+  "accept": [
+   "to the ~"
+  ],
+  "hint": "t_ t__",
+  "phrase": "to the left",
+  "relation": "prep",
+  "headword": "left",
+  "sense": "the left: political groups",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 559
+ },
+ {
+  "id": "c_ce35c1711a099e3b",
+  "type": "cloze",
+  "text": "The party became quieter as the night ___ and people started to leave.",
+  "answer": "wore on",
+  "accept": [
+   "progress",
+   "wear on"
+  ],
+  "hint": "w___ o_",
+  "phrase": "night progress",
+  "relation": "noun+verb",
+  "headword": "night",
+  "sense": "when it is dark and most people sleep",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 561
+ },
+ {
+  "id": "c_6fe8d46f67b7f80d",
+  "type": "cloze",
+  "text": "He checked his work twice to be ___ sure before submitting it to his teacher.",
+  "answer": "doubly",
+  "accept": [
+   "doubly"
+  ],
+  "hint": "d_____",
+  "phrase": "doubly sure",
+  "relation": "adv+adj",
+  "headword": "sure",
+  "sense": null,
+  "cefr": "B1",
+  "band": "extended",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 563
+ },
+ {
+  "id": "c_27a566884a982e38",
+  "type": "cloze",
+  "text": "After months of rejection, he ___ the will to keep applying for jobs.",
+  "answer": "lost",
+  "accept": [
+   "lose"
+  ],
+  "hint": "l___",
+  "phrase": "lose will",
+  "relation": "verb+obj",
+  "headword": "will",
+  "sense": "power to choose; desire",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 571
+ },
+ {
+  "id": "c_4c148fca46e9063a",
+  "type": "cloze",
+  "text": "She doesn't know much ___ fixing cars, so she took it to a mechanic.",
+  "answer": "about",
+  "accept": [
+   "about"
+  ],
+  "hint": "a____",
+  "phrase": "about know",
+  "relation": "prep",
+  "headword": "know",
+  "sense": "have information about sth",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 574
+ },
+ {
+  "id": "c_f6c15479204f2f96",
+  "type": "cloze",
+  "text": "After the party ended late, Tom ___ through the dark streets.",
+  "answer": "saw his elderly neighbor home",
+  "accept": [
+   "see sb home"
+  ],
+  "hint": "s__ h__ e______ n_______ h___",
+  "phrase": "see sb home",
+  "relation": "phrase",
+  "headword": "see",
+  "sense": "go with/accompany sb",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 575
+ },
+ {
+  "id": "c_f960a1a12c156e79",
+  "type": "cloze",
+  "text": "He ___ his work carefully, checking each detail before moving on.",
+  "answer": "went about",
+  "accept": [
+   "go about"
+  ],
+  "hint": "w___ a____",
+  "phrase": "go about work",
+  "relation": "verb+obj",
+  "headword": "work",
+  "sense": "effort/product of effort",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 577
+ },
+ {
+  "id": "c_a0fde7a779aa0abd",
+  "type": "cloze",
+  "text": "My daughter finally ___ right after practicing for an hour.",
+  "answer": "got her math homework",
+  "accept": [
+   "get sth"
+  ],
+  "hint": "g__ h__ m___ h_______",
+  "phrase": "get sth right",
+  "relation": "verb+adj",
+  "headword": "right",
+  "sense": null,
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 578
+ },
+ {
+  "id": "c_0641bb051c770ea6",
+  "type": "cloze",
+  "text": "When he's reading comics, my brother disappears into ___ world and forgets everything else.",
+  "answer": "his own little",
+  "accept": [
+   "sb's own (little)"
+  ],
+  "hint": "h__ o__ l_____",
+  "phrase": "sb's own little world",
+  "relation": "adj+noun",
+  "headword": "world",
+  "sense": "life/society",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 580
+ },
+ {
+  "id": "c_8dc422472372407d",
+  "type": "cloze",
+  "text": "After losing her job, she decided to ___ her life by moving to a new city and starting fresh.",
+  "answer": "rebuild",
+  "accept": [
+   "build",
+   "rebuild"
+  ],
+  "hint": "r______",
+  "phrase": "build life",
+  "relation": "verb+obj",
+  "headword": "life",
+  "sense": "activity in the world",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 581
+ },
+ {
+  "id": "c_fd4491fc1e0b47a8",
+  "type": "cloze",
+  "text": "My ___ days were filled with good friends and happy memories.",
+  "answer": "school",
+  "accept": [
+   "school",
+   "student",
+   "young"
+  ],
+  "hint": "s_____",
+  "phrase": "school day",
+  "relation": "adj+noun",
+  "headword": "day",
+  "sense": "hours of the day when you work",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 585
+ },
+ {
+  "id": "c_312b05979e2f39ce",
+  "type": "cloze",
+  "text": "She has a ___ love for animals and volunteers at the shelter every weekend.",
+  "answer": "great",
+  "accept": [
+   "deep",
+   "great",
+   "overwhelming",
+   "passionate"
+  ],
+  "hint": "g____",
+  "phrase": "deep love",
+  "relation": "adj+noun",
+  "headword": "love",
+  "sense": null,
+  "cefr": "A1",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 587
+ },
+ {
+  "id": "c_5e7aca17048aeda3",
+  "type": "cloze",
+  "text": "The old barn was converted ___ a community center last year.",
+  "answer": "for use as",
+  "accept": [
+   "for use as"
+  ],
+  "hint": "f__ u__ a_",
+  "phrase": "for use as",
+  "relation": "phrase",
+  "headword": "use",
+  "sense": "using/being used",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 588
+ },
+ {
+  "id": "c_2284aff91194aead",
+  "type": "cloze",
+  "text": "After six months abroad, her family threw a party to ___.",
+  "answer": "welcome her home",
+  "accept": [
+   "welcome home"
+  ],
+  "hint": "w______ h__ h___",
+  "phrase": "welcome home",
+  "relation": "phrase",
+  "headword": "home",
+  "sense": "place where sb/sth lives",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 589
+ },
+ {
+  "id": "c_934745db9f80bbc8",
+  "type": "cloze",
+  "text": "She wore a ___ look that never goes out of style.",
+  "answer": "classic",
+  "accept": [
+   "classic"
+  ],
+  "hint": "c______",
+  "phrase": "classic look",
+  "relation": "adj+noun",
+  "headword": "look",
+  "sense": "looks: sb's attractiveness",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 590
+ },
+ {
+  "id": "c_7e128188f6787db2",
+  "type": "cloze",
+  "text": "The government decided to sell off valuable state ___ to raise money for schools.",
+  "answer": "property",
+  "accept": [
+   "property"
+  ],
+  "hint": "p_______",
+  "phrase": "state property",
+  "relation": "noun+noun",
+  "headword": "state",
+  "sense": "country/government",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 595
+ },
+ {
+  "id": "c_b38ed3887e8b8bc2",
+  "type": "cloze",
+  "text": "After the accident, she called a lawyer to get ___ help with her insurance claim.",
+  "answer": "legal",
+  "accept": [
+   "financial",
+   "legal",
+   "medical",
+   "practical",
+   "professional"
+  ],
+  "hint": "l____",
+  "phrase": "financial help",
+  "relation": "adj+noun",
+  "headword": "help",
+  "sense": null,
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 596
+ },
+ {
+  "id": "c_63b7e2fe49a591c7",
+  "type": "cloze",
+  "text": "The team played their biggest ___ game last night and won 3-1.",
+  "answer": "Cup",
+  "accept": [
+   "Cup",
+   "League"
+  ],
+  "hint": "C__",
+  "phrase": "Cup game",
+  "relation": "adj+noun",
+  "headword": "game",
+  "sense": "sports match",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 599
+ },
+ {
+  "id": "c_6c1e467150854810",
+  "type": "cloze",
+  "text": "I ___ my place while reading and had to start the chapter again.",
+  "answer": "lost",
+  "accept": [
+   "lose"
+  ],
+  "hint": "l___",
+  "phrase": "lose place",
+  "relation": "verb+obj",
+  "headword": "place",
+  "sense": "particular position/area",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 602
+ },
+ {
+  "id": "c_72535e9b8c7aee51",
+  "type": "cloze",
+  "text": "The nurse visits patients at home and charges less for house ___ than office visits.",
+  "answer": "calls",
+  "accept": [
+   "call"
+  ],
+  "hint": "c____",
+  "phrase": "house call",
+  "relation": "noun+noun",
+  "headword": "house",
+  "sense": "building that is made for one family to live in",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 603
+ },
+ {
+  "id": "c_a9b29bd223d07ea1",
+  "type": "cloze",
+  "text": "The test results ___ show that the new medicine works better than the old one.",
+  "answer": "clearly",
+  "accept": [
+   "clearly"
+  ],
+  "hint": "c______",
+  "phrase": "clearly show",
+  "relation": "adv+verb",
+  "headword": "show",
+  "sense": "make sth clear; let sb see sth",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 604
+ },
+ {
+  "id": "c_6f25b280f5792c7d",
+  "type": "cloze",
+  "text": "We need to finish the project ___ end of next week.",
+  "answer": "by the",
+  "accept": [
+   "by the ~"
+  ],
+  "hint": "b_ t__",
+  "phrase": "by the end",
+  "relation": "adj+noun",
+  "headword": "end",
+  "sense": "furthest part of sth",
+  "cefr": "A1",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 605
+ },
+ {
+  "id": "c_26d61c85fd6e935c",
+  "type": "cloze",
+  "text": "The battery in my phone lasts ___ about two days if I don't use it much.",
+  "answer": "for",
+  "accept": [
+   "for"
+  ],
+  "hint": "f__",
+  "phrase": "for last",
+  "relation": "prep",
+  "headword": "last",
+  "sense": null,
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 607
+ },
+ {
+  "id": "c_d69d517ee8272ce1",
+  "type": "cloze",
+  "text": "My wife comes from a ___ family where everyone gets together every Sunday.",
+  "answer": "close",
+  "accept": [
+   "close",
+   "close-knit"
+  ],
+  "hint": "c____",
+  "phrase": "close family",
+  "relation": "adj+noun",
+  "headword": "family",
+  "sense": "group of people related to each other",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 609
+ },
+ {
+  "id": "c_4f3f932cd56fc1de",
+  "type": "cloze",
+  "text": "My grandmother's house is ___ old, but she refuses to move.",
+  "answer": "extremely",
+  "accept": [
+   "extremely",
+   "really",
+   "terribly",
+   "very"
+  ],
+  "hint": "e________",
+  "phrase": "extremely old",
+  "relation": "adv+adj",
+  "headword": "old",
+  "sense": "not new",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 611
+ },
+ {
+  "id": "c_25ac7965c35e07c8",
+  "type": "cloze",
+  "text": "A team ___ doctors worked together to find a cure for the disease.",
+  "answer": "of",
+  "accept": [
+   "~ of"
+  ],
+  "hint": "o_",
+  "phrase": "team of",
+  "relation": "prep",
+  "headword": "team",
+  "sense": "group of people who work together",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 612
+ },
+ {
+  "id": "c_fa2bad009762b711",
+  "type": "cloze",
+  "text": "She has longed ___ a peaceful home in the countryside ever since moving to the city.",
+  "answer": "for",
+  "accept": [
+   "for"
+  ],
+  "hint": "f__",
+  "phrase": "for long",
+  "relation": "prep",
+  "headword": "long",
+  "sense": null,
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 614
+ },
+ {
+  "id": "c_95b5b8ed7e0c4a39",
+  "type": "cloze",
+  "text": "When I first ___ your name at the party, I immediately remembered your older sister.",
+  "answer": "heard",
+  "accept": [
+   "hear"
+  ],
+  "hint": "h____",
+  "phrase": "hear name",
+  "relation": "verb+obj",
+  "headword": "name",
+  "sense": "word/words sb/sth is known by",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 615
+ },
+ {
+  "id": "c_3c4f9ab3dd977b7c",
+  "type": "cloze",
+  "text": "During summer vacation, the community center organized a play ___ for children in the neighborhood.",
+  "answer": "scheme",
+  "accept": [
+   "scheme"
+  ],
+  "hint": "s_____",
+  "phrase": "play scheme",
+  "relation": "noun+noun",
+  "headword": "play",
+  "sense": "activity done for fun",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 616
+ },
+ {
+  "id": "c_802a7d38383fa7a0",
+  "type": "cloze",
+  "text": "My uncle started a small ___ company that imports textiles from Asia.",
+  "answer": "trading",
+  "accept": [
+   "trading"
+  ],
+  "hint": "t______",
+  "phrase": "trading company",
+  "relation": "adj+noun",
+  "headword": "company",
+  "sense": "business organization",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 617
+ },
+ {
+  "id": "c_a767d49485e2f801",
+  "type": "cloze",
+  "text": "He ___ thought during the meeting and missed the important announcement.",
+  "answer": "was lost in",
+  "accept": [
+   "be deep in",
+   "be lost in"
+  ],
+  "hint": "w__ l___ i_",
+  "phrase": "be deep in thought",
+  "relation": "verb+obj",
+  "headword": "thought",
+  "sense": "process/act of thinking",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 618
+ },
+ {
+  "id": "c_43708615957bb023",
+  "type": "cloze",
+  "text": "The museum offers admission ___ on Sunday afternoons for all visitors.",
+  "answer": "free of charge",
+  "accept": [
+   "free of charge"
+  ],
+  "hint": "f___ o_ c_____",
+  "phrase": "free of charge",
+  "relation": "phrase",
+  "headword": "free",
+  "sense": "costing nothing",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 619
+ },
+ {
+  "id": "c_a91338fd7a8ca86f",
+  "type": "cloze",
+  "text": "A dog suddenly appeared ___ left and started barking at us.",
+  "answer": "from the",
+  "accept": [
+   "from the ~"
+  ],
+  "hint": "f___ t__",
+  "phrase": "from the left",
+  "relation": "prep",
+  "headword": "left",
+  "sense": "side",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 620
+ },
+ {
+  "id": "c_14ca435574292535",
+  "type": "cloze",
+  "text": "My friends and I always grab ice cream ___ school on Fridays.",
+  "answer": "after",
+  "accept": [
+   "after ~"
+  ],
+  "hint": "a____",
+  "phrase": "after school",
+  "relation": "prep",
+  "headword": "school",
+  "sense": null,
+  "cefr": "A1",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 621
+ },
+ {
+  "id": "c_9447ccf2dfcfabf8",
+  "type": "cloze",
+  "text": "The new restaurant served ___ different food that we had never tried before.",
+  "answer": "refreshingly",
+  "accept": [
+   "refreshingly"
+  ],
+  "hint": "r___________",
+  "phrase": "refreshingly different",
+  "relation": "adv+adj",
+  "headword": "different",
+  "sense": null,
+  "cefr": null,
+  "band": "rare",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 628
+ },
+ {
+  "id": "c_800d2a9e0ce78aab",
+  "type": "cloze",
+  "text": "Her relatives ___ the will because they believed it was not signed correctly.",
+  "answer": "challenged",
+  "accept": [
+   "challenge",
+   "contest"
+  ],
+  "hint": "c_________",
+  "phrase": "challenge will",
+  "relation": "verb+obj",
+  "headword": "will",
+  "sense": "legal document",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 630
+ },
+ {
+  "id": "c_7d70d941e198fc34",
+  "type": "cloze",
+  "text": "She had a ___ time after her divorce, but her friends helped her through it.",
+  "answer": "rough",
+  "accept": [
+   "bad",
+   "difficult",
+   "hard",
+   "rough",
+   "sad",
+   "troubled",
+   "unhappy"
+  ],
+  "hint": "r____",
+  "phrase": "bad time",
+  "relation": "adj+noun",
+  "headword": "time",
+  "sense": "amount of time",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 631
+ },
+ {
+  "id": "c_522b3695022f6a9d",
+  "type": "cloze",
+  "text": "My teacher has been really good ___ all the students in our class this year.",
+  "answer": "to",
+  "accept": [
+   "to"
+  ],
+  "hint": "t_",
+  "phrase": "to good",
+  "relation": "prep",
+  "headword": "good",
+  "sense": null,
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 632
+ },
+ {
+  "id": "c_ce354b3f0746caf1",
+  "type": "cloze",
+  "text": "My teacher is known ___ be very strict about homework deadlines.",
+  "answer": "to",
+  "accept": [
+   "to"
+  ],
+  "hint": "t_",
+  "phrase": "to know",
+  "relation": "prep",
+  "headword": "know",
+  "sense": "be familiar with sb/sth",
+  "cefr": "B2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 633
+ },
+ {
+  "id": "c_a40b6c8daeae51d1",
+  "type": "cloze",
+  "text": "I'm not sure if the plan will work, but let's ___ what happens next week.",
+  "answer": "wait and see",
+  "accept": [
+   "wait and see"
+  ],
+  "hint": "w___ a__ s__",
+  "phrase": "wait and see",
+  "relation": "phrase",
+  "headword": "see",
+  "sense": "find out",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 634
+ },
+ {
+  "id": "c_25f904cb6972ab0f",
+  "type": "cloze",
+  "text": "She spent the afternoon thinking ___ her job interview tomorrow.",
+  "answer": "about",
+  "accept": [
+   "about"
+  ],
+  "hint": "a____",
+  "phrase": "about think",
+  "relation": "prep",
+  "headword": "think",
+  "sense": "consider/reflect",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 641
+ },
+ {
+  "id": "c_03e651196ec2894e",
+  "type": "cloze",
+  "text": "The beach is busy with tourists ___.",
+  "answer": "all year round",
+  "accept": [
+   "all (the) year round"
+  ],
+  "hint": "a__ y___ r____",
+  "phrase": "all the year round",
+  "relation": "phrase",
+  "headword": "year",
+  "sense": null,
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 642
+ },
+ {
+  "id": "c_b1a61496db41b562",
+  "type": "cloze",
+  "text": "We sat in the garden ___ while, enjoying the afternoon sun.",
+  "answer": "for a",
+  "accept": [
+   "for a/the ~"
+  ],
+  "hint": "f__ a",
+  "phrase": "for a while",
+  "relation": "prep",
+  "headword": "while",
+  "sense": null,
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 643
+ },
+ {
+  "id": "c_584e100aff35c551",
+  "type": "cloze",
+  "text": "My grandparents often tell stories about the ___ days when they were young.",
+  "answer": "olden",
+  "accept": [
+   "early",
+   "former",
+   "old",
+   "olden"
+  ],
+  "hint": "o____",
+  "phrase": "early day",
+  "relation": "adj+noun",
+  "headword": "day",
+  "sense": "hours of the day when you work",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 644
+ },
+ {
+  "id": "c_7039360cfca3feb0",
+  "type": "cloze",
+  "text": "She showed ___ by caring for her elderly neighbor every single day.",
+  "answer": "an act of love",
+  "accept": [
+   "an act of love",
+   "deeply/madly/passionately in love"
+  ],
+  "hint": "a_ a__ o_ l___",
+  "phrase": "an act of love",
+  "relation": "phrase",
+  "headword": "love",
+  "sense": null,
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 646
+ },
+ {
+  "id": "c_95a3958dedff9ddb",
+  "type": "cloze",
+  "text": "She finally made ___ use of her cooking skills when she opened her own restaurant.",
+  "answer": "full",
+  "accept": [
+   "full"
+  ],
+  "hint": "f___",
+  "phrase": "full use",
+  "relation": "adj+noun",
+  "headword": "use",
+  "sense": "ability/permission to use sth",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 647
+ },
+ {
+  "id": "c_8510a2eb13538774",
+  "type": "cloze",
+  "text": "After years of saving, we finally bought our ___ home in the countryside.",
+  "answer": "dream",
+  "accept": [
+   "dream"
+  ],
+  "hint": "d____",
+  "phrase": "dream home",
+  "relation": "adj+noun",
+  "headword": "home",
+  "sense": "place where sb/sth lives",
+  "cefr": "A2",
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 648
+ },
+ {
+  "id": "c_a1be1e866f0e6bb4",
+  "type": "cloze",
+  "text": "She enjoyed the ___ part of her career more than the early years.",
+  "answer": "latter",
+  "accept": [
+   "latter"
+  ],
+  "hint": "l_____",
+  "phrase": "latter part",
+  "relation": "adj+noun",
+  "headword": "part",
+  "sense": "piece/area/period/division, etc. of sth",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 652
+ },
+ {
+  "id": "c_147bef181c8517f8",
+  "type": "cloze",
+  "text": "She finally ___ help from her neighbors when she injured her ankle.",
+  "answer": "accepted",
+  "accept": [
+   "accept"
+  ],
+  "hint": "a_______",
+  "phrase": "accept help",
+  "relation": "verb+obj",
+  "headword": "help",
+  "sense": null,
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 655
+ },
+ {
+  "id": "c_4914e7e822e2573f",
+  "type": "cloze",
+  "text": "The ___ thing I expected was to see my old friend at the grocery store yesterday.",
+  "answer": "last",
+  "accept": [
+   "last"
+  ],
+  "hint": "l___",
+  "phrase": "last thing",
+  "relation": "adj+noun",
+  "headword": "thing",
+  "sense": "fact/event/situation/action",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 656
+ },
+ {
+  "id": "c_0a3516f47c4de8d5",
+  "type": "cloze",
+  "text": "The nurse asked me to ___ still during the blood test.",
+  "answer": "keep the patient",
+  "accept": [
+   "hold sb/sth",
+   "keep sb/sth"
+  ],
+  "hint": "k___ t__ p______",
+  "phrase": "hold sb still",
+  "relation": "verb+adj",
+  "headword": "still",
+  "sense": "not moving",
+  "cefr": "A1",
+  "band": "rare",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 657
+ },
+ {
+  "id": "c_3117a8549a388e9e",
+  "type": "cloze",
+  "text": "She learned the rules of the game ___ chess from her grandfather over many years.",
+  "answer": "of",
+  "accept": [
+   "~ of"
+  ],
+  "hint": "o_",
+  "phrase": "game of",
+  "relation": "noun+noun",
+  "headword": "game",
+  "sense": "business/activity",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 658
+ },
+ {
+  "id": "c_b21360bd265bc83b",
+  "type": "cloze",
+  "text": "After missing three weeks of training, she ___ her place on the volleyball team.",
+  "answer": "lost",
+  "accept": [
+   "lose"
+  ],
+  "hint": "l___",
+  "phrase": "lose place",
+  "relation": "verb+obj",
+  "headword": "place",
+  "sense": "opportunity to study at a college, play for a team, etc.",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 660
+ },
+ {
+  "id": "c_054ece8c2466ffa8",
+  "type": "cloze",
+  "text": "The stubborn child ___ show respect to her teacher during the lesson.",
+  "answer": "refused to",
+  "accept": [
+   "refuse to"
+  ],
+  "hint": "r______ t_",
+  "phrase": "refuse to show",
+  "relation": "verb+obj",
+  "headword": "show",
+  "sense": "make sth clear; let sb see sth",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 662
+ },
+ {
+  "id": "c_cc59df7a80d60d19",
+  "type": "cloze",
+  "text": "She grabbed the ___ end of the string and tied it in a knot.",
+  "answer": "loose",
+  "accept": [
+   "free",
+   "knotted",
+   "loose"
+  ],
+  "hint": "l____",
+  "phrase": "free",
+  "relation": "phrase",
+  "headword": "end",
+  "sense": "furthest part of sth",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 663
+ },
+ {
+  "id": "c_8451d785f939be9b",
+  "type": "cloze",
+  "text": "The music festival runs ___ last summer, when they decided to stop organizing it.",
+  "answer": "until",
+  "accept": [
+   "until"
+  ],
+  "hint": "u____",
+  "phrase": "until last",
+  "relation": "prep",
+  "headword": "last",
+  "sense": null,
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 665
+ },
+ {
+  "id": "c_f34f874b8dfb1b74",
+  "type": "cloze",
+  "text": "My uncle is a devoted family ___ who always puts his children's needs first.",
+  "answer": "man",
+  "accept": [
+   "man"
+  ],
+  "hint": "m__",
+  "phrase": "family man",
+  "relation": "noun+noun",
+  "headword": "family",
+  "sense": "children",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 667
+ },
+ {
+  "id": "c_f180e5a897a7aa00",
+  "type": "cloze",
+  "text": "My grandfather is ___ old now, but he still enjoys playing tennis every weekend.",
+  "answer": "fairly",
+  "accept": [
+   "fairly",
+   "quite"
+  ],
+  "hint": "f_____",
+  "phrase": "fairly old",
+  "relation": "adv+adj",
+  "headword": "old",
+  "sense": "not young",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 669
+ },
+ {
+  "id": "c_9a05c7d50162379a",
+  "type": "cloze",
+  "text": "The local theatre group decided to stage a ___ play that kept the audience guessing until the final scene.",
+  "answer": "mystery",
+  "accept": [
+   "miracle",
+   "morality",
+   "mystery",
+   "nativity",
+   "passion"
+  ],
+  "hint": "m______",
+  "phrase": "miracle play",
+  "relation": "adj+noun",
+  "headword": "play",
+  "sense": "drama",
+  "cefr": "B1",
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 673
+ },
+ {
+  "id": "c_3e294729eb4d8603",
+  "type": "cloze",
+  "text": "She ___ her thoughts toward finding a solution to the problem.",
+  "answer": "directed",
+  "accept": [
+   "direct",
+   "turn"
+  ],
+  "hint": "d_______",
+  "phrase": "direct thought",
+  "relation": "verb+obj",
+  "headword": "thought",
+  "sense": "process/act of thinking",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 675
+ },
+ {
+  "id": "c_27b345991be0478d",
+  "type": "cloze",
+  "text": "After struggling for minutes, the dog finally managed to ___ free from the tangled leash.",
+  "answer": "pull",
+  "accept": [
+   "break",
+   "get",
+   "pull",
+   "walk"
+  ],
+  "hint": "p___",
+  "phrase": "break free",
+  "relation": "verb+adj",
+  "headword": "free",
+  "sense": "not in prison; not restricted/trapped",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 676
+ },
+ {
+  "id": "c_bcdbcf82484f1b1d",
+  "type": "cloze",
+  "text": "The volunteers who showed up to help were ___, but they worked very hard.",
+  "answer": "limited in number",
+  "accept": [
+   "a growth/an increase in numbers",
+   "few/limited/small in number"
+  ],
+  "hint": "l______ i_ n_____",
+  "phrase": "a growth increase in numbers",
+  "relation": "phrase",
+  "headword": "number",
+  "sense": "quantity/amount",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 681
+ },
+ {
+  "id": "c_5e8a88f7b6d3b695",
+  "type": "cloze",
+  "text": "My parents ___ their will last year to protect our family's future.",
+  "answer": "made",
+  "accept": [
+   "draw up",
+   "make"
+  ],
+  "hint": "m___",
+  "phrase": "draw up will",
+  "relation": "verb+obj",
+  "headword": "will",
+  "sense": "legal document",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 686
+ },
+ {
+  "id": "c_9909e006ea572f80",
+  "type": "cloze",
+  "text": "I've failed that test ___ before finally passing it.",
+  "answer": "a number of times",
+  "accept": [
+   "a number of times",
+   "X times out of X"
+  ],
+  "hint": "a n_____ o_ t____",
+  "phrase": "a number of times",
+  "relation": "phrase",
+  "headword": "time",
+  "sense": "occasion",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 687
+ },
+ {
+  "id": "c_994732d41b6b8f46",
+  "type": "cloze",
+  "text": "My brother is really good ___ children and loves working at the summer camp.",
+  "answer": "with",
+  "accept": [
+   "with"
+  ],
+  "hint": "w___",
+  "phrase": "with good",
+  "relation": "prep",
+  "headword": "good",
+  "sense": null,
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 688
+ },
+ {
+  "id": "c_de14565889fe2abb",
+  "type": "cloze",
+  "text": "Have you heard ___ any good restaurants in the city center?",
+  "answer": "of",
+  "accept": [
+   "of"
+  ],
+  "hint": "o_",
+  "phrase": "of know",
+  "relation": "prep",
+  "headword": "know",
+  "sense": "have information about sth",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 689
+ },
+ {
+  "id": "c_b79e95d04a0b3d1b",
+  "type": "cloze",
+  "text": "The children could ___ see the top of the mountain above the clouds.",
+  "answer": "just",
+  "accept": [
+   "just"
+  ],
+  "hint": "j___",
+  "phrase": "just see",
+  "relation": "adv+verb",
+  "headword": "see",
+  "sense": "become aware of sth using your eyes",
+  "cefr": "A1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 690
+ },
+ {
+  "id": "c_9f17a180120b1010",
+  "type": "cloze",
+  "text": "Your grades have improved this term, so ___ in your studies.",
+  "answer": "keep up the good work",
+  "accept": [
+   "keep up the good work"
+  ],
+  "hint": "k___ u_ t__ g___ w___",
+  "phrase": "keep up the good work",
+  "relation": "phrase",
+  "headword": "work",
+  "sense": "effort/product of effort",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 692
+ },
+ {
+  "id": "c_4a6e97c65af78636",
+  "type": "cloze",
+  "text": "Her answer was ___ right, but she made a small mistake with the spelling.",
+  "answer": "almost",
+  "accept": [
+   "almost",
+   "more or less",
+   "nearly"
+  ],
+  "hint": "a_____",
+  "phrase": "almost right",
+  "relation": "adv+adj",
+  "headword": "right",
+  "sense": null,
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 693
+ },
+ {
+  "id": "c_5b81821aee3a52c7",
+  "type": "cloze",
+  "text": "She grew up in a ___ world compared to her wealthy classmates at school.",
+  "answer": "different",
+  "accept": [
+   "different"
+  ],
+  "hint": "d________",
+  "phrase": "different world",
+  "relation": "adj+noun",
+  "headword": "world",
+  "sense": "life/society",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 695
+ },
+ {
+  "id": "c_ceccef04750c3727",
+  "type": "cloze",
+  "text": "She discovered her boyfriend was living a ___ life with another family across town.",
+  "answer": "double",
+  "accept": [
+   "double"
+  ],
+  "hint": "d_____",
+  "phrase": "double life",
+  "relation": "adj+noun",
+  "headword": "life",
+  "sense": "way of living",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 696
+ },
+ {
+  "id": "c_327c1dc30e5127f9",
+  "type": "cloze",
+  "text": "My children always think ___ their grandmother whenever they visit the park.",
+  "answer": "of",
+  "accept": [
+   "of"
+  ],
+  "hint": "o_",
+  "phrase": "of think",
+  "relation": "prep",
+  "headword": "think",
+  "sense": "have an opinion",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 697
+ },
+ {
+  "id": "c_f85a8f5e510b0daa",
+  "type": "cloze",
+  "text": "The whole town ___ the year they won the championship for the first time.",
+  "answer": "celebrated",
+  "accept": [
+   "celebrate"
+  ],
+  "hint": "c_________",
+  "phrase": "celebrate year",
+  "relation": "verb+obj",
+  "headword": "year",
+  "sense": null,
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 698
+ },
+ {
+  "id": "c_0a1f1110f2b85996",
+  "type": "cloze",
+  "text": "She ___ her love for him during their final conversation together.",
+  "answer": "professed",
+  "accept": [
+   "declare",
+   "profess"
+  ],
+  "hint": "p________",
+  "phrase": "declare love",
+  "relation": "verb+obj",
+  "headword": "love",
+  "sense": null,
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 700
+ },
+ {
+  "id": "c_a11f1e0c18a086f2",
+  "type": "cloze",
+  "text": "Complaining to him about the problem ___ because he never listens.",
+  "answer": "was no use",
+  "accept": [
+   "be no use"
+  ],
+  "hint": "w__ n_ u__",
+  "phrase": "be no use",
+  "relation": "phrase",
+  "headword": "use",
+  "sense": "how useful sth is",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 701
+ },
+ {
+  "id": "c_72a100a58ff30546",
+  "type": "cloze",
+  "text": "My grandparents always spend their ___ home months in Florida to escape the cold weather.",
+  "answer": "winter",
+  "accept": [
+   "winter"
+  ],
+  "hint": "w_____",
+  "phrase": "winter home",
+  "relation": "adj+noun",
+  "headword": "home",
+  "sense": "place where sb/sth lives",
+  "cefr": "A2",
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 702
+ },
+ {
+  "id": "c_3c8c6a59322489e1",
+  "type": "cloze",
+  "text": "The mechanic ordered some ___ parts to fix the broken washing machine.",
+  "answer": "spare",
+  "accept": [
+   "spare"
+  ],
+  "hint": "s____",
+  "phrase": "spare part",
+  "relation": "adj+noun",
+  "headword": "part",
+  "sense": "a piece of a machine",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 706
+ },
+ {
+  "id": "c_fc4cb1a1d8460294",
+  "type": "cloze",
+  "text": "I know I'm ___, but you really should eat breakfast before exercising.",
+  "answer": "stating the obvious",
+  "accept": [
+   "state the obvious"
+  ],
+  "hint": "s______ t__ o______",
+  "phrase": "state the obvious",
+  "relation": "phrase",
+  "headword": "state",
+  "sense": null,
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 707
+ },
+ {
+  "id": "c_865774f60a89a23b",
+  "type": "cloze",
+  "text": "When Sarah needed assistance with her project, she gratefully accepted ___ from her experienced colleague.",
+  "answer": "an offer of help",
+  "accept": [
+   "an offer of help"
+  ],
+  "hint": "a_ o____ o_ h___",
+  "phrase": "an offer of help",
+  "relation": "phrase",
+  "headword": "help",
+  "sense": null,
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 708
+ },
+ {
+  "id": "c_51c08c4caf7ea114",
+  "type": "cloze",
+  "text": "A nice cup of tea is ___ when you're feeling tired and cold.",
+  "answer": "just the thing",
+  "accept": [
+   "just the thing",
+   "not quite the thing"
+  ],
+  "hint": "j___ t__ t____",
+  "phrase": "just the thing",
+  "relation": "phrase",
+  "headword": "thing",
+  "sense": "what is needed/socially acceptable",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 709
+ },
+ {
+  "id": "c_488cb68eea4fffb6",
+  "type": "cloze",
+  "text": "After months of practice, she ___ her game enough to finally beat her older brother at tennis.",
+  "answer": "improved",
+  "accept": [
+   "improve",
+   "raise"
+  ],
+  "hint": "i_______",
+  "phrase": "improve game",
+  "relation": "verb+obj",
+  "headword": "game",
+  "sense": "how sb plays",
+  "cefr": "B1",
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 710
+ },
+ {
+  "id": "c_eebc9b3aa4453ada",
+  "type": "cloze",
+  "text": "When I stopped reading to answer the phone, I ___ my place in the book.",
+  "answer": "lost",
+  "accept": [
+   "lose"
+  ],
+  "hint": "l___",
+  "phrase": "lose place",
+  "relation": "verb+obj",
+  "headword": "place",
+  "sense": "seat/position for sb/sth",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 712
+ },
+ {
+  "id": "c_c1b94466d678d30e",
+  "type": "cloze",
+  "text": "Our new house ___, so we get plenty of natural light in the afternoons.",
+  "answer": "faces the garden",
+  "accept": [
+   "face sth",
+   "overlook sth"
+  ],
+  "hint": "f____ t__ g_____",
+  "phrase": "house face sth",
+  "relation": "noun+verb",
+  "headword": "house",
+  "sense": "building that is made for one family to live in",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 713
+ },
+ {
+  "id": "c_127f48d904032cdd",
+  "type": "cloze",
+  "text": "The stain on my shirt ___ shows after I washed it.",
+  "answer": "hardly",
+  "accept": [
+   "hardly"
+  ],
+  "hint": "h_____",
+  "phrase": "hardly show",
+  "relation": "adv+verb",
+  "headword": "show",
+  "sense": "be visible",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 714
+ },
+ {
+  "id": "c_e935216fb2b8b1f5",
+  "type": "cloze",
+  "text": "The old car met a ___ end when it crashed into the river last summer.",
+  "answer": "bad",
+  "accept": [
+   "bad",
+   "sticky"
+  ],
+  "hint": "b__",
+  "phrase": "bad end",
+  "relation": "adj+noun",
+  "headword": "end",
+  "sense": "death",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 715
+ },
+ {
+  "id": "c_f0f52ebf99a3681d",
+  "type": "cloze",
+  "text": "My father worked two jobs to ___ his family after my mother became ill.",
+  "answer": "support",
+  "accept": [
+   "feed",
+   "support"
+  ],
+  "hint": "s______",
+  "phrase": "feed family",
+  "relation": "verb+obj",
+  "headword": "family",
+  "sense": "children",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 718
+ },
+ {
+  "id": "c_364e44503e52effc",
+  "type": "cloze",
+  "text": "Early anthropologists studied the traditions of ___ people living in remote mountain regions.",
+  "answer": "primitive",
+  "accept": [
+   "primitive"
+  ],
+  "hint": "p________",
+  "phrase": "primitive people",
+  "relation": "adj+noun",
+  "headword": "people",
+  "sense": "of a particular place/race",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 719
+ },
+ {
+  "id": "c_080391777b421f28",
+  "type": "cloze",
+  "text": "My grandmother worried that she would spend her ___ old years without family nearby.",
+  "answer": "lonely",
+  "accept": [
+   "lonely"
+  ],
+  "hint": "l_____",
+  "phrase": "lonely old",
+  "relation": "adj+noun",
+  "headword": "old",
+  "sense": null,
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 720
+ },
+ {
+  "id": "c_66e7a483436721e3",
+  "type": "cloze",
+  "text": "The children were ___ free to play in the park without any rules.",
+  "answer": "completely",
+  "accept": [
+   "completely",
+   "entirely",
+   "quite",
+   "totally"
+  ],
+  "hint": "c_________",
+  "phrase": "completely free",
+  "relation": "adv+adj",
+  "headword": "free",
+  "sense": "not controlled by rules",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 727
+ },
+ {
+  "id": "c_17616ff227bca121",
+  "type": "cloze",
+  "text": "When you enter the classroom, the teacher's desk is ___ left.",
+  "answer": "on your",
+  "accept": [
+   "on the/your ~"
+  ],
+  "hint": "o_ y___",
+  "phrase": "on the left",
+  "relation": "prep",
+  "headword": "left",
+  "sense": "side",
+  "cefr": "A1",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 728
+ },
+ {
+  "id": "c_0aa136344c511488",
+  "type": "cloze",
+  "text": "The library contains a ___ number of books that students can borrow each semester.",
+  "answer": "finite",
+  "accept": [
+   "finite",
+   "infinite"
+  ],
+  "hint": "f_____",
+  "phrase": "finite number",
+  "relation": "adj+noun",
+  "headword": "number",
+  "sense": "quantity/amount",
+  "cefr": "B2",
+  "band": "extended",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 732
+ },
+ {
+  "id": "c_18e78ced92d257c4",
+  "type": "cloze",
+  "text": "The ___ will was clearly in favor of building a new community center in the neighborhood.",
+  "answer": "public",
+  "accept": [
+   "collective",
+   "general",
+   "majority",
+   "national",
+   "popular",
+   "public"
+  ],
+  "hint": "p_____",
+  "phrase": "collective will",
+  "relation": "adj+noun",
+  "headword": "will",
+  "sense": "power to choose; desire",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 736
+ },
+ {
+  "id": "c_f896081e2a870f36",
+  "type": "cloze",
+  "text": "She realized she had chosen the ___ time to ask her boss for a raise.",
+  "answer": "wrong",
+  "accept": [
+   "bad",
+   "wrong"
+  ],
+  "hint": "w____",
+  "phrase": "bad time",
+  "relation": "adj+noun",
+  "headword": "time",
+  "sense": "occasion",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 737
+ },
+ {
+  "id": "c_c2dc8e39e618fe8d",
+  "type": "cloze",
+  "text": "We ___ see the new playground finally open in our neighborhood.",
+  "answer": "were pleased to",
+  "accept": [
+   "be glad to",
+   "be overjoyed to",
+   "be pleased to"
+  ],
+  "hint": "w___ p______ t_",
+  "phrase": "be glad to see",
+  "relation": "verb+obj",
+  "headword": "see",
+  "sense": "become aware of sth using your eyes",
+  "cefr": "A1",
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 740
+ },
+ {
+  "id": "c_aaee02ff01c899eb",
+  "type": "cloze",
+  "text": "Learning a new language requires ___ work and patience over many months.",
+  "answer": "hard",
+  "accept": [
+   "hard"
+  ],
+  "hint": "h___",
+  "phrase": "hard work",
+  "relation": "adj+noun",
+  "headword": "work",
+  "sense": "effort/product of effort",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 742
+ },
+ {
+  "id": "c_285257ea85e9f297",
+  "type": "cloze",
+  "text": "Many countries have fought hard to protect ___ rights for all their citizens.",
+  "answer": "civil",
+  "accept": [
+   "civil"
+  ],
+  "hint": "c____",
+  "phrase": "civil right",
+  "relation": "adj+noun",
+  "headword": "right",
+  "sense": "entitlement",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 743
+ },
+ {
+  "id": "c_5f9e8081b74e7c4f",
+  "type": "cloze",
+  "text": "When Europeans arrived in the Americas, they encountered plants and animals unknown in the ___ World.",
+  "answer": "Old",
+  "accept": [
+   "New",
+   "Old"
+  ],
+  "hint": "O__",
+  "phrase": "New world",
+  "relation": "adj+noun",
+  "headword": "world",
+  "sense": "part of the earth",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 745
+ },
+ {
+  "id": "c_9fffdda2bf60263c",
+  "type": "cloze",
+  "text": "Making poor decisions in her twenties nearly ___ her life, but she recovered.",
+  "answer": "ruined",
+  "accept": [
+   "ruin"
+  ],
+  "hint": "r_____",
+  "phrase": "ruin life",
+  "relation": "verb+obj",
+  "headword": "life",
+  "sense": "way of living",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 746
+ },
+ {
+  "id": "c_c5291fe9113d5e71",
+  "type": "cloze",
+  "text": "She needs to have a serious think ___ whether she wants to change jobs.",
+  "answer": "about",
+  "accept": [
+   "~ about"
+  ],
+  "hint": "a____",
+  "phrase": "think about",
+  "relation": "prep",
+  "headword": "think",
+  "sense": null,
+  "cefr": "B2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 747
+ },
+ {
+  "id": "c_d00e9549e993887c",
+  "type": "cloze",
+  "text": "She spent her ___ years living abroad with her family in Spain.",
+  "answer": "happiest",
+  "accept": [
+   "golden",
+   "good",
+   "happy",
+   "memorable",
+   "momentous"
+  ],
+  "hint": "h_______",
+  "phrase": "golden year",
+  "relation": "adj+noun",
+  "headword": "year",
+  "sense": null,
+  "cefr": "A1",
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 748
+ },
+ {
+  "id": "c_a8076f0929a0f416",
+  "type": "cloze",
+  "text": "The library offers ___ use of computers to all members during opening hours.",
+  "answer": "free",
+  "accept": [
+   "free"
+  ],
+  "hint": "f___",
+  "phrase": "free use",
+  "relation": "adj+noun",
+  "headword": "use",
+  "sense": "using/being used",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 751
+ },
+ {
+  "id": "c_97f88271a2d30cb7",
+  "type": "cloze",
+  "text": "My friend's parents divorced last year, and now he struggles with adjusting to his ___ home.",
+  "answer": "broken",
+  "accept": [
+   "broken"
+  ],
+  "hint": "b_____",
+  "phrase": "broken home",
+  "relation": "adj+noun",
+  "headword": "home",
+  "sense": "place where sb/sth lives",
+  "cefr": "A2",
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 752
+ },
+ {
+  "id": "c_1bb1975e0df64deb",
+  "type": "cloze",
+  "text": "She took a ___ look around the room before deciding where to put the new sofa.",
+  "answer": "careful",
+  "accept": [
+   "careful",
+   "close"
+  ],
+  "hint": "c______",
+  "phrase": "careful look",
+  "relation": "adj+noun",
+  "headword": "look",
+  "sense": "act of looking at/considering sth",
+  "cefr": "A2",
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 753
+ },
+ {
+  "id": "c_4675f4f42145c755",
+  "type": "cloze",
+  "text": "The teacher ___ the need for students to arrive on time for class.",
+  "answer": "expressed",
+  "accept": [
+   "express"
+  ],
+  "hint": "e________",
+  "phrase": "express need",
+  "relation": "verb+obj",
+  "headword": "need",
+  "sense": "situation where sth is needed/necessary",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 754
+ },
+ {
+  "id": "c_4fd0f4f249238031",
+  "type": "cloze",
+  "text": "My doctor arranged ___ help for me to quit smoking last year.",
+  "answer": "individual",
+  "accept": [
+   "individual"
+  ],
+  "hint": "i_________",
+  "phrase": "individual help",
+  "relation": "adj+noun",
+  "headword": "help",
+  "sense": null,
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 758
+ },
+ {
+  "id": "c_5ccbeec8c5a1bca3",
+  "type": "cloze",
+  "text": "A warm blanket on a cold evening is the ___ thing I need right now.",
+  "answer": "very",
+  "accept": [
+   "very"
+  ],
+  "hint": "v___",
+  "phrase": "very thing",
+  "relation": "adj+noun",
+  "headword": "thing",
+  "sense": "what is needed/socially acceptable",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 759
+ },
+ {
+  "id": "c_5360c13da67352f5",
+  "type": "cloze",
+  "text": "My kids enjoy playing ___ games at birthday parties where they try to win prizes.",
+  "answer": "competitive",
+  "accept": [
+   "competitive"
+  ],
+  "hint": "c__________",
+  "phrase": "competitive game",
+  "relation": "adj+noun",
+  "headword": "game",
+  "sense": "activity/sport",
+  "cefr": "A2",
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 760
+ },
+ {
+  "id": "c_e2db34e00ce74339",
+  "type": "cloze",
+  "text": "He sometimes ___ his place and interrupts the teacher during lessons.",
+  "answer": "forgets",
+  "accept": [
+   "forget"
+  ],
+  "hint": "f______",
+  "phrase": "forget place",
+  "relation": "verb+obj",
+  "headword": "place",
+  "sense": "role/position/function",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 762
+ },
+ {
+  "id": "c_7b4a2f84d35cde51",
+  "type": "cloze",
+  "text": "If you play your music too loud, you'll ___ the house up.",
+  "answer": "wake",
+  "accept": [
+   "wake (up)"
+  ],
+  "hint": "w___",
+  "phrase": "wake up house",
+  "relation": "verb+obj",
+  "headword": "house",
+  "sense": "all the people who live in one house",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 763
+ },
+ {
+  "id": "c_feccca1f39c8843e",
+  "type": "cloze",
+  "text": "My daughter ___ show her grandmother the paintings she made at school.",
+  "answer": "was eager to",
+  "accept": [
+   "be anxious to",
+   "be eager to",
+   "be happy to",
+   "be keen to",
+   "intend to",
+   "want to",
+   "wish to"
+  ],
+  "hint": "w__ e____ t_",
+  "phrase": "be anxious to show",
+  "relation": "verb+obj",
+  "headword": "show",
+  "sense": "make sth clear; let sb see sth",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 764
+ },
+ {
+  "id": "c_eb531037ceedb327",
+  "type": "cloze",
+  "text": "The carpet stretches ___ across the entire living room.",
+  "answer": "from end to end",
+  "accept": [
+   "(from) end to end"
+  ],
+  "hint": "f___ e__ t_ e__",
+  "phrase": "from end to end",
+  "relation": "phrase",
+  "headword": "end",
+  "sense": "furthest part of sth",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 765
+ },
+ {
+  "id": "c_8e60f68fb9f884e1",
+  "type": "cloze",
+  "text": "The ceasefire agreement ___ last more than a few weeks.",
+  "answer": "is unlikely to",
+  "accept": [
+   "be likely/unlikely to"
+  ],
+  "hint": "i_ u_______ t_",
+  "phrase": "be likely to last",
+  "relation": "verb+obj",
+  "headword": "last",
+  "sense": null,
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 766
+ },
+ {
+  "id": "c_5b806d6b2321c695",
+  "type": "cloze",
+  "text": "More families today are choosing to have a smaller family ___ than their parents did.",
+  "answer": "size",
+  "accept": [
+   "size"
+  ],
+  "hint": "s___",
+  "phrase": "family size",
+  "relation": "noun+noun",
+  "headword": "family",
+  "sense": "children",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 768
+ },
+ {
+  "id": "c_9419eecba97a2da1",
+  "type": "cloze",
+  "text": "The ___ written language in the world is thought to be ancient Sumerian.",
+  "answer": "oldest known",
+  "accept": [
+   "oldest known"
+  ],
+  "hint": "o_____ k____",
+  "phrase": "oldest known",
+  "relation": "phrase",
+  "headword": "old",
+  "sense": "not new",
+  "cefr": "A1",
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 770
+ },
+ {
+  "id": "c_5555be84657ca02d",
+  "type": "cloze",
+  "text": "After years of meditation, he developed ___ thought about the meaning of life.",
+  "answer": "profound",
+  "accept": [
+   "deep",
+   "profound"
+  ],
+  "hint": "p_______",
+  "phrase": "deep thought",
+  "relation": "adj+noun",
+  "headword": "thought",
+  "sense": "process/act of thinking",
+  "cefr": "B2",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 776
+ }
+]
