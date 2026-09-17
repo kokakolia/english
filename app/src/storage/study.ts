@@ -1,0 +1,157 @@
+/**
+ * Чтение прогресса и запись результата повторения.
+ *
+ * Ключевое требование — **атомарность ответа**. Учащийся нажал оценку, поехала
+ * анимация, приложение свернули или закрыли вкладку: к этому моменту и новое
+ * состояние карточки, и запись в журнале уже должны быть на диске. Половина
+ * записанного хуже, чем ничего: расписание разъедется с журналом, и починить
+ * это будет нечем.
+ *
+ * Поэтому оба обновления идут одной транзакцией, а вызывается она до анимации,
+ * а не после.
+ */
+
+import { defaultScheduler, isDue, type Grade, type Scheduler } from "../srs";
+import type { AnswerVerdict, CardProgress } from "../srs";
+import type { AppDatabase, StoredProgress, StoredReview } from "./db";
+
+/** Прогресс по карточкам колоды, готовый к передаче в очередь дня. */
+export async function loadProgress(
+  db: AppDatabase,
+  deckId: string,
+): Promise<Map<string, StoredProgress>> {
+  const rows = await db.progress.where("deckId").equals(deckId).toArray();
+  return new Map(rows.map((row) => [row.cardId, row]));
+}
+
+export interface ReviewInput {
+  cardId: string;
+  deckId: string;
+  grade: Grade;
+  now?: Date;
+  /** Что учащийся набрал, если вводил ответ. */
+  typed?: string;
+  /** Как система оценила ввод. */
+  verdict?: AnswerVerdict;
+  durationMs?: number;
+  scheduler?: Scheduler;
+}
+
+export interface ReviewResult {
+  progress: StoredProgress;
+  intervalDays: number;
+}
+
+/**
+ * Применяет оценку: считает новое расписание и фиксирует его вместе с записью
+ * журнала.
+ */
+export async function recordReview(
+  db: AppDatabase,
+  input: ReviewInput,
+): Promise<ReviewResult> {
+  const now = input.now ?? new Date();
+  const scheduler = input.scheduler ?? defaultScheduler;
+
+  let stored: StoredProgress | undefined;
+  let intervalDays = 0;
+
+  await db.transaction("rw", db.progress, db.reviews, async () => {
+    const previous =
+      (await db.progress.get(input.cardId)) ??
+      ({ ...scheduler.create(input.cardId, now), deckId: input.deckId } as StoredProgress);
+
+    const outcome = scheduler.review(previous, input.grade, now);
+    stored = { ...outcome.progress, deckId: input.deckId };
+    intervalDays = outcome.intervalDays;
+
+    const entry: StoredReview = {
+      cardId: input.cardId,
+      reviewedAt: now.toISOString(),
+      grade: input.grade,
+      stateBefore: previous.state,
+      elapsedDays: previous.elapsedDays,
+      scheduledDays: previous.scheduledDays,
+      ...(input.typed !== undefined ? { typed: input.typed } : {}),
+      ...(input.verdict !== undefined ? { verdict: input.verdict } : {}),
+      ...(input.durationMs !== undefined ? { durationMs: input.durationMs } : {}),
+    };
+
+    await db.progress.put(stored);
+    await db.reviews.add(entry);
+  });
+
+  if (stored === undefined) {
+    throw new Error("не удалось записать повторение");
+  }
+  return { progress: stored, intervalDays };
+}
+
+export interface DeckCounts {
+  /** Карточек в колоде всего. */
+  total: number;
+  /** Ни разу не показанных. */
+  fresh: number;
+  /** Ждут повторения прямо сейчас. */
+  due: number;
+  /** Начатых, но ещё не перешедших в обычные повторения. */
+  learning: number;
+  /** Дошедших до обычных повторений. */
+  review: number;
+}
+
+/**
+ * Сводка по колоде для экрана начала дня.
+ *
+ * Считается по индексам, без вычитывания карточек: на девяти тысячах карточек
+ * это будет заметно.
+ */
+export async function deckCounts(
+  db: AppDatabase,
+  deckId: string,
+  now: Date = new Date(),
+): Promise<DeckCounts> {
+  const [total, rows] = await Promise.all([
+    db.cards.where("deckId").equals(deckId).count(),
+    db.progress.where("deckId").equals(deckId).toArray(),
+  ]);
+
+  let due = 0;
+  let learning = 0;
+  let review = 0;
+  for (const row of rows) {
+    if (row.state === "learning" || row.state === "relearning") learning += 1;
+    if (row.state === "review") review += 1;
+    if (row.state !== "new" && isDue(row, now)) due += 1;
+  }
+
+  return { total, fresh: total - rows.length, due, learning, review };
+}
+
+/** Журнал повторений по карточке, от старых к новым. */
+export async function cardHistory(
+  db: AppDatabase,
+  cardId: string,
+): Promise<StoredReview[]> {
+  const rows = await db.reviews.where("cardId").equals(cardId).toArray();
+  rows.sort((left, right) => left.reviewedAt.localeCompare(right.reviewedAt));
+  return rows;
+}
+
+/**
+ * Сбрасывает прогресс по карточке, не трогая журнал.
+ *
+ * Журнал остаётся: он описывает то, что действительно происходило, и
+ * переписывать историю задним числом нельзя, даже по просьбе пользователя.
+ */
+export async function resetCard(db: AppDatabase, cardId: string): Promise<void> {
+  await db.progress.delete(cardId);
+}
+
+/** Текущий прогресс по карточке, если он есть. */
+export async function getProgress(
+  db: AppDatabase,
+  cardId: string,
+): Promise<CardProgress | undefined> {
+  return db.progress.get(cardId);
+}
