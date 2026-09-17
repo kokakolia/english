@@ -1,16 +1,20 @@
 /**
  * Экран повторения по макету из `design/`.
  *
- * Три состояния: пропуск скрыт, ответ раскрыт, отклик после оценки. Логика
- * занятия здесь не живёт — компонент показывает состояние контроллера и
+ * Два состояния карточки — пропуск скрыт и ответ раскрыт — плюс итоги в конце
+ * занятия. Логика здесь не живёт: компонент показывает состояние контроллера и
  * пересылает нажатия.
+ *
+ * Разметка разделена на три слоя: шапка, растягивающаяся середина и кнопки
+ * внизу. Прокручивается при нужде только середина — так кнопки оценки всегда
+ * на виду, сколько бы ни было текста, и страница не уезжает целиком.
  */
 
 import { useEffect } from "react";
 
 import { GRADES, type Grade } from "../srs";
 import { keyAction, type StudyController, type StudyState } from "../study/controller";
-import { formatInterval } from "./format";
+import { formatInterval, plural } from "./format";
 import { GradeIcon, Leaf, MoodPlant, PanelFlourish } from "./Ornaments";
 
 /**
@@ -24,14 +28,6 @@ const GRADE_LABELS: Record<Grade, string> = {
   hard: "Плохо помню",
   good: "Помню",
   easy: "Отлично помню",
-};
-
-/** Оценки делятся надвое: одни возвращают карточку скоро, другие откладывают. */
-const GRADE_MOOD: Record<Grade, "weak" | "strong"> = {
-  again: "weak",
-  hard: "weak",
-  good: "strong",
-  easy: "strong",
 };
 
 /** Сколько точек в полосе прогресса. Больше не помещается на телефоне. */
@@ -51,7 +47,7 @@ function ProgressHeader({ state }: { state: StudyState }) {
   const filled = Math.min(DOT_COUNT, Math.round((done / total) * DOT_COUNT));
 
   return (
-    <>
+    <header className="topbar">
       <div className="head">
         <div className="dots">
           {Array.from({ length: DOT_COUNT }, (_, index) => (
@@ -71,7 +67,64 @@ function ProgressHeader({ state }: { state: StudyState }) {
         <span className="rule-dot" />
         <span className="rule-line rule-line--rev" />
       </div>
-    </>
+    </header>
+  );
+}
+
+/** Итоги занятия. Показываются один раз в конце, а не после каждой карточки. */
+function Summary({ state, onFinish }: { state: StudyState; onFinish: () => void }) {
+  const { tally, session } = state;
+  const strong = tally.good + tally.easy;
+  const answers = session.answered;
+  const share = answers > 0 ? Math.round((strong / answers) * 100) : 0;
+  const nothingDone = answers === 0;
+
+  return (
+    <section className="screen screen--done">
+      <div className="middle middle--center">
+        <div className="summary">
+          {!nothingDone && <div className="feedback-glow" />}
+          <MoodPlant mood={nothingDone ? "weak" : "strong"} />
+          <h1 className="display summary-title">
+            {nothingDone ? "На сегодня всё" : "Круг пройден"}
+          </h1>
+
+          {!nothingDone && (
+            <>
+              <p className="summary-sub">
+                {session.completed} {plural(session.completed, "карточка")}, вспомнили{" "}
+                {share}%
+              </p>
+
+              <dl className="tally">
+                {GRADES.map((grade) => (
+                  <div key={grade} className={`tally-row tally-row--${grade}`}>
+                    <dt>
+                      <GradeIcon grade={grade} />
+                      {GRADE_LABELS[grade]}
+                    </dt>
+                    <dd>{tally[grade]}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              {session.repeats > 0 && (
+                <p className="quiet">
+                  Возвратов внутри занятия: {session.repeats}. Это карточки, которые
+                  показались снова после «не знал».
+                </p>
+              )}
+            </>
+          )}
+        </div>
+      </div>
+
+      <footer className="bottombar">
+        <button type="button" className="pill" onClick={onFinish}>
+          К началу
+        </button>
+      </footer>
+    </section>
   );
 }
 
@@ -91,7 +144,6 @@ export function ReviewScreen({ controller, state, onFinish }: Props) {
 
       event.preventDefault();
       if (action.kind === "reveal") controller.reveal();
-      else if (action.kind === "next") controller.next();
       else void controller.grade(action.grade);
     }
 
@@ -100,52 +152,11 @@ export function ReviewScreen({ controller, state, onFinish }: Props) {
   }, [controller]);
 
   if (state.phase === "finished" || state.phase === "empty") {
-    return (
-      <section className="screen screen--done">
-        <MoodPlant mood="strong" />
-        <h1 className="display">
-          {state.phase === "empty" ? "На сегодня всё" : "Круг пройден"}
-        </h1>
-        {state.session.answered > 0 && (
-          <p className="quiet">
-            Карточек закрыто: {state.session.completed}
-            {state.session.repeats > 0 && `, возвратов: ${state.session.repeats}`}
-          </p>
-        )}
-        <button type="button" className="pill" onClick={onFinish}>
-          К началу
-        </button>
-      </section>
-    );
+    return <Summary state={state} onFinish={onFinish} />;
   }
 
   const card = state.card;
   if (card === null) return <section className="screen">Загрузка…</section>;
-
-  if (state.phase === "feedback") {
-    const grade = state.lastGrade ?? "good";
-    const mood = GRADE_MOOD[grade];
-    return (
-      <section className="screen screen--review">
-        <ProgressHeader state={state} />
-        <div className="feedback">
-          {mood === "strong" && <div className="feedback-glow" />}
-          <MoodPlant mood={mood} />
-          <h2 className={`display feedback-title feedback-title--${mood}`}>
-            {mood === "weak" ? "Ничего страшного" : "Отлично!"}
-          </h2>
-          <p className={`feedback-sub feedback-sub--${mood}`}>
-            {mood === "weak" ? "Повторим карточку через " : "Следующий показ — через "}
-            {formatInterval(state.lastInterval ?? 0)}
-          </p>
-          <p className="feedback-grade">Вы выбрали: {GRADE_LABELS[grade]}</p>
-          <button type="button" className="pill" onClick={() => controller.next()}>
-            Далее
-          </button>
-        </div>
-      </section>
-    );
-  }
 
   const answered = state.phase === "answered";
   const [before, after] = card.text.split("___");
@@ -154,70 +165,75 @@ export function ReviewScreen({ controller, state, onFinish }: Props) {
     <section className="screen screen--review">
       <ProgressHeader state={state} />
 
-      <div className="panel">
-        <PanelFlourish position="start" />
-        <PanelFlourish position="end" />
+      <div className="middle">
+        <div className="panel">
+          <PanelFlourish position="start" />
+          <PanelFlourish position="end" />
 
-        <div className="label">{answered ? "Ответ" : "Заполните пропуск"}</div>
+          <div className="label">{answered ? "Ответ" : "Заполните пропуск"}</div>
 
-        <p className="sentence">
-          {before}
-          {answered ? <strong className="answer">{card.answer}</strong> : <span className="gap">_____</span>}
-          {after}
-        </p>
+          <p className="sentence">
+            {before}
+            {answered ? (
+              <strong className="answer">{card.answer}</strong>
+            ) : (
+              <span className="gap">_____</span>
+            )}
+            {after}
+          </p>
 
-        {card.translation !== null && <p className="translation">{card.translation}</p>}
+          {card.translation !== null && <p className="translation">{card.translation}</p>}
 
-        {!answered && <p className="hint">{card.hint}</p>}
+          {!answered && <p className="hint">{card.hint}</p>}
 
-        {answered && card.note !== null && <p className="note">{card.note}</p>}
+          {answered && card.note !== null && <p className="note">{card.note}</p>}
 
-        {answered && card.also.length > 0 && (
-          // В макете этой строки нет, но без неё самопроверка врёт: партнёры
-          // кластера взаимозаменяемы, и вспомнивший `take` вместо `make`
-          // ответил верно.
-          <p className="also">так же подошло бы: {card.also.join(", ")}</p>
-        )}
+          {answered && card.also.length > 0 && (
+            // В макете этой строки нет, но без неё самопроверка врёт: партнёры
+            // кластера взаимозаменяемы, и вспомнивший `take` вместо `make`
+            // ответил верно.
+            <p className="also">так же подошло бы: {card.also.join(", ")}</p>
+          )}
 
-        {answered && (
-          <div className="tailpiece">
-            <span className="tailpiece-line" />
-            <svg className="tailpiece-leaf" viewBox="0 0 10 10" aria-hidden="true">
-              <path d="M5 9 C1 7 1 3 5 1 C9 3 9 7 5 9 Z" fill="#B8892B" />
-            </svg>
-            <span className="tailpiece-line" />
-          </div>
-        )}
+          {answered && (
+            <div className="tailpiece">
+              <span className="tailpiece-line" />
+              <svg className="tailpiece-leaf" viewBox="0 0 10 10" aria-hidden="true">
+                <path d="M5 9 C1 7 1 3 5 1 C9 3 9 7 5 9 Z" fill="#B8892B" />
+              </svg>
+              <span className="tailpiece-line" />
+            </div>
+          )}
+        </div>
       </div>
 
-      {!answered && (
-        <button type="button" className="pill pill--wide" onClick={() => controller.reveal()}>
-          Показать ответ
-        </button>
-      )}
-
-      {answered && (
-        <div className="grades">
-          {GRADES.map((grade, index) => (
-            <button
-              key={grade}
-              type="button"
-              className={`grade grade--${grade}`}
-              disabled={state.saving}
-              onClick={() => void controller.grade(grade)}
-            >
-              <GradeIcon grade={grade} />
-              <span className="grade-label">{GRADE_LABELS[grade]}</span>
-              <span className="grade-interval">
-                {state.intervals ? formatInterval(state.intervals[grade]) : ""}
-              </span>
-              <span className="grade-key">{index + 1}</span>
-            </button>
-          ))}
-        </div>
-      )}
-
-      {state.error !== null && <p className="error">{state.error}</p>}
+      <footer className="bottombar">
+        {!answered ? (
+          <button type="button" className="pill pill--wide" onClick={() => controller.reveal()}>
+            Показать ответ
+          </button>
+        ) : (
+          <div className="grades">
+            {GRADES.map((grade, index) => (
+              <button
+                key={grade}
+                type="button"
+                className={`grade grade--${grade}`}
+                disabled={state.saving}
+                onClick={() => void controller.grade(grade)}
+              >
+                <GradeIcon grade={grade} />
+                <span className="grade-label">{GRADE_LABELS[grade]}</span>
+                <span className="grade-interval">
+                  {state.intervals ? formatInterval(state.intervals[grade]) : ""}
+                </span>
+                <span className="grade-key">{index + 1}</span>
+              </button>
+            ))}
+          </div>
+        )}
+        {state.error !== null && <p className="error">{state.error}</p>}
+      </footer>
     </section>
   );
 }

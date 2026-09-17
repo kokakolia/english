@@ -45,7 +45,11 @@
 html,
 body {
   margin: 0;
-  min-height: 100%;
+  /* Страница не прокручивается: экран занятия всегда ровно в окно, а
+     прокручивается при нужде только текст карточки. Так кнопки оценки
+     никуда не уезжают. */
+  height: 100%;
+  overflow: hidden;
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
@@ -57,9 +61,12 @@ body {
 
 .app {
   position: relative;
-  min-height: 100dvh;
-  overflow-x: hidden;
-  padding: clamp(24px, 5vh, 118px) clamp(18px, 4vw, 40px) clamp(32px, 6vh, 64px);
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  /* Вертикальные отступы считаются от высоты окна, а не от ширины: на
+     невысоком ноутбуке большие поля съедали бы место под карточку. */
+  padding: clamp(12px, 3vh, 48px) clamp(16px, 4vw, 40px) clamp(12px, 3vh, 40px);
 }
 
 .ornament-defs {
@@ -130,9 +137,52 @@ body {
   z-index: 1;
   width: min(100%, var(--column));
   margin: 0 auto;
+  height: 100%;
+  min-height: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--step);
+  gap: clamp(10px, 1.6vh, 20px);
+}
+
+/* Три слоя экрана: шапка и кнопки прибиты, середина забирает остаток. */
+
+.topbar,
+.bottombar {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1.2vh, 14px);
+}
+
+.middle {
+  flex: 1 1 auto;
+  /* Без этого flex-элемент не даёт себя сжать и выталкивает кнопки за окно. */
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  /* Тонкая полоса в цвет орнамента: она должна быть видна — это единственный
+     признак, что текст продолжается ниже, — но не спорить с оформлением. */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(184, 137, 43, 0.5) transparent;
+}
+
+.middle::-webkit-scrollbar {
+  width: 6px;
+}
+
+.middle::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.middle::-webkit-scrollbar-thumb {
+  background: rgba(184, 137, 43, 0.45);
+  border-radius: 999px;
+}
+
+.middle--center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ===== Типографика ===== */
@@ -203,7 +253,6 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-top: calc(var(--step) * -0.5);
 }
 
 .rule-line {
@@ -238,6 +287,8 @@ body {
   box-shadow:
     0 26px 56px rgba(31, 58, 46, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  /* Отступ под тень: иначе она обрезается краем прокручиваемой середины. */
+  margin: 0 0 6px;
 }
 
 .flourish {
@@ -379,17 +430,25 @@ body {
 }
 
 .grades {
-  display: flex;
-  gap: clamp(8px, 1vw, 12px);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(6px, 1vw, 12px);
+}
+
+/* На узком экране четыре подписи в строку не помещаются — уходят в два ряда. */
+@media (max-width: 560px) {
+  .grades {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .grade {
-  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: clamp(4px, 0.6vw, 8px);
-  padding: clamp(10px, 1.4vw, 16px) clamp(4px, 0.8vw, 8px);
+  padding: clamp(8px, 1.2vh, 16px) clamp(4px, 0.8vw, 8px);
   border-radius: clamp(12px, 1.4vw, 16px);
   background: rgba(255, 255, 255, 0.5);
   border: 1px solid transparent;
@@ -511,14 +570,74 @@ body {
   text-transform: uppercase;
 }
 
-.screen--done {
+.summary {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   text-align: center;
-  padding-top: clamp(20px, 6vh, 60px);
+  gap: clamp(6px, 1vh, 10px);
+  width: 100%;
 }
 
-.screen--done .display {
-  font-size: clamp(24px, 2.6vw, 32px);
+.summary-title {
+  margin-top: clamp(6px, 1vh, 14px);
+  font-size: clamp(22px, 2.6vw, 32px);
+  color: var(--gold-dark);
+}
+
+.summary-sub {
+  margin: 0;
+  font-size: clamp(15px, 1.6vw, 19px);
+  color: #6e5314;
+}
+
+.tally {
+  width: min(100%, 360px);
+  margin: clamp(10px, 1.6vh, 18px) 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+}
+
+.tally-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: clamp(5px, 0.8vh, 9px) clamp(10px, 1.4vw, 14px);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.45);
+  font-size: clamp(13px, 1.4vw, 16px);
+}
+
+.tally-row dt {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tally-row dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(16px, 1.8vw, 21px);
+}
+
+.tally-row--again {
+  color: #7a3a22;
+}
+
+.tally-row--hard {
+  color: #7c6415;
+}
+
+.tally-row--good {
+  color: #35502f;
+}
+
+.tally-row--easy {
+  color: var(--gold-dark);
 }
 
 /* ===== Экран начала дня ===== */
