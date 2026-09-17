@@ -122,6 +122,19 @@ def test_sequence() -> None:
           (tokens, gap), (["from", "house", "to", "house"], (0, 4)))
 
 
+def test_placeholder_not_hidden() -> None:
+    # Плейсхолдер держит произвольное дополнение — прятать его нельзя.
+    tokens, gap = _sequence_for(BEFORE, "show", "let sth")
+    check("последовательность: sth не попадает в пропуск",
+          (tokens, gap), (["let", "sth", "show"], (0, 1)))
+    tokens, gap = _sequence_for(PHRASE, "home", "see sb home")
+    check("последовательность: пропуск обрывается на плейсхолдере",
+          (tokens, gap), (["see", "sb", "home"], (0, 1)))
+    # Запись целиком из плейсхолдеров прятать нечего.
+    check("последовательность: прятать нечего",
+          _sequence_for(BEFORE, "x", "sb"), None)
+
+
 def test_locate() -> None:
     # Пример использует не тот вариант, что стоит в словаре первым.
     example = "The study demonstrated the need for better mental health services."
@@ -130,12 +143,19 @@ def test_locate() -> None:
     check("поиск в примере: вырезан партнёр",
           example[located[0]:located[1]], "demonstrated")
 
-    # Плейсхолдер не должен захватывать пол-предложения.
+    # Плейсхолдер находится, но в пропуск уходит только то, что после него.
     example = "When he's reading comics, my brother disappears into his own little world."
     located = _locate(example, "world", BEFORE, ["sb's own little"])
     check_true("поиск в примере: плейсхолдер найден", located is not None)
-    check("поиск в примере: плейсхолдер не жадный",
-          example[located[0]:located[1]], "his own little")
+    check("поиск в примере: прячется только собственно партнёр",
+          example[located[0]:located[1]], "own little")
+
+    # Дополнение, пойманное плейсхолдером, остаётся в предложении.
+    example = "I heard my neighbor play the violin beautifully last night."
+    located = _locate(example, "play", BEFORE, ["hear sb"])
+    check_true("поиск в примере: запись с sb найдена", located is not None)
+    check("поиск в примере: дополнение не уезжает в пропуск",
+          example[located[0]:located[1]], "heard")
 
     # Дефис вместо пробела.
     example = "The movie was based on real-life events that happened here."

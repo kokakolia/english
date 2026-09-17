@@ -25,11 +25,11 @@ from . import store
 from .inflect import sequence_regex
 from .models import Collocation
 from .patterns import AFTER, PHRASE, TEMPLATE, build_phrase, parse_cat, parse_gloss
-from .variants import expand
+from .variants import PLACEHOLDERS, expand
 
 # Версия правил разбора. Поднять при любом изменении логики нормализации —
 # тогда следующий `run` пересоберёт базу целиком.
-VERSION = "0.2.2"
+VERSION = "0.3.0"
 
 SOURCE_DICT = "ozdic"
 
@@ -43,42 +43,60 @@ def _head_tokens(headword: str) -> list[str]:
 
 def _sequence_for(position: str, headword: str, variant: str
                   ) -> tuple[list[str], tuple[int, int]] | None:
-    """Токены коллокации целиком и границы пропуска внутри них."""
+    """Токены коллокации целиком и границы пропуска внутри них.
+
+    В пропуск попадает только то, что учащийся может произвести: сам партнёр.
+    Заголовочное слово остаётся видимым как опора, а плейсхолдеры `sb`/`sth` —
+    потому что на их месте в предложении стоит произвольное дополнение.
+    Без этого правила запись `see sb home` превращала предложение в
+    «Tom ___ through the dark streets» с ответом «saw his elderly neighbor
+    home», который угадать нельзя.
+    """
     head = _head_tokens(headword)
     partner = [token for token in variant.split() if token]
     if not partner:
         return None
 
-    if position == PHRASE:
-        # Устойчивое выражение — карточка на всю фразу.
-        return partner, (0, len(partner))
+    # Собираем последовательность, помечая токены, которые можно прятать.
+    tokens: list[str] = []
+    hideable: list[bool] = []
 
-    if position == TEMPLATE or "~" in variant:
-        tokens: list[str] = []
-        runs: list[list[int]] = []   # непрерывные куски партнёра между тильдами
-        current: list[int] = []
+    def add_partner() -> None:
         for token in partner:
             if token == "~":
-                if current:
-                    runs.append(current)
-                    current = []
                 tokens.extend(head)
+                hideable.extend([False] * len(head))
                 continue
-            current.append(len(tokens))
             tokens.append(token)
-        if current:
-            runs.append(current)
-        if not runs:
-            return None
-        if partner.count("~") > 1:
-            # `from ~ to ~` — единое выражение, прячем его целиком.
-            return tokens, (0, len(tokens))
-        run = runs[0]
-        return tokens, (run[0], run[-1] + 1)
+            hideable.append(token.lower() not in PLACEHOLDERS)
 
-    if position == AFTER:
-        return head + partner, (len(head), len(head) + len(partner))
-    return partner + head, (0, len(partner))
+    def add_head() -> None:
+        tokens.extend(head)
+        hideable.extend([False] * len(head))
+
+    if position == PHRASE or position == TEMPLATE or "~" in variant:
+        add_partner()
+    elif position == AFTER:
+        add_head()
+        add_partner()
+    else:
+        add_partner()
+        add_head()
+
+    if partner.count("~") > 1:
+        # `from ~ to ~` — единое выражение, прячем его целиком.
+        return tokens, (0, len(tokens))
+
+    # Первый непрерывный кусок из тех токенов, что можно спрятать.
+    start = None
+    for index, can_hide in enumerate(hideable):
+        if can_hide and start is None:
+            start = index
+        elif not can_hide and start is not None:
+            return tokens, (start, index)
+    if start is None:
+        return None
+    return tokens, (start, len(tokens))
 
 
 def _locate(example: str, headword: str, position: str, candidates: list[str]

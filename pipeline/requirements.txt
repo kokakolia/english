@@ -6,3 +6,4 @@ wordfreq>=3.1
 # requests-ом напрямую (сессия тогда просит только gzip и получает больше байт).
 brotli>=1.1
 jsonschema>=4.21
+genanki>=0.13

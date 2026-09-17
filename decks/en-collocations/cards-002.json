@@ -1,5 +1,166 @@
 [
  {
+  "id": "c_e2db34e00ce74339",
+  "type": "cloze",
+  "text": "He sometimes ___ his place and interrupts the teacher during lessons.",
+  "answer": "forgets",
+  "accept": [
+   "forget"
+  ],
+  "hint": "f______",
+  "phrase": "forget place",
+  "relation": "verb+obj",
+  "headword": "place",
+  "sense": "role/position/function",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 762
+ },
+ {
+  "id": "c_7b4a2f84d35cde51",
+  "type": "cloze",
+  "text": "If you play your music too loud, you'll ___ the house up.",
+  "answer": "wake",
+  "accept": [
+   "wake (up)"
+  ],
+  "hint": "w___",
+  "phrase": "wake up house",
+  "relation": "verb+obj",
+  "headword": "house",
+  "sense": "all the people who live in one house",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 763
+ },
+ {
+  "id": "c_feccca1f39c8843e",
+  "type": "cloze",
+  "text": "My daughter ___ show her grandmother the paintings she made at school.",
+  "answer": "was eager to",
+  "accept": [
+   "be anxious to",
+   "be eager to",
+   "be happy to",
+   "be keen to",
+   "intend to",
+   "want to",
+   "wish to"
+  ],
+  "hint": "w__ e____ t_",
+  "phrase": "be anxious to show",
+  "relation": "verb+obj",
+  "headword": "show",
+  "sense": "make sth clear; let sb see sth",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 764
+ },
+ {
+  "id": "c_eb531037ceedb327",
+  "type": "cloze",
+  "text": "The carpet stretches ___ across the entire living room.",
+  "answer": "from end to end",
+  "accept": [
+   "(from) end to end"
+  ],
+  "hint": "f___ e__ t_ e__",
+  "phrase": "from end to end",
+  "relation": "phrase",
+  "headword": "end",
+  "sense": "furthest part of sth",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 765
+ },
+ {
+  "id": "c_8e60f68fb9f884e1",
+  "type": "cloze",
+  "text": "The ceasefire agreement ___ last more than a few weeks.",
+  "answer": "is unlikely to",
+  "accept": [
+   "be likely/unlikely to"
+  ],
+  "hint": "i_ u_______ t_",
+  "phrase": "be likely to last",
+  "relation": "verb+obj",
+  "headword": "last",
+  "sense": null,
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 766
+ },
+ {
+  "id": "c_5b806d6b2321c695",
+  "type": "cloze",
+  "text": "More families today are choosing to have a smaller family ___ than their parents did.",
+  "answer": "size",
+  "accept": [
+   "size"
+  ],
+  "hint": "s___",
+  "phrase": "family size",
+  "relation": "noun+noun",
+  "headword": "family",
+  "sense": "children",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 768
+ },
+ {
+  "id": "c_9419eecba97a2da1",
+  "type": "cloze",
+  "text": "The ___ written language in the world is thought to be ancient Sumerian.",
+  "answer": "oldest known",
+  "accept": [
+   "oldest known"
+  ],
+  "hint": "o_____ k____",
+  "phrase": "oldest known",
+  "relation": "phrase",
+  "headword": "old",
+  "sense": "not new",
+  "cefr": "A1",
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 770
+ },
+ {
+  "id": "c_5555be84657ca02d",
+  "type": "cloze",
+  "text": "After years of meditation, he developed ___ thought about the meaning of life.",
+  "answer": "profound",
+  "accept": [
+   "deep",
+   "profound"
+  ],
+  "hint": "p_______",
+  "phrase": "deep thought",
+  "relation": "adj+noun",
+  "headword": "thought",
+  "sense": "process/act of thinking",
+  "cefr": "B2",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 776
+ },
+ {
   "id": "c_e1413489397870b3",
   "type": "cloze",
   "text": "She felt ___ free when she left her stressful job and moved to the countryside.",
@@ -892,12 +1053,12 @@
  {
   "id": "c_062de4f0af9808f8",
   "type": "cloze",
-  "text": "She decided to move away ___ good of her family's future.",
-  "answer": "for the",
+  "text": "She decided to move away ___ the good of her family's future.",
+  "answer": "for",
   "accept": [
    "for sb/sth's ~"
   ],
-  "hint": "f__ t__",
+  "hint": "f__",
   "phrase": "for sb good",
   "relation": "prep",
   "headword": "good",
@@ -930,12 +1091,12 @@
  {
   "id": "c_bfbc93fcf4fac12d",
   "type": "cloze",
-  "text": "My grandmother ___ the world during the war years.",
-  "answer": "brought five children into",
+  "text": "My grandmother ___ five children into the world during the war years.",
+  "answer": "brought",
   "accept": [
    "bring sb into"
   ],
-  "hint": "b______ f___ c_______ i___",
+  "hint": "b______",
   "phrase": "bring sb into world",
   "relation": "verb+obj",
   "headword": "world",
@@ -1520,13 +1681,13 @@
  {
   "id": "c_9c2ea8ee407fe4bb",
   "type": "cloze",
-  "text": "Our volleyball team ___ from different schools across the city.",
-  "answer": "comprises twelve players",
+  "text": "Our volleyball team ___ twelve players from different schools across the city.",
+  "answer": "comprises",
   "accept": [
    "comprise sb",
    "consist of sb"
   ],
-  "hint": "c________ t_____ p______",
+  "hint": "c________",
   "phrase": "team comprise sb",
   "relation": "noun+verb",
   "headword": "team",
@@ -2599,6 +2760,27 @@
   "ambiguity": "medium",
   "flags": [],
   "position": 1066
+ },
+ {
+  "id": "c_c96649e521b9a3c5",
+  "type": "cloze",
+  "text": "The school year ___ September to July in most countries.",
+  "answer": "runs from",
+  "accept": [
+   "run from/to sth"
+  ],
+  "hint": "r___ f___",
+  "phrase": "year run from sth",
+  "relation": "noun+verb",
+  "headword": "year",
+  "sense": null,
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 1069
  },
  {
   "id": "c_c4dd87300f7c57b3",
@@ -3836,12 +4018,12 @@
  {
   "id": "c_177fbe211e2cad80",
   "type": "cloze",
-  "text": "The landlord ___ use of the parking space after the lease ended.",
-  "answer": "denied them",
+  "text": "The landlord ___ them use of the parking space after the lease ended.",
+  "answer": "denied",
   "accept": [
    "deny sb"
   ],
-  "hint": "d_____ t___",
+  "hint": "d_____",
   "phrase": "deny sb use",
   "relation": "verb+obj",
   "headword": "use",
@@ -4764,189 +4946,5 @@
   "ambiguity": "medium",
   "flags": [],
   "position": 1390
- },
- {
-  "id": "c_60aa2ced59a58565",
-  "type": "cloze",
-  "text": "After the accident, he slowly ___ the use of his left arm.",
-  "answer": "recovered",
-  "accept": [
-   "recover",
-   "regain"
-  ],
-  "hint": "r________",
-  "phrase": "recover use",
-  "relation": "verb+obj",
-  "headword": "use",
-  "sense": "ability/permission to use sth",
-  "cefr": null,
-  "band": "common",
-  "ambiguity": "low",
-  "flags": [],
-  "position": 1395
- },
- {
-  "id": "c_65754892639732b0",
-  "type": "cloze",
-  "text": "Most home ___ find it easier to store their photos in the cloud.",
-  "answer": "users",
-  "accept": [
-   "user"
-  ],
-  "hint": "u____",
-  "phrase": "home user",
-  "relation": "noun+noun",
-  "headword": "home",
-  "sense": "place where sb/sth lives",
-  "cefr": null,
-  "band": "common",
-  "ambiguity": "medium",
-  "flags": [],
-  "position": 1396
- },
- {
-  "id": "c_0fe6896041a34ace",
-  "type": "cloze",
-  "text": "He quit his job and left the office ___.",
-  "answer": "without a backward look",
-  "accept": [
-   "without a backward look"
-  ],
-  "hint": "w______ a b_______ l___",
-  "phrase": "without a backward look",
-  "relation": "phrase",
-  "headword": "look",
-  "sense": "act of looking at/considering sth",
-  "cefr": null,
-  "band": "extended",
-  "ambiguity": "low",
-  "flags": [],
-  "position": 1397
- },
- {
-  "id": "c_3ea29ea34b66fc96",
-  "type": "cloze",
-  "text": "A good dictionary can be ___ help when you're learning new vocabulary.",
-  "answer": "of",
-  "accept": [
-   "of ~"
-  ],
-  "hint": "o_",
-  "phrase": "of help",
-  "relation": "prep",
-  "headword": "help",
-  "sense": null,
-  "cefr": "A2",
-  "band": "core",
-  "ambiguity": "low",
-  "flags": [],
-  "position": 1401
- },
- {
-  "id": "c_28845bc8c0fed452",
-  "type": "cloze",
-  "text": "The ___ thing about moving to a new city is how quickly you make new friends.",
-  "answer": "funny",
-  "accept": [
-   "amazing",
-   "curious",
-   "exciting",
-   "extraordinary",
-   "funny",
-   "interesting",
-   "remarkable",
-   "startling",
-   "strange",
-   "striking",
-   "surprising",
-   "weird"
-  ],
-  "hint": "f____",
-  "phrase": "amazing thing",
-  "relation": "adj+noun",
-  "headword": "thing",
-  "sense": "fact/event/situation/action",
-  "cefr": "A2",
-  "band": "core",
-  "ambiguity": "medium",
-  "flags": [],
-  "position": 1402
- },
- {
-  "id": "c_6dcf5f5b2e891da7",
-  "type": "cloze",
-  "text": "We ___ housed our guests in the spare bedroom while their apartment was being repaired.",
-  "answer": "temporarily",
-  "accept": [
-   "temporarily"
-  ],
-  "hint": "t__________",
-  "phrase": "temporarily house",
-  "relation": "adv+verb",
-  "headword": "house",
-  "sense": null,
-  "cefr": null,
-  "band": "common",
-  "ambiguity": "low",
-  "flags": [],
-  "position": 1406
- },
- {
-  "id": "c_8b9ac14bd10f57e7",
-  "type": "cloze",
-  "text": "The end ___ of the project was better than everyone expected.",
-  "answer": "result",
-  "accept": [
-   "product",
-   "result"
-  ],
-  "hint": "r_____",
-  "phrase": "end product",
-  "relation": "noun+noun",
-  "headword": "end",
-  "sense": "last part of sth",
-  "cefr": null,
-  "band": "common",
-  "ambiguity": "low",
-  "flags": [],
-  "position": 1408
- },
- {
-  "id": "c_80381186cd2d4ba5",
-  "type": "cloze",
-  "text": "She decided to leave her job because of her family ___ and young children at home.",
-  "answer": "commitments",
-  "accept": [
-   "commitments"
-  ],
-  "hint": "c__________",
-  "phrase": "family commitments",
-  "relation": "noun+noun",
-  "headword": "family",
-  "sense": "group of people related to each other",
-  "cefr": null,
-  "band": "extended",
-  "ambiguity": "medium",
-  "flags": [],
-  "position": 1409
- },
- {
-  "id": "c_96d809cea9b9f340",
-  "type": "cloze",
-  "text": "My father was a school ___ for thirty years before he retired.",
-  "answer": "teacher",
-  "accept": [
-   "teacher (also schoolteacher)"
-  ],
-  "hint": "t______",
-  "phrase": "school teacher",
-  "relation": "noun+noun",
-  "headword": "school",
-  "sense": null,
-  "cefr": "A1",
-  "band": "rare",
-  "ambiguity": "medium",
-  "flags": [],
-  "position": 1417
  }
 ]

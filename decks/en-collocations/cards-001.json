@@ -1,5 +1,86 @@
 [
  {
+  "id": "c_ee9367204741eacf",
+  "type": "cloze",
+  "text": "If you ___ want to improve your English, you need to practice every day.",
+  "answer": "genuinely",
+  "accept": [
+   "genuinely",
+   "truly"
+  ],
+  "hint": "g________",
+  "phrase": "genuinely want",
+  "relation": "adv+verb",
+  "headword": "want",
+  "sense": null,
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 317
+ },
+ {
+  "id": "c_6765022bac64c441",
+  "type": "cloze",
+  "text": "He knew Maria was ___ his life the moment they first met.",
+  "answer": "the love of",
+  "accept": [
+   "the love of sb's life"
+  ],
+  "hint": "t__ l___ o_",
+  "phrase": "the love of sb's life",
+  "relation": "phrase",
+  "headword": "love",
+  "sense": null,
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 318
+ },
+ {
+  "id": "c_809b0797d3394656",
+  "type": "cloze",
+  "text": "My old textbooks might ___ use to your younger brother.",
+  "answer": "be of",
+  "accept": [
+   "be of"
+  ],
+  "hint": "b_ o_",
+  "phrase": "be of use",
+  "relation": "verb+obj",
+  "headword": "use",
+  "sense": "how useful sth is",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 319
+ },
+ {
+  "id": "c_ef1586c5eda46f8a",
+  "type": "cloze",
+  "text": "After reviewing all the test results, the doctor gave her an ___ look of concern.",
+  "answer": "overall",
+  "accept": [
+   "overall"
+  ],
+  "hint": "o______",
+  "phrase": "overall look",
+  "relation": "adj+noun",
+  "headword": "look",
+  "sense": "act of looking at/considering sth",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 321
+ },
+ {
   "id": "c_147442c1ab9f2cff",
   "type": "cloze",
   "text": "Growing families often ___ a need for larger homes.",
@@ -381,14 +462,33 @@
   "position": 351
  },
  {
+  "id": "c_ce945e2034c34a70",
+  "type": "cloze",
+  "text": "She spent all her savings on the trip ___ her future expenses.",
+  "answer": "with no thought for",
+  "accept": [
+   "with no thought for sth"
+  ],
+  "hint": "w___ n_ t______ f__",
+  "phrase": "with no thought for sth",
+  "relation": "phrase",
+  "headword": "thought",
+  "sense": "process/act of thinking",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 352
+ },
+ {
   "id": "c_8a2f00904c6326aa",
   "type": "cloze",
-  "text": "I always ___ free so I can spend time with my family.",
-  "answer": "keep my evenings",
+  "text": "I always ___ my evenings free so I can spend time with my family.",
+  "answer": "keep",
   "accept": [
    "keep sth"
   ],
-  "hint": "k___ m_ e_______",
+  "hint": "k___",
   "phrase": "keep sth free",
   "relation": "verb+adj",
   "headword": "free",
@@ -975,19 +1075,19 @@
  {
   "id": "c_563f5fdc2f57be16",
   "type": "cloze",
-  "text": "My brother always dreamed of having ___ show on the radio.",
-  "answer": "his own",
+  "text": "My brother always dreamed of having his ___ show on the radio.",
+  "answer": "own",
   "accept": [
    "sb's own"
   ],
-  "hint": "h__ o__",
+  "hint": "o__",
   "phrase": "sb's own show",
   "relation": "adj+noun",
   "headword": "show",
   "sense": "type of entertainment",
   "cefr": "A2",
   "band": "core",
-  "ambiguity": "low",
+  "ambiguity": "medium",
   "flags": [],
   "position": 409
  },
@@ -1015,12 +1115,12 @@
  {
   "id": "c_5e27605cf735d26c",
   "type": "cloze",
-  "text": "We should enjoy this discount ___ before the store changes its prices.",
-  "answer": "while it lasts",
+  "text": "We should enjoy this discount ___ it lasts before the store changes its prices.",
+  "answer": "while",
   "accept": [
    "while sth lasts"
   ],
-  "hint": "w____ i_ l____",
+  "hint": "w____",
   "phrase": "while sth lasts",
   "relation": "phrase",
   "headword": "last",
@@ -1034,13 +1134,13 @@
  {
   "id": "c_ea3d85e23b8f8c6d",
   "type": "cloze",
-  "text": "A good night's sleep will ___ better before your important meeting tomorrow.",
-  "answer": "get you",
+  "text": "A good night's sleep will ___ you better before your important meeting tomorrow.",
+  "answer": "get",
   "accept": [
    "get sb",
    "make sb"
   ],
-  "hint": "g__ y__",
+  "hint": "g__",
   "phrase": "get sb better",
   "relation": "verb+adj",
   "headword": "better",
@@ -1153,13 +1253,13 @@
  {
   "id": "c_d77aa7a93dc0b991",
   "type": "cloze",
-  "text": "The technology company ___ tablets for customers around the world.",
-  "answer": "makes smartphones and",
+  "text": "The technology company ___ smartphones and tablets for customers around the world.",
+  "answer": "makes",
   "accept": [
    "make sth",
    "produce sth"
   ],
-  "hint": "m____ s__________ a__",
+  "hint": "m____",
   "phrase": "company make sth",
   "relation": "noun+verb",
   "headword": "company",
@@ -1194,12 +1294,12 @@
  {
   "id": "c_cd43af8ba096eef5",
   "type": "cloze",
-  "text": "We always ___ free at the dinner table for guests.",
-  "answer": "keep a chair",
+  "text": "We always ___ a chair free at the dinner table for guests.",
+  "answer": "keep",
   "accept": [
    "keep sth"
   ],
-  "hint": "k___ a c____",
+  "hint": "k___",
   "phrase": "keep sth free",
   "relation": "verb+adj",
   "headword": "free",
@@ -1287,6 +1387,25 @@
   "ambiguity": "medium",
   "flags": [],
   "position": 432
+ },
+ {
+  "id": "c_90ebc99830a53879",
+  "type": "cloze",
+  "text": "My boss wants everything perfect, so ___ her no matter what I do.",
+  "answer": "there's no pleasing",
+  "accept": [
+   "there's no pleasing sb"
+  ],
+  "hint": "t_____ n_ p_______",
+  "phrase": "there's no pleasing sb",
+  "relation": "phrase",
+  "headword": "please",
+  "sense": null,
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 433
  },
  {
   "id": "c_63be9eb508a81f0b",
@@ -1435,12 +1554,12 @@
  {
   "id": "c_655c2d9d1b010bb0",
   "type": "cloze",
-  "text": "You can't ___ right just by pretending the problem doesn't exist.",
-  "answer": "make something",
+  "text": "You can't ___ something right just by pretending the problem doesn't exist.",
+  "answer": "make",
   "accept": [
    "make sth"
   ],
-  "hint": "m___ s________",
+  "hint": "m___",
   "phrase": "make sth right",
   "relation": "verb+adj",
   "headword": "right",
@@ -1814,15 +1933,15 @@
  {
   "id": "c_739d7195d7e66a45",
   "type": "cloze",
-  "text": "She ___ better to apologize in person rather than sending an email.",
-  "answer": "considered it",
+  "text": "She ___ it better to apologize in person rather than sending an email.",
+  "answer": "considered",
   "accept": [
    "consider sth",
    "deem sth",
    "judge sth",
    "think sth"
   ],
-  "hint": "c_________ i_",
+  "hint": "c_________",
   "phrase": "consider sth better",
   "relation": "verb+adj",
   "headword": "better",
@@ -2180,12 +2299,12 @@
  {
   "id": "c_d1bab6fccf00cac3",
   "type": "cloze",
-  "text": "She traveled through Asia to ___ before returning home to study.",
-  "answer": "see something of life",
+  "text": "She traveled through Asia to ___ something of life before returning home to study.",
+  "answer": "see",
   "accept": [
    "see sth of life"
   ],
-  "hint": "s__ s________ o_ l___",
+  "hint": "s__",
   "phrase": "see sth of life",
   "relation": "phrase",
   "headword": "life",
@@ -2552,12 +2671,12 @@
  {
   "id": "c_8badf4e5b8d86dda",
   "type": "cloze",
-  "text": "When the child fell down, his mother ___ better and he stopped crying.",
-  "answer": "kissed his knee",
+  "text": "When the child fell down, his mother ___ his knee better and he stopped crying.",
+  "answer": "kissed",
   "accept": [
    "kiss sth"
   ],
-  "hint": "k_____ h__ k___",
+  "hint": "k_____",
   "phrase": "kiss sth better",
   "relation": "verb+adj",
   "headword": "better",
@@ -2669,12 +2788,12 @@
  {
   "id": "c_62d017404ed54dea",
   "type": "cloze",
-  "text": "The teacher decided to ___ free to choose their own research topics.",
-  "answer": "leave the students",
+  "text": "The teacher decided to ___ the students free to choose their own research topics.",
+  "answer": "leave",
   "accept": [
    "leave sb"
   ],
-  "hint": "l____ t__ s_______",
+  "hint": "l____",
   "phrase": "leave sb free",
   "relation": "verb+adj",
   "headword": "free",
@@ -2784,12 +2903,12 @@
  {
   "id": "c_f6c15479204f2f96",
   "type": "cloze",
-  "text": "After the party ended late, Tom ___ through the dark streets.",
-  "answer": "saw his elderly neighbor home",
+  "text": "After the party ended late, Tom ___ his elderly neighbor home through the dark streets.",
+  "answer": "saw",
   "accept": [
    "see sb home"
   ],
-  "hint": "s__ h__ e______ n_______ h___",
+  "hint": "s__",
   "phrase": "see sb home",
   "relation": "phrase",
   "headword": "see",
@@ -2801,6 +2920,25 @@
    "proper_noun"
   ],
   "position": 575
+ },
+ {
+  "id": "c_5f99ac0974ebab0f",
+  "type": "cloze",
+  "text": "I ___ the receptionist the way to the nearest bathroom.",
+  "answer": "asked",
+  "accept": [
+   "ask (sb)"
+  ],
+  "hint": "a____",
+  "phrase": "ask sb way",
+  "relation": "verb+obj",
+  "headword": "way",
+  "sense": "method/style",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 576
  },
  {
   "id": "c_f960a1a12c156e79",
@@ -2824,12 +2962,12 @@
  {
   "id": "c_a0fde7a779aa0abd",
   "type": "cloze",
-  "text": "My daughter finally ___ right after practicing for an hour.",
-  "answer": "got her math homework",
+  "text": "My daughter finally ___ her math homework right after practicing for an hour.",
+  "answer": "got",
   "accept": [
    "get sth"
   ],
-  "hint": "g__ h__ m___ h_______",
+  "hint": "g__",
   "phrase": "get sth right",
   "relation": "verb+adj",
   "headword": "right",
@@ -2843,12 +2981,12 @@
  {
   "id": "c_0641bb051c770ea6",
   "type": "cloze",
-  "text": "When he's reading comics, my brother disappears into ___ world and forgets everything else.",
-  "answer": "his own little",
+  "text": "When he's reading comics, my brother disappears into his ___ world and forgets everything else.",
+  "answer": "own little",
   "accept": [
    "sb's own (little)"
   ],
-  "hint": "h__ o__ l_____",
+  "hint": "o__ l_____",
   "phrase": "sb's own little world",
   "relation": "adj+noun",
   "headword": "world",
@@ -3678,13 +3816,13 @@
  {
   "id": "c_0a3516f47c4de8d5",
   "type": "cloze",
-  "text": "The nurse asked me to ___ still during the blood test.",
-  "answer": "keep the patient",
+  "text": "The nurse asked me to ___ the patient still during the blood test.",
+  "answer": "keep",
   "accept": [
    "hold sb/sth",
    "keep sb/sth"
   ],
-  "hint": "k___ t__ p______",
+  "hint": "k___",
   "phrase": "hold sb still",
   "relation": "verb+adj",
   "headword": "still",
@@ -4310,13 +4448,13 @@
  {
   "id": "c_c1b94466d678d30e",
   "type": "cloze",
-  "text": "Our new house ___, so we get plenty of natural light in the afternoons.",
-  "answer": "faces the garden",
+  "text": "Our new house ___ the garden, so we get plenty of natural light in the afternoons.",
+  "answer": "faces",
   "accept": [
    "face sth",
    "overlook sth"
   ],
-  "hint": "f____ t__ g_____",
+  "hint": "f____",
   "phrase": "house face sth",
   "relation": "noun+verb",
   "headword": "house",
@@ -4423,6 +4561,25 @@
   "ambiguity": "low",
   "flags": [],
   "position": 720
+ },
+ {
+  "id": "c_f16c64943fbc5c38",
+  "type": "cloze",
+  "text": "A lot of careful thought ___ planning the school trip.",
+  "answer": "went into",
+  "accept": [
+   "go into sth"
+  ],
+  "hint": "w___ i___",
+  "phrase": "thought go into sth",
+  "relation": "noun+verb",
+  "headword": "thought",
+  "sense": "process/act of thinking",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 726
  },
  {
   "id": "c_66e7a483436721e3",
@@ -4806,166 +4963,5 @@
   "ambiguity": "medium",
   "flags": [],
   "position": 760
- },
- {
-  "id": "c_e2db34e00ce74339",
-  "type": "cloze",
-  "text": "He sometimes ___ his place and interrupts the teacher during lessons.",
-  "answer": "forgets",
-  "accept": [
-   "forget"
-  ],
-  "hint": "f______",
-  "phrase": "forget place",
-  "relation": "verb+obj",
-  "headword": "place",
-  "sense": "role/position/function",
-  "cefr": null,
-  "band": "core",
-  "ambiguity": "low",
-  "flags": [],
-  "position": 762
- },
- {
-  "id": "c_7b4a2f84d35cde51",
-  "type": "cloze",
-  "text": "If you play your music too loud, you'll ___ the house up.",
-  "answer": "wake",
-  "accept": [
-   "wake (up)"
-  ],
-  "hint": "w___",
-  "phrase": "wake up house",
-  "relation": "verb+obj",
-  "headword": "house",
-  "sense": "all the people who live in one house",
-  "cefr": null,
-  "band": "common",
-  "ambiguity": "low",
-  "flags": [],
-  "position": 763
- },
- {
-  "id": "c_feccca1f39c8843e",
-  "type": "cloze",
-  "text": "My daughter ___ show her grandmother the paintings she made at school.",
-  "answer": "was eager to",
-  "accept": [
-   "be anxious to",
-   "be eager to",
-   "be happy to",
-   "be keen to",
-   "intend to",
-   "want to",
-   "wish to"
-  ],
-  "hint": "w__ e____ t_",
-  "phrase": "be anxious to show",
-  "relation": "verb+obj",
-  "headword": "show",
-  "sense": "make sth clear; let sb see sth",
-  "cefr": null,
-  "band": "common",
-  "ambiguity": "low",
-  "flags": [],
-  "position": 764
- },
- {
-  "id": "c_eb531037ceedb327",
-  "type": "cloze",
-  "text": "The carpet stretches ___ across the entire living room.",
-  "answer": "from end to end",
-  "accept": [
-   "(from) end to end"
-  ],
-  "hint": "f___ e__ t_ e__",
-  "phrase": "from end to end",
-  "relation": "phrase",
-  "headword": "end",
-  "sense": "furthest part of sth",
-  "cefr": "B1",
-  "band": "core",
-  "ambiguity": "medium",
-  "flags": [],
-  "position": 765
- },
- {
-  "id": "c_8e60f68fb9f884e1",
-  "type": "cloze",
-  "text": "The ceasefire agreement ___ last more than a few weeks.",
-  "answer": "is unlikely to",
-  "accept": [
-   "be likely/unlikely to"
-  ],
-  "hint": "i_ u_______ t_",
-  "phrase": "be likely to last",
-  "relation": "verb+obj",
-  "headword": "last",
-  "sense": null,
-  "cefr": null,
-  "band": "common",
-  "ambiguity": "low",
-  "flags": [],
-  "position": 766
- },
- {
-  "id": "c_5b806d6b2321c695",
-  "type": "cloze",
-  "text": "More families today are choosing to have a smaller family ___ than their parents did.",
-  "answer": "size",
-  "accept": [
-   "size"
-  ],
-  "hint": "s___",
-  "phrase": "family size",
-  "relation": "noun+noun",
-  "headword": "family",
-  "sense": "children",
-  "cefr": null,
-  "band": "core",
-  "ambiguity": "low",
-  "flags": [],
-  "position": 768
- },
- {
-  "id": "c_9419eecba97a2da1",
-  "type": "cloze",
-  "text": "The ___ written language in the world is thought to be ancient Sumerian.",
-  "answer": "oldest known",
-  "accept": [
-   "oldest known"
-  ],
-  "hint": "o_____ k____",
-  "phrase": "oldest known",
-  "relation": "phrase",
-  "headword": "old",
-  "sense": "not new",
-  "cefr": "A1",
-  "band": "common",
-  "ambiguity": "medium",
-  "flags": [
-   "proper_noun"
-  ],
-  "position": 770
- },
- {
-  "id": "c_5555be84657ca02d",
-  "type": "cloze",
-  "text": "After years of meditation, he developed ___ thought about the meaning of life.",
-  "answer": "profound",
-  "accept": [
-   "deep",
-   "profound"
-  ],
-  "hint": "p_______",
-  "phrase": "deep thought",
-  "relation": "adj+noun",
-  "headword": "thought",
-  "sense": "process/act of thinking",
-  "cefr": "B2",
-  "band": "core",
-  "ambiguity": "medium",
-  "flags": [],
-  "position": 776
  }
 ]

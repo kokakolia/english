@@ -1,0 +1,158 @@
+[
+ {
+  "id": "c_1696744f5790fdd0",
+  "type": "cloze",
+  "text": "We called our daughter Sophie ___ my grandmother.",
+  "answer": "in honour of",
+  "accept": [
+   "in honour of sb/sth"
+  ],
+  "hint": "i_ h_____ o_",
+  "phrase": "in honour of sb name",
+  "relation": "prep",
+  "headword": "name",
+  "sense": null,
+  "cefr": null,
+  "band": "rare",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 2474
+ },
+ {
+  "id": "c_112d31c4e23c7bd7",
+  "type": "cloze",
+  "text": "The hotel reservation was made ___ my mother's name since she was paying for it.",
+  "answer": "in",
+  "accept": [
+   "in sb/sth's ~"
+  ],
+  "hint": "i_",
+  "phrase": "in sb name",
+  "relation": "prep",
+  "headword": "name",
+  "sense": "word/words sb/sth is known by",
+  "cefr": "B1",
+  "band": "rare",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2479
+ },
+ {
+  "id": "c_6608daacee2c5c97",
+  "type": "cloze",
+  "text": "When the team lost their best player, things ___ for the rest of the season.",
+  "answer": "looked grim",
+  "accept": [
+   "look bleak/grim"
+  ],
+  "hint": "l_____ g___",
+  "phrase": "thing look bleak",
+  "relation": "noun+verb",
+  "headword": "thing",
+  "sense": "things: general situation, as it affects sb",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2482
+ },
+ {
+  "id": "c_b494a9bde1660451",
+  "type": "cloze",
+  "text": "We had a wonderful dinner party ___ their house last Saturday evening.",
+  "answer": "at",
+  "accept": [
+   "at sb's/the ~"
+  ],
+  "hint": "a_",
+  "phrase": "at sb's house",
+  "relation": "prep",
+  "headword": "house",
+  "sense": "building that is made for one family to live in",
+  "cefr": "A2",
+  "band": "rare",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 2487
+ },
+ {
+  "id": "c_94702679f6d08ef6",
+  "type": "cloze",
+  "text": "She ___ the project more time because the first deadline was too tight.",
+  "answer": "gave",
+  "accept": [
+   "give sb/sth"
+  ],
+  "hint": "g___",
+  "phrase": "give sb time",
+  "relation": "verb+obj",
+  "headword": "time",
+  "sense": "amount of time",
+  "cefr": "A2",
+  "band": "rare",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2500
+ },
+ {
+  "id": "c_c11453fd5bc06c47",
+  "type": "cloze",
+  "text": "The company offers bonuses as work ___ to help employees stay motivated.",
+  "answer": "incentives",
+  "accept": [
+   "incentive"
+  ],
+  "hint": "i_________",
+  "phrase": "work incentive",
+  "relation": "noun+noun",
+  "headword": "work",
+  "sense": "job",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2501
+ },
+ {
+  "id": "c_e974f441858c7e54",
+  "type": "cloze",
+  "text": "The office has accumulated ___ that needs to be completed this week.",
+  "answer": "a backlog of work",
+  "accept": [
+   "a backlog of work"
+  ],
+  "hint": "a b______ o_ w___",
+  "phrase": "a backlog of work",
+  "relation": "phrase",
+  "headword": "work",
+  "sense": "effort/product of effort",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2526
+ },
+ {
+  "id": "c_23fb8d30055a5eb9",
+  "type": "cloze",
+  "text": "The main character's struggle appears ___ work of many contemporary artists.",
+  "answer": "in the",
+  "accept": [
+   "in a/the ~"
+  ],
+  "hint": "i_ t__",
+  "phrase": "in a work",
+  "relation": "prep",
+  "headword": "work",
+  "sense": "book/music/art",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2554
+ }
+]

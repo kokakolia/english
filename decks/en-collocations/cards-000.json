@@ -78,12 +78,12 @@
  {
   "id": "c_adbcfac07307970e",
   "type": "cloze",
-  "text": "Exercise will ___ good if you're feeling stressed about work.",
-  "answer": "do you",
+  "text": "Exercise will ___ you good if you're feeling stressed about work.",
+  "answer": "do",
   "accept": [
    "do (sb)"
   ],
-  "hint": "d_ y__",
+  "hint": "d_",
   "phrase": "do sb good",
   "relation": "verb+obj",
   "headword": "good",
@@ -462,12 +462,12 @@
  {
   "id": "c_bcf91e471bc71a3e",
   "type": "cloze",
-  "text": "Winning the championship ___ a high that they celebrated all night.",
-  "answer": "gave the team such",
+  "text": "Winning the championship ___ the team such a high that they celebrated all night.",
+  "answer": "gave",
   "accept": [
    "give sb"
   ],
-  "hint": "g___ t__ t___ s___",
+  "hint": "g___",
   "phrase": "give sb high",
   "relation": "verb+obj",
   "headword": "high",
@@ -606,12 +606,12 @@
  {
   "id": "c_29d0e4a74e186f23",
   "type": "cloze",
-  "text": "He didn't want to ___ show during the job interview.",
-  "answer": "let his nervousness",
+  "text": "He didn't want to ___ his nervousness show during the job interview.",
+  "answer": "let",
   "accept": [
    "let sth"
   ],
-  "hint": "l__ h__ n__________",
+  "hint": "l__",
   "phrase": "let sth show",
   "relation": "verb+obj",
   "headword": "show",
@@ -897,12 +897,12 @@
  {
   "id": "c_d6388aafd7cfa7df",
   "type": "cloze",
-  "text": "My grandmother asked me to ___ company while she recovered from surgery.",
-  "answer": "keep her",
+  "text": "My grandmother asked me to ___ her company while she recovered from surgery.",
+  "answer": "keep",
   "accept": [
    "keep sb"
   ],
-  "hint": "k___ h__",
+  "hint": "k___",
   "phrase": "keep sb company",
   "relation": "verb+obj",
   "headword": "company",
@@ -1049,12 +1049,12 @@
  {
   "id": "c_9c9ce98d21202a8d",
   "type": "cloze",
-  "text": "His excellent test scores ___ sure he would get into a good university.",
-  "answer": "made his parents",
+  "text": "His excellent test scores ___ his parents sure he would get into a good university.",
+  "answer": "made",
   "accept": [
    "make sb"
   ],
-  "hint": "m___ h__ p______",
+  "hint": "m___",
   "phrase": "make sb sure",
   "relation": "verb+adj",
   "headword": "sure",
@@ -1285,12 +1285,12 @@
  {
   "id": "c_8c8bc9dd89db0632",
   "type": "cloze",
-  "text": "His parents ___ their will, leaving him the family house.",
-  "answer": "remembered him in",
+  "text": "His parents ___ him in their will, leaving him the family house.",
+  "answer": "remembered",
   "accept": [
    "remember sb in"
   ],
-  "hint": "r_________ h__ i_",
+  "hint": "r_________",
   "phrase": "remember sb in will",
   "relation": "verb+obj",
   "headword": "will",
@@ -1362,12 +1362,12 @@
  {
   "id": "c_50192b2d02a73c93",
   "type": "cloze",
-  "text": "If you find out anything useful, please ___ know as soon as possible.",
-  "answer": "let me",
+  "text": "If you find out anything useful, please ___ me know as soon as possible.",
+  "answer": "let",
   "accept": [
    "let sb"
   ],
-  "hint": "l__ m_",
+  "hint": "l__",
   "phrase": "let sb know",
   "relation": "verb+obj",
   "headword": "know",
@@ -1560,13 +1560,13 @@
  {
   "id": "c_3ab66c655bc2acc7",
   "type": "cloze",
-  "text": "They ___ use of the training facility during the renovation.",
-  "answer": "offered the players the",
+  "text": "They ___ the players the use of the training facility during the renovation.",
+  "answer": "offered",
   "accept": [
    "give sb",
    "offer (sb)"
   ],
-  "hint": "o______ t__ p______ t__",
+  "hint": "o______",
   "phrase": "give sb use",
   "relation": "verb+obj",
   "headword": "use",
@@ -1637,12 +1637,12 @@
  {
   "id": "c_b959bc0a81491380",
   "type": "cloze",
-  "text": "She tried to ___ even across all the walls.",
-  "answer": "keep the paint application",
+  "text": "She tried to ___ the paint application even across all the walls.",
+  "answer": "keep",
   "accept": [
    "keep sth"
   ],
-  "hint": "k___ t__ p____ a__________",
+  "hint": "k___",
   "phrase": "keep sth even",
   "relation": "verb+adj",
   "headword": "even",
@@ -1811,14 +1811,33 @@
   "position": 108
  },
  {
+  "id": "c_1d1e5b8899365a12",
+  "type": "cloze",
+  "text": "There ___ people complaining that music was better in the old days.",
+  "answer": "is nothing new about",
+  "accept": [
+   "be nothing new about/in sth"
+  ],
+  "hint": "i_ n______ n__ a____",
+  "phrase": "be nothing new about sth",
+  "relation": "phrase",
+  "headword": "new",
+  "sense": "different/not familiar",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 110
+ },
+ {
   "id": "c_1d6732d328e1c461",
   "type": "cloze",
-  "text": "When the new employee started criticizing everyone's work, the manager had to ___ his place.",
-  "answer": "put him in",
+  "text": "When the new employee started criticizing everyone's work, the manager had to ___ him in his place.",
+  "answer": "put",
   "accept": [
    "put sb in"
   ],
-  "hint": "p__ h__ i_",
+  "hint": "p__",
   "phrase": "put sb in place",
   "relation": "verb+obj",
   "headword": "place",
@@ -2124,12 +2143,12 @@
  {
   "id": "c_dc6673d587a0a6d1",
   "type": "cloze",
-  "text": "My parents ___ play outside until dinner time.",
-  "answer": "let me",
+  "text": "My parents ___ me play outside until dinner time.",
+  "answer": "let",
   "accept": [
    "let sb"
   ],
-  "hint": "l__ m_",
+  "hint": "l__",
   "phrase": "let sb play",
   "relation": "verb+obj",
   "headword": "play",
@@ -2204,12 +2223,12 @@
  {
   "id": "c_4431b32770ea8eb6",
   "type": "cloze",
-  "text": "My parents always try to ___ free from clutter by throwing away old things.",
-  "answer": "keep the house",
+  "text": "My parents always try to ___ the house free from clutter by throwing away old things.",
+  "answer": "keep",
   "accept": [
    "keep sth"
   ],
-  "hint": "k___ t__ h____",
+  "hint": "k___",
   "phrase": "keep sth free",
   "relation": "verb+adj",
   "headword": "free",
@@ -2435,6 +2454,25 @@
   "position": 148
  },
  {
+  "id": "c_b64a0f1df0124c6b",
+  "type": "cloze",
+  "text": "The local bakery is now ___ a family who bought it ten years ago.",
+  "answer": "wholly owned by",
+  "accept": [
+   "partly/wholly owned by sb"
+  ],
+  "hint": "w_____ o____ b_",
+  "phrase": "partly owned by sb",
+  "relation": "phrase",
+  "headword": "own",
+  "sense": null,
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 149
+ },
+ {
   "id": "c_180a9c3fa5615658",
   "type": "cloze",
   "text": "My sister's taste in music is quite different ___ mine.",
@@ -2532,14 +2570,34 @@
   "position": 156
  },
  {
+  "id": "c_5c78e69a11eb6dd9",
+  "type": "cloze",
+  "text": "We all have to make sacrifices sometimes ___ the community.",
+  "answer": "for the good of",
+  "accept": [
+   "for the good of sth",
+   "good and evil"
+  ],
+  "hint": "f__ t__ g___ o_",
+  "phrase": "for the good of sth",
+  "relation": "phrase",
+  "headword": "good",
+  "sense": null,
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 157
+ },
+ {
   "id": "c_dfa79e6ec4da8434",
   "type": "cloze",
-  "text": "The local restaurant ___ in our neighborhood for its delicious pizza.",
-  "answer": "is known to many families",
+  "text": "The local restaurant ___ many families in our neighborhood for its delicious pizza.",
+  "answer": "is known to",
   "accept": [
    "be known to sb"
   ],
-  "hint": "i_ k____ t_ m___ f_______",
+  "hint": "i_ k____ t_",
   "phrase": "be known to sb",
   "relation": "phrase",
   "headword": "know",
@@ -2710,13 +2768,13 @@
  {
   "id": "c_ebef322d2d3c2bad",
   "type": "cloze",
-  "text": "My grandmother always ___ love to everyone she meets.",
-  "answer": "gives her",
+  "text": "My grandmother always ___ her love to everyone she meets.",
+  "answer": "gives",
   "accept": [
    "give sb",
    "send (sb)"
   ],
-  "hint": "g____ h__",
+  "hint": "g____",
   "phrase": "give sb love",
   "relation": "verb+obj",
   "headword": "love",
@@ -2876,15 +2934,15 @@
  {
   "id": "c_fb66fcb3bc65375e",
   "type": "cloze",
-  "text": "When the old man fell in the street, several people quickly ___ help.",
-  "answer": "offered him",
+  "text": "When the old man fell in the street, several people quickly ___ him help.",
+  "answer": "offered",
   "accept": [
    "come to",
    "give sb",
    "offer (sb)",
    "provide (sb with)"
   ],
-  "hint": "o______ h__",
+  "hint": "o______",
   "phrase": "come to help",
   "relation": "verb+obj",
   "headword": "help",
@@ -3110,12 +3168,12 @@
  {
   "id": "c_06958b6a993a8bde",
   "type": "cloze",
-  "text": "The new manager's ideas really ___ better for everyone.",
-  "answer": "made the workplace",
+  "text": "The new manager's ideas really ___ the workplace better for everyone.",
+  "answer": "made",
   "accept": [
    "make sth"
   ],
-  "hint": "m___ t__ w________",
+  "hint": "m___",
   "phrase": "make sth better",
   "relation": "verb+adj",
   "headword": "better",
@@ -3187,15 +3245,15 @@
  {
   "id": "c_7419585ef2ae10b5",
   "type": "cloze",
-  "text": "The doctor ___ best to wait and see how the patient responded to treatment.",
-  "answer": "considered it",
+  "text": "The doctor ___ it best to wait and see how the patient responded to treatment.",
+  "answer": "considered",
   "accept": [
    "consider sth",
    "deem sth",
    "judge sth",
    "think sth"
   ],
-  "hint": "c_________ i_",
+  "hint": "c_________",
   "phrase": "consider sth best",
   "relation": "verb+adj",
   "headword": "best",
@@ -3629,12 +3687,12 @@
  {
   "id": "c_a6769e3038cca04f",
   "type": "cloze",
-  "text": "Your parents made you study hard because it was ___.",
-  "answer": "for your own good",
+  "text": "Your parents made you study hard because it was ___ your own good.",
+  "answer": "for",
   "accept": [
    "for sb's (own) good"
   ],
-  "hint": "f__ y___ o__ g___",
+  "hint": "f__",
   "phrase": "for sb's own good",
   "relation": "phrase",
   "headword": "good",
@@ -4175,12 +4233,12 @@
  {
   "id": "c_cbbf8de121112f96",
   "type": "cloze",
-  "text": "I'll ___ show me how to use this new software tomorrow afternoon.",
-  "answer": "let you",
+  "text": "I'll ___ you show me how to use this new software tomorrow afternoon.",
+  "answer": "let",
   "accept": [
    "let sb"
   ],
-  "hint": "l__ y__",
+  "hint": "l__",
   "phrase": "let sb show",
   "relation": "verb+obj",
   "headword": "show",
@@ -4374,12 +4432,12 @@
  {
   "id": "c_bd514207e9132d17",
   "type": "cloze",
-  "text": "I ___ play the violin beautifully last night through the apartment wall.",
-  "answer": "heard my neighbor",
+  "text": "I ___ my neighbor play the violin beautifully last night through the apartment wall.",
+  "answer": "heard",
   "accept": [
    "hear sb"
   ],
-  "hint": "h____ m_ n_______",
+  "hint": "h____",
   "phrase": "hear sb play",
   "relation": "verb+obj",
   "headword": "play",
@@ -4712,12 +4770,12 @@
  {
   "id": "c_93666bc138f5511a",
   "type": "cloze",
-  "text": "I wanted to check the new apartment before signing the lease, so I asked the landlord to ___ see it first.",
-  "answer": "let me",
+  "text": "I wanted to check the new apartment before signing the lease, so I asked the landlord to ___ me see it first.",
+  "answer": "let",
   "accept": [
    "let sb"
   ],
-  "hint": "l__ m_",
+  "hint": "l__",
   "phrase": "let sb see",
   "relation": "verb+obj",
   "headword": "see",
@@ -4888,65 +4946,5 @@
   "ambiguity": "low",
   "flags": [],
   "position": 316
- },
- {
-  "id": "c_ee9367204741eacf",
-  "type": "cloze",
-  "text": "If you ___ want to improve your English, you need to practice every day.",
-  "answer": "genuinely",
-  "accept": [
-   "genuinely",
-   "truly"
-  ],
-  "hint": "g________",
-  "phrase": "genuinely want",
-  "relation": "adv+verb",
-  "headword": "want",
-  "sense": null,
-  "cefr": null,
-  "band": "common",
-  "ambiguity": "low",
-  "flags": [
-   "proper_noun"
-  ],
-  "position": 317
- },
- {
-  "id": "c_809b0797d3394656",
-  "type": "cloze",
-  "text": "My old textbooks might ___ use to your younger brother.",
-  "answer": "be of",
-  "accept": [
-   "be of"
-  ],
-  "hint": "b_ o_",
-  "phrase": "be of use",
-  "relation": "verb+obj",
-  "headword": "use",
-  "sense": "how useful sth is",
-  "cefr": null,
-  "band": "core",
-  "ambiguity": "low",
-  "flags": [],
-  "position": 319
- },
- {
-  "id": "c_ef1586c5eda46f8a",
-  "type": "cloze",
-  "text": "After reviewing all the test results, the doctor gave her an ___ look of concern.",
-  "answer": "overall",
-  "accept": [
-   "overall"
-  ],
-  "hint": "o______",
-  "phrase": "overall look",
-  "relation": "adj+noun",
-  "headword": "look",
-  "sense": "act of looking at/considering sth",
-  "cefr": null,
-  "band": "common",
-  "ambiguity": "low",
-  "flags": [],
-  "position": 321
  }
 ]

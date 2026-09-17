@@ -1,5 +1,189 @@
 [
  {
+  "id": "c_60aa2ced59a58565",
+  "type": "cloze",
+  "text": "After the accident, he slowly ___ the use of his left arm.",
+  "answer": "recovered",
+  "accept": [
+   "recover",
+   "regain"
+  ],
+  "hint": "r________",
+  "phrase": "recover use",
+  "relation": "verb+obj",
+  "headword": "use",
+  "sense": "ability/permission to use sth",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1395
+ },
+ {
+  "id": "c_65754892639732b0",
+  "type": "cloze",
+  "text": "Most home ___ find it easier to store their photos in the cloud.",
+  "answer": "users",
+  "accept": [
+   "user"
+  ],
+  "hint": "u____",
+  "phrase": "home user",
+  "relation": "noun+noun",
+  "headword": "home",
+  "sense": "place where sb/sth lives",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1396
+ },
+ {
+  "id": "c_0fe6896041a34ace",
+  "type": "cloze",
+  "text": "He quit his job and left the office ___.",
+  "answer": "without a backward look",
+  "accept": [
+   "without a backward look"
+  ],
+  "hint": "w______ a b_______ l___",
+  "phrase": "without a backward look",
+  "relation": "phrase",
+  "headword": "look",
+  "sense": "act of looking at/considering sth",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1397
+ },
+ {
+  "id": "c_3ea29ea34b66fc96",
+  "type": "cloze",
+  "text": "A good dictionary can be ___ help when you're learning new vocabulary.",
+  "answer": "of",
+  "accept": [
+   "of ~"
+  ],
+  "hint": "o_",
+  "phrase": "of help",
+  "relation": "prep",
+  "headword": "help",
+  "sense": null,
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1401
+ },
+ {
+  "id": "c_28845bc8c0fed452",
+  "type": "cloze",
+  "text": "The ___ thing about moving to a new city is how quickly you make new friends.",
+  "answer": "funny",
+  "accept": [
+   "amazing",
+   "curious",
+   "exciting",
+   "extraordinary",
+   "funny",
+   "interesting",
+   "remarkable",
+   "startling",
+   "strange",
+   "striking",
+   "surprising",
+   "weird"
+  ],
+  "hint": "f____",
+  "phrase": "amazing thing",
+  "relation": "adj+noun",
+  "headword": "thing",
+  "sense": "fact/event/situation/action",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1402
+ },
+ {
+  "id": "c_6dcf5f5b2e891da7",
+  "type": "cloze",
+  "text": "We ___ housed our guests in the spare bedroom while their apartment was being repaired.",
+  "answer": "temporarily",
+  "accept": [
+   "temporarily"
+  ],
+  "hint": "t__________",
+  "phrase": "temporarily house",
+  "relation": "adv+verb",
+  "headword": "house",
+  "sense": null,
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1406
+ },
+ {
+  "id": "c_8b9ac14bd10f57e7",
+  "type": "cloze",
+  "text": "The end ___ of the project was better than everyone expected.",
+  "answer": "result",
+  "accept": [
+   "product",
+   "result"
+  ],
+  "hint": "r_____",
+  "phrase": "end product",
+  "relation": "noun+noun",
+  "headword": "end",
+  "sense": "last part of sth",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1408
+ },
+ {
+  "id": "c_80381186cd2d4ba5",
+  "type": "cloze",
+  "text": "She decided to leave her job because of her family ___ and young children at home.",
+  "answer": "commitments",
+  "accept": [
+   "commitments"
+  ],
+  "hint": "c__________",
+  "phrase": "family commitments",
+  "relation": "noun+noun",
+  "headword": "family",
+  "sense": "group of people related to each other",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1409
+ },
+ {
+  "id": "c_96d809cea9b9f340",
+  "type": "cloze",
+  "text": "My father was a school ___ for thirty years before he retired.",
+  "answer": "teacher",
+  "accept": [
+   "teacher (also schoolteacher)"
+  ],
+  "hint": "t______",
+  "phrase": "school teacher",
+  "relation": "noun+noun",
+  "headword": "school",
+  "sense": null,
+  "cefr": "A1",
+  "band": "rare",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1417
+ },
+ {
   "id": "c_e60c9c91f8672009",
   "type": "cloze",
   "text": "My new bedroom furniture comes ___ set with a bed, two nightstands, and a dresser.",
@@ -337,12 +521,12 @@
  {
   "id": "c_98c4e9c5adbdcfdb",
   "type": "cloze",
-  "text": "People wore hats much more often ___ day.",
-  "answer": "in my grandmother's",
+  "text": "People wore hats much more often ___ my grandmother's day.",
+  "answer": "in",
   "accept": [
    "in sb's ~"
   ],
-  "hint": "i_ m_ g___________",
+  "hint": "i_",
   "phrase": "in sb's day",
   "relation": "prep",
   "headword": "day",
@@ -641,15 +825,15 @@
  {
   "id": "c_4af0446ccd3364dc",
   "type": "cloze",
-  "text": "The rescue team ___ free from the collapsed building.",
-  "answer": "pulled the trapped hiker",
+  "text": "The rescue team ___ the trapped hiker free from the collapsed building.",
+  "answer": "pulled",
   "accept": [
    "cut sb/sth",
    "let sb/sth",
    "pull sb/sth",
    "set sb/sth"
   ],
-  "hint": "p_____ t__ t______ h____",
+  "hint": "p_____",
   "phrase": "cut sb free",
   "relation": "verb+adj",
   "headword": "free",
@@ -1304,8 +1488,8 @@
  {
   "id": "c_a002ce88df630e8d",
   "type": "cloze",
-  "text": "A sudden thought ___ saw the old photograph on the shelf.",
-  "answer": "struck her when she",
+  "text": "A sudden thought ___ her when she saw the old photograph on the shelf.",
+  "answer": "struck",
   "accept": [
    "come/pop into your mind",
    "come to sb",
@@ -1315,7 +1499,7 @@
    "occur to sb",
    "strike sb"
   ],
-  "hint": "s_____ h__ w___ s__",
+  "hint": "s_____",
   "phrase": "thought come into your mind",
   "relation": "noun+verb",
   "headword": "thought",
@@ -1745,12 +1929,12 @@
  {
   "id": "c_6bfa51c206863b0a",
   "type": "cloze",
-  "text": "A flexible schedule ___ work part-time while studying for her degree.",
-  "answer": "enabled her to",
+  "text": "A flexible schedule ___ her to work part-time while studying for her degree.",
+  "answer": "enabled",
   "accept": [
    "enable sb to"
   ],
-  "hint": "e______ h__ t_",
+  "hint": "e______",
   "phrase": "enable sb to work",
   "relation": "verb+obj",
   "headword": "work",
@@ -3056,6 +3240,25 @@
   "position": 1979
  },
  {
+  "id": "c_ea4c257122169f62",
+  "type": "cloze",
+  "text": "Some people believe the world ___ them success just because they work hard.",
+  "answer": "owes",
+  "accept": [
+   "owe sb sth"
+  ],
+  "hint": "o___",
+  "phrase": "world owe sb sth",
+  "relation": "noun+verb",
+  "headword": "world",
+  "sense": "life/society",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1983
+ },
+ {
   "id": "c_856ddf0cb3112cf5",
   "type": "cloze",
   "text": "After the accident, she had a ___ look of panic on her face.",
@@ -3278,6 +3481,25 @@
   "position": 2035
  },
  {
+  "id": "c_0b5b941215ac4ca9",
+  "type": "cloze",
+  "text": "My parents often debate ___ social media with us at dinner.",
+  "answer": "the rights and wrongs of",
+  "accept": [
+   "the rights and wrongs of sth"
+  ],
+  "hint": "t__ r_____ a__ w_____ o_",
+  "phrase": "the rights and wrongs of sth",
+  "relation": "phrase",
+  "headword": "right",
+  "sense": "what is morally good",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2038
+ },
+ {
   "id": "c_894d816b3a073129",
   "type": "cloze",
   "text": "She decided to explore the world ___ professional cooking after watching cooking shows online.",
@@ -3492,13 +3714,13 @@
  {
   "id": "c_fde90e8638d0b77c",
   "type": "cloze",
-  "text": "The restaurant's name ___ in fresh seafood dishes from the Mediterranean coast.",
-  "answer": "suggests it specializes",
+  "text": "The restaurant's name ___ it specializes in fresh seafood dishes from the Mediterranean coast.",
+  "answer": "suggests",
   "accept": [
    "imply sth",
    "suggest sth"
   ],
-  "hint": "s_______ i_ s__________",
+  "hint": "s_______",
   "phrase": "name imply sth",
   "relation": "noun+verb",
   "headword": "name",
@@ -3610,13 +3832,13 @@
  {
   "id": "c_4a89d943a1b6f4b5",
   "type": "cloze",
-  "text": "She ___ thought for her old friend while walking past their favorite café.",
-  "answer": "spared a",
+  "text": "She ___ a thought for her old friend while walking past their favorite café.",
+  "answer": "spared",
   "accept": [
    "give sb/sth",
    "spare (sb)"
   ],
-  "hint": "s_____ a",
+  "hint": "s_____",
   "phrase": "give sb thought",
   "relation": "verb+obj",
   "headword": "thought",
@@ -3793,12 +4015,12 @@
  {
   "id": "c_3ce78fc1074cdf53",
   "type": "cloze",
-  "text": "The promise of a bonus ___ work late every evening that month.",
-  "answer": "motivated her to",
+  "text": "The promise of a bonus ___ her to work late every evening that month.",
+  "answer": "motivated",
   "accept": [
    "motivate sb to"
   ],
-  "hint": "m________ h__ t_",
+  "hint": "m________",
   "phrase": "motivate sb to work",
   "relation": "verb+obj",
   "headword": "work",
@@ -3910,13 +4132,13 @@
  {
   "id": "c_0ffc6517928a0ff7",
   "type": "cloze",
-  "text": "We finally ___ home after searching for six months in the city.",
-  "answer": "found a",
+  "text": "We finally ___ a home after searching for six months in the city.",
+  "answer": "found",
   "accept": [
    "find (sb/sth)",
    "give sb/sth"
   ],
-  "hint": "f____ a",
+  "hint": "f____",
   "phrase": "find sb home",
   "relation": "verb+obj",
   "headword": "home",
@@ -3964,6 +4186,25 @@
   "ambiguity": "medium",
   "flags": [],
   "position": 2269
+ },
+ {
+  "id": "c_0c2f93ce80169ae7",
+  "type": "cloze",
+  "text": "My grandfather could ___ us a thing or two about fishing after fifty years on the river.",
+  "answer": "teach",
+  "accept": [
+   "know/learn/teach sb a thing or two"
+  ],
+  "hint": "t____",
+  "phrase": "know sb a thing or two",
+  "relation": "phrase",
+  "headword": "thing",
+  "sense": "fact/event/situation/action",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2277
  },
  {
   "id": "c_79f8657c2606dc53",
@@ -4470,6 +4711,25 @@
   "position": 2420
  },
  {
+  "id": "c_1f5e6ac101faf035",
+  "type": "cloze",
+  "text": "I couldn't ___ the old song playing in the cafe.",
+  "answer": "put a name to",
+  "accept": [
+   "put a name to sb/sth"
+  ],
+  "hint": "p__ a n___ t_",
+  "phrase": "put a name to sb",
+  "relation": "phrase",
+  "headword": "name",
+  "sense": "word/words sb/sth is known by",
+  "cefr": null,
+  "band": "rare",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2424
+ },
+ {
   "id": "c_c16492adfab86f4b",
   "type": "cloze",
   "text": "My father took a week ___ work to help us move to our new house.",
@@ -4641,138 +4901,22 @@
   "position": 2454
  },
  {
-  "id": "c_112d31c4e23c7bd7",
+  "id": "c_b5c6d759c28c4d41",
   "type": "cloze",
-  "text": "The hotel reservation was made ___ name since she was paying for it.",
-  "answer": "in my mother's",
+  "text": "His teenage son believes the world ___ his smartphone and his friends.",
+  "answer": "revolves around",
   "accept": [
-   "in sb/sth's ~"
+   "revolve around sb/sth"
   ],
-  "hint": "i_ m_ m______",
-  "phrase": "in sb name",
-  "relation": "prep",
-  "headword": "name",
-  "sense": "word/words sb/sth is known by",
-  "cefr": "B1",
-  "band": "rare",
-  "ambiguity": "low",
-  "flags": [],
-  "position": 2479
- },
- {
-  "id": "c_6608daacee2c5c97",
-  "type": "cloze",
-  "text": "When the team lost their best player, things ___ for the rest of the season.",
-  "answer": "looked grim",
-  "accept": [
-   "look bleak/grim"
-  ],
-  "hint": "l_____ g___",
-  "phrase": "thing look bleak",
+  "hint": "r_______ a_____",
+  "phrase": "world revolve around sb",
   "relation": "noun+verb",
-  "headword": "thing",
-  "sense": "things: general situation, as it affects sb",
+  "headword": "world",
+  "sense": "life/society",
   "cefr": null,
-  "band": "extended",
-  "ambiguity": "medium",
-  "flags": [],
-  "position": 2482
- },
- {
-  "id": "c_b494a9bde1660451",
-  "type": "cloze",
-  "text": "We had a wonderful dinner party ___ house last Saturday evening.",
-  "answer": "at their",
-  "accept": [
-   "at sb's/the ~"
-  ],
-  "hint": "a_ t____",
-  "phrase": "at sb's house",
-  "relation": "prep",
-  "headword": "house",
-  "sense": "building that is made for one family to live in",
-  "cefr": "A2",
   "band": "rare",
   "ambiguity": "low",
-  "flags": [
-   "proper_noun"
-  ],
-  "position": 2487
- },
- {
-  "id": "c_94702679f6d08ef6",
-  "type": "cloze",
-  "text": "She ___ time because the first deadline was too tight.",
-  "answer": "gave the project more",
-  "accept": [
-   "give sb/sth"
-  ],
-  "hint": "g___ t__ p______ m___",
-  "phrase": "give sb time",
-  "relation": "verb+obj",
-  "headword": "time",
-  "sense": "amount of time",
-  "cefr": "A2",
-  "band": "rare",
-  "ambiguity": "medium",
   "flags": [],
-  "position": 2500
- },
- {
-  "id": "c_c11453fd5bc06c47",
-  "type": "cloze",
-  "text": "The company offers bonuses as work ___ to help employees stay motivated.",
-  "answer": "incentives",
-  "accept": [
-   "incentive"
-  ],
-  "hint": "i_________",
-  "phrase": "work incentive",
-  "relation": "noun+noun",
-  "headword": "work",
-  "sense": "job",
-  "cefr": null,
-  "band": "extended",
-  "ambiguity": "low",
-  "flags": [],
-  "position": 2501
- },
- {
-  "id": "c_e974f441858c7e54",
-  "type": "cloze",
-  "text": "The office has accumulated ___ that needs to be completed this week.",
-  "answer": "a backlog of work",
-  "accept": [
-   "a backlog of work"
-  ],
-  "hint": "a b______ o_ w___",
-  "phrase": "a backlog of work",
-  "relation": "phrase",
-  "headword": "work",
-  "sense": "effort/product of effort",
-  "cefr": null,
-  "band": "extended",
-  "ambiguity": "low",
-  "flags": [],
-  "position": 2526
- },
- {
-  "id": "c_23fb8d30055a5eb9",
-  "type": "cloze",
-  "text": "The main character's struggle appears ___ work of many contemporary artists.",
-  "answer": "in the",
-  "accept": [
-   "in a/the ~"
-  ],
-  "hint": "i_ t__",
-  "phrase": "in a work",
-  "relation": "prep",
-  "headword": "work",
-  "sense": "book/music/art",
-  "cefr": null,
-  "band": "core",
-  "ambiguity": "low",
-  "flags": [],
-  "position": 2554
+  "position": 2461
  }
 ]
