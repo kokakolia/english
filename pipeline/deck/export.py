@@ -50,8 +50,10 @@ ANKI_CSS = """
 .nightMode .answer { color: #6ecf9a; }
 .full b { color: #1f7a4d; }
 .nightMode .full b { color: #6ecf9a; }
-.accept { font-size: 16px; color: #6a6a66; margin-top: 12px; }
-.meta { font-size: 14px; color: #9a9a95; margin-top: 14px; }
+.note { font-size: 16px; color: #4a4a46; margin-top: 16px; padding-left: 12px;
+        border-left: 3px solid #d8d3c8; line-height: 1.5; }
+.nightMode .note { color: #c8c8c2; border-left-color: #4a463c; }
+.accept { font-size: 15px; color: #9a9a95; margin-top: 12px; }
 hr { border: none; border-top: 1px solid #ddd; margin: 16px 0; }
 .nightMode hr { border-top-color: #3a3a3a; }
 """
@@ -70,8 +72,8 @@ BACK_TEMPLATE = """
 <hr>
 <div class="answer">{{Answer}}</div>
 <div class="full">{{Full}}</div>
+<div class="note">{{Note}}</div>
 <div class="accept">{{Accept}}</div>
-<div class="meta">{{Phrase}} · {{Meta}}</div>
 """
 
 
@@ -99,18 +101,18 @@ def _card_fields(card: dict) -> list[str]:
     full = html.escape(card["text"]).replace(
         "___", f"<b>{html.escape(card['answer'])}</b>"
     )
-    accept = ", ".join(card["accept"])
-    level = card["cefr"] or "уровень не размечен"
-    meta = f"{card['relation']} · {card['band']} · {level}"
+    also = ", ".join(card.get("also") or [])
+    # Грамматическая разметка на карточку не идёт: она нужна пайплайну и
+    # фильтрам, а учащемуся вместо неё полезнее заметка об употреблении.
+    # Отбирать подмножества в Anki по-прежнему можно тегами.
     return [
         text,
         html.escape(card["answer"]),
         html.escape(card["hint"]),
         html.escape(card.get("translation") or ""),
         full,
-        html.escape(f"варианты кластера: {accept}"),
-        html.escape(card["phrase"]),
-        html.escape(meta),
+        html.escape(f"ещё варианты: {also}") if also else "",
+        html.escape(card.get("note") or ""),
         card["id"],
     ]
 
@@ -129,12 +131,12 @@ def cmd_anki(args: argparse.Namespace) -> int:
     model = genanki.Model(
         # Версия в имени обязательна: Anki опознаёт тип заметки по этому
         # идентификатору, и при смене набора полей его нужно поднимать.
-        _stable_id("collocation-cloze-model-v2"),
+        _stable_id("collocation-cloze-model-v3"),
         "Коллокация (пропуск)",
         fields=[
             {"name": "Text"}, {"name": "Answer"}, {"name": "Hint"},
             {"name": "Translation"}, {"name": "Full"}, {"name": "Accept"},
-            {"name": "Phrase"}, {"name": "Meta"}, {"name": "CardId"},
+            {"name": "Note"}, {"name": "CardId"},
         ],
         templates=[
             {"name": "Пропуск", "qfmt": FRONT_TEMPLATE, "afmt": BACK_TEMPLATE}
@@ -195,6 +197,8 @@ HTML_PAGE = """<!DOCTYPE html>
   details {{ margin-top: 10px; }}
   summary {{ cursor: pointer; color: #777; font-size: 14px; }}
   .answer {{ font-size: 17px; font-weight: 600; color: #1f7a4d; margin-top: 8px; }}
+  .note {{ font-size: 15px; color: CanvasText; margin-top: 10px; padding-left: 10px;
+          border-left: 3px solid color-mix(in srgb, CanvasText 25%, transparent); }}
   .accept, .meta {{ font-size: 14px; color: #888; margin-top: 6px; }}
   .flags {{ font-size: 13px; color: #b26b00; margin-top: 6px; }}
 </style></head><body>
@@ -209,10 +213,10 @@ HTML_CARD = """<div class="card">
   <div class="sentence">{text}</div>
   <div class="translation">{translation}</div>
   <div class="hint">{hint}</div>
-  <details><summary>показать ответ</summary>
+  <details {open}><summary>показать ответ</summary>
     <div class="answer">{answer}</div>
-    <div class="accept">варианты кластера: {accept}</div>
-    <div class="meta">{phrase} · {relation} · {band} · {level} · неоднозначность {ambiguity}</div>
+    {note}
+    {also}
     {flags}
   </details>
 </div>"""
@@ -222,6 +226,8 @@ def cmd_html(args: argparse.Namespace) -> int:
     meta, cards = load_deck(args.deck_id)
     if args.relation:
         cards = [card for card in cards if card["relation"] == args.relation]
+    if args.notes_only:
+        cards = [card for card in cards if card.get("note")]
     if not cards:
         print("под фильтр ничего не попало", file=sys.stderr)
         return 1
@@ -231,22 +237,23 @@ def cmd_html(args: argparse.Namespace) -> int:
     sample = random.Random(args.seed).sample(cards, min(args.n, len(cards)))
     sample.sort(key=lambda card: card["position"])
 
+    expanded = args.expanded
     rendered = []
     for card in sample:
         flags = card.get("flags") or []
         rendered.append(
             HTML_CARD.format(
+                open="open" if expanded else "",
                 position=card["position"],
                 text=html.escape(card["text"]).replace("___", GAP_HTML),
                 translation=html.escape(card.get("translation") or ""),
                 hint=html.escape(card["hint"]),
                 answer=html.escape(card["answer"]),
-                accept=html.escape(", ".join(card["accept"])),
-                phrase=html.escape(card["phrase"]),
-                relation=card["relation"],
-                band=card["band"],
-                level=card["cefr"] or "уровень не размечен",
-                ambiguity=card["ambiguity"],
+                note=(f'<div class="note">{html.escape(card["note"])}</div>'
+                      if card.get("note") else ""),
+                also=(f'<div class="accept">ещё варианты: '
+                      f'{html.escape(", ".join(card["also"]))}</div>'
+                      if card.get("also") else ""),
                 flags=(f'<div class="flags">пометки: {", ".join(flags)}</div>'
                        if flags else ""),
             )
@@ -289,6 +296,10 @@ def main(argv: list[str] | None = None) -> int:
     p_html.add_argument("-n", type=int, default=100)
     p_html.add_argument("--seed", type=int, default=1)
     p_html.add_argument("--relation", help="только одно отношение")
+    p_html.add_argument("--notes-only", action="store_true",
+                        help="только карточки с заметкой об употреблении")
+    p_html.add_argument("--expanded", action="store_true",
+                        help="сразу раскрыть ответы — для просмотра, а не тренировки")
     p_html.add_argument("--out", help="каталог для файла")
     p_html.set_defaults(func=cmd_html)
 

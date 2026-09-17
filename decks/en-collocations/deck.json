@@ -1,10 +1,10 @@
 {
  "id": "en-collocations",
  "name": "Английские коллокации",
- "version": "6aaaa393effa",
+ "version": "f4f1dd05eaa0",
  "language": "en",
  "card_type": "cloze",
- "built_at": "2026-09-17T17:53:15+00:00",
+ "built_at": "2026-09-17T18:10:30+00:00",
  "source": {
   "dict": "ozdic",
   "note": "Словарные статьи ozdic (материал восходит к Oxford Collocations Dictionary); примеры и уровни — из данных того же сайта."

@@ -23,7 +23,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from ..normalize import store
+from ..normalize.inflect import phrase_regex
+from ..normalize.variants import expand
 from ..translate import store as translations_store
+from ..usage import store as usage_store
 from . import quality
 
 DECKS_DIR = Path(__file__).resolve().parents[2] / "decks"
@@ -64,6 +67,7 @@ def make_cards(conn, args) -> tuple[list[dict], dict[str, int]]:
 
     # Переводы живут отдельно и привязаны к тексту предложения, а не к карточке.
     translations = translations_store.load_all()
+    usage_notes = usage_store.load_all()
 
     cards: list[dict] = []
     rejected: dict[str, int] = {}
@@ -101,6 +105,8 @@ def make_cards(conn, args) -> tuple[list[dict], dict[str, int]]:
                 "accept": accept,
                 "hint": verdict.hint,
                 "translation": translations.get(translations_store.key_for(example)),
+                "also": other_cluster_members(accept, matched, answer),
+                "note": usage_notes.get(record_id),
                 "phrase": phrase,
                 "relation": relation,
                 "headword": headword,
@@ -118,6 +124,28 @@ def make_cards(conn, args) -> tuple[list[dict], dict[str, int]]:
     return cards, rejected
 
 
+def other_cluster_members(accept: list[str], matched: str | None, answer: str
+                          ) -> list[str]:
+    """Партнёры кластера, кроме того, что уже стоит в предложении.
+
+    Показывать учащемуся весь кластер вместе с ответом бессмысленно: ответ он
+    только что назвал. Полезны именно остальные варианты — то, чем ещё можно
+    было сказать то же самое.
+    """
+    others = []
+    for entry in accept:
+        forms, _ = expand(entry)
+        if matched and matched in forms:
+            continue
+        # Если matched не сохранён, опознаём использованный вариант по тому,
+        # что он совпадает с ответом целиком.
+        pattern = phrase_regex(entry)
+        if pattern is not None and pattern.fullmatch(answer.strip()):
+            continue
+        others.append(entry)
+    return others
+
+
 def content_version(cards: list[dict]) -> str:
     """Хэш содержимого: меняется только когда меняются сами карточки.
 
@@ -129,7 +157,7 @@ def content_version(cards: list[dict]) -> str:
     for card in cards:
         digest.update(
             f"{card['id']}|{card['text']}|{card['answer']}"
-            f"|{card.get('translation') or ''}".encode("utf-8")
+            f"|{card.get('translation') or ''}|{card.get('note') or ''}".encode("utf-8")
         )
     return digest.hexdigest()[:12]
 
@@ -256,6 +284,8 @@ def cmd_run(args: argparse.Namespace) -> int:
     for reason, count in sorted(rejected.items(), key=lambda item: -item[1]):
         print(f"  {count:>5}  {reason}")
 
+    with_note = sum(1 for card in cards if card.get("note"))
+    print(f"с заметкой: {with_note} из {len(cards)} ({with_note / len(cards):.0%})")
     translated = sum(1 for card in cards if card.get("translation"))
     print(f"с переводом: {translated} из {len(cards)} "
           f"({translated / len(cards):.0%})")
