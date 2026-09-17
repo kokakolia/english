@@ -1,0 +1,32 @@
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import { VitePWA } from "vite-plugin-pwa";
+
+export default defineConfig({
+  plugins: [
+    react(),
+    VitePWA({
+      registerType: "autoUpdate",
+      manifest: {
+        name: "Английские коллокации",
+        short_name: "Коллокации",
+        description: "Интервальное повторение английских коллокаций",
+        lang: "ru",
+        start_url: "/",
+        display: "standalone",
+        background_color: "#fbfbfa",
+        theme_color: "#fbfbfa",
+      },
+      workbox: {
+        // Колода должна попасть в офлайн-кэш вместе с кодом: без неё
+        // приложение откроется, но учить будет нечему.
+        globPatterns: ["**/*.{js,css,html,json,svg,png,woff2}"],
+        // Файл колоды крупнее стандартного порога; без этого он молча
+        // выпадет из кэша, и офлайн сломается только у тех, кто ещё не
+        // импортировал её в базу.
+        maximumFileSizeToCacheInBytes: 8 * 1024 * 1024,
+      },
+    }),
+  ],
+  server: { port: 5173 },
+});

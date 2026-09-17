@@ -88,6 +88,12 @@ export async function recordReview(
 }
 
 export interface DeckCounts {
+  /**
+   * Сколько повторений просрочено сверх дневного лимита.
+   *
+   * Считается только если лимит передан: без него понятия «сверх лимита» нет.
+   */
+  backlog: number;
   /** Карточек в колоде всего. */
   total: number;
   /** Ни разу не показанных. */
@@ -110,6 +116,7 @@ export async function deckCounts(
   db: AppDatabase,
   deckId: string,
   now: Date = new Date(),
+  reviewsPerDay?: number,
 ): Promise<DeckCounts> {
   const [total, rows] = await Promise.all([
     db.cards.where("deckId").equals(deckId).count(),
@@ -125,7 +132,9 @@ export async function deckCounts(
     if (row.state !== "new" && isDue(row, now)) due += 1;
   }
 
-  return { total, fresh: total - rows.length, due, learning, review };
+  const backlog =
+    reviewsPerDay === undefined ? 0 : Math.max(0, due - reviewsPerDay);
+  return { total, fresh: total - rows.length, due, learning, review, backlog };
 }
 
 /** Журнал повторений по карточке, от старых к новым. */

@@ -13,9 +13,12 @@
     "noFallthroughCasesInSwitch": true,
     "verbatimModuleSyntax": true,
     "skipLibCheck": true,
-    "noEmit": true
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "allowImportingTsExtensions": false
   },
   "include": [
-    "src"
+    "src",
+    "vite.config.ts"
   ]
 }
