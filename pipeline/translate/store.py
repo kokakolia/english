@@ -1,97 +1,101 @@
 """Хранилище переводов предложений.
 
-Перевод привязан к **тексту предложения**, а не к карточке. Это важно: набор
-партнёров в кластере может поменяться, идентификатор карточки вместе с ним —
-а предложение останется тем же, и переводить его заново незачем. И наоборот:
-если пример заменили, перевод старого предложения к новому не подходит и
-должен пропасть сам.
+Переводы сделаны руками и, в отличие от скачанного сырья, повторным запуском
+не восстанавливаются. Поэтому они лежат **в репозитории**, обычным текстовым
+файлом: `translations/en-ru.tsv`, три колонки — ключ, английский, русский.
+Файл отсортирован по английскому предложению, так что изменения видно в diff
+построчно и их можно просматривать как код.
 
-Переводы стоят дорого (их делает человек или языковая модель), поэтому таблица
-живёт отдельно от колоды и переживает любые пересборки.
+Перевод привязан к **тексту предложения**, а не к карточке. Это важно в обе
+стороны: набор партнёров в кластере может измениться, идентификатор карточки
+вместе с ним — а предложение останется прежним, и переводить его заново
+незачем. И наоборот, если пример заменили, перевод старого предложения к новому
+не подходит и перестаёт использоваться.
 """
 
 from __future__ import annotations
 
 import hashlib
-import sqlite3
-from datetime import datetime, timezone
+from pathlib import Path
 
-from ..sources.ozdic.storage import DATA_DIR
+# Репозиторий, а не pipeline/data: data в git не попадает.
+TRANSLATIONS_DIR = Path(__file__).resolve().parents[2] / "translations"
+TSV_PATH = TRANSLATIONS_DIR / "en-ru.tsv"
 
-DB_PATH = DATA_DIR / "interim" / "translations.sqlite"
-
-SCHEMA = """
-CREATE TABLE IF NOT EXISTS translations (
-    text_sha1   TEXT PRIMARY KEY,
-    en          TEXT NOT NULL,
-    ru          TEXT NOT NULL,
-    source      TEXT,
-    created_at  TEXT
-);
-"""
+HEADER = "# ключ\tанглийский\tрусский"
 
 
 def key_for(sentence: str) -> str:
     """Ключ перевода — хэш нормализованного предложения."""
-    normalized = " ".join(sentence.split())
+    normalized = " ".join(str(sentence or "").split())
     return hashlib.sha1(normalized.encode("utf-8")).hexdigest()
 
 
-def connect() -> sqlite3.Connection:
-    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
-    conn = sqlite3.connect(DB_PATH)
-    conn.executescript(SCHEMA)
-    conn.commit()
-    return conn
+def _normalize(text: str) -> str:
+    return " ".join(str(text or "").split())
 
 
-def load_all(conn: sqlite3.Connection) -> dict[str, str]:
-    """Все переводы: ключ предложения → русский текст."""
-    return {row[0]: row[1] for row in conn.execute("SELECT text_sha1, ru FROM translations")}
+def load_pairs() -> dict[str, tuple[str, str]]:
+    """ключ → (английское предложение, перевод)."""
+    if not TSV_PATH.exists():
+        return {}
+    pairs: dict[str, tuple[str, str]] = {}
+    for line in TSV_PATH.read_text(encoding="utf-8").splitlines():
+        if not line.strip() or line.startswith("#"):
+            continue
+        parts = line.split("\t")
+        if len(parts) != 3:
+            continue
+        key, english, russian = parts
+        pairs[key] = (english, russian)
+    return pairs
 
 
-def save_many(conn: sqlite3.Connection, items: list[tuple[str, str]],
-              source: str) -> tuple[int, int]:
+def load_all() -> dict[str, str]:
+    """ключ → перевод."""
+    return {key: russian for key, (_, russian) in load_pairs().items()}
+
+
+def _write(pairs: dict[str, tuple[str, str]]) -> None:
+    TRANSLATIONS_DIR.mkdir(parents=True, exist_ok=True)
+    lines = [HEADER]
+    # Сортируем по английскому: так diff читается по-человечески.
+    for key, (english, russian) in sorted(pairs.items(), key=lambda item: item[1][0]):
+        lines.append(f"{key}\t{english}\t{russian}")
+    TSV_PATH.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def save_many(items: list[tuple[str, str]]) -> tuple[int, int]:
     """Сохраняет пары (английское предложение, перевод).
 
     Возвращает (добавлено, обновлено).
     """
+    pairs = load_pairs()
     added = updated = 0
-    now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     for english, russian in items:
-        english = " ".join(english.split())
-        russian = " ".join(russian.split())
+        english, russian = _normalize(english), _normalize(russian)
         if not english or not russian:
             continue
         key = key_for(english)
-        existing = conn.execute(
-            "SELECT ru FROM translations WHERE text_sha1 = ?", (key,)
-        ).fetchone()
+        existing = pairs.get(key)
         if existing is None:
             added += 1
-        elif existing[0] != russian:
+        elif existing[1] != russian:
             updated += 1
         else:
             continue
-        conn.execute(
-            "INSERT INTO translations (text_sha1, en, ru, source, created_at) "
-            "VALUES (?, ?, ?, ?, ?) "
-            "ON CONFLICT(text_sha1) DO UPDATE SET ru=excluded.ru, "
-            "source=excluded.source, created_at=excluded.created_at",
-            (key, english, russian, source, now),
-        )
-    conn.commit()
+        pairs[key] = (english, russian)
+    if added or updated:
+        _write(pairs)
     return added, updated
 
 
-def forget_unused(conn: sqlite3.Connection, live_keys: set[str]) -> int:
+def forget_unused(live_keys: set[str]) -> int:
     """Убирает переводы предложений, которых больше нет ни в одной карточке."""
-    stale = [
-        row[0]
-        for row in conn.execute("SELECT text_sha1 FROM translations")
-        if row[0] not in live_keys
-    ]
+    pairs = load_pairs()
+    stale = [key for key in pairs if key not in live_keys]
     for key in stale:
-        conn.execute("DELETE FROM translations WHERE text_sha1 = ?", (key,))
-    conn.commit()
+        del pairs[key]
+    if stale:
+        _write(pairs)
     return len(stale)

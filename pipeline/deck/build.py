@@ -63,11 +63,7 @@ def make_cards(conn, args) -> tuple[list[dict], dict[str, int]]:
     index = quality.rival_index(everything)
 
     # Переводы живут отдельно и привязаны к тексту предложения, а не к карточке.
-    translations_conn = translations_store.connect()
-    try:
-        translations = translations_store.load_all(translations_conn)
-    finally:
-        translations_conn.close()
+    translations = translations_store.load_all()
 
     cards: list[dict] = []
     rejected: dict[str, int] = {}

@@ -41,9 +41,7 @@ def sentences_of(deck_id: str) -> list[str]:
 
 
 def cmd_todo(args: argparse.Namespace) -> int:
-    conn = store.connect()
-    known = store.load_all(conn)
-    conn.close()
+    known = store.load_all()
 
     pending = [s for s in sentences_of(args.deck_id) if store.key_for(s) not in known]
     if not pending:
@@ -92,16 +90,14 @@ def cmd_load(args: argparse.Namespace) -> int:
             print(f"  строка {number}: ключ {left} не найден в колоде",
                   file=sys.stderr)
 
-    conn = store.connect()
-    added, updated = store.save_many(conn, items, args.source)
-    conn.close()
+    added, updated = store.save_many(items)
     print(f"добавлено: {added}, обновлено: {updated}, пропущено строк: {bad}")
+    print(f"файл: {store.TSV_PATH}")
     return 1 if bad else 0
 
 
 def cmd_stats(args: argparse.Namespace) -> int:
-    conn = store.connect()
-    known = store.load_all(conn)
+    known = store.load_all()
     sentences = sentences_of(args.deck_id)
     live = {store.key_for(s) for s in sentences}
     covered = sum(1 for key in live if key in known)
@@ -113,15 +109,12 @@ def cmd_stats(args: argparse.Namespace) -> int:
     if stale:
         print(f"переводов от исчезнувших предложений: {stale} "
               f"(убрать: `prune`)")
-    conn.close()
     return 0
 
 
 def cmd_prune(args: argparse.Namespace) -> int:
-    conn = store.connect()
     live = {store.key_for(s) for s in sentences_of(args.deck_id)}
-    removed = store.forget_unused(conn, live)
-    conn.close()
+    removed = store.forget_unused(live)
     print(f"убрано переводов: {removed}")
     return 0
 
@@ -140,7 +133,6 @@ def main(argv: list[str] | None = None) -> int:
 
     p_load = sub.add_parser("load", help="загрузить переводы из TSV")
     p_load.add_argument("file")
-    p_load.add_argument("--source", default="claude", help="кто перевёл")
     p_load.set_defaults(func=cmd_load)
 
     p_stats = sub.add_parser("stats", help="покрытие переводами")
