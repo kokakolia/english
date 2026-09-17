@@ -155,6 +155,7 @@ describe("раскрытие карточки", () => {
 
     controller.reveal();
     await controller.grade("good");
+    controller.next();
     expect(controller.state().hintVisible).toBe(false);
   });
 });
@@ -181,6 +182,13 @@ describe("разбор нажатий", () => {
     expect(keyAction("answered", "Enter")).toEqual({ kind: "grade", grade: "good" });
   });
 
+  it("на экране отклика пробел и Enter ведут дальше", () => {
+    expect(keyAction("feedback", " ")).toEqual({ kind: "next" });
+    expect(keyAction("feedback", "Enter")).toEqual({ kind: "next" });
+    // Оценка уже поставлена: цифрами её не переставить.
+    expect(keyAction("feedback", "2")).toBeNull();
+  });
+
   it("прочие клавиши и прочие состояния игнорируются", () => {
     expect(keyAction("answered", "x")).toBeNull();
     expect(keyAction("loading", " ")).toBeNull();
@@ -205,18 +213,51 @@ describe("разбор нажатий", () => {
 });
 
 describe("оценка и запись", () => {
-  it("записывает прогресс и журнал до перехода к следующей карточке", async () => {
+  it("записывает прогресс и журнал до показа отклика", async () => {
     const controller = await makeController();
     const card = controller.state().card!;
 
     controller.reveal();
     await controller.grade("good");
 
-    // К моменту, когда показана следующая карточка, ответ уже на диске.
-    expect(controller.state().card?.id).not.toBe(card.id);
+    // К моменту, когда показан отклик, ответ уже на диске.
+    expect(controller.state().phase).toBe("feedback");
     const history = await cardHistory(db, card.id);
     expect(history).toHaveLength(1);
     expect(history[0]).toMatchObject({ grade: "good", stateBefore: "new" });
+  });
+
+  it("отклик показывает поставленную оценку и срок", async () => {
+    const controller = await makeController();
+    controller.reveal();
+    await controller.grade("easy");
+
+    const state = controller.state();
+    expect(state.lastGrade).toBe("easy");
+    expect(state.lastInterval).toBeGreaterThan(0);
+    // Карточка на экране прежняя: отклик относится именно к ней.
+    expect(state.card).not.toBeNull();
+  });
+
+  it("переход к следующей карточке — отдельным шагом", async () => {
+    const controller = await makeController();
+    const card = controller.state().card!;
+
+    controller.reveal();
+    await controller.grade("good");
+    expect(controller.state().card?.id).toBe(card.id);
+
+    controller.next();
+    expect(controller.state().phase).toBe("question");
+    expect(controller.state().card?.id).not.toBe(card.id);
+  });
+
+  it("переход с других экранов ничего не делает", async () => {
+    const controller = await makeController();
+    const card = controller.state().card?.id;
+    controller.next();
+    expect(controller.state().phase).toBe("question");
+    expect(controller.state().card?.id).toBe(card);
   });
 
   it("оценка до раскрытия ответа игнорируется", async () => {
@@ -233,6 +274,7 @@ describe("оценка и запись", () => {
 
     controller.reveal();
     await controller.grade("again");
+    controller.next();
 
     expect(controller.state().card?.id).not.toBe(first);
 
@@ -241,6 +283,7 @@ describe("оценка и запись", () => {
       seen.push(controller.state().card!.id);
       controller.reveal();
       await controller.grade("good");
+      controller.next();
     }
     expect(seen).toContain(first);
   });
@@ -252,6 +295,7 @@ describe("оценка и запись", () => {
       guard += 1;
       controller.reveal();
       await controller.grade("good");
+      controller.next();
     }
 
     expect(controller.state().phase).toBe("finished");

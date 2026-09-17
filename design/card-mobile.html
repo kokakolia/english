@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Коллокации — карточка (мобильная версия)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Lora:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+  /* ===== это обвязка только для превью в браузере — в приложении не нужна ===== */
+  html, body { margin: 0; background: #ddd7c8; display: flex; justify-content: center; padding: 24px 0; box-sizing: border-box; }
+
+  /* ===== дальше — сама карточка, это и есть код для переноса ===== */
+  a { color: #96721C; }
+  a:hover { color: #6E5314; }
+  .lgh-btn { border: none; cursor: pointer; font-family: 'Lora', serif; }
+  .lgh-btn:hover { filter: brightness(1.04); }
+  .lgh-grade:hover { transform: translateY(-2px); }
+  .lgh-screen { display: none; }
+  .lgh-screen.active { display: block; }
+
+  #lgh-card {
+    width: 390px; height: 844px; position: relative; overflow: hidden;
+    background: #F3EEDC; font-family: 'Lora', serif; box-sizing: border-box;
+  }
+  #lgh-card svg.bg { position: absolute; top: 0; left: 0; }
+  .lgh-content { position: relative; z-index: 1; height: 100%; box-sizing: border-box; padding: 28px 22px 26px; display: flex; flex-direction: column; }
+  .lgh-header { display: flex; align-items: center; justify-content: space-between; }
+  .lgh-dots { display: flex; gap: 5px; }
+  .lgh-dot { width: 16px; height: 16px; border-radius: 50%; background: #B8892B; }
+  .lgh-dot.empty { background: none; border: 1.5px solid #B8892B; }
+  .lgh-counter { display: flex; align-items: center; gap: 6px; }
+  .lgh-counter-text { font-family: 'Marcellus', serif; font-size: 15px; letter-spacing: 0.08em; color: #7C6A3E; text-transform: uppercase; }
+  .lgh-divider { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+  .lgh-divider-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, #B8892B); opacity: 0.6; }
+  .lgh-divider-line.rev { background: linear-gradient(to left, transparent, #B8892B); }
+  .lgh-divider-dot { width: 5px; height: 5px; transform: rotate(45deg); background: #B8892B; opacity: 0.7; }
+  .lgh-body { flex: 1; display: flex; flex-direction: column; justify-content: flex-start; padding-top: 22px; }
+
+  .lgh-panel {
+    position: relative; background: rgba(255,255,255,0.4);
+    backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.7); border-radius: 20px; padding: 30px 26px;
+    box-shadow: 0 20px 44px rgba(31,58,46,0.2), inset 0 1px 0 rgba(255,255,255,0.55);
+  }
+  .lgh-flourish { position: absolute; opacity: 0.4; }
+  .lgh-label { font-family: 'Marcellus', serif; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #96721C; margin-bottom: 14px; }
+  .lgh-sentence { font-size: 23px; line-height: 1.5; color: #1F3A2E; }
+  .lgh-gap { display: inline-block; min-width: 66px; border-bottom: 2px solid #B8892B; color: transparent; }
+  .lgh-answer { color: #7C5A18; text-decoration: underline; text-decoration-color: #B8892B; text-underline-offset: 3px; }
+  .lgh-translation { margin-top: 16px; font-style: italic; font-size: 17px; color: #5F6F5A; }
+  .lgh-hint { margin-top: 14px; font-family: 'Marcellus', serif; letter-spacing: 6px; font-size: 17px; color: #96721C; }
+  .lgh-note { margin-top: 16px; padding: 12px 14px; border-left: 2px solid #1F3A2E; background: rgba(31,58,46,0.06); border-radius: 0 10px 10px 0; font-size: 15px; line-height: 1.55; color: #2B3F30; }
+  .lgh-tailpiece { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 16px; }
+  .lgh-tailpiece-line { width: 24px; height: 1px; background: #B8892B; opacity: 0.5; }
+
+  .lgh-show-btn { margin-top: 24px; width: 100%; padding: 13px; border-radius: 999px; background: rgba(255,255,255,0.55); border: 1px solid #B8892B; color: #4E3B10; font-family: 'Marcellus', serif; font-size: 15px; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .lgh-grades { display: flex; gap: 8px; margin-top: 16px; }
+  .lgh-grade { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 4px; border-radius: 14px; background: rgba(255,255,255,0.5); font-size: 11px; letter-spacing: 0.02em; }
+  .lgh-grade svg { display: block; }
+
+  .lgh-feedback { text-align: center; }
+  .lgh-feedback-title { margin-top: 10px; font-family: 'Marcellus', serif; font-size: 20px; }
+  .lgh-feedback-sub { margin-top: 6px; font-size: 15px; }
+  .lgh-grade-label { margin-top: 10px; font-size: 12.5px; letter-spacing: 0.04em; color: #8A7A50; text-transform: uppercase; }
+  .lgh-next-btn { margin-top: 22px; padding: 12px 30px; border-radius: 999px; background: rgba(255,255,255,0.6); border: 1px solid #B8892B; color: #4E3B10; font-family: 'Marcellus', serif; font-size: 15px; letter-spacing: 0.1em; text-transform: uppercase; }
+</style>
+</head>
+<body>
+
+<div id="lgh-card">
+
+  <svg class="bg" viewBox="0 0 390 844" width="390" height="844" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <symbol id="lgh-fern" viewBox="0 0 140 200">
+        <path d="M10 190 C 20 140 15 90 40 40 C 55 15 70 5 90 0" fill="none" stroke="#1F3A2E" stroke-width="2.5"></path>
+        <g fill="#1F3A2E">
+          <ellipse cx="25" cy="170" rx="14" ry="5" transform="rotate(-35 25 170)"></ellipse>
+          <ellipse cx="15" cy="150" rx="12" ry="4.5" transform="rotate(35 15 150)"></ellipse>
+          <ellipse cx="22" cy="130" rx="13" ry="5" transform="rotate(-30 22 130)"></ellipse>
+          <ellipse cx="18" cy="108" rx="11" ry="4" transform="rotate(30 18 108)"></ellipse>
+          <ellipse cx="28" cy="88" rx="12" ry="4.5" transform="rotate(-28 28 88)"></ellipse>
+          <ellipse cx="30" cy="66" rx="10" ry="4" transform="rotate(25 30 66)"></ellipse>
+          <ellipse cx="45" cy="48" rx="10" ry="4" transform="rotate(-25 45 48)"></ellipse>
+          <ellipse cx="55" cy="30" rx="8" ry="3.5" transform="rotate(20 55 30)"></ellipse>
+          <ellipse cx="70" cy="16" rx="7" ry="3" transform="rotate(-15 70 16)"></ellipse>
+        </g>
+        <circle cx="90" cy="2" r="3" fill="#B8892B"></circle>
+      </symbol>
+      <symbol id="lgh-flower" viewBox="-10 -10 20 20">
+        <g fill="currentColor">
+          <circle cx="0" cy="-6" r="3"></circle>
+          <circle cx="5.6" cy="-1.8" r="3"></circle>
+          <circle cx="3.5" cy="4.8" r="3"></circle>
+          <circle cx="-3.5" cy="4.8" r="3"></circle>
+          <circle cx="-5.6" cy="-1.8" r="3"></circle>
+        </g>
+        <circle r="1.8" fill="#6E5314"></circle>
+      </symbol>
+      <filter id="lgh-grain">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="noise"></feTurbulence>
+        <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0.12  0 0 0 0 0.23  0 0 0 0 0.18  0 0 0 0.06 0"></feColorMatrix>
+      </filter>
+    </defs>
+    <rect x="0" y="0" width="390" height="844" filter="url(#lgh-grain)"></rect>
+    <use href="#lgh-fern" x="-28" y="-18" width="150" height="210" opacity="0.5"></use>
+    <g transform="translate(390,844) rotate(180)"><use href="#lgh-fern" x="-28" y="-18" width="150" height="210" opacity="0.5"></use></g>
+    <g fill="none" stroke="#B8892B" stroke-width="1.5" opacity="0.55">
+      <path d="M 378 130 C 362 210 388 290 368 370 C 352 440 382 510 362 580 C 350 630 372 670 358 710"></path>
+    </g>
+    <g color="#B8892B" opacity="0.75">
+      <use href="#lgh-flower" x="356" y="205" width="20" height="20"></use>
+      <use href="#lgh-flower" x="365" y="368" width="18" height="18"></use>
+      <use href="#lgh-flower" x="350" y="578" width="16" height="16"></use>
+    </g>
+    <g fill="none" stroke="#B8892B" stroke-width="1.5" opacity="0.45">
+      <path d="M 12 170 C 28 250 4 330 24 410 C 40 480 10 550 30 620 C 42 660 20 700 34 740"></path>
+    </g>
+    <g color="#B8892B" opacity="0.6">
+      <use href="#lgh-flower" x="16" y="245" width="16" height="16"></use>
+      <use href="#lgh-flower" x="6" y="408" width="18" height="18"></use>
+      <use href="#lgh-flower" x="20" y="618" width="15" height="15"></use>
+    </g>
+  </svg>
+
+  <div class="lgh-content">
+
+    <div class="lgh-header">
+      <div class="lgh-dots">
+        <div class="lgh-dot"></div><div class="lgh-dot"></div><div class="lgh-dot"></div>
+        <div class="lgh-dot"></div><div class="lgh-dot"></div>
+        <div class="lgh-dot empty"></div><div class="lgh-dot empty"></div><div class="lgh-dot empty"></div>
+      </div>
+      <div class="lgh-counter">
+        <svg width="11" height="15" viewBox="0 0 12 16"><path d="M6 15 C1 12 1 4 6 1 C11 4 11 12 6 15 Z" fill="none" stroke="#B8892B" stroke-width="1"></path><line x1="6" y1="2" x2="6" y2="14" stroke="#B8892B" stroke-width="0.8"></line></svg>
+        <div class="lgh-counter-text">5&nbsp;/&nbsp;8</div>
+        <svg width="11" height="15" viewBox="0 0 12 16" style="transform: scaleX(-1);"><path d="M6 15 C1 12 1 4 6 1 C11 4 11 12 6 15 Z" fill="none" stroke="#B8892B" stroke-width="1"></path><line x1="6" y1="2" x2="6" y2="14" stroke="#B8892B" stroke-width="0.8"></line></svg>
+      </div>
+    </div>
+
+    <div class="lgh-divider">
+      <div class="lgh-divider-line"></div>
+      <div class="lgh-divider-dot"></div>
+      <div class="lgh-divider-line rev"></div>
+    </div>
+
+    <div class="lgh-body">
+
+      <!-- FRONT -->
+      <div id="screen-front" class="lgh-screen active">
+        <div class="lgh-panel">
+          <svg class="lgh-flourish" width="20" height="20" viewBox="0 0 26 26" style="top: 8px; left: 8px;"><path d="M2 24 C2 10 10 2 24 2" fill="none" stroke="#B8892B" stroke-width="1.2"></path><path d="M2 24 C2 16 6 12 12 12" fill="none" stroke="#B8892B" stroke-width="1"></path><circle cx="24" cy="2" r="1.6" fill="#B8892B"></circle></svg>
+          <svg class="lgh-flourish" width="20" height="20" viewBox="0 0 26 26" style="bottom: 8px; right: 8px; transform: rotate(180deg);"><path d="M2 24 C2 10 10 2 24 2" fill="none" stroke="#B8892B" stroke-width="1.2"></path><path d="M2 24 C2 16 6 12 12 12" fill="none" stroke="#B8892B" stroke-width="1"></path><circle cx="24" cy="2" r="1.6" fill="#B8892B"></circle></svg>
+          <div class="lgh-label">Заполните пропуск</div>
+          <div class="lgh-sentence">My grandmother lived to a <span class="lgh-gap">_____</span> old age and enjoyed her retirement years.</div>
+          <div class="lgh-translation">Бабушка дожила до глубокой старости и успела насладиться пенсией.</div>
+          <div class="lgh-hint">g___</div>
+          <button class="lgh-btn lgh-show-btn" onclick="showBack()">Показать ответ</button>
+        </div>
+      </div>
+
+      <!-- BACK -->
+      <div id="screen-back" class="lgh-screen">
+        <div class="lgh-panel">
+          <svg class="lgh-flourish" width="20" height="20" viewBox="0 0 26 26" style="top: 8px; left: 8px;"><path d="M2 24 C2 10 10 2 24 2" fill="none" stroke="#B8892B" stroke-width="1.2"></path><path d="M2 24 C2 16 6 12 12 12" fill="none" stroke="#B8892B" stroke-width="1"></path><circle cx="24" cy="2" r="1.6" fill="#B8892B"></circle></svg>
+          <svg class="lgh-flourish" width="20" height="20" viewBox="0 0 26 26" style="bottom: 8px; right: 8px; transform: rotate(180deg);"><path d="M2 24 C2 10 10 2 24 2" fill="none" stroke="#B8892B" stroke-width="1.2"></path><path d="M2 24 C2 16 6 12 12 12" fill="none" stroke="#B8892B" stroke-width="1"></path><circle cx="24" cy="2" r="1.6" fill="#B8892B"></circle></svg>
+          <div class="lgh-label">Ответ</div>
+          <div class="lgh-sentence">My grandmother lived to a <strong class="lgh-answer">good</strong> old age and enjoyed her retirement years.</div>
+          <div class="lgh-translation">Бабушка дожила до глубокой старости и успела насладиться пенсией.</div>
+          <div class="lgh-note">good old + существительное — тёплое, чуть ироничное упоминание чего-то привычного: the good old days, good old Bob.</div>
+          <div class="lgh-tailpiece">
+            <div class="lgh-tailpiece-line"></div>
+            <svg width="10" height="10" viewBox="0 0 10 10" style="opacity:0.6"><path d="M5 9 C1 7 1 3 5 1 C9 3 9 7 5 9 Z" fill="#B8892B"></path></svg>
+            <div class="lgh-tailpiece-line"></div>
+          </div>
+        </div>
+        <div class="lgh-grades">
+          <button class="lgh-btn lgh-grade" style="border:1px solid rgba(166,70,43,0.45); color:#7A3A22;" onclick="grade('Не знал','через 1 минуту','weak')">
+            <svg width="18" height="18" viewBox="0 0 18 18"><path d="M4 4 C9 6 10 10 8 15" fill="none" stroke="#A6462B" stroke-width="1.6"></path><ellipse cx="6.5" cy="7.5" rx="3.4" ry="1.6" transform="rotate(35 6.5 7.5)" fill="#A6462B" opacity="0.75"></ellipse></svg>
+            Не знал
+          </button>
+          <button class="lgh-btn lgh-grade" style="border:1px solid rgba(184,137,43,0.5); color:#7C6415;" onclick="grade('Плохо помню','через 10 минут','weak')">
+            <svg width="18" height="18" viewBox="0 0 18 18"><ellipse cx="9" cy="10" rx="3.2" ry="4.6" fill="#C79A34"></ellipse><path d="M9 14 L9 17" stroke="#C79A34" stroke-width="1.4"></path></svg>
+            Плохо помню
+          </button>
+          <button class="lgh-btn lgh-grade" style="border:1px solid rgba(79,113,74,0.5); color:#35502F;" onclick="grade('Помню','через 3 дня','strong')">
+            <svg width="18" height="18" viewBox="0 0 18 18"><path d="M9 17 C9 10 9 7 9 2" stroke="#4F714A" stroke-width="1.4" fill="none"></path><path d="M9 9 C4 7 3 3 3 3 C3 3 8 3 9 9 Z" fill="#4F714A"></path></svg>
+            Помню
+          </button>
+          <button class="lgh-btn lgh-grade" style="border:1px solid rgba(184,137,43,0.7); color:#6E5314;" onclick="grade('Отлично помню','через 9 дней','strong')">
+            <svg width="18" height="18" viewBox="-9 -9 18 18" color="#B8892B"><use href="#lgh-flower"></use></svg>
+            Отлично помню
+          </button>
+        </div>
+      </div>
+
+      <!-- FEEDBACK -->
+      <div id="screen-feedback" class="lgh-screen lgh-feedback">
+        <div id="feedback-weak" style="display:none;">
+          <svg width="120" height="120" viewBox="0 0 120 120" style="margin:0 auto; display:block;">
+            <path d="M60 108 C 58 78 62 58 48 40" fill="none" stroke="#8A8A72" stroke-width="3"></path>
+            <path d="M48 40 C 34 42 26 34 24 24 C 36 24 46 30 48 40 Z" fill="#A9A98E"></path>
+            <path d="M60 60 C 72 56 78 46 78 36 C 66 38 58 46 58 58 Z" fill="#A9A98E" opacity="0.85"></path>
+          </svg>
+          <div class="lgh-feedback-title" style="color:#5B5B45;">Ничего страшного</div>
+          <div class="lgh-feedback-sub" style="color:#6B6B55;">Повторим карточку <span id="interval-weak"></span></div>
+        </div>
+        <div id="feedback-strong" style="display:none; position:relative;">
+          <div style="position:absolute; left:50%; top:46px; width:160px; height:160px; transform:translate(-50%,-50%); border-radius:50%; background: radial-gradient(circle, rgba(184,137,43,0.35), rgba(184,137,43,0) 70%);"></div>
+          <svg width="120" height="120" viewBox="0 0 120 120" style="position:relative; margin:0 auto; display:block;">
+            <path d="M60 110 C 60 80 60 60 60 46" stroke="#4F714A" stroke-width="3" fill="none"></path>
+            <path d="M60 78 C 44 74 40 62 40 62 C 40 62 54 60 60 78 Z" fill="#4F714A"></path>
+            <path d="M60 88 C 76 84 80 72 80 72 C 80 72 66 70 60 88 Z" fill="#4F714A"></path>
+            <g transform="translate(60,38)" color="#D9A93B"><use href="#lgh-flower" width="56" height="56" x="-28" y="-28"></use></g>
+          </svg>
+          <div class="lgh-feedback-title" style="color:#4E3B10;">Отлично!</div>
+          <div class="lgh-feedback-sub" style="color:#6E5314;">Следующий показ — <span id="interval-strong"></span></div>
+        </div>
+        <div class="lgh-grade-label">Вы выбрали: <span id="grade-label"></span></div>
+        <button class="lgh-btn lgh-next-btn" onclick="goNext()">Далее</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  function show(id) {
+    document.querySelectorAll('.lgh-screen').forEach(function (el) { el.classList.remove('active'); });
+    document.getElementById(id).classList.add('active');
+  }
+  function showBack() { show('screen-back'); }
+  function grade(label, interval, mood) {
+    document.getElementById('feedback-weak').style.display = mood === 'weak' ? 'block' : 'none';
+    document.getElementById('feedback-strong').style.display = mood === 'strong' ? 'block' : 'none';
+    document.getElementById('interval-weak').textContent = interval;
+    document.getElementById('interval-strong').textContent = interval;
+    document.getElementById('grade-label').textContent = label;
+    show('screen-feedback');
+  }
+  function goNext() { show('screen-front'); }
+</script>
+</body>
+</html>

@@ -1,13 +1,14 @@
 /**
  * Экран начала дня.
  *
- * Три числа и кнопка. Завал показывается отдельной строкой и только когда он
- * есть: это единственный способ узнать, что долг накопился, и прятать его
- * нельзя — но и пугать им каждый день, когда его нет, незачем.
+ * В макете его нет — он собран в том же визуальном языке: та же панель, те же
+ * разделители, та же типографика. Когда дойдут руки нарисовать и его, менять
+ * придётся только вёрстку.
  */
 
 import type { DeckCounts } from "../storage";
 import { plural } from "./format";
+import { Leaf, PanelFlourish } from "./Ornaments";
 
 interface Props {
   deckName: string;
@@ -22,37 +23,52 @@ export function DayScreen({ deckName, counts, backlog, offline, onStart }: Props
 
   return (
     <section className="screen screen--day">
-      <h1>{deckName}</h1>
+      <div className="day-head">
+        <Leaf className="counter-leaf" />
+        <h1 className="display">{deckName}</h1>
+        <Leaf className="counter-leaf counter-leaf--flip" />
+      </div>
 
-      <dl className="counts">
-        <div>
-          <dt>Новые</dt>
-          <dd>{counts.fresh}</dd>
-        </div>
-        <div>
-          <dt>К повторению</dt>
-          <dd>{counts.due}</dd>
-        </div>
-        <div>
-          <dt>Всего в колоде</dt>
-          <dd>{counts.total}</dd>
-        </div>
-      </dl>
+      <div className="rule">
+        <span className="rule-line" />
+        <span className="rule-dot" />
+        <span className="rule-line rule-line--rev" />
+      </div>
 
-      {backlog > 0 && (
-        <p className="backlog">
-          Просрочено сверх дневного лимита: {backlog}{" "}
-          {plural(backlog, "карточка")}. Они не потеряются, но разбирать их
-          придётся несколько дней.
-        </p>
-      )}
+      <div className="panel">
+        <PanelFlourish position="start" />
+        <PanelFlourish position="end" />
 
-      <button type="button" onClick={onStart} disabled={!ready}>
+        <dl className="counts">
+          <div>
+            <dt>Новые</dt>
+            <dd>{counts.fresh}</dd>
+          </div>
+          <div>
+            <dt>К повторению</dt>
+            <dd>{counts.due}</dd>
+          </div>
+          <div>
+            <dt>Всего</dt>
+            <dd>{counts.total}</dd>
+          </div>
+        </dl>
+
+        {backlog > 0 && (
+          <p className="note">
+            Просрочено сверх дневного лимита: {backlog}{" "}
+            {plural(backlog, "карточка")}. Они не потеряются, но разбирать их
+            придётся несколько дней.
+          </p>
+        )}
+      </div>
+
+      <button type="button" className="pill pill--wide" onClick={onStart} disabled={!ready}>
         {ready ? "Учить" : "На сегодня всё"}
       </button>
 
       {offline && (
-        <p className="muted">
+        <p className="quiet">
           Свежую колоду достать не удалось — занимаемся тем, что уже загружено.
         </p>
       )}

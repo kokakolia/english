@@ -18,6 +18,7 @@ import {
 } from "../storage";
 import { createStudyController, type StudyController, type StudyState } from "../study/controller";
 import { DayScreen } from "./DayScreen";
+import { Background, CornerFern, OrnamentDefs, SideVine } from "./Ornaments";
 import { ReviewScreen } from "./ReviewScreen";
 
 type Stage =
@@ -88,24 +89,35 @@ export function App() {
     if (db !== null && deck !== null) await showDay(db, deck.id);
   }
 
-  if (stage.kind === "loading") {
-    return <main className="app">Загрузка…</main>;
-  }
+  return (
+    <main className="app">
+      <OrnamentDefs />
+      <Background />
+      <CornerFern corner="tl" />
+      <CornerFern corner="tr" />
+      <CornerFern corner="bl" />
+      <CornerFern corner="br" />
+      <SideVine />
+      {renderStage()}
+    </main>
+  );
 
-  if (stage.kind === "error") {
-    return (
-      <main className="app">
+  function renderStage() {
+    if (stage.kind === "loading") {
+      return <section className="screen">Загрузка…</section>;
+    }
+
+    if (stage.kind === "error") {
+      return (
         <section className="screen">
-          <h1>Не удалось начать</h1>
+          <h1 className="display">Не удалось начать</h1>
           <p className="error">{stage.message}</p>
         </section>
-      </main>
-    );
-  }
+      );
+    }
 
-  if (stage.kind === "day") {
-    return (
-      <main className="app">
+    if (stage.kind === "day") {
+      return (
         <DayScreen
           deckName={deck?.name ?? "Колода"}
           counts={stage.counts}
@@ -113,21 +125,18 @@ export function App() {
           offline={offline}
           onStart={() => void startStudy()}
         />
-      </main>
-    );
-  }
+      );
+    }
 
-  return (
-    <main className="app">
-      {controller !== null && state !== null ? (
+    if (controller !== null && state !== null) {
+      return (
         <ReviewScreen
           controller={controller}
           state={state}
           onFinish={() => void finishStudy()}
         />
-      ) : (
-        <section className="screen">Готовим очередь…</section>
-      )}
-    </main>
-  );
+      );
+    }
+    return <section className="screen">Готовим очередь…</section>;
+  }
 }

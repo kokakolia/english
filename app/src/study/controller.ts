@@ -52,6 +52,8 @@ export type StudyPhase =
   | "question"
   /** Ответ раскрыт, ждём оценки. */
   | "answered"
+  /** Оценка принята, показан отклик и срок следующего показа. */
+  | "feedback"
   /** Очередь пройдена. */
   | "finished";
 
@@ -61,6 +63,10 @@ export interface StudyState {
   hintVisible: boolean;
   /** Сколько дней до следующего показа при каждой оценке. */
   intervals: Record<Grade, number> | null;
+  /** Поставленная оценка — показывается на экране отклика. */
+  lastGrade: Grade | null;
+  /** Срок следующего показа в днях. */
+  lastInterval: number | null;
   counts: QueueCounts;
   backlog: number;
   session: SessionProgress;
@@ -75,8 +81,10 @@ export interface StudyController {
   showHint(): void;
   /** Раскрыть ответ. */
   reveal(): void;
-  /** Оценить карточку, записать и перейти дальше. */
+  /** Оценить карточку и записать. Переход к следующей — отдельным шагом. */
   grade(grade: Grade): Promise<void>;
+  /** Перейти к следующей карточке с экрана отклика. */
+  next(): void;
   /** Построить очередь заново — например, после смены настроек. */
   restart(): Promise<void>;
   settings(): StudySettings;
@@ -104,6 +112,7 @@ const EMPTY_SESSION: SessionProgress = {
 export type KeyAction =
   | { kind: "reveal" }
   | { kind: "grade"; grade: Grade }
+  | { kind: "next" }
   | null;
 
 /**
@@ -121,6 +130,9 @@ export type KeyAction =
 export function keyAction(phase: StudyPhase, key: string): KeyAction {
   if (phase === "question") {
     return key === " " || key === "Enter" ? { kind: "reveal" } : null;
+  }
+  if (phase === "feedback") {
+    return key === " " || key === "Enter" ? { kind: "next" } : null;
   }
   if (phase !== "answered") return null;
 
@@ -147,6 +159,8 @@ export async function createStudyController(
     card: null,
     hintVisible: false,
     intervals: null,
+    lastGrade: null,
+    lastInterval: null,
     counts: EMPTY_COUNTS,
     backlog: 0,
     session: EMPTY_SESSION,
@@ -188,6 +202,8 @@ export async function createStudyController(
         card: null,
         hintVisible: false,
         intervals: null,
+        lastGrade: null,
+        lastInterval: null,
         session: session?.progress() ?? EMPTY_SESSION,
       });
       return;
@@ -197,6 +213,8 @@ export async function createStudyController(
       card,
       hintVisible: false,
       intervals: null,
+      lastGrade: null,
+      lastInterval: null,
       session: session?.progress() ?? EMPTY_SESSION,
     });
   }
@@ -266,9 +284,10 @@ export async function createStudyController(
       if (state.phase !== "answered" || card === null || state.saving) return;
 
       publish({ saving: true, error: null });
+      let intervalDays = 0;
       try {
-        // Запись идёт до перехода к следующей карточке: если вкладку закроют
-        // на анимации, ответ уже на диске.
+        // Запись идёт до показа отклика: если вкладку закроют прямо сейчас,
+        // ответ уже на диске.
         const result = await recordReview(db, {
           cardId: card.id,
           deckId,
@@ -277,13 +296,26 @@ export async function createStudyController(
           scheduler,
         });
         progress.set(card.id, result.progress);
+        intervalDays = result.intervalDays;
       } catch (cause) {
         publish({ saving: false, error: `не удалось сохранить ответ: ${String(cause)}` });
         return;
       }
 
+      // Очередь двигается сразу, а карточка на экране — нет: отклик
+      // показывается по уже применённой оценке.
       session?.answer(grade);
-      publish({ saving: false });
+      publish({
+        phase: "feedback",
+        saving: false,
+        lastGrade: grade,
+        lastInterval: intervalDays,
+        session: session?.progress() ?? EMPTY_SESSION,
+      });
+    },
+
+    next() {
+      if (state.phase !== "feedback") return;
       advance();
     },
 
