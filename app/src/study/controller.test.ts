@@ -11,7 +11,7 @@ import {
   updateStudySettings,
   type DeckFile,
 } from "../storage";
-import { createStudyController, suggestedGrade, type StudyController } from "./controller";
+import { createStudyController, keyAction, type StudyController } from "./controller";
 
 const scheduler = createScheduler({ enableFuzz: false });
 const NOW = new Date("2026-07-01T09:00:00Z");
@@ -32,7 +32,6 @@ function deckFile(cards: ReturnType<typeof makeCard>[]): DeckFile {
   };
 }
 
-/** Три карточки разных гнёзд с разными ответами. */
 function sampleCards() {
   return [
     makeCard({
@@ -42,6 +41,7 @@ function sampleCards() {
       text: "We need to ___ a decision by Friday.",
       answer: "make",
       answers: ["make", "take", "reach"],
+      also: ["take", "reach"],
       hint: "m___",
     }),
     makeCard({
@@ -120,65 +120,11 @@ describe("начало занятия", () => {
   });
 });
 
-describe("ответ на карточку", () => {
-  it("засчитывает любого партнёра кластера", async () => {
-    const controller = await makeController();
-    const card = controller.state().card!;
-    const other = card.answers[1] ?? card.answer;
-
-    controller.setTyped(other);
-    controller.submit();
-
-    expect(controller.state().phase).toBe("answered");
-    expect(controller.state().check?.verdict).toBe("correct");
-  });
-
-  it("не принимает пустой ввод", async () => {
-    const controller = await makeController();
-    controller.setTyped("   ");
-    controller.submit();
-    expect(controller.state().phase).toBe("question");
-  });
-
-  it("опечатка по умолчанию не засчитывается", async () => {
-    const controller = await makeController({ seed: 1 });
-    // Ищем карточку с достаточно длинным ответом, чтобы опечатка имела смысл.
-    while (controller.state().card!.answer.length < 6) {
-      controller.reveal();
-      await controller.grade("good");
-    }
-    const answer = controller.state().card!.answer;
-    const typo = answer.slice(0, -2) + answer.slice(-1) + answer.slice(-2, -1);
-
-    controller.setTyped(typo);
-    controller.submit();
-    expect(controller.state().check?.verdict).toBe("almost");
-  });
-
-  it("настройкой опечатку можно засчитывать", async () => {
-    await updateStudySettings(db, { acceptTypos: true });
-    const controller = await makeController();
-    while (controller.state().card!.answer.length < 6) {
-      controller.reveal();
-      await controller.grade("good");
-    }
-    const answer = controller.state().card!.answer;
-    const typo = answer.slice(0, -2) + answer.slice(-1) + answer.slice(-2, -1);
-
-    controller.setTyped(typo);
-    controller.submit();
-    expect(controller.state().check?.verdict).toBe("correct");
-    expect(controller.state().check?.reason).toBe("typo");
-  });
-
-  it("ответ можно раскрыть без попытки", async () => {
+describe("раскрытие карточки", () => {
+  it("переводит в состояние с ответом", async () => {
     const controller = await makeController();
     controller.reveal();
-
     expect(controller.state().phase).toBe("answered");
-    // Вердикта нет: человек не отвечал, и называть это ошибкой неправильно —
-    // оценку он поставит сам.
-    expect(controller.state().check).toBeNull();
   });
 
   it("показывает сроки на кнопках до выбора оценки", async () => {
@@ -188,6 +134,16 @@ describe("ответ на карточку", () => {
     const intervals = controller.state().intervals!;
     expect(intervals.again).toBeLessThanOrEqual(intervals.good);
     expect(intervals.good).toBeLessThan(intervals.easy);
+  });
+
+  it("повторное раскрытие ничего не ломает", async () => {
+    const controller = await makeController();
+    const first = controller.state().card?.id;
+    controller.reveal();
+    controller.reveal();
+
+    expect(controller.state().phase).toBe("answered");
+    expect(controller.state().card?.id).toBe(first);
   });
 
   it("подсказка показывается по требованию и гаснет на следующей карточке", async () => {
@@ -203,27 +159,67 @@ describe("ответ на карточку", () => {
   });
 });
 
+describe("разбор нажатий", () => {
+  it("на скрытом ответе пробел и Enter раскрывают карточку", () => {
+    expect(keyAction("question", " ")).toEqual({ kind: "reveal" });
+    expect(keyAction("question", "Enter")).toEqual({ kind: "reveal" });
+  });
+
+  it("на скрытом ответе цифры ничего не делают", () => {
+    // Иначе одно нажатие раскрывало бы карточку и сразу ставило оценку —
+    // ровно та ошибка, ради которой разбор вынесен в отдельную функцию.
+    expect(keyAction("question", "3")).toBeNull();
+  });
+
+  it("на раскрытом ответе цифры ставят оценку", () => {
+    expect(keyAction("answered", "1")).toEqual({ kind: "grade", grade: "again" });
+    expect(keyAction("answered", "4")).toEqual({ kind: "grade", grade: "easy" });
+  });
+
+  it("на раскрытом ответе пробел и Enter ставят «хорошо»", () => {
+    expect(keyAction("answered", " ")).toEqual({ kind: "grade", grade: "good" });
+    expect(keyAction("answered", "Enter")).toEqual({ kind: "grade", grade: "good" });
+  });
+
+  it("прочие клавиши и прочие состояния игнорируются", () => {
+    expect(keyAction("answered", "x")).toBeNull();
+    expect(keyAction("loading", " ")).toBeNull();
+    expect(keyAction("finished", "Enter")).toBeNull();
+    expect(keyAction("empty", "1")).toBeNull();
+  });
+
+  it("одно нажатие даёт ровно одно действие", async () => {
+    // Проверка того же свойства на живом контроллере: пробел, обработанный
+    // один раз, не должен и раскрыть карточку, и оценить её.
+    const controller = await makeController();
+    const card = controller.state().card?.id;
+
+    const action = keyAction(controller.state().phase, " ");
+    expect(action).toEqual({ kind: "reveal" });
+    controller.reveal();
+
+    expect(controller.state().phase).toBe("answered");
+    expect(controller.state().card?.id).toBe(card);
+    expect(await db.reviews.count()).toBe(0);
+  });
+});
+
 describe("оценка и запись", () => {
   it("записывает прогресс и журнал до перехода к следующей карточке", async () => {
     const controller = await makeController();
     const card = controller.state().card!;
 
-    controller.setTyped(card.answer);
-    controller.submit();
+    controller.reveal();
     await controller.grade("good");
 
     // К моменту, когда показана следующая карточка, ответ уже на диске.
     expect(controller.state().card?.id).not.toBe(card.id);
     const history = await cardHistory(db, card.id);
     expect(history).toHaveLength(1);
-    expect(history[0]).toMatchObject({
-      grade: "good",
-      typed: card.answer,
-      verdict: "correct",
-    });
+    expect(history[0]).toMatchObject({ grade: "good", stateBefore: "new" });
   });
 
-  it("оценка до показа ответа игнорируется", async () => {
+  it("оценка до раскрытия ответа игнорируется", async () => {
     const controller = await makeController();
     await controller.grade("good");
 
@@ -275,17 +271,7 @@ describe("подписка на состояние", () => {
 
     unsubscribe();
     const before = seen.length;
-    controller.setTyped("x");
+    controller.showHint();
     expect(seen).toHaveLength(before);
-  });
-});
-
-describe("предлагаемая оценка", () => {
-  it("после верного ответа — «good», иначе «again»", () => {
-    expect(suggestedGrade({ verdict: "correct", matched: "make", reason: "exact" })).toBe(
-      "good",
-    );
-    expect(suggestedGrade({ verdict: "wrong", matched: null, reason: null })).toBe("again");
-    expect(suggestedGrade(null)).toBe("again");
   });
 });

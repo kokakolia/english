@@ -2,14 +2,19 @@
  * Ход занятия: что показано на экране и что происходит по нажатию.
  *
  * Это не часть интерфейса, а его собеседник. React-компоненты подписываются на
- * состояние и вызывают методы; вся логика — какая карточка следующая, засчитан
- * ли ответ, когда писать в базу — живёт здесь. Причин две.
+ * состояние и вызывают методы; вся логика — какая карточка следующая, когда
+ * писать в базу — живёт здесь. Причин две.
  *
  * Первая: это можно проверить тестами без браузера и без React.
  *
  * Вторая: дизайн экрана мы будем переделывать, и не один раз. Переписывать
  * вёрстку, не трогая логику занятия, гораздо дешевле, чем выковыривать логику
  * из компонентов.
+ *
+ * Проверяет себя сам учащийся. Система не спрашивает ответ и не судит его: она
+ * показывает пропуск, по требованию раскрывает карточку и принимает оценку.
+ * Так устроен Anki, и так честнее — знание своего ответа есть только у того,
+ * кто вспоминал.
  *
  * Отдельное обязательство — **ответ записывается до перехода к следующей
  * карточке**. Учащийся нажал оценку, поехала анимация, вкладку закрыли: к
@@ -18,10 +23,9 @@
 
 import {
   buildQueue,
-  checkAnswer,
   createSession,
   defaultScheduler,
-  type AnswerCheck,
+  GRADES,
   type DeckCard,
   type Grade,
   type QueueCounts,
@@ -44,9 +48,9 @@ export type StudyPhase =
   | "loading"
   /** На сегодня всё: очередь пуста с самого начала. */
   | "empty"
-  /** Показан пропуск, ждём ответа. */
+  /** Показан пропуск, ответ скрыт. */
   | "question"
-  /** Ответ показан, ждём оценки. */
+  /** Ответ раскрыт, ждём оценки. */
   | "answered"
   /** Очередь пройдена. */
   | "finished";
@@ -54,10 +58,6 @@ export type StudyPhase =
 export interface StudyState {
   phase: StudyPhase;
   card: DeckCard | null;
-  /** Что набрано в поле ввода. */
-  typed: string;
-  /** Итог проверки. `null`, если ответ был раскрыт без попытки. */
-  check: AnswerCheck | null;
   hintVisible: boolean;
   /** Сколько дней до следующего показа при каждой оценке. */
   intervals: Record<Grade, number> | null;
@@ -72,11 +72,8 @@ export interface StudyState {
 export interface StudyController {
   state(): StudyState;
   subscribe(listener: (state: StudyState) => void): () => void;
-  setTyped(value: string): void;
   showHint(): void;
-  /** Проверить набранное. */
-  submit(): void;
-  /** Показать ответ, не отвечая. */
+  /** Раскрыть ответ. */
   reveal(): void;
   /** Оценить карточку, записать и перейти дальше. */
   grade(grade: Grade): Promise<void>;
@@ -103,15 +100,39 @@ const EMPTY_SESSION: SessionProgress = {
   repeats: 0,
 };
 
+/** Что должно произойти по нажатию клавиши. */
+export type KeyAction =
+  | { kind: "reveal" }
+  | { kind: "grade"; grade: Grade }
+  | null;
+
 /**
- * Какую оценку предложить по умолчанию.
+ * Разбор нажатия — отдельной чистой функцией.
  *
- * Не решение за учащегося, а подсказка интерфейсу: после верного ответа палец
- * тянется к «good», после неверного — к «again».
+ * Так сделано из-за ошибки, которая иначе неизбежна. Если обработчик клавиш
+ * перевешивать при каждой смене состояния, одно нажатие Enter успевает
+ * раскрыть карточку и тут же её оценить: React перерисовывает экран внутри
+ * того же события, а обработчик, добавленный на цель, до которой событие ещё
+ * не дошло, по спецификации DOM всё равно срабатывает.
+ *
+ * Поэтому обработчик вешается один раз и спрашивает состояние сам, а решение
+ * «что делать по этой клавише» живёт здесь и проверяется тестами.
  */
-export function suggestedGrade(check: AnswerCheck | null): Grade {
-  if (check === null) return "again";
-  return check.verdict === "correct" ? "good" : "again";
+export function keyAction(phase: StudyPhase, key: string): KeyAction {
+  if (phase === "question") {
+    return key === " " || key === "Enter" ? { kind: "reveal" } : null;
+  }
+  if (phase !== "answered") return null;
+
+  const index = ["1", "2", "3", "4"].indexOf(key);
+  if (index >= 0) {
+    const grade = GRADES[index];
+    return grade === undefined ? null : { kind: "grade", grade };
+  }
+  // Пробел и Enter ставят «хорошо» — как в Anki, где это движение уже в
+  // пальцах у всех, кто пользовался карточками.
+  if (key === " " || key === "Enter") return { kind: "grade", grade: "good" };
+  return null;
 }
 
 export async function createStudyController(
@@ -124,8 +145,6 @@ export async function createStudyController(
   let state: StudyState = {
     phase: "loading",
     card: null,
-    typed: "",
-    check: null,
     hintVisible: false,
     intervals: null,
     counts: EMPTY_COUNTS,
@@ -167,8 +186,6 @@ export async function createStudyController(
       publish({
         phase: "finished",
         card: null,
-        typed: "",
-        check: null,
         hintVisible: false,
         intervals: null,
         session: session?.progress() ?? EMPTY_SESSION,
@@ -178,8 +195,6 @@ export async function createStudyController(
     publish({
       phase: "question",
       card,
-      typed: "",
-      check: null,
       hintVisible: false,
       intervals: null,
       session: session?.progress() ?? EMPTY_SESSION,
@@ -235,36 +250,15 @@ export async function createStudyController(
 
     settings: () => settings,
 
-    setTyped(value) {
-      if (state.phase !== "question") return;
-      publish({ typed: value });
-    },
-
     showHint() {
       if (state.phase !== "question") return;
       publish({ hintVisible: true });
     },
 
-    submit() {
-      const card = state.card;
-      if (state.phase !== "question" || card === null) return;
-      if (state.typed.trim() === "") return;
-
-      let check = checkAnswer(state.typed, card);
-      // Опечатку можно засчитывать автоматически — это настройка, а не
-      // решение ядра: кто-то хочет строгости, кто-то нет.
-      if (check.verdict === "almost" && settings.acceptTypos) {
-        check = { ...check, verdict: "correct" };
-      }
-      publish({ phase: "answered", check, intervals: previewIntervals(card) });
-    },
-
     reveal() {
       const card = state.card;
       if (state.phase !== "question" || card === null) return;
-      // Ответ раскрыт без попытки: проверять нечего, но и «неверно» это не
-      // совсем — вердикт остаётся пустым, а оценку ставит человек.
-      publish({ phase: "answered", check: null, intervals: previewIntervals(card) });
+      publish({ phase: "answered", intervals: previewIntervals(card) });
     },
 
     async grade(grade) {
@@ -280,8 +274,6 @@ export async function createStudyController(
           deckId,
           grade,
           now: clock(),
-          ...(state.typed.trim() !== "" ? { typed: state.typed } : {}),
-          ...(state.check !== null ? { verdict: state.check.verdict } : {}),
           scheduler,
         });
         progress.set(card.id, result.progress);

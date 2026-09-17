@@ -80,17 +80,6 @@ button:disabled {
   cursor: default;
 }
 
-input[type="text"] {
-  font: inherit;
-  color: inherit;
-  background: transparent;
-  border: 1px solid var(--line);
-  border-radius: 0.5rem;
-  padding: 0.5rem 0.7rem;
-  min-width: 12rem;
-  flex: 1 1 12rem;
-}
-
 /* Экран начала дня */
 
 .counts {
@@ -139,26 +128,24 @@ input[type="text"] {
   color: var(--right);
 }
 
-.filled--wrong,
-.filled--almost {
-  color: var(--wrong);
-}
-
-.filled--revealed {
-  color: var(--accent);
-}
-
 .translation {
   color: var(--muted);
   margin: 0;
   font-size: 1.05rem;
 }
 
-.answer-form {
+.reveal-row {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   align-items: center;
+}
+
+.reveal-row .suggested {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
 }
 
 .hint {
