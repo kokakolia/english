@@ -9,6 +9,9 @@
   ],
   "hint": "i_ h_____ o_",
   "translation": "Мы назвали дочь Софией в честь моей бабушки.",
+  "answers": [
+   "in honour of"
+  ],
   "also": [],
   "note": "in honour of sb — в честь кого-то. Британское написание honour, американское honor.",
   "phrase": "in honour of sb name",
@@ -33,6 +36,9 @@
   ],
   "hint": "i_",
   "translation": "Бронь в отеле оформили на имя моей мамы, так как платила она.",
+  "answers": [
+   "in"
+  ],
   "also": [],
   "note": "in sb's name — на чьё-то имя. О брони, счёте, документе.",
   "phrase": "in sb name",
@@ -55,6 +61,11 @@
   ],
   "hint": "l_____ g___",
   "translation": "Когда команда лишилась лучшего игрока, дела на остаток сезона стали выглядеть мрачно.",
+  "answers": [
+   "look bleak",
+   "look grim",
+   "looked grim"
+  ],
   "also": [],
   "note": "things look bleak / grim — дела выглядят скверно. Устойчивая формула тревожного прогноза.",
   "phrase": "thing look bleak",
@@ -77,6 +88,10 @@
   ],
   "hint": "a_",
   "translation": "В прошлую субботу мы чудесно поужинали у них дома.",
+  "answers": [
+   "at",
+   "at the"
+  ],
   "also": [],
   "note": "at sb's house — у кого-то дома. Предлог at, а не in: речь о месте встречи.",
   "phrase": "at sb's house",
@@ -101,6 +116,10 @@
   ],
   "hint": "g___",
   "translation": "Она дала проекту больше времени, потому что первый срок был слишком жёстким.",
+  "answers": [
+   "give",
+   "gave"
+  ],
   "also": [],
   "note": "give sb/sth time — дать время. Два дополнения подряд, без предлога.",
   "phrase": "give sb time",
@@ -123,6 +142,10 @@
   ],
   "hint": "i_________",
   "translation": "Компания предлагает премии как стимул к работе, чтобы сотрудники сохраняли мотивацию.",
+  "answers": [
+   "incentive",
+   "incentives"
+  ],
   "also": [],
   "note": "work incentives — стимулы к труду: премии, льготы. Термин из экономики труда.",
   "phrase": "work incentive",
@@ -145,6 +168,9 @@
   ],
   "hint": "a b______ o_ w___",
   "translation": "В офисе скопились незавершённые дела, которые надо закрыть на этой неделе.",
+  "answers": [
+   "a backlog of work"
+  ],
   "also": [],
   "note": "a backlog of work — накопившиеся дела, завал. Существительное backlog — отставание от графика.",
   "phrase": "a backlog of work",
@@ -167,6 +193,10 @@
   ],
   "hint": "i_ t__",
   "translation": "Борьба главного героя прослеживается в творчестве многих современных художников.",
+  "answers": [
+   "in a",
+   "in the"
+  ],
   "also": [],
   "note": "in a work (of art) — в произведении. О содержании книги, картины, фильма.",
   "phrase": "in a work",

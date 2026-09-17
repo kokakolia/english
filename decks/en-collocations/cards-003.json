@@ -10,6 +10,11 @@
   ],
   "hint": "r________",
   "translation": "После аварии он постепенно восстановил способность владеть левой рукой.",
+  "answers": [
+   "recover",
+   "regain",
+   "recovered"
+  ],
   "also": [
    "regain"
   ],
@@ -34,6 +39,10 @@
   ],
   "hint": "u____",
   "translation": "Большинству домашних пользователей проще хранить фотографии в облаке.",
+  "answers": [
+   "user",
+   "users"
+  ],
   "also": [],
   "note": "a home user — частный, домашний пользователь. Противопоставляется корпоративному.",
   "phrase": "home user",
@@ -56,6 +65,9 @@
   ],
   "hint": "w______ a b_______ l___",
   "translation": "Он уволился и вышел из офиса, не оглянувшись.",
+  "answers": [
+   "without a backward look"
+  ],
   "also": [],
   "note": "without a backward look / glance — не оглянувшись. О решительном уходе, без сожалений.",
   "phrase": "without a backward look",
@@ -78,6 +90,9 @@
   ],
   "hint": "o_",
   "translation": "Хороший словарь может быть подспорьем, когда учишь новую лексику.",
+  "answers": [
+   "of"
+  ],
   "also": [],
   "note": "be of help (to sb) — быть полезным. Формальнее, чем help; предлог of обязателен.",
   "phrase": "of help",
@@ -111,6 +126,20 @@
   ],
   "hint": "f____",
   "translation": "Забавная штука с переездом в новый город: как быстро ты заводишь новых друзей.",
+  "answers": [
+   "amazing",
+   "curious",
+   "exciting",
+   "extraordinary",
+   "funny",
+   "interesting",
+   "remarkable",
+   "startling",
+   "strange",
+   "striking",
+   "surprising",
+   "weird"
+  ],
   "also": [
    "amazing",
    "curious",
@@ -145,6 +174,9 @@
   ],
   "hint": "t__________",
   "translation": "Мы временно поселили гостей в свободной спальне, пока их квартиру ремонтировали.",
+  "answers": [
+   "temporarily"
+  ],
   "also": [],
   "note": "temporarily house sb — временно разместить. Глагол house — «предоставить жильё».",
   "phrase": "temporarily house",
@@ -168,6 +200,10 @@
   ],
   "hint": "r_____",
   "translation": "Итоговый результат проекта оказался лучше, чем все ожидали.",
+  "answers": [
+   "product",
+   "result"
+  ],
   "also": [
    "product"
   ],
@@ -192,6 +228,9 @@
   ],
   "hint": "c__________",
   "translation": "Она решила уйти с работы из-за семейных обязательств и маленьких детей дома.",
+  "answers": [
+   "commitments"
+  ],
   "also": [],
   "note": "family commitments — семейные обязательства. Стандартная формулировка для объяснения отказа или ухода.",
   "phrase": "family commitments",
@@ -214,6 +253,10 @@
   ],
   "hint": "t______",
   "translation": "Мой отец тридцать лет проработал школьным учителем, прежде чем вышел на пенсию.",
+  "answers": [
+   "teacher",
+   "schoolteacher"
+  ],
   "also": [],
   "note": "a school teacher — школьный учитель. Пишется и слитно: schoolteacher.",
   "phrase": "school teacher",
@@ -236,6 +279,10 @@
   ],
   "hint": "i_ a",
   "translation": "Мебель для новой спальни идёт комплектом: кровать, две тумбочки и комод.",
+  "answers": [
+   "in a",
+   "in the"
+  ],
   "also": [],
   "note": "come in a set — продаваться комплектом. Оборот in a set о наборе предметов.",
   "phrase": "in a set",
@@ -258,6 +305,9 @@
   ],
   "hint": "w______",
   "translation": "Проиграв три матча, баскетбольная команда вчера наконец вернулась к победам.",
+  "answers": [
+   "winning"
+  ],
   "also": [],
   "note": "return to winning ways — снова начать выигрывать. Спортивное клише из репортажей.",
   "phrase": "winning way",
@@ -280,6 +330,11 @@
   ],
   "hint": "b____ a n__ l___",
   "translation": "Бросив работу в городе, она решила построить новую жизнь в деревне.",
+  "answers": [
+   "build a new life",
+   "make a new life",
+   "start a new life"
+  ],
   "also": [],
   "note": "build / start a new life — начать жизнь заново. Обычно после переезда или потрясения.",
   "phrase": "build a new life",
@@ -302,6 +357,9 @@
   ],
   "hint": "p__",
   "translation": "Завод выпускает около пятисот автомобилей в год.",
+  "answers": [
+   "per"
+  ],
   "also": [],
   "note": "per year — в год, ежегодно. Формальное; в обычной речи a year: 500 cars a year.",
   "phrase": "per year",
@@ -324,6 +382,9 @@
   ],
   "hint": "o_ t__",
   "translation": "Тогдашний президент объявил о новых мерах для борьбы с растущим экономическим кризисом.",
+  "answers": [
+   "of the"
+  ],
   "also": [],
   "note": "the president of the day — тогдашний президент. Оборот of the day означает «в то время занимавший пост».",
   "phrase": "of the day",
@@ -351,6 +412,14 @@
   ],
   "hint": "n_______",
   "translation": "Обычно я проверяю почту с телефона перед началом работы.",
+  "answers": [
+   "frequently",
+   "generally",
+   "habitually",
+   "normally",
+   "regularly",
+   "usually"
+  ],
   "also": [
    "frequently",
    "generally",
@@ -379,6 +448,9 @@
   ],
   "hint": "l________",
   "translation": "Благодаря бабушкиной стряпне наш дом стал легендарным местом семейных застолий в районе.",
+  "answers": [
+   "legendary"
+  ],
   "also": [],
   "note": "a legendary home / place — легендарное место. Преувеличение ради тёплой оценки.",
   "phrase": "legendary home",
@@ -401,6 +473,9 @@
   ],
   "hint": "f___",
   "translation": "Мать посмотрела на неё с осуждением, когда она пришла домой поздно.",
+  "answers": [
+   "from"
+  ],
   "also": [],
   "note": "a look from sb — взгляд, брошенный кем-то. Предлог from указывает, от кого он исходил.",
   "phrase": "look from",
@@ -426,6 +501,12 @@
   ],
   "hint": "d_________",
   "translation": "Он однозначно заявил, что не примет предложение о работе.",
+  "answers": [
+   "categorically",
+   "definitely",
+   "positively",
+   "unequivocally"
+  ],
   "also": [
    "categorically",
    "positively",
@@ -452,6 +533,9 @@
   ],
   "hint": "f___",
   "translation": "Я не смог бы закончить проект без помощи товарищей по команде.",
+  "answers": [
+   "from"
+  ],
   "also": [],
   "note": "help from sb — помощь от кого-то. Предлог from указывает источник.",
   "phrase": "help from",
@@ -474,6 +558,10 @@
   ],
   "hint": "a__ g____",
   "translation": "Мы не виделись несколько месяцев — расскажи, как дела на новой работе.",
+  "answers": [
+   "be going",
+   "are going"
+  ],
   "also": [],
   "note": "how are things going? — как дела? Разговорная формула, things — жизнь вообще.",
   "phrase": "thing be going",
@@ -496,6 +584,9 @@
   ],
   "hint": "t_",
   "translation": "Я показал паспорт пограничнику, когда прилетел в аэропорт.",
+  "answers": [
+   "to"
+  ],
   "also": [],
   "note": "show sth to sb — показать кому-то. Предлог to перед адресатом, если он идёт после дополнения.",
   "phrase": "to show",
@@ -518,6 +609,10 @@
   ],
   "hint": "e____ i_ t____",
   "translation": "Ссора детей началась в шутку, но кончилась слезами, когда кто-то ушибся.",
+  "answers": [
+   "end in tears",
+   "ended in tears"
+  ],
   "also": [],
   "note": "end in tears — кончиться слезами. Устойчивое, часто как предупреждение: it'll all end in tears.",
   "phrase": "end in tears",
@@ -544,6 +639,13 @@
   ],
   "hint": "p_______",
   "translation": "Приятно было думать, что мы наконец увидим внуков после такой долгой разлуки.",
+  "answers": [
+   "comforting",
+   "good",
+   "happy",
+   "pleasant",
+   "positive"
+  ],
   "also": [
    "comforting",
    "good",
@@ -571,6 +673,9 @@
   ],
   "hint": "r_____",
   "translation": "Она решила отозвать своё завещание, получив большое наследство от тёти.",
+  "answers": [
+   "revoke"
+  ],
   "also": [],
   "note": "revoke a will — отменить завещание. Юридический термин, формальнее, чем cancel.",
   "phrase": "revoke will",
@@ -593,6 +698,9 @@
   ],
   "hint": "e_________",
   "translation": "Дочь этим летом проходит практику в местной больнице.",
+  "answers": [
+   "experience"
+  ],
   "also": [],
   "note": "work experience — стаж или учебная практика. В Британии — практика школьников на предприятии.",
   "phrase": "work experience",
@@ -615,6 +723,9 @@
   ],
   "hint": "p_______",
   "translation": "При разводе оба родителя обычно сохраняют родительские права и обязанности в отношении детей.",
+  "answers": [
+   "parental"
+  ],
   "also": [],
   "note": "parental rights — родительские права. Всегда во множественном числе, юридический термин.",
   "phrase": "parental right",
@@ -637,6 +748,9 @@
   ],
   "hint": "i_",
   "translation": "Во времена моей бабушки шляпы носили гораздо чаще.",
+  "answers": [
+   "in"
+  ],
   "also": [],
   "note": "in sb's day — во времена кого-то. О прошлом поколении: in my grandmother's day.",
   "phrase": "in sb's day",
@@ -659,6 +773,9 @@
   ],
   "hint": "e___ o_ u__",
   "translation": "Простота использования смартфона делает его популярным у покупателей постарше.",
+  "answers": [
+   "ease of use"
+  ],
   "also": [],
   "note": "ease of use — удобство использования. Термин из описаний техники и интерфейсов.",
   "phrase": "ease of use",
@@ -681,6 +798,9 @@
   ],
   "hint": "a______",
   "translation": "Во время войны многим семьям пришлось бросить дома и бежать в безопасное место.",
+  "answers": [
+   "abandon"
+  ],
   "also": [],
   "note": "abandon your home — бросить дом. Сильное слово: уйти навсегда и вынужденно.",
   "phrase": "abandon home",
@@ -703,6 +823,9 @@
   ],
   "hint": "o_",
   "translation": "Сара посмотрела на него с разочарованием, когда он опоздал на два часа.",
+  "answers": [
+   "of"
+  ],
   "also": [],
   "note": "the look of sth — вид, облик чего-то. Оборот с предлогом of о внешнем впечатлении.",
   "phrase": "look of",
@@ -725,6 +848,9 @@
   ],
   "hint": "w___",
   "translation": "Сестра на прошлой неделе попросила меня помочь с заявкой на работу.",
+  "answers": [
+   "with"
+  ],
   "also": [],
   "note": "help with sth — помощь с конкретным делом: help with homework, help with the move.",
   "phrase": "help with",
@@ -747,6 +873,9 @@
   ],
   "hint": "e__ i_ d_______",
   "translation": "Если не будешь усердно готовиться, экзамен может кончиться катастрофой.",
+  "answers": [
+   "end in disaster"
+  ],
   "also": [],
   "note": "end in disaster — кончиться катастрофой. Предлог in указывает, чем именно всё закончилось.",
   "phrase": "end in disaster",
@@ -769,6 +898,10 @@
   ],
   "hint": "r____ a b___",
   "translation": "Название этого ресторана мне что-то напоминает, но не могу вспомнить, где я его слышал.",
+  "answers": [
+   "ring a bell",
+   "rings a bell"
+  ],
   "also": [],
   "note": "the name rings a bell — имя кажется знакомым. Метафора звонка: что-то смутно припоминается.",
   "phrase": "name ring a bell",
@@ -791,6 +924,9 @@
   ],
   "hint": "c______",
   "translation": "Крытый переход между двумя зданиями укрыл нас от сильного дождя.",
+  "answers": [
+   "covered"
+  ],
   "also": [],
   "note": "a covered way — крытый переход. Архитектурный термин; причастие covered — «с крышей».",
   "phrase": "covered way",
@@ -813,6 +949,9 @@
   ],
   "hint": "w___ i_ p_______",
   "translation": "Моё эссе пока в работе, доделаю его на выходных.",
+  "answers": [
+   "work in progress"
+  ],
   "also": [],
   "note": "a work in progress — незаконченная работа. И буквально, и о человеке, который ещё меняется.",
   "phrase": "work in progress",
@@ -835,6 +974,9 @@
   ],
   "hint": "b_",
   "translation": "Днём магазин закрыт, но по вечерам открывается для особых мероприятий.",
+  "answers": [
+   "by"
+  ],
   "also": [],
   "note": "by day — днём. Книжное, обычно в паре: by day and by night.",
   "phrase": "by day",
@@ -857,6 +999,9 @@
   ],
   "hint": "f__",
   "translation": "Она искала ключи повсюду и наконец нашла их в кармане пальто.",
+  "answers": [
+   "for"
+  ],
   "also": [],
   "note": "a look for sb — взгляд, предназначенный кому-то. Чаще встречается look at и look for в значении «искать».",
   "phrase": "look for",
@@ -879,6 +1024,9 @@
   ],
   "hint": "i_",
   "translation": "Старшая сестра сильно помогла мне в подготовке к собеседованию.",
+  "answers": [
+   "in"
+  ],
   "also": [],
   "note": "help in doing sth — помощь в процессе. После in идёт форма на -ing.",
   "phrase": "help in",
@@ -901,6 +1049,9 @@
   ],
   "hint": "a_____",
   "translation": "Я не мог принять положение вещей таким, каким оно было, и решил что-то изменить.",
+  "answers": [
+   "accept"
+  ],
   "also": [],
   "note": "accept things (as they are) — принять положение вещей. Разговорное things — обстоятельства.",
   "phrase": "accept thing",
@@ -923,6 +1074,9 @@
   ],
   "hint": "i___",
   "translation": "Плотник аккуратно вставил деревянную доску на место, чтобы закончить полку.",
+  "answers": [
+   "into"
+  ],
   "also": [],
   "note": "fit / fall into place — встать на место. И буквально о детали, и переносно о том, как всё сошлось.",
   "phrase": "into place",
@@ -945,6 +1099,9 @@
   ],
   "hint": "o_",
   "translation": "Новый руководитель устроил целое представление из того, что приходит рано каждое утро.",
+  "answers": [
+   "of"
+  ],
   "also": [],
   "note": "a show of sth — демонстрация чего-то: силы, уверенности, чувств. Часто с оттенком показного.",
   "phrase": "show of",
@@ -967,6 +1124,9 @@
   ],
   "hint": "a_______",
   "translation": "Сара с волнением ждала, что в следующем месяце впервые встретится со своей приёмной семьёй.",
+  "answers": [
+   "adoptive"
+  ],
   "also": [],
   "note": "adoptive family, adoptive parents — приёмная семья. Про берущих ребёнка; про самого ребёнка — adopted.",
   "phrase": "adoptive family",
@@ -992,6 +1152,13 @@
   ],
   "hint": "p_____",
   "translation": "Спасатели высвободили застрявшего туриста из-под обрушившегося здания.",
+  "answers": [
+   "cut",
+   "let",
+   "pull",
+   "set",
+   "pulled"
+  ],
   "also": [
    "cut sb/sth",
    "let sb/sth",
@@ -1018,6 +1185,9 @@
   ],
   "hint": "r___",
   "translation": "Темп работы команды заметно вырос с начала новой программы тренировок.",
+  "answers": [
+   "rate"
+  ],
   "also": [],
   "note": "work rate — темп работы. Из спорта и менеджмента: сколько успевают за единицу времени.",
   "phrase": "work rate",
@@ -1040,6 +1210,9 @@
   ],
   "hint": "f___ t__",
   "translation": "Справа внезапно выехала машина, когда мы переходили улицу.",
+  "answers": [
+   "from the"
+  ],
   "also": [],
   "note": "from the right — справа. О появлении или движении со стороны.",
   "phrase": "from the right",
@@ -1062,6 +1235,9 @@
   ],
   "hint": "v___",
   "translation": "Поездки по разным странам полностью изменили мой взгляд на мир.",
+  "answers": [
+   "view"
+  ],
   "also": [],
   "note": "world view — мировоззрение. Пишется и слитно: worldview; калька с немецкого Weltanschauung.",
   "phrase": "world view",
@@ -1084,6 +1260,9 @@
   ],
   "hint": "o_",
   "translation": "Она не могла уснуть в ночь перед днём свадьбы.",
+  "answers": [
+   "of"
+  ],
   "also": [],
   "note": "the day of sth — день такого-то события: the day of her wedding, the day of the match.",
   "phrase": "day of",
@@ -1106,6 +1285,9 @@
   ],
   "hint": "e____________",
   "translation": "Мы провели вечер всей семьёй, осваивая новый домашний кинотеатр.",
+  "answers": [
+   "entertainment"
+  ],
   "also": [],
   "note": "home entertainment — домашние развлечения: техника, кино, музыка. Термин из рекламы.",
   "phrase": "home entertainment",
@@ -1128,6 +1310,9 @@
   ],
   "hint": "t______",
   "translation": "Она быстро просмотрела почту и нашла письмо, которого ждала.",
+  "answers": [
+   "through"
+  ],
   "also": [],
   "note": "look through sth — просмотреть, пролистать. Отличается от look at — «разглядывать».",
   "phrase": "look through",
@@ -1155,6 +1340,14 @@
   ],
   "hint": "u________",
   "translation": "Последние исследования подчёркивают необходимость регулярных упражнений для поддержания здоровья.",
+  "answers": [
+   "emphasize",
+   "heighten",
+   "highlight",
+   "reaffirm",
+   "stress",
+   "underline"
+  ],
   "also": [
    "emphasize",
    "heighten",
@@ -1183,6 +1376,9 @@
   ],
   "hint": "i_",
   "translation": "Физические упражнения помогают улучшить общее здоровье и уровень энергии.",
+  "answers": [
+   "in"
+  ],
   "also": [],
   "note": "help in sth — помощь в области. Предлог in перед сферой, with — перед конкретным делом.",
   "phrase": "in help",
@@ -1205,6 +1401,10 @@
   ],
   "hint": "t_____ o__",
   "translation": "Я переживал из-за собеседования, но всё обернулось лучше, чем я ожидал.",
+  "answers": [
+   "turn out",
+   "turned out"
+  ],
   "also": [],
   "note": "things turn out — всё оборачивается так или иначе. Часто с наречием: turned out better than expected.",
   "phrase": "thing turn out",
@@ -1228,6 +1428,11 @@
   ],
   "hint": "a______",
   "translation": "Мы с друзьями решили сыграть партию против компьютера.",
+  "answers": [
+   "against",
+   "with",
+   "of"
+  ],
   "also": [
    "~ of"
   ],
@@ -1252,6 +1457,9 @@
   ],
   "hint": "i_",
   "translation": "Рамка с фотографией осталась на месте на полке даже во время землетрясения.",
+  "answers": [
+   "in"
+  ],
   "also": [],
   "note": "in place — на месте, там, где положено. Противоположное — out of place.",
   "phrase": "in place",
@@ -1274,6 +1482,9 @@
   ],
   "hint": "f__",
   "translation": "Он надел на вечеринку дорогой костюм, но в основном напоказ.",
+  "answers": [
+   "for"
+  ],
   "also": [],
   "note": "for show — напоказ, ради вида. Подразумевает, что настоящей цели нет.",
   "phrase": "for show",
@@ -1297,6 +1508,13 @@
   ],
   "hint": "q____ a w__",
   "translation": "Новый торговый центр довольно далеко от нашего дома, поэтому мы обычно ездим туда на автобусе.",
+  "answers": [
+   "quite a way",
+   "quite some way",
+   "a way ahead",
+   "a way away",
+   "a way off"
+  ],
   "also": [
    "a way ahead/away/off"
   ],
@@ -1322,6 +1540,11 @@
   ],
   "hint": "w___ o_",
   "translation": "Строительные работы шли несколько месяцев, прежде чем новое здание наконец было готово.",
+  "answers": [
+   "continue",
+   "go on",
+   "went on"
+  ],
   "also": [
    "continue"
   ],
@@ -1346,6 +1569,9 @@
   ],
   "hint": "b_",
   "translation": "Она унаследовала семейный бизнес по праву старшей дочери.",
+  "answers": [
+   "by"
+  ],
   "also": [],
   "note": "by right of sth — по праву чего-то: рождения, старшинства, завоевания. Книжный оборот.",
   "phrase": "by right of",
@@ -1368,6 +1594,9 @@
   ],
   "hint": "d______",
   "translation": "Если не действовать сейчас, загрязнение может уничтожить мир для будущих поколений.",
+  "answers": [
+   "destroy"
+  ],
   "also": [],
   "note": "destroy the world — уничтожить мир. Артикль the обязателен.",
   "phrase": "destroy world",
@@ -1390,6 +1619,9 @@
   ],
   "hint": "o_ t__",
   "translation": "Она была взволнована в день собеседования.",
+  "answers": [
+   "on the"
+  ],
   "also": [],
   "note": "on the day (of sth) — в день чего-то. Предлог on с конкретными днями.",
   "phrase": "on the day of",
@@ -1412,6 +1644,10 @@
   ],
   "hint": "o__ o_",
   "translation": "Она ушла с работы из любви к больной матери.",
+  "answers": [
+   "for of",
+   "out of"
+  ],
   "also": [],
   "note": "out of love (for sb) — из любви к кому-то. Предлог out of указывает мотив поступка.",
   "phrase": "for of love",
@@ -1434,6 +1670,9 @@
   ],
   "hint": "a_",
   "translation": "Учитель поймал меня на том, что я подглядываю в работу друга на экзамене.",
+  "answers": [
+   "at"
+  ],
   "also": [],
   "note": "a look at sth — взгляд на что-то. Оборот have / take a look at.",
   "phrase": "look at",
@@ -1457,6 +1696,10 @@
   ],
   "hint": "e________",
   "translation": "Она всегда кладёт в сумку самое необходимое перед выходом на работу.",
+  "answers": [
+   "basic",
+   "essential"
+  ],
   "also": [
    "basic"
   ],
@@ -1481,6 +1724,9 @@
   ],
   "hint": "o_",
   "translation": "Ответственность за организацию мероприятия легла на плечи Сары.",
+  "answers": [
+   "on"
+  ],
   "also": [],
   "note": "place on sth — делать упор на что-то: place emphasis on, place importance on.",
   "phrase": "on place",
@@ -1505,6 +1751,9 @@
   ],
   "hint": "f___ h____ t_ h____",
   "translation": "Волонтёры ходили из дома в дом, разнося продуктовые наборы нуждающимся семьям.",
+  "answers": [
+   "from house to house"
+  ],
   "also": [],
   "note": "from house to house — из дома в дом. Оборот from X to X без артиклей передаёт повторяющийся обход.",
   "phrase": "from house to house",
@@ -1527,6 +1776,10 @@
   ],
   "hint": "a s___ o_ f____",
   "translation": "Военные устроили демонстрацию силы у границы, чтобы отбить охоту нападать.",
+  "answers": [
+   "a show of force",
+   "a show of strength"
+  ],
   "also": [],
   "note": "a show of force / strength — демонстрация силы. Из военной и политической лексики.",
   "phrase": "a show of force",
@@ -1549,6 +1802,9 @@
   ],
   "hint": "f______",
   "translation": "После месяцев тяжёлой работы команда отпраздновала достойное завершение успешного проекта.",
+  "answers": [
+   "fitting"
+  ],
   "also": [],
   "note": "a fitting end — достойное, подобающее завершение. Прилагательное fitting — «уместный».",
   "phrase": "fitting end",
@@ -1571,6 +1827,9 @@
   ],
   "hint": "t_______________",
   "translation": "Документальный фильм о климате заставил задуматься и пересмотреть мои повседневные привычки.",
+  "answers": [
+   "thought-provoking"
+  ],
   "also": [],
   "note": "thought-provoking — заставляющий задуматься. Через дефис; о книге, фильме, выступлении.",
   "phrase": "thought-provoking",
@@ -1593,6 +1852,10 @@
   ],
   "hint": "p________",
   "translation": "Компания улучшила организацию работы, получив отзывы сотрудников.",
+  "answers": [
+   "practice",
+   "practices"
+  ],
   "also": [],
   "note": "work practices — принятые способы работы. Во множественном числе, из языка менеджмента.",
   "phrase": "work practice",
@@ -1615,6 +1878,9 @@
   ],
   "hint": "o_ t__",
   "translation": "Новая политика сдвинула правительство дальше вправо, чем ожидало большинство избирателей.",
+  "answers": [
+   "on the"
+  ],
   "also": [],
   "note": "on the right — справа. Указывает положение; to the right — направление.",
   "phrase": "on the right",
@@ -1638,6 +1904,10 @@
   ],
   "hint": "a________",
   "translation": "Новая вакцина привлекла внимание всего мира со стороны организаций здравоохранения.",
+  "answers": [
+   "attention",
+   "opinion"
+  ],
   "also": [
    "opinion"
   ],
@@ -1662,6 +1932,9 @@
   ],
   "hint": "i__________",
   "translation": "За прошедшие годы она постепенно обрела уверенность и в итоге открыла своё дело.",
+  "answers": [
+   "intervening"
+  ],
   "also": [],
   "note": "the intervening years — годы, прошедшие между двумя событиями. Книжное, всегда во множественном.",
   "phrase": "intervening year",
@@ -1684,6 +1957,9 @@
   ],
   "hint": "b_ t__",
   "translation": "Её кулинарные навыки росли с каждым днём в первый месяц учёбы в кулинарной школе.",
+  "answers": [
+   "by the"
+  ],
   "also": [],
   "note": "by the day — день ото дня. О постепенном изменении: getting better by the day.",
   "phrase": "by the day",
@@ -1706,6 +1982,9 @@
   ],
   "hint": "o__ o_",
   "translation": "Она выглянула за дверь класса посмотреть, не приехал ли автобус.",
+  "answers": [
+   "out of"
+  ],
   "also": [],
   "note": "look out of sth — выглянуть откуда-то: из окна, из двери. В американском часто look out.",
   "phrase": "look out of",
@@ -1730,6 +2009,13 @@
   ],
   "hint": "w___ o__",
   "translation": "Надеюсь, у них всё наладится после ссоры на прошлой неделе.",
+  "answers": [
+   "go according to plan",
+   "go to plan",
+   "go well",
+   "work out",
+   "work"
+  ],
   "also": [
    "go (according) to plan",
    "go well"
@@ -1755,6 +2041,9 @@
   ],
   "hint": "o__ o_",
   "translation": "Его громкий смех совершенно не к месту прозвучал на тихой церемонии прощания.",
+  "answers": [
+   "out of"
+  ],
   "also": [],
   "note": "out of place — неуместно, не к месту. И о вещи не на своём месте, и о поведении.",
   "phrase": "out of place",
@@ -1783,6 +2072,20 @@
   ],
   "hint": "s_____",
   "translation": "Её осенила внезапная мысль, когда она увидела старую фотографию на полке.",
+  "answers": [
+   "come into your mind",
+   "pop into your mind",
+   "come to",
+   "cross your mind",
+   "go through your mind",
+   "flash through your mind",
+   "pass through your mind",
+   "race through your mind",
+   "hit",
+   "occur to",
+   "strike",
+   "struck"
+  ],
   "also": [
    "come/pop into your mind",
    "come to sb",
@@ -1812,6 +2115,9 @@
   ],
   "hint": "o_",
   "translation": "В демократическом обществе у каждого должно быть право на свободу слова без страха.",
+  "answers": [
+   "of"
+  ],
   "also": [],
   "note": "the right of sth — право на что-то: the right of free speech, the right of way.",
   "phrase": "right of",
@@ -1834,6 +2140,9 @@
   ],
   "hint": "t___",
   "translation": "Известная певица завершила мировое турне, объехав в прошлом году сорок пять стран.",
+  "answers": [
+   "tour"
+  ],
   "also": [],
   "note": "a world tour — мировое турне. Существительное world в роли определения.",
   "phrase": "world tour",
@@ -1856,6 +2165,9 @@
   ],
   "hint": "t_________ t__",
   "translation": "Бабушка навещает внуков в течение всего года, обычно оставаясь на пару недель.",
+  "answers": [
+   "throughout the"
+  ],
   "also": [],
   "note": "throughout the year — на протяжении всего года. Сильнее, чем during: подчёркивает «весь год без перерыва».",
   "phrase": "throughout the year",
@@ -1879,6 +2191,10 @@
   ],
   "hint": "l___________",
   "translation": "Документальный фильм с лёгкой иронией смотрит на историю модных промахов.",
+  "answers": [
+   "humorous",
+   "light-hearted"
+  ],
   "also": [
    "humorous"
   ],
@@ -1903,6 +2219,9 @@
   ],
   "hint": "s____",
   "translation": "Теперь, когда в компанию пришёл новый руководитель, дела обстоят иначе.",
+  "answers": [
+   "stand"
+  ],
   "also": [],
   "note": "things stand — дела обстоят. Устойчиво: as things stand — при нынешнем положении дел.",
   "phrase": "thing stand",
@@ -1925,6 +2244,9 @@
   ],
   "hint": "o_",
   "translation": "Он был рад получить место в университетской баскетбольной команде.",
+  "answers": [
+   "on"
+  ],
   "also": [],
   "note": "a place on sth — место в составе: on the team, on the committee. Предлог on, а не in.",
   "phrase": "place on",
@@ -1947,6 +2269,9 @@
   ],
   "hint": "t_ t__",
   "translation": "Поток машин смещался в правый ряд, съезжая с шоссе.",
+  "answers": [
+   "to the"
+  ],
   "also": [],
   "note": "to the right — направо. Направление движения; on the right — положение.",
   "phrase": "to the right",
@@ -1970,6 +2295,10 @@
   ],
   "hint": "r____",
   "translation": "Она всегда старается поступать правильно, даже когда это трудно.",
+  "answers": [
+   "proper",
+   "right"
+  ],
   "also": [
    "proper"
   ],
@@ -1994,6 +2323,10 @@
   ],
   "hint": "d_____ t__",
   "translation": "Ребёнок несколько раз плакал ночью, так что мы почти не спали.",
+  "answers": [
+   "during the",
+   "in the"
+  ],
   "also": [],
   "note": "during the night, in the night — ночью. in the night чаще о пробуждении среди ночи.",
   "phrase": "during the night",
@@ -2018,6 +2351,11 @@
   ],
   "hint": "s_____",
   "translation": "Несмотря на тихую внешность, у неё была сильная воля, которую было не сломить.",
+  "answers": [
+   "indomitable",
+   "iron",
+   "strong"
+  ],
   "also": [
    "indomitable",
    "iron"
@@ -2043,6 +2381,9 @@
   ],
   "hint": "v_______",
   "translation": "Волонтёры делают ценную работу, помогая пожилым людям в нашем районе.",
+  "answers": [
+   "valuable"
+  ],
   "also": [],
   "note": "valuable work — ценная работа. Неисчисляемое; о вкладе, а не о конкретном труде.",
   "phrase": "valuable work",
@@ -2066,6 +2407,10 @@
   ],
   "hint": "a_ o_",
   "translation": "У неё есть бесплатный проездной по праву, потому что ей больше шестидесяти пяти.",
+  "answers": [
+   "as of",
+   "by"
+  ],
   "also": [
    "by ~"
   ],
@@ -2092,6 +2437,11 @@
   ],
   "hint": "E______________",
   "translation": "Многие страны англоязычного мира приняли схожие образовательные стандарты.",
+  "answers": [
+   "Arab",
+   "English-speaking",
+   "Western"
+  ],
   "also": [
    "Arab",
    "Western"
@@ -2119,6 +2469,10 @@
   ],
   "hint": "t__ p___ o_ l___",
   "translation": "В городе темп жизни настолько быстрый, что людям редко удаётся отдохнуть.",
+  "answers": [
+   "a pace of life",
+   "the pace of life"
+  ],
   "also": [],
   "note": "the pace of life — темп жизни. Устойчивое сочетание, чаще всего с fast или slow.",
   "phrase": "a pace of life",
@@ -2141,6 +2495,9 @@
   ],
   "hint": "s_________",
   "translation": "Проработав учителем десять лет, она взяла годовой отпуск, чтобы попутешествовать и восстановиться.",
+  "answers": [
+   "sabbatical"
+  ],
   "also": [],
   "note": "a sabbatical year — творческий отпуск на год. Термин из университетской жизни.",
   "phrase": "sabbatical year",
@@ -2165,6 +2522,12 @@
   ],
   "hint": "h___ o___ h____ i_ l___",
   "translation": "Она влюбилась в него по уши в тот самый миг, когда они познакомились в кофейне.",
+  "answers": [
+   "desperately in love",
+   "hopelessly in love",
+   "head over heels in love",
+   "love at first sight"
+  ],
   "also": [
    "desperately/hopelessly in love",
    "love at first sight"
@@ -2190,6 +2553,9 @@
   ],
   "hint": "a_____",
   "translation": "Отец переводил меня через оживлённую улицу, когда я был маленьким.",
+  "answers": [
+   "across"
+  ],
   "also": [],
   "note": "help sb across sth — помочь перейти. Предлог указывает направление: across the street.",
   "phrase": "across help",
@@ -2212,6 +2578,9 @@
   ],
   "hint": "u____",
   "translation": "Каждое утро Сара делает своё обычное: варит кофе и только потом проверяет почту.",
+  "answers": [
+   "usual"
+  ],
   "also": [],
   "note": "the usual thing — обычное дело, привычный порядок. Часто о рутине: do the usual thing.",
   "phrase": "usual thing",
@@ -2237,6 +2606,10 @@
   ],
   "hint": "o____",
   "translation": "Новая владелица дома в первый же день посадила в саду деревья.",
+  "answers": [
+   "buyer",
+   "owner"
+  ],
   "also": [
    "buyer"
   ],
@@ -2261,6 +2634,9 @@
   ],
   "hint": "b_______",
   "translation": "Семья покойного получила поддержку от соседей после похорон.",
+  "answers": [
+   "bereaved"
+  ],
   "also": [],
   "note": "the bereaved family — семья покойного. Книжное и уважительное, из соболезнований.",
   "phrase": "bereaved family",
@@ -2286,6 +2662,13 @@
   ],
   "hint": "p__",
   "translation": "Кемпинг берёт тридцать долларов за ночь за место под палатку.",
+  "answers": [
+   "for a",
+   "for the",
+   "on Friday",
+   "etc.",
+   "per"
+  ],
   "also": [
    "for a/the ~",
    "on Friday",
@@ -2312,6 +2695,10 @@
   ],
   "hint": "e______",
   "translation": "Гибкий график позволил ей работать неполный день, пока она училась на диплом.",
+  "answers": [
+   "enable",
+   "enabled"
+  ],
   "also": [],
   "note": "enable sb to do sth — дать возможность что-то делать. После enable обязателен инфинитив с to.",
   "phrase": "enable sb to work",
@@ -2334,6 +2721,9 @@
   ],
   "hint": "t_",
   "translation": "У каждого есть право на чистую питьевую воду и базовую медицинскую помощь.",
+  "answers": [
+   "to"
+  ],
   "also": [],
   "note": "the right to sth / to do sth — право на что-то. Предлог to, а не on.",
   "phrase": "right to",
@@ -2356,6 +2746,10 @@
   ],
   "hint": "f___ a____",
   "translation": "Когда она потеряла работу, весь её мир рухнул за одну ночь.",
+  "answers": [
+   "fall apart",
+   "fell apart"
+  ],
   "also": [],
   "note": "sb's world falls apart — мир рушится. Метафора о крахе привычной жизни.",
   "phrase": "world fall apart",
@@ -2379,6 +2773,10 @@
   ],
   "hint": "a___ f___",
   "translation": "Дети затосковали по дому, проведя две недели в летнем лагере.",
+  "answers": [
+   "at",
+   "away from"
+  ],
   "also": [
    "at ~"
   ],
@@ -2404,6 +2802,10 @@
   ],
   "hint": "l____",
   "translation": "После еды Сара аккуратно сложила все обеденные принадлежности в сумку.",
+  "answers": [
+   "breakfast",
+   "lunch"
+  ],
   "also": [
    "breakfast"
   ],
@@ -2430,6 +2832,10 @@
   ],
   "hint": "i_ a",
   "translation": "Сестра работает в компании, которая делает программы для больниц.",
+  "answers": [
+   "in a",
+   "in the"
+  ],
   "also": [],
   "note": "in a company — в компании, внутри фирмы. Про место работы, а не про общество людей.",
   "phrase": "in a company",
@@ -2460,6 +2866,17 @@
   ],
   "hint": "p________",
   "translation": "Ходить в школу пешком — удобный способ для детей получать движение каждый день.",
+  "answers": [
+   "convenient",
+   "easy",
+   "effective",
+   "efficient",
+   "good",
+   "ideal",
+   "practical",
+   "quick",
+   "useful"
+  ],
   "also": [
    "convenient",
    "easy",
@@ -2492,6 +2909,10 @@
   ],
   "hint": "w_____",
   "translation": "Во многих семьях готовку и уборку раньше считали женской работой.",
+  "answers": [
+   "men's",
+   "women's"
+  ],
   "also": [
    "men's"
   ],
@@ -2516,6 +2937,9 @@
   ],
   "hint": "o___",
   "translation": "У компании есть полное право решать, как проектировать и продавать продукт.",
+  "answers": [
+   "over"
+  ],
   "also": [],
   "note": "rights over sth — права на что-то, власть над чем-то. Предлог over подчёркивает контроль.",
   "phrase": "right over",
@@ -2538,6 +2962,9 @@
   ],
   "hint": "o_",
   "translation": "Бразилия — родина крупнейшего в мире тропического леса и множества уникальных животных.",
+  "answers": [
+   "of"
+  ],
   "also": [],
   "note": "the home of sth — родина, место происхождения чего-то: Brazil is the home of samba.",
   "phrase": "home of",
@@ -2560,6 +2987,9 @@
   ],
   "hint": "b_____",
   "translation": "Старой машине уже ничем нельзя было помочь, и мы решили купить новую.",
+  "answers": [
+   "beyond"
+  ],
   "also": [],
   "note": "be beyond help — уже не спасти. Предлог beyond означает «за пределами возможного».",
   "phrase": "beyond help",
@@ -2582,6 +3012,9 @@
   ],
   "hint": "w___",
   "translation": "Встреча закончилась тем, что все согласились попробовать новый план в следующем месяце.",
+  "answers": [
+   "with"
+  ],
   "also": [],
   "note": "end with sth — завершиться чем-то. with про финальный элемент, in про результат.",
   "phrase": "with end",
@@ -2604,6 +3037,10 @@
   ],
   "hint": "w_____ t__",
   "translation": "Отдел маркетинга имел значительное влияние внутри компании.",
+  "answers": [
+   "within a",
+   "within the"
+  ],
   "also": [],
   "note": "within a company — внутри компании. Формальнее, чем in; подчёркивает границы организации.",
   "phrase": "within a company",
@@ -2626,6 +3063,9 @@
   ],
   "hint": "c________",
   "translation": "За эти годы она побывала в том музее бессчётное число раз.",
+  "answers": [
+   "countless"
+  ],
   "also": [],
   "note": "countless times — бессчётное число раз. Прилагательное countless всегда с множественным числом.",
   "phrase": "countless time",
@@ -2648,6 +3088,9 @@
   ],
   "hint": "s______",
   "translation": "Рабочая поверхность на кухне была завалена грязной посудой и старыми газетами.",
+  "answers": [
+   "surface"
+  ],
   "also": [],
   "note": "a work surface — рабочая поверхность, столешница. Кухонный и производственный термин.",
   "phrase": "work surface",
@@ -2670,6 +3113,9 @@
   ],
   "hint": "o_ t__",
   "translation": "Когда выйдешь из здания, парковка будет справа.",
+  "answers": [
+   "on the"
+  ],
   "also": [],
   "note": "on the right — справа. В указаниях дороги и описаниях расположения.",
   "phrase": "on the right",
@@ -2692,6 +3138,9 @@
   ],
   "hint": "b____ n__",
   "translation": "Компания пообещала сотрудникам дивный новый мир гибкого графика и повышенных зарплат.",
+  "answers": [
+   "brave new"
+  ],
   "also": [],
   "note": "a brave new world — дивный новый мир. Отсылка к Шекспиру и роману Хаксли, часто с иронией.",
   "phrase": "brave new world",
@@ -2714,6 +3163,10 @@
   ],
   "hint": "u____ a",
   "translation": "Бабушка живёт в этом доме пока что меньше года.",
+  "answers": [
+   "over a",
+   "under a"
+  ],
   "also": [],
   "note": "over a year, under a year — больше или меньше года. Предлоги для приблизительного срока.",
   "phrase": "over a year",
@@ -2743,6 +3196,16 @@
   ],
   "hint": "m________",
   "translation": "Свадьба обернулась поистине незабываемым днём для всей семьи.",
+  "answers": [
+   "auspicious",
+   "big",
+   "eventful",
+   "field",
+   "historic",
+   "memorable",
+   "red-letter",
+   "special"
+  ],
   "also": [
    "auspicious",
    "big",
@@ -2773,6 +3236,9 @@
   ],
   "hint": "n________",
   "translation": "Она с ностальгией оглядела свой старый школьный класс после двадцати лет разлуки.",
+  "answers": [
+   "nostalgic"
+  ],
   "also": [],
   "note": "a nostalgic look — ностальгический взгляд. И о взгляде человека, и о взгляде на тему в книге.",
   "phrase": "nostalgic look",
@@ -2795,6 +3261,9 @@
   ],
   "hint": "f__",
   "translation": "В нашем городе растёт потребность в доступном жилье.",
+  "answers": [
+   "for"
+  ],
   "also": [],
   "note": "the need for sth — потребность в чём-то. Предлог for обязателен, а не of.",
   "phrase": "need for",
@@ -2819,6 +3288,11 @@
   ],
   "hint": "d_____",
   "translation": "Найдя кошелёк, она поступила порядочно и вернула его владельцу.",
+  "answers": [
+   "decent",
+   "done",
+   "honourable"
+  ],
   "also": [
    "done",
    "honourable"
@@ -2844,6 +3318,9 @@
   ],
   "hint": "a_________",
   "translation": "Многие семьи в лагере беженцев зимой жили в неподобающих условиях.",
+  "answers": [
+   "adequately"
+  ],
   "also": [],
   "note": "be adequately housed — иметь подобающее жильё. Формальное, из отчётов о социальных условиях.",
   "phrase": "adequately house",
@@ -2866,6 +3343,9 @@
   ],
   "hint": "t_ t___",
   "translation": "Нам нужно экономить, и с этой целью мы решили каждый вечер готовить ужин дома.",
+  "answers": [
+   "to this"
+  ],
   "also": [],
   "note": "to this end — с этой целью. Книжный связующий оборот; end здесь — цель.",
   "phrase": "to this end",
@@ -2889,6 +3369,10 @@
   ],
   "hint": "n______",
   "translation": "Родители переживают, что нынешняя молодёжь ценит традиционную семью меньше, чем прежние поколения.",
+  "answers": [
+   "conjugal",
+   "nuclear"
+  ],
   "also": [
    "conjugal"
   ],
@@ -2913,6 +3397,9 @@
   ],
   "hint": "f__",
   "translation": "Дочь назвали в честь бабушки, которая была известной пианисткой.",
+  "answers": [
+   "for"
+  ],
   "also": [],
   "note": "be named for sb — быть названным в честь кого-то. Американское; британцы скажут named after.",
   "phrase": "name for",
@@ -2935,6 +3422,9 @@
   ],
   "hint": "a w___ o_ g_____",
   "translation": "Проект нового музея критики во всём мире сочли гениальной работой.",
+  "answers": [
+   "a work of genius"
+  ],
   "also": [],
   "note": "a work of genius — гениальное творение. Оборот a work of + существительное: of art, of fiction.",
   "phrase": "a work of genius",
@@ -2957,6 +3447,9 @@
   ],
   "hint": "a____",
   "translation": "Учитель был прав насчёт того, что к экзамену надо готовиться усерднее.",
+  "answers": [
+   "about"
+  ],
   "also": [],
   "note": "about right — примерно верно. Разговорная оценка: that sounds about right.",
   "phrase": "about right",
@@ -2979,6 +3472,9 @@
   ],
   "hint": "w_____ a____",
   "translation": "У этих двух друзей совершенно разные интересы, и они словно из разных миров, хотя живут по соседству.",
+  "answers": [
+   "worlds apart"
+  ],
   "also": [],
   "note": "worlds apart — как небо и земля. Во множественном числе, о разительном отличии.",
   "phrase": "worlds apart",
@@ -3001,6 +3497,9 @@
   ],
   "hint": "i_",
   "translation": "Старый мост остро нуждался в ремонте, пока не стал опасным.",
+  "answers": [
+   "in"
+  ],
   "also": [],
   "note": "be in need of sth — нуждаться в чём-то. Формальнее, чем need; часто о ремонте и помощи.",
   "phrase": "in need of",
@@ -3027,6 +3526,13 @@
   ],
   "hint": "m___",
   "translation": "Главное, что мы вынесли из того опыта, — никогда не сдаваться.",
+  "answers": [
+   "crucial",
+   "key",
+   "main",
+   "important",
+   "vital"
+  ],
   "also": [
    "crucial",
    "key",
@@ -3054,6 +3560,9 @@
   ],
   "hint": "i_",
   "translation": "Ссора двух друзей закончилась извинениями и примирением.",
+  "answers": [
+   "in"
+  ],
   "also": [],
   "note": "in the end — в конце концов. Не путать с at the end — «в конце чего-то конкретного».",
   "phrase": "in end",
@@ -3076,6 +3585,10 @@
   ],
   "hint": "w_____ a",
   "translation": "В семье часто случаются разногласия из-за денег и домашних обязанностей.",
+  "answers": [
+   "within a",
+   "within the"
+  ],
   "also": [],
   "note": "within a family — внутри семьи. Формальнее, чем in; о том, что не выходит наружу.",
   "phrase": "within a family",
@@ -3098,6 +3611,9 @@
   ],
   "hint": "b_",
   "translation": "Охранник каждое утро здоровался со всеми постоянными посетителями по имени.",
+  "answers": [
+   "by"
+  ],
   "also": [],
   "note": "by name — по имени. Оборот know sb by name — знать по имени, но не лично.",
   "phrase": "by name",
@@ -3128,6 +3644,17 @@
   ],
   "hint": "w________",
   "translation": "Прошлым летом мы чудесно провели время на пляже.",
+  "answers": [
+   "enjoyable",
+   "fun",
+   "good",
+   "grand",
+   "great",
+   "marvellous",
+   "pleasant",
+   "splendid",
+   "wonderful"
+  ],
   "also": [
    "enjoyable",
    "fun",
@@ -3159,6 +3686,9 @@
   ],
   "hint": "c_____",
   "translation": "Она подрабатывала в кофейне во время своего года перерыва перед учёбой.",
+  "answers": [
+   "casual"
+  ],
   "also": [],
   "note": "casual work — подработка, нерегулярная занятость. Без артикля; casual — «непостоянный».",
   "phrase": "casual work",
@@ -3181,6 +3711,10 @@
   ],
   "hint": "f__ t__",
   "translation": "Сестра приехала из-за границы, и мы запланировали на день несколько занятий.",
+  "answers": [
+   "for a",
+   "for the"
+  ],
   "also": [],
   "note": "for a day — на день, в течение дня. Предлог for отвечает на вопрос «как долго».",
   "phrase": "for a day",
@@ -3203,6 +3737,9 @@
   ],
   "hint": "f__",
   "translation": "Переговорная доступна для использования любому отделу, которому нужно её забронировать.",
+  "answers": [
+   "for"
+  ],
   "also": [],
   "note": "for use — для использования. Формула из инструкций: for use with, for use as.",
   "phrase": "for use",
@@ -3225,6 +3762,9 @@
   ],
   "hint": "b_____",
   "translation": "Эта чёртова штука снова сломалась именно тогда, когда была нужнее всего.",
+  "answers": [
+   "bloody"
+  ],
   "also": [],
   "note": "that bloody thing — эта чёртова штука. Британское ругательное усиление, в вежливой речи неуместно.",
   "phrase": "bloody thing",
@@ -3247,6 +3787,9 @@
   ],
   "hint": "a_ a_",
   "translation": "К следующей пятнице весь ремонт в доме должен подойти к концу.",
+  "answers": [
+   "at an"
+  ],
   "also": [],
   "note": "be at an end — подойти к концу, завершиться. Книжное: the war was at an end.",
   "phrase": "at an end",
@@ -3271,6 +3814,9 @@
   ],
   "hint": "b_ t__",
   "translation": "У нас в офисе работает женщина по имени Сара.",
+  "answers": [
+   "by the"
+  ],
   "also": [],
   "note": "by the name of sb — по имени такой-то. Книжный оборот при первом упоминании человека.",
   "phrase": "by the name of",
@@ -3295,6 +3841,10 @@
   ],
   "hint": "i_ t__",
   "translation": "Мой рейс прилетает после обеда, так что увидимся ближе к вечеру.",
+  "answers": [
+   "in a",
+   "in the"
+  ],
   "also": [],
   "note": "in a day — за день. Предлог in про срок выполнения, for — про продолжительность.",
   "phrase": "in a day",
@@ -3317,6 +3867,9 @@
   ],
   "hint": "t_",
   "translation": "Эти старые учебники могут пригодиться новым ученикам в твоём классе.",
+  "answers": [
+   "to"
+  ],
   "also": [],
   "note": "be of use to sb — быть полезным кому-то. Предлог to указывает, кому именно.",
   "phrase": "use to",
@@ -3339,6 +3892,9 @@
   ],
   "hint": "t______",
   "translation": "Многие смотрят в новый год с надеждой и волнением.",
+  "answers": [
+   "towards"
+  ],
   "also": [],
   "note": "look towards sth — смотреть в сторону чего-то, рассчитывать на будущее. Часто метафорически.",
   "phrase": "look towards",
@@ -3366,6 +3922,15 @@
   ],
   "hint": "a_______",
   "translation": "Начальник устроил всё так, чтобы я мог уйти пораньше в пятницу.",
+  "answers": [
+   "arrange",
+   "deal with",
+   "handle",
+   "look after",
+   "run",
+   "sort out",
+   "arranged"
+  ],
   "also": [
    "deal with",
    "handle",
@@ -3396,6 +3961,9 @@
   ],
   "hint": "o_",
   "translation": "Книга упала, и я поставил её стоймя, чтобы она держалась на полке.",
+  "answers": [
+   "on"
+  ],
   "also": [],
   "note": "on end — стоймя или подряд без перерыва. Два значения: stand it on end и for hours on end.",
   "phrase": "on end",
@@ -3418,6 +3986,9 @@
   ],
   "hint": "a____",
   "translation": "Родители решили назвать меня в честь бабушки, потому что она была для них очень важна.",
+  "answers": [
+   "after"
+  ],
   "also": [],
   "note": "be named after sb — быть названным в честь кого-то. Британское; американское — named for.",
   "phrase": "after name",
@@ -3440,6 +4011,9 @@
   ],
   "hint": "a_ a",
   "translation": "Она может сосредоточиться на учёбе примерно два часа за один раз.",
+  "answers": [
+   "at a"
+  ],
   "also": [],
   "note": "at a time — за один раз, одновременно. Оборот ten at a time — по десять за раз.",
   "phrase": "at a time",
@@ -3463,6 +4037,11 @@
   ],
   "hint": "d_____ t__",
   "translation": "Она днём сидела у подруги дома, пока родители были на работе.",
+  "answers": [
+   "during the",
+   "for a",
+   "for the"
+  ],
   "also": [
    "for a/the ~"
   ],
@@ -3487,6 +4066,9 @@
   ],
   "hint": "a_ t__",
   "translation": "Ресторан находится в конце торгового центра, рядом с кинотеатром.",
+  "answers": [
+   "at the"
+  ],
   "also": [],
   "note": "at the end (of sth) — в конце чего-то конкретного. Не путать с in the end — «в итоге».",
   "phrase": "at the end",
@@ -3509,6 +4091,9 @@
   ],
   "hint": "f__",
   "translation": "Дочь назвали в честь моей бабушки, которая была учительницей.",
+  "answers": [
+   "for"
+  ],
   "also": [],
   "note": "ask for sb's name — спросить имя. В анкетах: ask for your name and address.",
   "phrase": "for name",
@@ -3531,6 +4116,9 @@
   ],
   "hint": "f__ a",
   "translation": "Она какое-то время работала учительницей, прежде чем решила учиться на врача.",
+  "answers": [
+   "for a"
+  ],
   "also": [],
   "note": "for a time — некоторое время, какое-то время. Книжнее, чем for a while.",
   "phrase": "for a time",
@@ -3553,6 +4141,9 @@
   ],
   "hint": "f__",
   "translation": "Кухонный нож используют для нарезки овощей и хлеба.",
+  "answers": [
+   "for"
+  ],
   "also": [],
   "note": "for use as sth — для применения в качестве чего-то. Формула из технических описаний.",
   "phrase": "for use",
@@ -3576,6 +4167,10 @@
   ],
   "hint": "r_____",
   "translation": "Бабушка божится, что её домашнее средство — имбирный чай — всегда помогает мне при простуде.",
+  "answers": [
+   "remedy",
+   "treatment"
+  ],
   "also": [
    "treatment"
   ],
@@ -3602,6 +4197,11 @@
   ],
   "hint": "o__",
   "translation": "Она посмотрела на меня со странным выражением, когда я рассказал о своём необычном плане.",
+  "answers": [
+   "funny",
+   "odd",
+   "strange"
+  ],
   "also": [
    "funny",
    "strange"
@@ -3627,6 +4227,9 @@
   ],
   "hint": "a_ t__",
   "translation": "Она наконец нашла место для парковки в конце улицы.",
+  "answers": [
+   "at the"
+  ],
   "also": [],
   "note": "at the end of sth — в конце чего-то: улицы, дня, списка. Предлог of обязателен.",
   "phrase": "at the end",
@@ -3649,6 +4252,9 @@
   ],
   "hint": "i_",
   "translation": "Она приехала в аэропорт вовремя, чтобы успеть на рейс в Лондон.",
+  "answers": [
+   "in"
+  ],
   "also": [],
   "note": "in time (for sth) — вовремя, успеть к чему-то. Не путать с on time — «точно в назначенный час».",
   "phrase": "in time",
@@ -3673,6 +4279,9 @@
   ],
   "hint": "o_",
   "translation": "После травмы он постепенно вернул подвижность правой руки благодаря физиотерапии.",
+  "answers": [
+   "of"
+  ],
   "also": [],
   "note": "the use of sth — использование чего-то. С определённым артиклем в обороте the use of computers.",
   "phrase": "use of",
@@ -3698,6 +4307,12 @@
   ],
   "hint": "a___________",
   "translation": "Она взглянула на меня с тревогой, прежде чем войти в экзаменационную аудиторию.",
+  "answers": [
+   "apprehensive",
+   "anxious",
+   "doubtful",
+   "worried"
+  ],
   "also": [
    "anxious",
    "doubtful",
@@ -3724,6 +4339,9 @@
   ],
   "hint": "o_",
   "translation": "Новые модели автомобилей выставлены на выставке в эти выходные.",
+  "answers": [
+   "on"
+  ],
   "also": [],
   "note": "be on show — быть выставленным напоказ. О выставке или витрине; британское, в США on display.",
   "phrase": "on show being shown for people to look at",
@@ -3746,6 +4364,9 @@
   ],
   "hint": "i_",
   "translation": "Она нервничала из-за презентации, но со временем её уверенность выросла.",
+  "answers": [
+   "in"
+  ],
   "also": [],
   "note": "in time — со временем, постепенно. Отличается от in time for — «успеть к чему-то».",
   "phrase": "in time",
@@ -3768,6 +4389,9 @@
   ],
   "hint": "w____",
   "translation": "После аварии она решила отказаться от права судиться с компанией.",
+  "answers": [
+   "waive"
+  ],
   "also": [],
   "note": "waive a right — отказаться от права. Юридический термин: добровольно и осознанно.",
   "phrase": "waive right",
@@ -3790,6 +4414,12 @@
   ],
   "hint": "h_____ w___",
   "translation": "Вся улица кипела жизнью субботним утром, когда открывался рынок.",
+  "answers": [
+   "burst with",
+   "hum with",
+   "teem with",
+   "hummed with"
+  ],
   "also": [],
   "note": "hum / teem / burst with life — кипеть жизнью. Метафора о людном и оживлённом месте.",
   "phrase": "burst with life",
@@ -3816,6 +4446,12 @@
   ],
   "hint": "p_____",
   "translation": "Прошло несколько лет, прежде чем она наконец вернулась в родной город.",
+  "answers": [
+   "elapse",
+   "go by",
+   "pass",
+   "passed"
+  ],
   "also": [
    "elapse",
    "go by"
@@ -3841,6 +4477,9 @@
   ],
   "hint": "a_",
   "translation": "Моя старая спальня теперь используется как домашний кабинет, с тех пор как я работаю из дома.",
+  "answers": [
+   "as"
+  ],
   "also": [],
   "note": "use sth as sth — использовать в качестве. Предлог as перед новой ролью предмета.",
   "phrase": "as use",
@@ -3863,6 +4502,9 @@
   ],
   "hint": "i_",
   "translation": "Древние руины были построены так, что пережили тысячелетия истории.",
+  "answers": [
+   "in"
+  ],
   "also": [],
   "note": "in time to do sth — вовремя, чтобы успеть. Дальше идёт инфинитив с to.",
   "phrase": "in time",
@@ -3885,6 +4527,10 @@
   ],
   "hint": "o___",
   "translation": "Некоторые считают, что мир обязан им успехом просто потому, что они много работают.",
+  "answers": [
+   "owe",
+   "owes"
+  ],
   "also": [],
   "note": "the world owes sb sth — мир кому-то должен. Всегда с иронией: об инфантильной претензии.",
   "phrase": "world owe sb sth",
@@ -3907,6 +4553,9 @@
   ],
   "hint": "w___",
   "translation": "После аварии на её лице застыл дикий взгляд паники.",
+  "answers": [
+   "wild"
+  ],
   "also": [],
   "note": "a wild look — дикий, безумный взгляд. О сильном испуге или потрясении.",
   "phrase": "wild look",
@@ -3929,6 +4578,9 @@
   ],
   "hint": "s___________",
   "translation": "Медсестра заботливо помогла пожилому пациенту пройти по больничному коридору.",
+  "answers": [
+   "solicitously"
+  ],
   "also": [],
   "note": "solicitously help — заботливо помогать. Книжное наречие: с подчёркнутым вниманием к человеку.",
   "phrase": "solicitously help",
@@ -3951,6 +4603,9 @@
   ],
   "hint": "t______",
   "translation": "Она задумалась, что пережили её предки, проходя сквозь время.",
+  "answers": [
+   "through"
+  ],
   "also": [],
   "note": "through time — сквозь время, на протяжении веков. Книжное; обычное «со временем» — over time.",
   "phrase": "through time",
@@ -3973,6 +4628,18 @@
   ],
   "hint": "t__ w__ t____",
   "translation": "По дороге туда она поехала живописным маршрутом и приехала гораздо позже, чем рассчитывала.",
+  "answers": [
+   "the way back",
+   "the way down",
+   "the way forward",
+   "the way here",
+   "the way home",
+   "the way in",
+   "the way out",
+   "the way over",
+   "the way there",
+   "the way up"
+  ],
   "also": [],
   "note": "the way back / home / out — обратный путь, дорога домой, выход. Существительное way с наречием, без предлога.",
   "phrase": "the way back",
@@ -4001,6 +4668,15 @@
   ],
   "hint": "f_____",
   "translation": "Многие взрослые до сих пор получают финансовую поддержку из родительского дома.",
+  "answers": [
+   "boyhood",
+   "childhood",
+   "family",
+   "marital",
+   "matrimonial",
+   "natural",
+   "parental"
+  ],
   "also": [
    "boyhood",
    "childhood",
@@ -4032,6 +4708,11 @@
   ],
   "hint": "r_____",
   "translation": "Бабушка выросла в глухом месте, где не было ни дорог, ни электричества.",
+  "answers": [
+   "faraway",
+   "out-of-the way",
+   "remote"
+  ],
   "also": [
    "faraway",
    "out-of-the way"
@@ -4059,6 +4740,12 @@
   ],
   "hint": "t_____",
   "translation": "Он отговорился от штрафа за превышение скорости, объяснив, что спешил в больницу.",
+  "answers": [
+   "bluff",
+   "talk",
+   "trick",
+   "talked"
+  ],
   "also": [
    "bluff",
    "trick"
@@ -4084,6 +4771,9 @@
   ],
   "hint": "i_ t__",
   "translation": "Многие люди в мире каждый день говорят больше чем на одном языке.",
+  "answers": [
+   "in the"
+  ],
   "also": [],
   "note": "in the world — в мире. Часто в превосходной степени: the biggest in the world.",
   "phrase": "in the world",
@@ -4109,6 +4799,12 @@
   ],
   "hint": "s_______",
   "translation": "Разумнее было бы накопить немного денег, прежде чем покупать машину.",
+  "answers": [
+   "logical",
+   "obvious",
+   "prudent",
+   "sensible"
+  ],
   "also": [
    "logical",
    "obvious",
@@ -4135,6 +4831,10 @@
   ],
   "hint": "i______",
   "translation": "Когда учитель упомянул имя знаменитого учёного, ученики заинтересовались уроком.",
+  "answers": [
+   "invoke",
+   "invoked"
+  ],
   "also": [],
   "note": "invoke a name — упомянуть имя, чтобы сослаться на авторитет. Книжное, с оттенком призывания.",
   "phrase": "invoke name",
@@ -4157,6 +4857,9 @@
   ],
   "hint": "f__",
   "translation": "Дети были в восторге, потому что наконец пришло время ложиться спать.",
+  "answers": [
+   "for"
+  ],
   "also": [],
   "note": "time for sth — время на что-то. Предлог for перед делом, to — перед глаголом.",
   "phrase": "time for",
@@ -4179,6 +4882,9 @@
   ],
   "hint": "t__ r_____ a__ w_____ o_",
   "translation": "Родители часто обсуждают с нами за ужином плюсы и минусы социальных сетей.",
+  "answers": [
+   "the rights and wrongs of"
+  ],
   "also": [],
   "note": "the rights and wrongs of sth — все за и против, плюсы и минусы. Устойчивая пара во множественном числе.",
   "phrase": "the rights and wrongs of sth",
@@ -4201,6 +4907,9 @@
   ],
   "hint": "o_",
   "translation": "Она решила погрузиться в мир профессиональной кухни, насмотревшись кулинарных шоу в интернете.",
+  "answers": [
+   "of"
+  ],
   "also": [],
   "note": "the world of sth — мир чего-то: спорта, моды, финансов. Метафора отдельной среды.",
   "phrase": "world of",
@@ -4223,6 +4932,9 @@
   ],
   "hint": "o_",
   "translation": "Автобус на этот раз пришёл вовремя, и мы добрались до встречи без спешки.",
+  "answers": [
+   "on"
+  ],
   "also": [],
   "note": "on time — точно в назначенный час. Не путать с in time — «успеть, не опоздать».",
   "phrase": "on time",
@@ -4245,6 +4957,9 @@
   ],
   "hint": "c_________",
   "translation": "Двум отделам пришлось тщательно согласовывать работу, чтобы уложиться в срок.",
+  "answers": [
+   "coordinate"
+  ],
   "also": [],
   "note": "coordinate work — согласовывать работу. Между отделами, людьми, этапами.",
   "phrase": "coordinate work",
@@ -4267,6 +4982,9 @@
   ],
   "hint": "i_ t__",
   "translation": "В мире существуют миллионы разных видов насекомых.",
+  "answers": [
+   "in the"
+  ],
   "also": [],
   "note": "in the world — на свете. Усиливает вопрос или превосходную степень: what in the world?",
   "phrase": "in the world",
@@ -4289,6 +5007,10 @@
   ],
   "hint": "i___",
   "translation": "Он заглянул в холодильник посмотреть, что есть на ужин.",
+  "answers": [
+   "in",
+   "into"
+  ],
   "also": [],
   "note": "look into sth — изучить вопрос, разобраться. Отличается от look in — «заглянуть ненадолго».",
   "phrase": "look in",
@@ -4311,6 +5033,10 @@
   ],
   "hint": "p__ t_____ s_______",
   "translation": "Нам нужно всё прояснить, прежде чем двигаться дальше как команда.",
+  "answers": [
+   "get things straight",
+   "put things straight"
+  ],
   "also": [],
   "note": "get / put things straight — расставить всё по местам, внести ясность. Разговорное, часто после недоразумения.",
   "phrase": "get things straight",
@@ -4333,6 +5059,10 @@
   ],
   "hint": "i_",
   "translation": "Дочь получила место в школьном оркестре, пройдя прослушивание.",
+  "answers": [
+   "at",
+   "in"
+  ],
   "also": [],
   "note": "a place at / in sth — место в учебном заведении или организации. Британцы говорят a place at university.",
   "phrase": "place at",
@@ -4355,6 +5085,10 @@
   ],
   "hint": "i_ t__",
   "translation": "Знаменитый танцор вчера выступил в шоу и сорвал овации.",
+  "answers": [
+   "in a",
+   "in the"
+  ],
   "also": [],
   "note": "in a show — в спектакле, в передаче. Предлог in про участие в постановке.",
   "phrase": "in a show",
@@ -4377,6 +5111,9 @@
   ],
   "hint": "o___",
   "translation": "Мой английский со временем сильно улучшился с тех пор, как я начал брать уроки.",
+  "answers": [
+   "over"
+  ],
   "also": [],
   "note": "over time — со временем, постепенно. Самый обычный способ сказать о медленном изменении.",
   "phrase": "over time",
@@ -4402,6 +5139,10 @@
   ],
   "hint": "o__ o_",
   "translation": "Я наконец нашёл выход из запутанного терминала аэропорта, расспросив нескольких человек.",
+  "answers": [
+   "from",
+   "out of"
+  ],
   "also": [
    "~ from"
   ],
@@ -4426,6 +5167,10 @@
   ],
   "hint": "f___ t__",
   "translation": "Открывающий танцевальный номер шоу исполнили профессиональные танцоры.",
+  "answers": [
+   "from a",
+   "from the"
+  ],
   "also": [],
   "note": "from a show — из спектакля, из передачи. О номере или отрывке.",
   "phrase": "from a show",
@@ -4449,6 +5194,11 @@
   ],
   "hint": "s_______",
   "translation": "Название ресторана намекает, что там специализируются на свежих морепродуктах со Средиземноморья.",
+  "answers": [
+   "imply",
+   "suggest",
+   "suggests"
+  ],
   "also": [
    "imply sth"
   ],
@@ -4475,6 +5225,9 @@
   ],
   "hint": "t______",
   "translation": "Она протиснулась через людный рынок к овощному прилавку.",
+  "answers": [
+   "through"
+  ],
   "also": [],
   "note": "the way through sth — путь сквозь что-то: толпу, лес, документ.",
   "phrase": "way through",
@@ -4497,6 +5250,9 @@
   ],
   "hint": "f___ b________ t_ e__",
   "translation": "Я посмотрел весь фильм от начала до конца, ни разу не заглянув в телефон.",
+  "answers": [
+   "from beginning to end"
+  ],
   "also": [],
   "note": "from beginning to end — от начала до конца. Без артиклей в этом обороте.",
   "phrase": "from beginning to end end",
@@ -4519,6 +5275,9 @@
   ],
   "hint": "b_ t__",
   "translation": "Магазин уже закроется к тому времени, как ты приедешь после работы.",
+  "answers": [
+   "by the"
+  ],
   "also": [],
   "note": "by the time — к тому времени, как. Вводит придаточное, дальше идёт настоящее время вместо будущего.",
   "phrase": "by the time",
@@ -4542,6 +5301,10 @@
   ],
   "hint": "t_",
   "translation": "Быстрее всего добраться до вокзала через парк, а не по главной дороге.",
+  "answers": [
+   "from",
+   "to"
+  ],
   "also": [
    "~ from"
   ],
@@ -4566,6 +5329,12 @@
   ],
   "hint": "g__ t_____ m_____",
   "translation": "Маленькому магазину удалось снова сдвинуть дело с мёртвой точки, когда пришёл новый управляющий.",
+  "answers": [
+   "get things going",
+   "get things moving",
+   "keep things going",
+   "keep things moving"
+  ],
   "also": [],
   "note": "get / keep things moving — сдвинуть дело с места, не дать ему заглохнуть. Разговорное.",
   "phrase": "get things going",
@@ -4589,6 +5358,11 @@
   ],
   "hint": "s_____",
   "translation": "Она вспомнила о старом друге, проходя мимо их любимого кафе.",
+  "answers": [
+   "give",
+   "spare",
+   "spared"
+  ],
   "also": [
    "give sb/sth"
   ],
@@ -4613,6 +5387,9 @@
   ],
   "hint": "t_",
   "translation": "Отсюда до центра города можно добраться несколькими разными способами.",
+  "answers": [
+   "to"
+  ],
   "also": [],
   "note": "the way to somewhere — дорога куда-то. Артикль the обязателен: ask the way to the station.",
   "phrase": "way to",
@@ -4635,6 +5412,9 @@
   ],
   "hint": "f______",
   "translation": "Она украдкой оглядела комнату, прежде чем шепнуть подруге секрет.",
+  "answers": [
+   "furtive"
+  ],
   "also": [],
   "note": "a furtive look — украдкой брошенный взгляд. Прилагательное furtive — «скрытный, вороватый».",
   "phrase": "furtive look",
@@ -4657,6 +5437,9 @@
   ],
   "hint": "a____ t__",
   "translation": "Во время поездки к морю мы останавливались в нескольких интересных городках по пути.",
+  "answers": [
+   "along the"
+  ],
   "also": [],
   "note": "along the way — по пути, попутно. И буквально о дороге, и о ходе дела.",
   "phrase": "along the way",
@@ -4679,6 +5462,10 @@
   ],
   "hint": "k___ o_ t____",
   "translation": "Родители по выходным любят читать книги, смотреть фильмы и всё в таком духе.",
+  "answers": [
+   "kind of thing",
+   "sort of thing"
+  ],
   "also": [],
   "note": "that kind / sort of thing — что-то в этом роде. Разговорная формула для обобщения.",
   "phrase": "kind of thing",
@@ -4701,6 +5488,9 @@
   ],
   "hint": "a_____",
   "translation": "Есть живописная тропа, которая идёт через реку до самой деревни.",
+  "answers": [
+   "across"
+  ],
   "also": [],
   "note": "the way across sth — путь через что-то: реку, площадь, поле.",
   "phrase": "way across",
@@ -4723,6 +5513,9 @@
   ],
   "hint": "a_____ t__",
   "translation": "Учёные из разных стран мира работают сообща, чтобы найти лекарство от болезни.",
+  "answers": [
+   "across the"
+  ],
   "also": [],
   "note": "across the world — по всему миру. Синоним around the world, чуть формальнее.",
   "phrase": "across the world",
@@ -4745,6 +5538,9 @@
   ],
   "hint": "a____",
   "translation": "Мне очень нравится в этой работе одна вещь — коллеги приветливые и отзывчивые.",
+  "answers": [
+   "about"
+  ],
   "also": [],
   "note": "the thing about sth — что характерно для чего-то. Зачин пояснения: the thing about London is...",
   "phrase": "thing about",
@@ -4776,6 +5572,18 @@
   ],
   "hint": "o____",
   "translation": "Ресторан носил странное название «Сломанный компас», но всем нравилось там есть.",
+  "answers": [
+   "curiously",
+   "delightfully",
+   "exotically",
+   "grandly",
+   "improbably",
+   "oddly",
+   "quaintly",
+   "romantically",
+   "strangely",
+   "wonderfully"
+  ],
   "also": [
    "curiously",
    "delightfully",
@@ -4810,6 +5618,10 @@
   ],
   "hint": "m________",
   "translation": "Обещание премии подтолкнуло её работать допоздна весь тот месяц.",
+  "answers": [
+   "motivate",
+   "motivated"
+  ],
   "also": [],
   "note": "motivate sb to do sth — побудить кого-то к действию. После motivate обязателен инфинитив с to.",
   "phrase": "motivate sb to work",
@@ -4832,6 +5644,9 @@
   ],
   "hint": "s________",
   "translation": "Прожив в заброшенном доме несколько месяцев, группа приобрела права самовольных жильцов.",
+  "answers": [
+   "squatters'"
+  ],
   "also": [],
   "note": "squatters' rights — права самовольных жильцов. С апострофом после s: права принадлежат им.",
   "phrase": "squatters' right",
@@ -4854,6 +5669,9 @@
   ],
   "hint": "d_________",
   "translation": "Сверхдержава стремилась к мировому господству в эпоху холодной войны.",
+  "answers": [
+   "domination"
+  ],
   "also": [],
   "note": "world domination — мировое господство. Из политики и, чаще, из шуток про корпорации.",
   "phrase": "world domination",
@@ -4878,6 +5696,10 @@
   ],
   "hint": "i_ t__",
   "translation": "Мы просидели весь день дома из-за сильного дождя на улице.",
+  "answers": [
+   "in a",
+   "in the"
+  ],
   "also": [],
   "note": "in the house — в доме. Предлог in про нахождение внутри, at про адрес.",
   "phrase": "in a house",
@@ -4901,6 +5723,10 @@
   ],
   "hint": "s______",
   "translation": "Для большинства учёных этот документальный фильм до сих пор остаётся основополагающей работой о климате.",
+  "answers": [
+   "definitive",
+   "seminal"
+  ],
   "also": [
    "definitive"
   ],
@@ -4925,6 +5751,9 @@
   ],
   "hint": "v________",
   "translation": "Бабушка часто говорит об исчезающем мире её детства, когда интернета ещё не было.",
+  "answers": [
+   "vanishing"
+  ],
   "also": [],
   "note": "a vanishing world — уходящий мир. Причастие vanishing — «исчезающий на глазах».",
   "phrase": "vanishing world",
@@ -4948,6 +5777,11 @@
   ],
   "hint": "f____",
   "translation": "Мы наконец нашли жильё после шести месяцев поисков в городе.",
+  "answers": [
+   "find",
+   "give",
+   "found"
+  ],
   "also": [
    "give sb/sth"
   ],
@@ -4972,6 +5806,9 @@
   ],
   "hint": "b_____",
   "translation": "Автобус приехал с опозданием на двадцать минут, и мы не успели на встречу.",
+  "answers": [
+   "behind"
+  ],
   "also": [],
   "note": "behind time — с опозданием. Книжнее, чем late; часто о транспорте и расписании.",
   "phrase": "behind time",
@@ -4994,6 +5831,10 @@
   ],
   "hint": "o_ t__",
   "translation": "Вчера по дороге с работы я купил продуктов.",
+  "answers": [
+   "on the",
+   "on your"
+  ],
   "also": [],
   "note": "on the way, on your way — по дороге. Оборот on my way home — «по пути домой».",
   "phrase": "on the way",
@@ -5016,6 +5857,11 @@
   ],
   "hint": "t____",
   "translation": "Дед мог бы кое-чему нас научить в рыбалке после пятидесяти лет на реке.",
+  "answers": [
+   "know",
+   "learn",
+   "teach"
+  ],
   "also": [],
   "note": "teach / know a thing or two — знать толк, кое-чему научить. Скромное на вид, но хвалебное выражение.",
   "phrase": "know sb a thing or two",
@@ -5038,6 +5884,10 @@
   ],
   "hint": "o__ o_ t__",
   "translation": "Мне надо убрать машину с дороги, чтобы здесь припарковался грузовик с доставкой.",
+  "answers": [
+   "out of the",
+   "out of your"
+  ],
   "also": [],
   "note": "out of the way — в сторону, не мешая. Глагол get out of the way — «посторониться».",
   "phrase": "out of the way",
@@ -5060,6 +5910,9 @@
   ],
   "hint": "t_________ t__",
   "translation": "Учёные со всего мира работают сообща, чтобы найти лекарство от болезни.",
+  "answers": [
+   "throughout the"
+  ],
   "also": [],
   "note": "throughout the world — по всему миру. Формальнее, чем all over the world.",
   "phrase": "throughout the world",
@@ -5086,6 +5939,13 @@
   ],
   "hint": "a____",
   "translation": "Это был ужасный поступок — уйти с вечеринки, ни с кем не попрощавшись.",
+  "answers": [
+   "appalling",
+   "awful",
+   "dreadful",
+   "horrible",
+   "terrible"
+  ],
   "also": [
    "appalling",
    "dreadful",
@@ -5113,6 +5973,10 @@
   ],
   "hint": "o_",
   "translation": "У бабушки необычное имя польского происхождения, которое никто не может выговорить.",
+  "answers": [
+   "for",
+   "of"
+  ],
   "also": [],
   "note": "a name of Polish origin, a name for sth — имя такого-то происхождения. Предлог of перед происхождением.",
   "phrase": "name for",
@@ -5137,6 +6001,10 @@
   ],
   "hint": "w__ r___",
   "translation": "Настало подходящее время наконец открыть свой ресторан после лет планирования.",
+  "answers": [
+   "be ripe",
+   "was ripe"
+  ],
   "also": [],
   "note": "the time is ripe (for sth) — время созрело. Книжная метафора урожая.",
   "phrase": "time be ripe",
@@ -5159,6 +6027,9 @@
   ],
   "hint": "a____ o_",
   "translation": "Она подготовила слайды для презентации заранее, чтобы не нервничать перед встречей.",
+  "answers": [
+   "ahead of"
+  ],
   "also": [],
   "note": "ahead of time — заранее, досрочно. Синоним in advance, чуть разговорнее.",
   "phrase": "ahead of time",
@@ -5181,6 +6052,9 @@
   ],
   "hint": "u_________",
   "translation": "Полицейские годами работали под прикрытием, чтобы поймать преступную группировку.",
+  "answers": [
+   "undercover"
+  ],
   "also": [],
   "note": "undercover work — работа под прикрытием. Из полицейской и журналистской лексики.",
   "phrase": "undercover work",
@@ -5203,6 +6077,10 @@
   ],
   "hint": "a______ o____ t_____",
   "translation": "Сара любит рисовать, играть на гитаре и, помимо прочего, помогает в приюте для животных.",
+  "answers": [
+   "among other things",
+   "amongst other things"
+  ],
   "also": [],
   "note": "among other things — помимо прочего. Показывает, что список неполный.",
   "phrase": "among other things",
@@ -5226,6 +6104,12 @@
   ],
   "hint": "p_________ o_ t__ w____",
   "translation": "Поездки по Азии полностью изменили её восприятие мира.",
+  "answers": [
+   "experience of the world",
+   "knowledge of the world",
+   "perception of the world",
+   "the eyes of the world"
+  ],
   "also": [
    "the eyes of the world"
   ],
@@ -5252,6 +6136,10 @@
   ],
   "hint": "u____ t__ b_____ e__",
   "translation": "Она решила оставаться в отношениях до самого горького конца, несмотря на все проблемы.",
+  "answers": [
+   "to the bitter end",
+   "until the bitter end"
+  ],
   "also": [],
   "note": "to the bitter end — до самого конца, несмотря ни на что. Всегда с оттенком упрямства или страдания.",
   "phrase": "to the bitter end end",
@@ -5275,6 +6163,11 @@
   ],
   "hint": "d______",
   "translation": "Его участие в скандале серьёзно подорвало репутацию благотворительной организации.",
+  "answers": [
+   "blacken",
+   "damage",
+   "damaged"
+  ],
   "also": [
    "blacken"
   ],
@@ -5299,6 +6192,9 @@
   ],
   "hint": "f__",
   "translation": "Брат работает в технологическом стартапе в центре города.",
+  "answers": [
+   "for"
+  ],
   "also": [],
   "note": "for work — для работы, по работе. Оборот leave for work — «уйти на работу».",
   "phrase": "for work",
@@ -5321,6 +6217,9 @@
   ],
   "hint": "w___",
   "translation": "Команда работает с местными жителями над благоустройством районного парка.",
+  "answers": [
+   "with"
+  ],
   "also": [],
   "note": "work with sb/sth — работать с кем-то или чем-то. Предлог with про партнёрство и инструменты.",
   "phrase": "work with",
@@ -5343,6 +6242,9 @@
   ],
   "hint": "t______",
   "translation": "Я познакомился с лучшим другом через работу в кофейне в центре.",
+  "answers": [
+   "through"
+  ],
   "also": [],
   "note": "through work — через работу, благодаря ей. О знакомствах и связях: I met him through work.",
   "phrase": "through work",
@@ -5365,6 +6267,9 @@
   ],
   "hint": "o_",
   "translation": "Сестра делает проект по естествознанию, и в эти выходные ей нужна помощь.",
+  "answers": [
+   "on"
+  ],
   "also": [],
   "note": "work on sth — работать над чем-то. Предлог on перед проектом или задачей.",
   "phrase": "work on",
@@ -5387,6 +6292,9 @@
   ],
   "hint": "o_",
   "translation": "Команда работает над улучшением обслуживания гостей в ресторане.",
+  "answers": [
+   "on"
+  ],
   "also": [],
   "note": "start work on sth — приступить к работе над чем-то. Предлог on обязателен.",
   "phrase": "on work",
@@ -5409,6 +6317,10 @@
   ],
   "hint": "l__ t_____ s____",
   "translation": "После травмы он не хотел запускать дела на работе и вышел раньше срока.",
+  "answers": [
+   "let things slide",
+   "let things slip"
+  ],
   "also": [],
   "note": "let things slide — запустить дела, пустить на самотёк. Всегда с осуждением.",
   "phrase": "let things slide",
@@ -5431,6 +6343,10 @@
   ],
   "hint": "b____",
   "translation": "Мы выжидали подходящего момента и не подавали на эту работу, пока не набрались опыта.",
+  "answers": [
+   "bide",
+   "bided"
+  ],
   "also": [],
   "note": "bide your time — выжидать удобного момента. Книжное; глагол bide вне этого оборота не встречается.",
   "phrase": "bide time",
@@ -5453,6 +6369,9 @@
   ],
   "hint": "o__ o_",
   "translation": "Сестра уже три месяца без работы и ищет новую.",
+  "answers": [
+   "out of"
+  ],
   "also": [],
   "note": "be out of work — быть безработным. Без артикля; звучит мягче, чем unemployed.",
   "phrase": "out of work",
@@ -5475,6 +6394,10 @@
   ],
   "hint": "a____",
   "translation": "Ей нравится изучать разные культуры и традиции окружающего её мира.",
+  "answers": [
+   "about",
+   "around"
+  ],
   "also": [],
   "note": "the world about / around sb — окружающий мир. Книжное, about здесь значит «вокруг».",
   "phrase": "world about",
@@ -5497,6 +6420,9 @@
   ],
   "hint": "f__",
   "translation": "У него всё в итоге сложилось, несмотря на первоначальные трудности.",
+  "answers": [
+   "for"
+  ],
   "also": [],
   "note": "leave for work — уехать на работу. Предлог for указывает пункт назначения.",
   "phrase": "for work",
@@ -5519,6 +6445,9 @@
   ],
   "hint": "t__ m____ o_ t___",
   "translation": "Никто точно не знает, когда зародилась эта традиция, — она теряется во тьме веков.",
+  "answers": [
+   "the mists of time"
+  ],
   "also": [],
   "note": "lost in the mists of time — теряется во тьме веков. Книжная метафора о забытом прошлом.",
   "phrase": "the mists of time",
@@ -5541,6 +6470,9 @@
   ],
   "hint": "a_",
   "translation": "Брат сейчас на работе, так что дома будет только к шести.",
+  "answers": [
+   "at"
+  ],
   "also": [],
   "note": "be at work — быть на работе. Без артикля; at home — противоположное.",
   "phrase": "at work",
@@ -5563,6 +6495,9 @@
   ],
   "hint": "b______",
   "translation": "Эта новая компания по производству смартфонов за пять лет вырвалась в мировые лидеры.",
+  "answers": [
+   "beaters"
+  ],
   "also": [],
   "note": "world beaters — те, кто обходит весь мир, мировые лидеры. Разговорное, из спортивной лексики.",
   "phrase": "world beaters",
@@ -5585,6 +6520,9 @@
   ],
   "hint": "a_",
   "translation": "Она всё утро работала за компьютером, чтобы закончить проект до обеда.",
+  "answers": [
+   "at"
+  ],
   "also": [],
   "note": "at work — за работой, в процессе. Переносно: forces at work — «действующие силы».",
   "phrase": "at work",
@@ -5607,6 +6545,11 @@
   ],
   "hint": "a__ o___ t__",
   "translation": "Люди со всего мира каждый год приезжают в этот музей посмотреть на знаменитые картины.",
+  "answers": [
+   "all around the",
+   "all over the",
+   "all round the"
+  ],
   "also": [],
   "note": "all over the world, all around the world — по всему свету. Взаимозаменяемы, over чуть чаще.",
   "phrase": "all around the world",
@@ -5629,6 +6572,9 @@
   ],
   "hint": "p__ a n___ t_",
   "translation": "Я никак не мог вспомнить название старой песни, игравшей в кафе.",
+  "answers": [
+   "put a name to"
+  ],
   "also": [],
   "note": "put a name to sb/sth — вспомнить, как это называется. О том, что вертится на языке.",
   "phrase": "put a name to sb",
@@ -5651,6 +6597,9 @@
   ],
   "hint": "o__",
   "translation": "Отец взял неделю отпуска, чтобы помочь нам с переездом в новый дом.",
+  "answers": [
+   "off"
+  ],
   "also": [],
   "note": "be off work — не выйти на работу, быть на больничном. Без артикля.",
   "phrase": "off work",
@@ -5673,6 +6622,9 @@
   ],
   "hint": "w___",
   "translation": "Ей нравится работать с командой над решением сложных задач в офисе.",
+  "answers": [
+   "with"
+  ],
   "also": [],
   "note": "help with work — помощь с работой. Предлог with перед тем, в чём помогают.",
   "phrase": "with work",
@@ -5695,6 +6647,10 @@
   ],
   "hint": "a_ t__",
   "translation": "Бабушка была учительницей в те времена, когда женщины редко имели профессию.",
+  "answers": [
+   "at a",
+   "at the"
+  ],
   "also": [],
   "note": "at a time — за раз, одновременно. Оборот one at a time — «по одному».",
   "phrase": "at a time",
@@ -5717,6 +6673,9 @@
   ],
   "hint": "a_",
   "translation": "Она пять лет проработала медсестрой в больнице, прежде чем сменила профессию.",
+  "answers": [
+   "as"
+  ],
   "also": [],
   "note": "work as sb — работать кем-то. Предлог as перед должностью: work as a nurse.",
   "phrase": "as work",
@@ -5739,6 +6698,12 @@
   ],
   "hint": "b___ s_____",
   "translation": "Мне, кажется, в последнее время мерещится всякое — так я устал от работы.",
+  "answers": [
+   "be hearing",
+   "be imagining",
+   "be seeing",
+   "been seeing"
+  ],
   "also": [],
   "note": "be seeing / hearing things — мерещится, слышится. Разговорное о галлюцинациях от усталости.",
   "phrase": "be hearing thing",
@@ -5761,6 +6726,10 @@
   ],
   "hint": "o___",
   "translation": "Со временем он научился готовить лучше, пробуя каждую неделю новые рецепты.",
+  "answers": [
+   "over",
+   "with"
+  ],
   "also": [],
   "note": "over time, with time — со временем. Оба о постепенных изменениях, over чуть чаще.",
   "phrase": "over time",
@@ -5783,6 +6752,9 @@
   ],
   "hint": "a_",
   "translation": "Она была на работе, когда сын позвонил сказать, что потерял ключи.",
+  "answers": [
+   "at"
+  ],
   "also": [],
   "note": "at work — на рабочем месте. Отвечает на вопрос «где», без артикля.",
   "phrase": "at work",
@@ -5805,6 +6777,10 @@
   ],
   "hint": "a_ a",
   "translation": "Мы пускаем не больше десяти посетителей за раз, чтобы в музее не было толчеи.",
+  "answers": [
+   "at a",
+   "at the"
+  ],
   "also": [],
   "note": "at a time — за один приём. Часто с числом: ten visitors at a time.",
   "phrase": "at a time",
@@ -5827,6 +6803,10 @@
   ],
   "hint": "i_",
   "translation": "Многие испытывают стресс, когда им некомфортно в рабочей обстановке.",
+  "answers": [
+   "in your",
+   "in"
+  ],
   "also": [],
   "note": "in your work — в своей работе, в профессиональной деятельности. О творчестве и исследованиях.",
   "phrase": "in your work",
@@ -5849,6 +6829,10 @@
   ],
   "hint": "r_______ a_____",
   "translation": "Его сын-подросток считает, что мир вертится вокруг его смартфона и друзей.",
+  "answers": [
+   "revolve around",
+   "revolves around"
+  ],
   "also": [],
   "note": "the world revolves around sb — мир вертится вокруг кого-то. Почти всегда с упрёком в эгоцентризме.",
   "phrase": "world revolve around sb",

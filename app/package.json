@@ -1,0 +1,19 @@
+{
+  "name": "collocation-srs",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Интервальное повторение английских коллокаций",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "ts-fsrs": "^4.4.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  }
+}

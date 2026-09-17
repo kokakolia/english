@@ -23,6 +23,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from ..normalize import store
+from ..normalize.build import _sequence_for
 from ..normalize.inflect import phrase_regex
 from ..normalize.variants import expand
 from ..translate import store as translations_store
@@ -50,6 +51,7 @@ def _load_rows(conn):
     candidates = conn.execute(
         """
         SELECT c.id, c.headword, c.relation, c.sense, c.phrase, c.accept,
+               c.variants, c.position AS pattern_position,
                c.example, c.gap_start, c.gap_end, c.matched,
                r.cefr, r.band, r.position
         FROM collocations c
@@ -73,8 +75,9 @@ def make_cards(conn, args) -> tuple[list[dict], dict[str, int]]:
     rejected: dict[str, int] = {}
     max_ambiguity = AMBIGUITY_ORDER[args.max_ambiguity]
 
-    for (record_id, headword, relation, sense, phrase, accept_json, example,
-         gap_start, gap_end, matched, cefr, band, position) in candidates:
+    for (record_id, headword, relation, sense, phrase, accept_json, variants_json,
+         pattern_position, example, gap_start, gap_end, matched,
+         cefr, band, position) in candidates:
         if args.band and band != args.band:
             continue
         if args.cefr and cefr != args.cefr:
@@ -105,6 +108,9 @@ def make_cards(conn, args) -> tuple[list[dict], dict[str, int]]:
                 "accept": accept,
                 "hint": verdict.hint,
                 "translation": translations.get(translations_store.key_for(example)),
+                "answers": answer_forms(
+                    json.loads(variants_json), pattern_position, headword, answer
+                ),
                 "also": other_cluster_members(accept, matched, answer),
                 "note": usage_notes.get(record_id),
                 "phrase": phrase,
@@ -122,6 +128,38 @@ def make_cards(conn, args) -> tuple[list[dict], dict[str, int]]:
             break
 
     return cards, rejected
+
+
+def answer_forms(variants: list[str], pattern_position: str, headword: str,
+                 answer: str) -> list[str]:
+    """Формы, которые приложение засчитывает как правильный ответ.
+
+    `accept` хранит словарные записи как есть — с тильдами, плейсхолдерами и
+    сокращениями (`in (a/the)~`, `see sb home`). Сравнивать с ними ввод нельзя,
+    а разворачивать их в приложении значило бы завести вторую копию логики,
+    которая уже написана и покрыта тестами здесь. Поэтому разворачиваем при
+    сборке: берём у каждого варианта ровно ту часть, что попадает в пропуск.
+    """
+    forms: list[str] = []
+    for variant in variants:
+        sequence = _sequence_for(pattern_position, headword, variant)
+        if sequence is None:
+            continue
+        tokens, gap = sequence
+        form = " ".join(tokens[gap[0] : gap[1]]).strip()
+        if form:
+            forms.append(form)
+    # Форма из самого предложения — всегда правильный ответ, даже если словарь
+    # даёт её в другом виде (`demonstrate` в словаре, `demonstrated` в примере).
+    forms.append(answer.strip())
+    seen: set[str] = set()
+    unique = []
+    for form in forms:
+        key = form.lower()
+        if key and key not in seen:
+            seen.add(key)
+            unique.append(form)
+    return unique
 
 
 def other_cluster_members(accept: list[str], matched: str | None, answer: str

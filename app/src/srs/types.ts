@@ -1,0 +1,105 @@
+/**
+ * Типы предметной области.
+ *
+ * Главное разделение здесь — между **содержимым карточки** и **прогрессом по
+ * ней**. Карточка приходит из файла колоды и неизменна; прогресс живёт только
+ * на устройстве и связывается с карточкой по `id`. Их нельзя смешивать в одной
+ * структуре: обновление колоды не должно затрагивать выученное.
+ */
+
+/** Оценка ответа, которую ставит учащийся. */
+export type Grade = "again" | "hard" | "good" | "easy";
+
+export const GRADES: readonly Grade[] = ["again", "hard", "good", "easy"];
+
+/** Состояние карточки в терминах интервального повторения. */
+export type CardState = "new" | "learning" | "review" | "relearning";
+
+/** Карточка из файла колоды. Иммутабельна, приходит извне. */
+export interface DeckCard {
+  id: string;
+  type: "cloze";
+  /** Предложение с пропуском, обозначенным `___`. */
+  text: string;
+  /** Точная форма, стоявшая в предложении: `demonstrated`. */
+  answer: string;
+  /** Словарные записи партнёров как есть — для показа: `see sb home`. */
+  accept: string[];
+  /** Развёрнутые формы для проверки ввода: `see`, `saw`. */
+  answers: string[];
+  /** Первая буква и длина: `d__________`. */
+  hint: string;
+  /** Перевод предложения целиком. Показывается вместе с пропуском. */
+  translation: string | null;
+  /** Остальные партнёры кластера, кроме того, что уже в предложении. */
+  also: string[];
+  /** Заметка об употреблении. */
+  note: string | null;
+  phrase: string;
+  relation: string;
+  headword: string;
+  sense: string | null;
+  cefr: string | null;
+  band: string;
+  ambiguity: "low" | "medium" | "high";
+  flags: string[];
+  /** Место в общей очереди изучения. */
+  position: number;
+}
+
+/**
+ * Прогресс по карточке. Поля соответствуют состоянию FSRS.
+ *
+ * Даты хранятся строками ISO, а не объектами `Date`: структура кладётся в
+ * IndexedDB и экспортируется в файл, и в обоих случаях должна пережить
+ * сериализацию без потерь и догадок о часовом поясе.
+ */
+export interface CardProgress {
+  cardId: string;
+  /** Когда карточку показывать снова. */
+  due: string;
+  stability: number;
+  difficulty: number;
+  elapsedDays: number;
+  scheduledDays: number;
+  reps: number;
+  lapses: number;
+  state: CardState;
+  lastReview: string | null;
+}
+
+/**
+ * Запись в журнале повторений — append-only.
+ *
+ * Журнал нужен не для работы планировщика, а для всего, что будет потом:
+ * статистики, переобучения параметров FSRS под себя и синхронизации. Поэтому
+ * пишется сырьём и никогда не переписывается задним числом.
+ */
+export interface ReviewEntry {
+  cardId: string;
+  reviewedAt: string;
+  grade: Grade;
+  /** Состояние карточки до этого повторения. */
+  stateBefore: CardState;
+  elapsedDays: number;
+  scheduledDays: number;
+  /** Что учащийся набрал, если вводил ответ. */
+  typed?: string;
+  /** Как система оценила ввод. */
+  verdict?: AnswerVerdict;
+  /** Сколько времени заняло повторение. */
+  durationMs?: number;
+}
+
+/** Итог проверки введённого ответа. */
+export type AnswerVerdict = "correct" | "almost" | "wrong";
+
+/** Почему ответ признан правильным или почти правильным. */
+export type AnswerReason = "exact" | "article" | "form" | "typo";
+
+export interface AnswerCheck {
+  verdict: AnswerVerdict;
+  /** Форма из `answers`, с которой совпал ввод. */
+  matched: string | null;
+  reason: AnswerReason | null;
+}

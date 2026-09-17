@@ -41,7 +41,7 @@
   "$defs": {
     "card": {
       "type": "object",
-      "required": ["id", "type", "text", "answer", "accept", "hint", "phrase", "relation", "headword", "position"],
+      "required": ["id", "type", "text", "answer", "accept", "answers", "hint", "phrase", "relation", "headword", "position"],
       "additionalProperties": false,
       "properties": {
         "id": {
@@ -73,6 +73,12 @@
         "translation": {
           "type": ["string", "null"],
           "description": "Перевод предложения целиком. Показывается на лицевой стороне: без него пропуск допускает много осмысленных вариантов, а с ним карточка становится упражнением на продукцию — смысл известен, нужно выдать английскую коллокацию."
+        },
+        "answers": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" },
+          "description": "Развёрнутые формы, которые засчитываются как правильный ответ. В отличие от accept, здесь нет тильд, плейсхолдеров и сокращений: `in (a/the)~` превращается в «in a», «in the», «in». Приложение сравнивает ввод именно с этим списком."
         },
         "also": {
           "type": "array",
