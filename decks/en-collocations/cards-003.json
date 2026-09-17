@@ -9,6 +9,7 @@
    "regain"
   ],
   "hint": "r________",
+  "translation": "После аварии он постепенно восстановил способность владеть левой рукой.",
   "phrase": "recover use",
   "relation": "verb+obj",
   "headword": "use",
@@ -28,6 +29,7 @@
    "user"
   ],
   "hint": "u____",
+  "translation": "Большинству домашних пользователей проще хранить фотографии в облаке.",
   "phrase": "home user",
   "relation": "noun+noun",
   "headword": "home",
@@ -47,6 +49,7 @@
    "without a backward look"
   ],
   "hint": "w______ a b_______ l___",
+  "translation": "Он уволился и вышел из офиса, не оглянувшись.",
   "phrase": "without a backward look",
   "relation": "phrase",
   "headword": "look",
@@ -66,6 +69,7 @@
    "of ~"
   ],
   "hint": "o_",
+  "translation": "Хороший словарь может быть подспорьем, когда учишь новую лексику.",
   "phrase": "of help",
   "relation": "prep",
   "headword": "help",
@@ -96,6 +100,7 @@
    "weird"
   ],
   "hint": "f____",
+  "translation": "Забавная штука с переездом в новый город: как быстро ты заводишь новых друзей.",
   "phrase": "amazing thing",
   "relation": "adj+noun",
   "headword": "thing",
@@ -115,6 +120,7 @@
    "temporarily"
   ],
   "hint": "t__________",
+  "translation": "Мы временно поселили гостей в свободной спальне, пока их квартиру ремонтировали.",
   "phrase": "temporarily house",
   "relation": "adv+verb",
   "headword": "house",
@@ -135,6 +141,7 @@
    "result"
   ],
   "hint": "r_____",
+  "translation": "Итоговый результат проекта оказался лучше, чем все ожидали.",
   "phrase": "end product",
   "relation": "noun+noun",
   "headword": "end",
@@ -154,6 +161,7 @@
    "commitments"
   ],
   "hint": "c__________",
+  "translation": "Она решила уйти с работы из-за семейных обязательств и маленьких детей дома.",
   "phrase": "family commitments",
   "relation": "noun+noun",
   "headword": "family",
@@ -173,6 +181,7 @@
    "teacher (also schoolteacher)"
   ],
   "hint": "t______",
+  "translation": "Мой отец тридцать лет проработал школьным учителем, прежде чем вышел на пенсию.",
   "phrase": "school teacher",
   "relation": "noun+noun",
   "headword": "school",
@@ -192,6 +201,7 @@
    "in a/the ~"
   ],
   "hint": "i_ a",
+  "translation": "Мебель для новой спальни идёт комплектом: кровать, две тумбочки и комод.",
   "phrase": "in a set",
   "relation": "prep",
   "headword": "set",
@@ -211,6 +221,7 @@
    "winning"
   ],
   "hint": "w______",
+  "translation": "Проиграв три матча, баскетбольная команда вчера наконец вернулась к победам.",
   "phrase": "winning way",
   "relation": "adj+noun",
   "headword": "way",
@@ -230,6 +241,7 @@
    "build/make/start a new life"
   ],
   "hint": "b____ a n__ l___",
+  "translation": "Бросив работу в городе, она решила построить новую жизнь в деревне.",
   "phrase": "build a new life",
   "relation": "phrase",
   "headword": "life",
@@ -249,6 +261,7 @@
    "per ~"
   ],
   "hint": "p__",
+  "translation": "Завод выпускает около пятисот автомобилей в год.",
   "phrase": "per year",
   "relation": "prep",
   "headword": "year",
@@ -268,6 +281,7 @@
    "of the ~"
   ],
   "hint": "o_ t__",
+  "translation": "Тогдашний президент объявил о новых мерах для борьбы с растущим экономическим кризисом.",
   "phrase": "of the day",
   "relation": "prep",
   "headword": "day",
@@ -292,6 +306,7 @@
    "usually"
   ],
   "hint": "n_______",
+  "translation": "Обычно я проверяю почту с телефона перед началом работы.",
   "phrase": "frequently use",
   "relation": "adv+verb",
   "headword": "use",
@@ -311,6 +326,7 @@
    "legendary"
   ],
   "hint": "l________",
+  "translation": "Благодаря бабушкиной стряпне наш дом стал легендарным местом семейных застолий в районе.",
   "phrase": "legendary home",
   "relation": "adj+noun",
   "headword": "home",
@@ -330,6 +346,7 @@
    "~ from"
   ],
   "hint": "f___",
+  "translation": "Мать посмотрела на неё с осуждением, когда она пришла домой поздно.",
   "phrase": "look from",
   "relation": "prep",
   "headword": "look",
@@ -352,6 +369,7 @@
    "unequivocally"
   ],
   "hint": "d_________",
+  "translation": "Он однозначно заявил, что не примет предложение о работе.",
   "phrase": "categorically state",
   "relation": "adv+verb",
   "headword": "state",
@@ -371,6 +389,7 @@
    "~ from"
   ],
   "hint": "f___",
+  "translation": "Я не смог бы закончить проект без помощи товарищей по команде.",
   "phrase": "help from",
   "relation": "prep",
   "headword": "help",
@@ -390,6 +409,7 @@
    "be going"
   ],
   "hint": "a__ g____",
+  "translation": "Мы не виделись несколько месяцев — расскажи, как дела на новой работе.",
   "phrase": "thing be going",
   "relation": "noun+verb",
   "headword": "thing",
@@ -409,6 +429,7 @@
    "to"
   ],
   "hint": "t_",
+  "translation": "Я показал паспорт пограничнику, когда прилетел в аэропорт.",
   "phrase": "to show",
   "relation": "prep",
   "headword": "show",
@@ -428,6 +449,7 @@
    "end in tears"
   ],
   "hint": "e____ i_ t____",
+  "translation": "Ссора детей началась в шутку, но кончилась слезами, когда кто-то ушибся.",
   "phrase": "end in tears",
   "relation": "phrase",
   "headword": "end",
@@ -451,6 +473,7 @@
    "positive"
   ],
   "hint": "p_______",
+  "translation": "Приятно было думать, что мы наконец увидим внуков после такой долгой разлуки.",
   "phrase": "comforting thought",
   "relation": "adj+noun",
   "headword": "thought",
@@ -470,6 +493,7 @@
    "revoke"
   ],
   "hint": "r_____",
+  "translation": "Она решила отозвать своё завещание, получив большое наследство от тёти.",
   "phrase": "revoke will",
   "relation": "verb+obj",
   "headword": "will",
@@ -489,6 +513,7 @@
    "experience"
   ],
   "hint": "e_________",
+  "translation": "Дочь этим летом проходит практику в местной больнице.",
   "phrase": "work experience",
   "relation": "noun+noun",
   "headword": "work",
@@ -508,6 +533,7 @@
    "parental"
   ],
   "hint": "p_______",
+  "translation": "При разводе оба родителя обычно сохраняют родительские права и обязанности в отношении детей.",
   "phrase": "parental right",
   "relation": "adj+noun",
   "headword": "right",
@@ -527,6 +553,7 @@
    "in sb's ~"
   ],
   "hint": "i_",
+  "translation": "Во времена моей бабушки шляпы носили гораздо чаще.",
   "phrase": "in sb's day",
   "relation": "prep",
   "headword": "day",
@@ -546,6 +573,7 @@
    "ease of use"
   ],
   "hint": "e___ o_ u__",
+  "translation": "Простота использования смартфона делает его популярным у покупателей постарше.",
   "phrase": "ease of use",
   "relation": "phrase",
   "headword": "use",
@@ -565,6 +593,7 @@
    "abandon"
   ],
   "hint": "a______",
+  "translation": "Во время войны многим семьям пришлось бросить дома и бежать в безопасное место.",
   "phrase": "abandon home",
   "relation": "verb+obj",
   "headword": "home",
@@ -584,6 +613,7 @@
    "~ of"
   ],
   "hint": "o_",
+  "translation": "Сара посмотрела на него с разочарованием, когда он опоздал на два часа.",
   "phrase": "look of",
   "relation": "prep",
   "headword": "look",
@@ -603,6 +633,7 @@
    "~ with"
   ],
   "hint": "w___",
+  "translation": "Сестра на прошлой неделе попросила меня помочь с заявкой на работу.",
   "phrase": "help with",
   "relation": "prep",
   "headword": "help",
@@ -622,6 +653,7 @@
    "end in disaster"
   ],
   "hint": "e__ i_ d_______",
+  "translation": "Если не будешь усердно готовиться, экзамен может кончиться катастрофой.",
   "phrase": "end in disaster",
   "relation": "phrase",
   "headword": "end",
@@ -641,6 +673,7 @@
    "ring a bell"
   ],
   "hint": "r____ a b___",
+  "translation": "Название этого ресторана мне что-то напоминает, но не могу вспомнить, где я его слышал.",
   "phrase": "name ring a bell",
   "relation": "noun+verb",
   "headword": "name",
@@ -660,6 +693,7 @@
    "covered"
   ],
   "hint": "c______",
+  "translation": "Крытый переход между двумя зданиями укрыл нас от сильного дождя.",
   "phrase": "covered way",
   "relation": "adj+noun",
   "headword": "way",
@@ -679,6 +713,7 @@
    "work in progress"
   ],
   "hint": "w___ i_ p_______",
+  "translation": "Моё эссе пока в работе, доделаю его на выходных.",
   "phrase": "work in progress",
   "relation": "phrase",
   "headword": "work",
@@ -698,6 +733,7 @@
    "by ~"
   ],
   "hint": "b_",
+  "translation": "Днём магазин закрыт, но по вечерам открывается для особых мероприятий.",
   "phrase": "by day",
   "relation": "prep",
   "headword": "day",
@@ -717,6 +753,7 @@
    "~ for"
   ],
   "hint": "f__",
+  "translation": "Она искала ключи повсюду и наконец нашла их в кармане пальто.",
   "phrase": "look for",
   "relation": "prep",
   "headword": "look",
@@ -736,6 +773,7 @@
    "~ in"
   ],
   "hint": "i_",
+  "translation": "Старшая сестра сильно помогла мне в подготовке к собеседованию.",
   "phrase": "help in",
   "relation": "prep",
   "headword": "help",
@@ -755,6 +793,7 @@
    "accept"
   ],
   "hint": "a_____",
+  "translation": "Я не мог принять положение вещей таким, каким оно было, и решил что-то изменить.",
   "phrase": "accept thing",
   "relation": "verb+obj",
   "headword": "thing",
@@ -774,6 +813,7 @@
    "into ~"
   ],
   "hint": "i___",
+  "translation": "Плотник аккуратно вставил деревянную доску на место, чтобы закончить полку.",
   "phrase": "into place",
   "relation": "prep",
   "headword": "place",
@@ -793,6 +833,7 @@
    "~ of"
   ],
   "hint": "o_",
+  "translation": "Новый руководитель устроил целое представление из того, что приходит рано каждое утро.",
   "phrase": "show of",
   "relation": "prep",
   "headword": "show",
@@ -812,6 +853,7 @@
    "adoptive"
   ],
   "hint": "a_______",
+  "translation": "Сара с волнением ждала, что в следующем месяце впервые встретится со своей приёмной семьёй.",
   "phrase": "adoptive family",
   "relation": "adj+noun",
   "headword": "family",
@@ -834,6 +876,7 @@
    "set sb/sth"
   ],
   "hint": "p_____",
+  "translation": "Спасатели высвободили застрявшего туриста из-под обрушившегося здания.",
   "phrase": "cut sb free",
   "relation": "verb+adj",
   "headword": "free",
@@ -853,6 +896,7 @@
    "rate"
   ],
   "hint": "r___",
+  "translation": "Темп работы команды заметно вырос с начала новой программы тренировок.",
   "phrase": "work rate",
   "relation": "noun+noun",
   "headword": "work",
@@ -872,6 +916,7 @@
    "from the ~"
   ],
   "hint": "f___ t__",
+  "translation": "Справа внезапно выехала машина, когда мы переходили улицу.",
   "phrase": "from the right",
   "relation": "prep",
   "headword": "right",
@@ -891,6 +936,7 @@
    "view"
   ],
   "hint": "v___",
+  "translation": "Поездки по разным странам полностью изменили мой взгляд на мир.",
   "phrase": "world view",
   "relation": "noun+noun",
   "headword": "world",
@@ -910,6 +956,7 @@
    "~ of"
   ],
   "hint": "o_",
+  "translation": "Она не могла уснуть в ночь перед днём свадьбы.",
   "phrase": "day of",
   "relation": "prep",
   "headword": "day",
@@ -929,6 +976,7 @@
    "entertainment"
   ],
   "hint": "e____________",
+  "translation": "Мы провели вечер всей семьёй, осваивая новый домашний кинотеатр.",
   "phrase": "home entertainment",
   "relation": "noun+noun",
   "headword": "home",
@@ -948,6 +996,7 @@
    "~ through"
   ],
   "hint": "t______",
+  "translation": "Она быстро просмотрела почту и нашла письмо, которого ждала.",
   "phrase": "look through",
   "relation": "prep",
   "headword": "look",
@@ -972,6 +1021,7 @@
    "underline"
   ],
   "hint": "u________",
+  "translation": "Последние исследования подчёркивают необходимость регулярных упражнений для поддержания здоровья.",
   "phrase": "emphasize need",
   "relation": "verb+obj",
   "headword": "need",
@@ -991,6 +1041,7 @@
    "in"
   ],
   "hint": "i_",
+  "translation": "Физические упражнения помогают улучшить общее здоровье и уровень энергии.",
   "phrase": "in help",
   "relation": "prep",
   "headword": "help",
@@ -1010,6 +1061,7 @@
    "turn out"
   ],
   "hint": "t_____ o__",
+  "translation": "Я переживал из-за собеседования, но всё обернулось лучше, чем я ожидал.",
   "phrase": "thing turn out",
   "relation": "noun+verb",
   "headword": "thing",
@@ -1030,6 +1082,7 @@
    "~ of"
   ],
   "hint": "a______",
+  "translation": "Мы с друзьями решили сыграть партию против компьютера.",
   "phrase": "game against",
   "relation": "prep",
   "headword": "game",
@@ -1049,6 +1102,7 @@
    "in ~"
   ],
   "hint": "i_",
+  "translation": "Рамка с фотографией осталась на месте на полке даже во время землетрясения.",
   "phrase": "in place",
   "relation": "prep",
   "headword": "place",
@@ -1068,6 +1122,7 @@
    "for ~"
   ],
   "hint": "f__",
+  "translation": "Он надел на вечеринку дорогой костюм, но в основном напоказ.",
   "phrase": "for show",
   "relation": "prep",
   "headword": "show",
@@ -1088,6 +1143,7 @@
    "a way ahead/away/off"
   ],
   "hint": "q____ a w__",
+  "translation": "Новый торговый центр довольно далеко от нашего дома, поэтому мы обычно ездим туда на автобусе.",
   "phrase": "quite a way",
   "relation": "phrase",
   "headword": "way",
@@ -1108,6 +1164,7 @@
    "go on"
   ],
   "hint": "w___ o_",
+  "translation": "Строительные работы шли несколько месяцев, прежде чем новое здание наконец было готово.",
   "phrase": "work continue",
   "relation": "noun+verb",
   "headword": "work",
@@ -1127,6 +1184,7 @@
    "by ~ of"
   ],
   "hint": "b_",
+  "translation": "Она унаследовала семейный бизнес по праву старшей дочери.",
   "phrase": "by right of",
   "relation": "prep",
   "headword": "right",
@@ -1146,6 +1204,7 @@
    "destroy"
   ],
   "hint": "d______",
+  "translation": "Если не действовать сейчас, загрязнение может уничтожить мир для будущих поколений.",
   "phrase": "destroy world",
   "relation": "verb+obj",
   "headword": "world",
@@ -1165,6 +1224,7 @@
    "on the ~ (of)"
   ],
   "hint": "o_ t__",
+  "translation": "Она была взволнована в день собеседования.",
   "phrase": "on the day of",
   "relation": "prep",
   "headword": "day",
@@ -1184,6 +1244,7 @@
    "for/out of ~"
   ],
   "hint": "o__ o_",
+  "translation": "Она ушла с работы из любви к больной матери.",
   "phrase": "for of love",
   "relation": "prep",
   "headword": "love",
@@ -1203,6 +1264,7 @@
    "~ at"
   ],
   "hint": "a_",
+  "translation": "Учитель поймал меня на том, что я подглядываю в работу друга на экзамене.",
   "phrase": "look at",
   "relation": "prep",
   "headword": "look",
@@ -1223,6 +1285,7 @@
    "essential"
   ],
   "hint": "e________",
+  "translation": "Она всегда кладёт в сумку самое необходимое перед выходом на работу.",
   "phrase": "basic thing",
   "relation": "adj+noun",
   "headword": "thing",
@@ -1242,6 +1305,7 @@
    "on"
   ],
   "hint": "o_",
+  "translation": "Ответственность за организацию мероприятия легла на плечи Сары.",
   "phrase": "on place",
   "relation": "prep",
   "headword": "place",
@@ -1263,6 +1327,7 @@
    "from ~ to ~"
   ],
   "hint": "f___ h____ t_ h____",
+  "translation": "Волонтёры ходили из дома в дом, разнося продуктовые наборы нуждающимся семьям.",
   "phrase": "from house to house",
   "relation": "prep",
   "headword": "house",
@@ -1282,6 +1347,7 @@
    "a show of force/strength"
   ],
   "hint": "a s___ o_ f____",
+  "translation": "Военные устроили демонстрацию силы у границы, чтобы отбить охоту нападать.",
   "phrase": "a show of force",
   "relation": "phrase",
   "headword": "show",
@@ -1301,6 +1367,7 @@
    "fitting"
   ],
   "hint": "f______",
+  "translation": "После месяцев тяжёлой работы команда отпраздновала достойное завершение успешного проекта.",
   "phrase": "fitting end",
   "relation": "adj+noun",
   "headword": "end",
@@ -1320,6 +1387,7 @@
    "thought-provoking"
   ],
   "hint": "t_______________",
+  "translation": "Документальный фильм о климате заставил задуматься и пересмотреть мои повседневные привычки.",
   "phrase": "thought-provoking",
   "relation": "phrase",
   "headword": "thought",
@@ -1339,6 +1407,7 @@
    "practice"
   ],
   "hint": "p________",
+  "translation": "Компания улучшила организацию работы, получив отзывы сотрудников.",
   "phrase": "work practice",
   "relation": "noun+noun",
   "headword": "work",
@@ -1358,6 +1427,7 @@
    "on the ~"
   ],
   "hint": "o_ t__",
+  "translation": "Новая политика сдвинула правительство дальше вправо, чем ожидало большинство избирателей.",
   "phrase": "on the right",
   "relation": "prep",
   "headword": "right",
@@ -1378,6 +1448,7 @@
    "opinion"
   ],
   "hint": "a________",
+  "translation": "Новая вакцина привлекла внимание всего мира со стороны организаций здравоохранения.",
   "phrase": "world attention",
   "relation": "noun+noun",
   "headword": "world",
@@ -1397,6 +1468,7 @@
    "intervening"
   ],
   "hint": "i__________",
+  "translation": "За прошедшие годы она постепенно обрела уверенность и в итоге открыла своё дело.",
   "phrase": "intervening year",
   "relation": "adj+noun",
   "headword": "year",
@@ -1416,6 +1488,7 @@
    "by the ~"
   ],
   "hint": "b_ t__",
+  "translation": "Её кулинарные навыки росли с каждым днём в первый месяц учёбы в кулинарной школе.",
   "phrase": "by the day",
   "relation": "prep",
   "headword": "day",
@@ -1435,6 +1508,7 @@
    "~ out of"
   ],
   "hint": "o__ o_",
+  "translation": "Она выглянула за дверь класса посмотреть, не приехал ли автобус.",
   "phrase": "look out of",
   "relation": "prep",
   "headword": "look",
@@ -1456,6 +1530,7 @@
    "work (out)"
   ],
   "hint": "w___ o__",
+  "translation": "Надеюсь, у них всё наладится после ссоры на прошлой неделе.",
   "phrase": "thing go according to plan",
   "relation": "noun+verb",
   "headword": "thing",
@@ -1475,6 +1550,7 @@
    "out of ~"
   ],
   "hint": "o__ o_",
+  "translation": "Его громкий смех совершенно не к месту прозвучал на тихой церемонии прощания.",
   "phrase": "out of place",
   "relation": "prep",
   "headword": "place",
@@ -1500,6 +1576,7 @@
    "strike sb"
   ],
   "hint": "s_____",
+  "translation": "Её осенила внезапная мысль, когда она увидела старую фотографию на полке.",
   "phrase": "thought come into your mind",
   "relation": "noun+verb",
   "headword": "thought",
@@ -1519,6 +1596,7 @@
    "~ of"
   ],
   "hint": "o_",
+  "translation": "В демократическом обществе у каждого должно быть право на свободу слова без страха.",
   "phrase": "right of",
   "relation": "prep",
   "headword": "right",
@@ -1538,6 +1616,7 @@
    "tour"
   ],
   "hint": "t___",
+  "translation": "Известная певица завершила мировое турне, объехав в прошлом году сорок пять стран.",
   "phrase": "world tour",
   "relation": "noun+noun",
   "headword": "world",
@@ -1557,6 +1636,7 @@
    "throughout the ~"
   ],
   "hint": "t_________ t__",
+  "translation": "Бабушка навещает внуков в течение всего года, обычно оставаясь на пару недель.",
   "phrase": "throughout the year",
   "relation": "prep",
   "headword": "year",
@@ -1577,6 +1657,7 @@
    "light-hearted"
   ],
   "hint": "l___________",
+  "translation": "Документальный фильм с лёгкой иронией смотрит на историю модных промахов.",
   "phrase": "humorous look",
   "relation": "adj+noun",
   "headword": "look",
@@ -1596,6 +1677,7 @@
    "stand"
   ],
   "hint": "s____",
+  "translation": "Теперь, когда в компанию пришёл новый руководитель, дела обстоят иначе.",
   "phrase": "thing stand",
   "relation": "noun+verb",
   "headword": "thing",
@@ -1615,6 +1697,7 @@
    "~ on"
   ],
   "hint": "o_",
+  "translation": "Он был рад получить место в университетской баскетбольной команде.",
   "phrase": "place on",
   "relation": "prep",
   "headword": "place",
@@ -1634,6 +1717,7 @@
    "to the ~"
   ],
   "hint": "t_ t__",
+  "translation": "Поток машин смещался в правый ряд, съезжая с шоссе.",
   "phrase": "to the right",
   "relation": "prep",
   "headword": "right",
@@ -1654,6 +1738,7 @@
    "right"
   ],
   "hint": "r____",
+  "translation": "Она всегда старается поступать правильно, даже когда это трудно.",
   "phrase": "proper thing",
   "relation": "adj+noun",
   "headword": "thing",
@@ -1673,6 +1758,7 @@
    "during/in the ~"
   ],
   "hint": "d_____ t__",
+  "translation": "Ребёнок несколько раз плакал ночью, так что мы почти не спали.",
   "phrase": "during the night",
   "relation": "prep",
   "headword": "night",
@@ -1694,6 +1780,7 @@
    "strong"
   ],
   "hint": "s_____",
+  "translation": "Несмотря на тихую внешность, у неё была сильная воля, которую было не сломить.",
   "phrase": "indomitable will",
   "relation": "adj+noun",
   "headword": "will",
@@ -1713,6 +1800,7 @@
    "valuable"
   ],
   "hint": "v_______",
+  "translation": "Волонтёры делают ценную работу, помогая пожилым людям в нашем районе.",
   "phrase": "valuable work",
   "relation": "adj+noun",
   "headword": "work",
@@ -1733,6 +1821,7 @@
    "by ~"
   ],
   "hint": "a_ o_",
+  "translation": "У неё есть бесплатный проездной по праву, потому что ей больше шестидесяти пяти.",
   "phrase": "as of right",
   "relation": "prep",
   "headword": "right",
@@ -1754,6 +1843,7 @@
    "Western"
   ],
   "hint": "E______________",
+  "translation": "Многие страны англоязычного мира приняли схожие образовательные стандарты.",
   "phrase": "Arab world",
   "relation": "adj+noun",
   "headword": "world",
@@ -1775,6 +1865,7 @@
    "a/the pace of life"
   ],
   "hint": "t__ p___ o_ l___",
+  "translation": "В городе темп жизни настолько быстрый, что людям редко удаётся отдохнуть.",
   "phrase": "a pace of life",
   "relation": "phrase",
   "headword": "life",
@@ -1794,6 +1885,7 @@
    "sabbatical"
   ],
   "hint": "s_________",
+  "translation": "Проработав учителем десять лет, она взяла годовой отпуск, чтобы попутешествовать и восстановиться.",
   "phrase": "sabbatical year",
   "relation": "adj+noun",
   "headword": "year",
@@ -1815,6 +1907,7 @@
    "love at first sight"
   ],
   "hint": "h___ o___ h____ i_ l___",
+  "translation": "Она влюбилась в него по уши в тот самый миг, когда они познакомились в кофейне.",
   "phrase": "desperately in love",
   "relation": "phrase",
   "headword": "love",
@@ -1834,6 +1927,7 @@
    "across"
   ],
   "hint": "a_____",
+  "translation": "Отец переводил меня через оживлённую улицу, когда я был маленьким.",
   "phrase": "across help",
   "relation": "prep",
   "headword": "help",
@@ -1853,6 +1947,7 @@
    "usual"
   ],
   "hint": "u____",
+  "translation": "Каждое утро Сара делает своё обычное: варит кофе и только потом проверяет почту.",
   "phrase": "usual thing",
   "relation": "adj+noun",
   "headword": "thing",
@@ -1875,6 +1970,7 @@
    "owner"
   ],
   "hint": "o____",
+  "translation": "Новая владелица дома в первый же день посадила в саду деревья.",
   "phrase": "house buyer",
   "relation": "noun+noun",
   "headword": "house",
@@ -1894,6 +1990,7 @@
    "bereaved"
   ],
   "hint": "b_______",
+  "translation": "Семья покойного получила поддержку от соседей после похорон.",
   "phrase": "bereaved family",
   "relation": "adj+noun",
   "headword": "family",
@@ -1916,6 +2013,7 @@
    "per ~"
   ],
   "hint": "p__",
+  "translation": "Кемпинг берёт тридцать долларов за ночь за место под палатку.",
   "phrase": "for a night",
   "relation": "prep",
   "headword": "night",
@@ -1935,6 +2033,7 @@
    "enable sb to"
   ],
   "hint": "e______",
+  "translation": "Гибкий график позволил ей работать неполный день, пока она училась на диплом.",
   "phrase": "enable sb to work",
   "relation": "verb+obj",
   "headword": "work",
@@ -1954,6 +2053,7 @@
    "~ to"
   ],
   "hint": "t_",
+  "translation": "У каждого есть право на чистую питьевую воду и базовую медицинскую помощь.",
   "phrase": "right to",
   "relation": "prep",
   "headword": "right",
@@ -1973,6 +2073,7 @@
    "fall apart"
   ],
   "hint": "f___ a____",
+  "translation": "Когда она потеряла работу, весь её мир рухнул за одну ночь.",
   "phrase": "world fall apart",
   "relation": "noun+verb",
   "headword": "world",
@@ -1993,6 +2094,7 @@
    "away from ~"
   ],
   "hint": "a___ f___",
+  "translation": "Дети затосковали по дому, проведя две недели в летнем лагере.",
   "phrase": "at home",
   "relation": "prep",
   "headword": "home",
@@ -2013,6 +2115,7 @@
    "lunch"
   ],
   "hint": "l____",
+  "translation": "После еды Сара аккуратно сложила все обеденные принадлежности в сумку.",
   "phrase": "breakfast thing",
   "relation": "adj+noun",
   "headword": "thing",
@@ -2034,6 +2137,7 @@
    "in a/the ~"
   ],
   "hint": "i_ a",
+  "translation": "Сестра работает в компании, которая делает программы для больниц.",
   "phrase": "in a company",
   "relation": "prep",
   "headword": "company",
@@ -2061,6 +2165,7 @@
    "useful"
   ],
   "hint": "p________",
+  "translation": "Ходить в школу пешком — удобный способ для детей получать движение каждый день.",
   "phrase": "convenient way",
   "relation": "adj+noun",
   "headword": "way",
@@ -2081,6 +2186,7 @@
    "women's"
   ],
   "hint": "w_____",
+  "translation": "Во многих семьях готовку и уборку раньше считали женской работой.",
   "phrase": "men's work",
   "relation": "adj+noun",
   "headword": "work",
@@ -2100,6 +2206,7 @@
    "~ over"
   ],
   "hint": "o___",
+  "translation": "У компании есть полное право решать, как проектировать и продавать продукт.",
   "phrase": "right over",
   "relation": "prep",
   "headword": "right",
@@ -2119,6 +2226,7 @@
    "~ of"
   ],
   "hint": "o_",
+  "translation": "Бразилия — родина крупнейшего в мире тропического леса и множества уникальных животных.",
   "phrase": "home of",
   "relation": "prep",
   "headword": "home",
@@ -2138,6 +2246,7 @@
    "beyond ~"
   ],
   "hint": "b_____",
+  "translation": "Старой машине уже ничем нельзя было помочь, и мы решили купить новую.",
   "phrase": "beyond help",
   "relation": "prep",
   "headword": "help",
@@ -2157,6 +2266,7 @@
    "with"
   ],
   "hint": "w___",
+  "translation": "Встреча закончилась тем, что все согласились попробовать новый план в следующем месяце.",
   "phrase": "with end",
   "relation": "prep",
   "headword": "end",
@@ -2176,6 +2286,7 @@
    "within a/the ~"
   ],
   "hint": "w_____ t__",
+  "translation": "Отдел маркетинга имел значительное влияние внутри компании.",
   "phrase": "within a company",
   "relation": "prep",
   "headword": "company",
@@ -2195,6 +2306,7 @@
    "countless"
   ],
   "hint": "c________",
+  "translation": "За эти годы она побывала в том музее бессчётное число раз.",
   "phrase": "countless time",
   "relation": "adj+noun",
   "headword": "time",
@@ -2214,6 +2326,7 @@
    "surface"
   ],
   "hint": "s______",
+  "translation": "Рабочая поверхность на кухне была завалена грязной посудой и старыми газетами.",
   "phrase": "work surface",
   "relation": "noun+noun",
   "headword": "work",
@@ -2233,6 +2346,7 @@
    "on the ~"
   ],
   "hint": "o_ t__",
+  "translation": "Когда выйдешь из здания, парковка будет справа.",
   "phrase": "on the right",
   "relation": "prep",
   "headword": "right",
@@ -2252,6 +2366,7 @@
    "brave new"
   ],
   "hint": "b____ n__",
+  "translation": "Компания пообещала сотрудникам дивный новый мир гибкого графика и повышенных зарплат.",
   "phrase": "brave new world",
   "relation": "adj+noun",
   "headword": "world",
@@ -2271,6 +2386,7 @@
    "over/under a ~"
   ],
   "hint": "u____ a",
+  "translation": "Бабушка живёт в этом доме пока что меньше года.",
   "phrase": "over a year",
   "relation": "prep",
   "headword": "year",
@@ -2297,6 +2413,7 @@
    "special"
   ],
   "hint": "m________",
+  "translation": "Свадьба обернулась поистине незабываемым днём для всей семьи.",
   "phrase": "auspicious day",
   "relation": "adj+noun",
   "headword": "day",
@@ -2316,6 +2433,7 @@
    "nostalgic"
   ],
   "hint": "n________",
+  "translation": "Она с ностальгией оглядела свой старый школьный класс после двадцати лет разлуки.",
   "phrase": "nostalgic look",
   "relation": "adj+noun",
   "headword": "look",
@@ -2335,6 +2453,7 @@
    "~ for"
   ],
   "hint": "f__",
+  "translation": "В нашем городе растёт потребность в доступном жилье.",
   "phrase": "need for",
   "relation": "prep",
   "headword": "need",
@@ -2356,6 +2475,7 @@
    "honourable"
   ],
   "hint": "d_____",
+  "translation": "Найдя кошелёк, она поступила порядочно и вернула его владельцу.",
   "phrase": "decent thing",
   "relation": "adj+noun",
   "headword": "thing",
@@ -2375,6 +2495,7 @@
    "adequately"
   ],
   "hint": "a_________",
+  "translation": "Многие семьи в лагере беженцев зимой жили в неподобающих условиях.",
   "phrase": "adequately house",
   "relation": "adv+verb",
   "headword": "house",
@@ -2394,6 +2515,7 @@
    "to this ~"
   ],
   "hint": "t_ t___",
+  "translation": "Нам нужно экономить, и с этой целью мы решили каждый вечер готовить ужин дома.",
   "phrase": "to this end",
   "relation": "prep",
   "headword": "end",
@@ -2414,6 +2536,7 @@
    "nuclear"
   ],
   "hint": "n______",
+  "translation": "Родители переживают, что нынешняя молодёжь ценит традиционную семью меньше, чем прежние поколения.",
   "phrase": "conjugal family",
   "relation": "adj+noun",
   "headword": "family",
@@ -2433,6 +2556,7 @@
    "~ for"
   ],
   "hint": "f__",
+  "translation": "Дочь назвали в честь бабушки, которая была известной пианисткой.",
   "phrase": "name for",
   "relation": "prep",
   "headword": "name",
@@ -2452,6 +2576,7 @@
    "a work of genius"
   ],
   "hint": "a w___ o_ g_____",
+  "translation": "Проект нового музея критики во всём мире сочли гениальной работой.",
   "phrase": "a work of genius",
   "relation": "phrase",
   "headword": "work",
@@ -2471,6 +2596,7 @@
    "about"
   ],
   "hint": "a____",
+  "translation": "Учитель был прав насчёт того, что к экзамену надо готовиться усерднее.",
   "phrase": "about right",
   "relation": "prep",
   "headword": "right",
@@ -2490,6 +2616,7 @@
    "worlds apart"
   ],
   "hint": "w_____ a____",
+  "translation": "У этих двух друзей совершенно разные интересы, и они словно из разных миров, хотя живут по соседству.",
   "phrase": "worlds apart",
   "relation": "phrase",
   "headword": "world",
@@ -2509,6 +2636,7 @@
    "in ~ (of)"
   ],
   "hint": "i_",
+  "translation": "Старый мост остро нуждался в ремонте, пока не стал опасным.",
   "phrase": "in need of",
   "relation": "prep",
   "headword": "need",
@@ -2532,6 +2660,7 @@
    "vital"
   ],
   "hint": "m___",
+  "translation": "Главное, что мы вынесли из того опыта, — никогда не сдаваться.",
   "phrase": "crucial thing",
   "relation": "adj+noun",
   "headword": "thing",
@@ -2551,6 +2680,7 @@
    "in"
   ],
   "hint": "i_",
+  "translation": "Ссора двух друзей закончилась извинениями и примирением.",
   "phrase": "in end",
   "relation": "prep",
   "headword": "end",
@@ -2570,6 +2700,7 @@
    "within a/the ~"
   ],
   "hint": "w_____ a",
+  "translation": "В семье часто случаются разногласия из-за денег и домашних обязанностей.",
   "phrase": "within a family",
   "relation": "prep",
   "headword": "family",
@@ -2589,6 +2720,7 @@
    "by ~"
   ],
   "hint": "b_",
+  "translation": "Охранник каждое утро здоровался со всеми постоянными посетителями по имени.",
   "phrase": "by name",
   "relation": "prep",
   "headword": "name",
@@ -2616,6 +2748,7 @@
    "wonderful"
   ],
   "hint": "w________",
+  "translation": "Прошлым летом мы чудесно провели время на пляже.",
   "phrase": "enjoyable time",
   "relation": "adj+noun",
   "headword": "time",
@@ -2635,6 +2768,7 @@
    "casual"
   ],
   "hint": "c_____",
+  "translation": "Она подрабатывала в кофейне во время своего года перерыва перед учёбой.",
   "phrase": "casual work",
   "relation": "adj+noun",
   "headword": "work",
@@ -2654,6 +2788,7 @@
    "for a/the ~"
   ],
   "hint": "f__ t__",
+  "translation": "Сестра приехала из-за границы, и мы запланировали на день несколько занятий.",
   "phrase": "for a day",
   "relation": "prep",
   "headword": "day",
@@ -2673,6 +2808,7 @@
    "for ~"
   ],
   "hint": "f__",
+  "translation": "Переговорная доступна для использования любому отделу, которому нужно её забронировать.",
   "phrase": "for use",
   "relation": "prep",
   "headword": "use",
@@ -2692,6 +2828,7 @@
    "bloody"
   ],
   "hint": "b_____",
+  "translation": "Эта чёртова штука снова сломалась именно тогда, когда была нужнее всего.",
   "phrase": "bloody thing",
   "relation": "adj+noun",
   "headword": "thing",
@@ -2711,6 +2848,7 @@
    "at an ~"
   ],
   "hint": "a_ a_",
+  "translation": "К следующей пятнице весь ремонт в доме должен подойти к концу.",
   "phrase": "at an end",
   "relation": "prep",
   "headword": "end",
@@ -2732,6 +2870,7 @@
    "by the ~ of"
   ],
   "hint": "b_ t__",
+  "translation": "У нас в офисе работает женщина по имени Сара.",
   "phrase": "by the name of",
   "relation": "prep",
   "headword": "name",
@@ -2753,6 +2892,7 @@
    "in a/the ~"
   ],
   "hint": "i_ t__",
+  "translation": "Мой рейс прилетает после обеда, так что увидимся ближе к вечеру.",
   "phrase": "in a day",
   "relation": "prep",
   "headword": "day",
@@ -2772,6 +2912,7 @@
    "~ to"
   ],
   "hint": "t_",
+  "translation": "Эти старые учебники могут пригодиться новым ученикам в твоём классе.",
   "phrase": "use to",
   "relation": "prep",
   "headword": "use",
@@ -2791,6 +2932,7 @@
    "~ towards"
   ],
   "hint": "t______",
+  "translation": "Многие смотрят в новый год с надеждой и волнением.",
   "phrase": "look towards",
   "relation": "prep",
   "headword": "look",
@@ -2815,6 +2957,7 @@
    "sort out"
   ],
   "hint": "a_______",
+  "translation": "Начальник устроил всё так, чтобы я мог уйти пораньше в пятницу.",
   "phrase": "arrange thing",
   "relation": "verb+obj",
   "headword": "thing",
@@ -2836,6 +2979,7 @@
    "on ~"
   ],
   "hint": "o_",
+  "translation": "Книга упала, и я поставил её стоймя, чтобы она держалась на полке.",
   "phrase": "on end",
   "relation": "prep",
   "headword": "end",
@@ -2855,6 +2999,7 @@
    "after"
   ],
   "hint": "a____",
+  "translation": "Родители решили назвать меня в честь бабушки, потому что она была для них очень важна.",
   "phrase": "after name",
   "relation": "prep",
   "headword": "name",
@@ -2874,6 +3019,7 @@
    "at a ~"
   ],
   "hint": "a_ a",
+  "translation": "Она может сосредоточиться на учёбе примерно два часа за один раз.",
   "phrase": "at a time",
   "relation": "prep",
   "headword": "time",
@@ -2894,6 +3040,7 @@
    "for a/the ~"
   ],
   "hint": "d_____ t__",
+  "translation": "Она днём сидела у подруги дома, пока родители были на работе.",
   "phrase": "during the day",
   "relation": "prep",
   "headword": "day",
@@ -2913,6 +3060,7 @@
    "at the ~"
   ],
   "hint": "a_ t__",
+  "translation": "Ресторан находится в конце торгового центра, рядом с кинотеатром.",
   "phrase": "at the end",
   "relation": "prep",
   "headword": "end",
@@ -2932,6 +3080,7 @@
    "for"
   ],
   "hint": "f__",
+  "translation": "Дочь назвали в честь моей бабушки, которая была учительницей.",
   "phrase": "for name",
   "relation": "prep",
   "headword": "name",
@@ -2951,6 +3100,7 @@
    "for a ~"
   ],
   "hint": "f__ a",
+  "translation": "Она какое-то время работала учительницей, прежде чем решила учиться на врача.",
   "phrase": "for a time",
   "relation": "prep",
   "headword": "time",
@@ -2970,6 +3120,7 @@
    "for"
   ],
   "hint": "f__",
+  "translation": "Кухонный нож используют для нарезки овощей и хлеба.",
   "phrase": "for use",
   "relation": "prep",
   "headword": "use",
@@ -2990,6 +3141,7 @@
    "treatment"
   ],
   "hint": "r_____",
+  "translation": "Бабушка божится, что её домашнее средство — имбирный чай — всегда помогает мне при простуде.",
   "phrase": "home remedy",
   "relation": "noun+noun",
   "headword": "home",
@@ -3011,6 +3163,7 @@
    "strange"
   ],
   "hint": "o__",
+  "translation": "Она посмотрела на меня со странным выражением, когда я рассказал о своём необычном плане.",
   "phrase": "funny look",
   "relation": "prep",
   "headword": "look",
@@ -3030,6 +3183,7 @@
    "at the ~"
   ],
   "hint": "a_ t__",
+  "translation": "Она наконец нашла место для парковки в конце улицы.",
   "phrase": "at the end",
   "relation": "prep",
   "headword": "end",
@@ -3049,6 +3203,7 @@
    "in ~"
   ],
   "hint": "i_",
+  "translation": "Она приехала в аэропорт вовремя, чтобы успеть на рейс в Лондон.",
   "phrase": "in time",
   "relation": "prep",
   "headword": "time",
@@ -3070,6 +3225,7 @@
    "~ of"
   ],
   "hint": "o_",
+  "translation": "После травмы он постепенно вернул подвижность правой руки благодаря физиотерапии.",
   "phrase": "use of",
   "relation": "prep",
   "headword": "use",
@@ -3092,6 +3248,7 @@
    "worried"
   ],
   "hint": "a___________",
+  "translation": "Она взглянула на меня с тревогой, прежде чем войти в экзаменационную аудиторию.",
   "phrase": "apprehensive look",
   "relation": "adj+noun",
   "headword": "look",
@@ -3111,6 +3268,7 @@
    "on ~ (being shown for people to look at)"
   ],
   "hint": "o_",
+  "translation": "Новые модели автомобилей выставлены на выставке в эти выходные.",
   "phrase": "on show being shown for people to look at",
   "relation": "prep",
   "headword": "show",
@@ -3130,6 +3288,7 @@
    "in ~"
   ],
   "hint": "i_",
+  "translation": "Она нервничала из-за презентации, но со временем её уверенность выросла.",
   "phrase": "in time",
   "relation": "prep",
   "headword": "time",
@@ -3149,6 +3308,7 @@
    "waive"
   ],
   "hint": "w____",
+  "translation": "После аварии она решила отказаться от права судиться с компанией.",
   "phrase": "waive right",
   "relation": "verb+obj",
   "headword": "right",
@@ -3168,6 +3328,7 @@
    "burst/hum/teem with"
   ],
   "hint": "h_____ w___",
+  "translation": "Вся улица кипела жизнью субботним утром, когда открывался рынок.",
   "phrase": "burst with life",
   "relation": "verb+obj",
   "headword": "life",
@@ -3191,6 +3352,7 @@
    "pass"
   ],
   "hint": "p_____",
+  "translation": "Прошло несколько лет, прежде чем она наконец вернулась в родной город.",
   "phrase": "year elapse",
   "relation": "noun+verb",
   "headword": "year",
@@ -3210,6 +3372,7 @@
    "as"
   ],
   "hint": "a_",
+  "translation": "Моя старая спальня теперь используется как домашний кабинет, с тех пор как я работаю из дома.",
   "phrase": "as use",
   "relation": "prep",
   "headword": "use",
@@ -3229,6 +3392,7 @@
    "in ~"
   ],
   "hint": "i_",
+  "translation": "Древние руины были построены так, что пережили тысячелетия истории.",
   "phrase": "in time",
   "relation": "prep",
   "headword": "time",
@@ -3248,6 +3412,7 @@
    "owe sb sth"
   ],
   "hint": "o___",
+  "translation": "Некоторые считают, что мир обязан им успехом просто потому, что они много работают.",
   "phrase": "world owe sb sth",
   "relation": "noun+verb",
   "headword": "world",
@@ -3267,6 +3432,7 @@
    "wild"
   ],
   "hint": "w___",
+  "translation": "После аварии на её лице застыл дикий взгляд паники.",
   "phrase": "wild look",
   "relation": "prep",
   "headword": "look",
@@ -3286,6 +3452,7 @@
    "solicitously"
   ],
   "hint": "s___________",
+  "translation": "Медсестра заботливо помогла пожилому пациенту пройти по больничному коридору.",
   "phrase": "solicitously help",
   "relation": "adv+verb",
   "headword": "help",
@@ -3305,6 +3472,7 @@
    "through ~"
   ],
   "hint": "t______",
+  "translation": "Она задумалась, что пережили её предки, проходя сквозь время.",
   "phrase": "through time",
   "relation": "prep",
   "headword": "time",
@@ -3324,6 +3492,7 @@
    "the way back/down/forward/here/home/in/out/over/there/up"
   ],
   "hint": "t__ w__ t____",
+  "translation": "По дороге туда она поехала живописным маршрутом и приехала гораздо позже, чем рассчитывала.",
   "phrase": "the way back",
   "relation": "phrase",
   "headword": "way",
@@ -3349,6 +3518,7 @@
    "parental"
   ],
   "hint": "f_____",
+  "translation": "Многие взрослые до сих пор получают финансовую поддержку из родительского дома.",
   "phrase": "boyhood home",
   "relation": "adj+noun",
   "headword": "home",
@@ -3370,6 +3540,7 @@
    "remote"
   ],
   "hint": "r_____",
+  "translation": "Бабушка выросла в глухом месте, где не было ни дорог, ни электричества.",
   "phrase": "faraway place",
   "relation": "adj+noun",
   "headword": "place",
@@ -3391,6 +3562,7 @@
    "trick"
   ],
   "hint": "t_____",
+  "translation": "Он отговорился от штрафа за превышение скорости, объяснив, что спешил в больницу.",
   "phrase": "bluff way",
   "relation": "verb+obj",
   "headword": "way",
@@ -3410,6 +3582,7 @@
    "in the ~"
   ],
   "hint": "i_ t__",
+  "translation": "Многие люди в мире каждый день говорят больше чем на одном языке.",
   "phrase": "in the world",
   "relation": "prep",
   "headword": "world",
@@ -3432,6 +3605,7 @@
    "sensible"
   ],
   "hint": "s_______",
+  "translation": "Разумнее было бы накопить немного денег, прежде чем покупать машину.",
   "phrase": "logical thing",
   "relation": "adj+noun",
   "headword": "thing",
@@ -3451,6 +3625,7 @@
    "invoke"
   ],
   "hint": "i______",
+  "translation": "Когда учитель упомянул имя знаменитого учёного, ученики заинтересовались уроком.",
   "phrase": "invoke name",
   "relation": "verb+obj",
   "headword": "name",
@@ -3470,6 +3645,7 @@
    "~ for"
   ],
   "hint": "f__",
+  "translation": "Дети были в восторге, потому что наконец пришло время ложиться спать.",
   "phrase": "time for",
   "relation": "prep",
   "headword": "time",
@@ -3489,6 +3665,7 @@
    "the rights and wrongs of sth"
   ],
   "hint": "t__ r_____ a__ w_____ o_",
+  "translation": "Родители часто обсуждают с нами за ужином плюсы и минусы социальных сетей.",
   "phrase": "the rights and wrongs of sth",
   "relation": "phrase",
   "headword": "right",
@@ -3508,6 +3685,7 @@
    "~ of"
   ],
   "hint": "o_",
+  "translation": "Она решила погрузиться в мир профессиональной кухни, насмотревшись кулинарных шоу в интернете.",
   "phrase": "world of",
   "relation": "prep",
   "headword": "world",
@@ -3527,6 +3705,7 @@
    "on ~"
   ],
   "hint": "o_",
+  "translation": "Автобус на этот раз пришёл вовремя, и мы добрались до встречи без спешки.",
   "phrase": "on time",
   "relation": "prep",
   "headword": "time",
@@ -3546,6 +3725,7 @@
    "coordinate"
   ],
   "hint": "c_________",
+  "translation": "Двум отделам пришлось тщательно согласовывать работу, чтобы уложиться в срок.",
   "phrase": "coordinate work",
   "relation": "verb+obj",
   "headword": "work",
@@ -3565,6 +3745,7 @@
    "in the ~"
   ],
   "hint": "i_ t__",
+  "translation": "В мире существуют миллионы разных видов насекомых.",
   "phrase": "in the world",
   "relation": "prep",
   "headword": "world",
@@ -3584,6 +3765,7 @@
    "~ in/into"
   ],
   "hint": "i___",
+  "translation": "Он заглянул в холодильник посмотреть, что есть на ужин.",
   "phrase": "look in",
   "relation": "prep",
   "headword": "look",
@@ -3603,6 +3785,7 @@
    "get/put things straight"
   ],
   "hint": "p__ t_____ s_______",
+  "translation": "Нам нужно всё прояснить, прежде чем двигаться дальше как команда.",
   "phrase": "get things straight",
   "relation": "phrase",
   "headword": "thing",
@@ -3622,6 +3805,7 @@
    "~ at/in"
   ],
   "hint": "i_",
+  "translation": "Дочь получила место в школьном оркестре, пройдя прослушивание.",
   "phrase": "place at",
   "relation": "prep",
   "headword": "place",
@@ -3641,6 +3825,7 @@
    "in a/the ~"
   ],
   "hint": "i_ t__",
+  "translation": "Знаменитый танцор вчера выступил в шоу и сорвал овации.",
   "phrase": "in a show",
   "relation": "prep",
   "headword": "show",
@@ -3660,6 +3845,7 @@
    "over ~"
   ],
   "hint": "o___",
+  "translation": "Мой английский со временем сильно улучшился с тех пор, как я начал брать уроки.",
   "phrase": "over time",
   "relation": "prep",
   "headword": "time",
@@ -3682,6 +3868,7 @@
    "~ out of"
   ],
   "hint": "o__ o_",
+  "translation": "Я наконец нашёл выход из запутанного терминала аэропорта, расспросив нескольких человек.",
   "phrase": "way from",
   "relation": "prep",
   "headword": "way",
@@ -3701,6 +3888,7 @@
    "from a/the ~"
   ],
   "hint": "f___ t__",
+  "translation": "Открывающий танцевальный номер шоу исполнили профессиональные танцоры.",
   "phrase": "from a show",
   "relation": "prep",
   "headword": "show",
@@ -3721,6 +3909,7 @@
    "suggest sth"
   ],
   "hint": "s_______",
+  "translation": "Название ресторана намекает, что там специализируются на свежих морепродуктах со Средиземноморья.",
   "phrase": "name imply sth",
   "relation": "noun+verb",
   "headword": "name",
@@ -3742,6 +3931,7 @@
    "~ through"
   ],
   "hint": "t______",
+  "translation": "Она протиснулась через людный рынок к овощному прилавку.",
   "phrase": "way through",
   "relation": "prep",
   "headword": "way",
@@ -3761,6 +3951,7 @@
    "from beginning to end"
   ],
   "hint": "f___ b________ t_ e__",
+  "translation": "Я посмотрел весь фильм от начала до конца, ни разу не заглянув в телефон.",
   "phrase": "from beginning to end end",
   "relation": "prep",
   "headword": "end",
@@ -3780,6 +3971,7 @@
    "by the ~"
   ],
   "hint": "b_ t__",
+  "translation": "Магазин уже закроется к тому времени, как ты приедешь после работы.",
   "phrase": "by the time",
   "relation": "prep",
   "headword": "time",
@@ -3800,6 +3992,7 @@
    "~ to"
   ],
   "hint": "t_",
+  "translation": "Быстрее всего добраться до вокзала через парк, а не по главной дороге.",
   "phrase": "way from",
   "relation": "prep",
   "headword": "way",
@@ -3819,6 +4012,7 @@
    "get/keep things going/moving"
   ],
   "hint": "g__ t_____ m_____",
+  "translation": "Маленькому магазину удалось снова сдвинуть дело с мёртвой точки, когда пришёл новый управляющий.",
   "phrase": "get things going",
   "relation": "phrase",
   "headword": "thing",
@@ -3839,6 +4033,7 @@
    "spare (sb)"
   ],
   "hint": "s_____",
+  "translation": "Она вспомнила о старом друге, проходя мимо их любимого кафе.",
   "phrase": "give sb thought",
   "relation": "verb+obj",
   "headword": "thought",
@@ -3858,6 +4053,7 @@
    "~ to"
   ],
   "hint": "t_",
+  "translation": "Отсюда до центра города можно добраться несколькими разными способами.",
   "phrase": "way to",
   "relation": "prep",
   "headword": "way",
@@ -3877,6 +4073,7 @@
    "furtive"
   ],
   "hint": "f______",
+  "translation": "Она украдкой оглядела комнату, прежде чем шепнуть подруге секрет.",
   "phrase": "furtive look",
   "relation": "adj+noun",
   "headword": "look",
@@ -3896,6 +4093,7 @@
    "along the ~"
   ],
   "hint": "a____ t__",
+  "translation": "Во время поездки к морю мы останавливались в нескольких интересных городках по пути.",
   "phrase": "along the way",
   "relation": "prep",
   "headword": "way",
@@ -3915,6 +4113,7 @@
    "kind/sort of thing"
   ],
   "hint": "k___ o_ t____",
+  "translation": "Родители по выходным любят читать книги, смотреть фильмы и всё в таком духе.",
   "phrase": "kind of thing",
   "relation": "phrase",
   "headword": "thing",
@@ -3934,6 +4133,7 @@
    "~ across"
   ],
   "hint": "a_____",
+  "translation": "Есть живописная тропа, которая идёт через реку до самой деревни.",
   "phrase": "way across",
   "relation": "prep",
   "headword": "way",
@@ -3953,6 +4153,7 @@
    "across the ~"
   ],
   "hint": "a_____ t__",
+  "translation": "Учёные из разных стран мира работают сообща, чтобы найти лекарство от болезни.",
   "phrase": "across the world",
   "relation": "prep",
   "headword": "world",
@@ -3972,6 +4173,7 @@
    "~ about"
   ],
   "hint": "a____",
+  "translation": "Мне очень нравится в этой работе одна вещь — коллеги приветливые и отзывчивые.",
   "phrase": "thing about",
   "relation": "prep",
   "headword": "thing",
@@ -4000,6 +4202,7 @@
    "wonderfully"
   ],
   "hint": "o____",
+  "translation": "Ресторан носил странное название «Сломанный компас», но всем нравилось там есть.",
   "phrase": "curiously name",
   "relation": "adv+verb",
   "headword": "name",
@@ -4021,6 +4224,7 @@
    "motivate sb to"
   ],
   "hint": "m________",
+  "translation": "Обещание премии подтолкнуло её работать допоздна весь тот месяц.",
   "phrase": "motivate sb to work",
   "relation": "verb+obj",
   "headword": "work",
@@ -4040,6 +4244,7 @@
    "squatters'"
   ],
   "hint": "s________",
+  "translation": "Прожив в заброшенном доме несколько месяцев, группа приобрела права самовольных жильцов.",
   "phrase": "squatters' right",
   "relation": "adj+noun",
   "headword": "right",
@@ -4059,6 +4264,7 @@
    "domination"
   ],
   "hint": "d_________",
+  "translation": "Сверхдержава стремилась к мировому господству в эпоху холодной войны.",
   "phrase": "world domination",
   "relation": "noun+noun",
   "headword": "world",
@@ -4080,6 +4286,7 @@
    "in a/the ~"
   ],
   "hint": "i_ t__",
+  "translation": "Мы просидели весь день дома из-за сильного дождя на улице.",
   "phrase": "in a house",
   "relation": "prep",
   "headword": "house",
@@ -4100,6 +4307,7 @@
    "seminal"
   ],
   "hint": "s______",
+  "translation": "Для большинства учёных этот документальный фильм до сих пор остаётся основополагающей работой о климате.",
   "phrase": "definitive work",
   "relation": "adj+noun",
   "headword": "work",
@@ -4119,6 +4327,7 @@
    "vanishing"
   ],
   "hint": "v________",
+  "translation": "Бабушка часто говорит об исчезающем мире её детства, когда интернета ещё не было.",
   "phrase": "vanishing world",
   "relation": "adj+noun",
   "headword": "world",
@@ -4139,6 +4348,7 @@
    "give sb/sth"
   ],
   "hint": "f____",
+  "translation": "Мы наконец нашли жильё после шести месяцев поисков в городе.",
   "phrase": "find sb home",
   "relation": "verb+obj",
   "headword": "home",
@@ -4158,6 +4368,7 @@
    "behind ~"
   ],
   "hint": "b_____",
+  "translation": "Автобус приехал с опозданием на двадцать минут, и мы не успели на встречу.",
   "phrase": "behind time",
   "relation": "prep",
   "headword": "time",
@@ -4177,6 +4388,7 @@
    "on the/your ~"
   ],
   "hint": "o_ t__",
+  "translation": "Вчера по дороге с работы я купил продуктов.",
   "phrase": "on the way",
   "relation": "prep",
   "headword": "way",
@@ -4196,6 +4408,7 @@
    "know/learn/teach sb a thing or two"
   ],
   "hint": "t____",
+  "translation": "Дед мог бы кое-чему нас научить в рыбалке после пятидесяти лет на реке.",
   "phrase": "know sb a thing or two",
   "relation": "phrase",
   "headword": "thing",
@@ -4215,6 +4428,7 @@
    "out of the/your ~"
   ],
   "hint": "o__ o_ t__",
+  "translation": "Мне надо убрать машину с дороги, чтобы здесь припарковался грузовик с доставкой.",
   "phrase": "out of the way",
   "relation": "prep",
   "headword": "way",
@@ -4234,6 +4448,7 @@
    "throughout the ~"
   ],
   "hint": "t_________ t__",
+  "translation": "Учёные со всего мира работают сообща, чтобы найти лекарство от болезни.",
   "phrase": "throughout the world",
   "relation": "prep",
   "headword": "world",
@@ -4257,6 +4472,7 @@
    "terrible"
   ],
   "hint": "a____",
+  "translation": "Это был ужасный поступок — уйти с вечеринки, ни с кем не попрощавшись.",
   "phrase": "appalling thing",
   "relation": "adj+noun",
   "headword": "thing",
@@ -4276,6 +4492,7 @@
    "~ for/of"
   ],
   "hint": "o_",
+  "translation": "У бабушки необычное имя польского происхождения, которое никто не может выговорить.",
   "phrase": "name for",
   "relation": "prep",
   "headword": "name",
@@ -4297,6 +4514,7 @@
    "be ripe"
   ],
   "hint": "w__ r___",
+  "translation": "Настало подходящее время наконец открыть свой ресторан после лет планирования.",
   "phrase": "time be ripe",
   "relation": "noun+verb",
   "headword": "time",
@@ -4316,6 +4534,7 @@
    "ahead of ~"
   ],
   "hint": "a____ o_",
+  "translation": "Она подготовила слайды для презентации заранее, чтобы не нервничать перед встречей.",
   "phrase": "ahead of time",
   "relation": "prep",
   "headword": "time",
@@ -4335,6 +4554,7 @@
    "undercover"
   ],
   "hint": "u_________",
+  "translation": "Полицейские годами работали под прикрытием, чтобы поймать преступную группировку.",
   "phrase": "undercover work",
   "relation": "adj+noun",
   "headword": "work",
@@ -4354,6 +4574,7 @@
    "among/amongst other things"
   ],
   "hint": "a______ o____ t_____",
+  "translation": "Сара любит рисовать, играть на гитаре и, помимо прочего, помогает в приюте для животных.",
   "phrase": "among other things",
   "relation": "phrase",
   "headword": "thing",
@@ -4374,6 +4595,7 @@
    "the eyes of the world"
   ],
   "hint": "p_________ o_ t__ w____",
+  "translation": "Поездки по Азии полностью изменили её восприятие мира.",
   "phrase": "experience of the world",
   "relation": "phrase",
   "headword": "world",
@@ -4395,6 +4617,7 @@
    "to/until the bitter end"
   ],
   "hint": "u____ t__ b_____ e__",
+  "translation": "Она решила оставаться в отношениях до самого горького конца, несмотря на все проблемы.",
   "phrase": "to the bitter end end",
   "relation": "prep",
   "headword": "end",
@@ -4415,6 +4638,7 @@
    "damage"
   ],
   "hint": "d______",
+  "translation": "Его участие в скандале серьёзно подорвало репутацию благотворительной организации.",
   "phrase": "blacken name",
   "relation": "verb+obj",
   "headword": "name",
@@ -4434,6 +4658,7 @@
    "for"
   ],
   "hint": "f__",
+  "translation": "Брат работает в технологическом стартапе в центре города.",
   "phrase": "for work",
   "relation": "prep",
   "headword": "work",
@@ -4453,6 +4678,7 @@
    "~ with"
   ],
   "hint": "w___",
+  "translation": "Команда работает с местными жителями над благоустройством районного парка.",
   "phrase": "work with",
   "relation": "prep",
   "headword": "work",
@@ -4472,6 +4698,7 @@
    "through ~"
   ],
   "hint": "t______",
+  "translation": "Я познакомился с лучшим другом через работу в кофейне в центре.",
   "phrase": "through work",
   "relation": "prep",
   "headword": "work",
@@ -4491,6 +4718,7 @@
    "~ on"
   ],
   "hint": "o_",
+  "translation": "Сестра делает проект по естествознанию, и в эти выходные ей нужна помощь.",
   "phrase": "work on",
   "relation": "prep",
   "headword": "work",
@@ -4510,6 +4738,7 @@
    "on"
   ],
   "hint": "o_",
+  "translation": "Команда работает над улучшением обслуживания гостей в ресторане.",
   "phrase": "on work",
   "relation": "prep",
   "headword": "work",
@@ -4529,6 +4758,7 @@
    "let things slide/slip"
   ],
   "hint": "l__ t_____ s____",
+  "translation": "После травмы он не хотел запускать дела на работе и вышел раньше срока.",
   "phrase": "let things slide",
   "relation": "phrase",
   "headword": "thing",
@@ -4548,6 +4778,7 @@
    "bide"
   ],
   "hint": "b____",
+  "translation": "Мы выжидали подходящего момента и не подавали на эту работу, пока не набрались опыта.",
   "phrase": "bide time",
   "relation": "verb+obj",
   "headword": "time",
@@ -4567,6 +4798,7 @@
    "out of ~"
   ],
   "hint": "o__ o_",
+  "translation": "Сестра уже три месяца без работы и ищет новую.",
   "phrase": "out of work",
   "relation": "prep",
   "headword": "work",
@@ -4586,6 +4818,7 @@
    "~ about/around"
   ],
   "hint": "a____",
+  "translation": "Ей нравится изучать разные культуры и традиции окружающего её мира.",
   "phrase": "world about",
   "relation": "prep",
   "headword": "world",
@@ -4605,6 +4838,7 @@
    "for"
   ],
   "hint": "f__",
+  "translation": "У него всё в итоге сложилось, несмотря на первоначальные трудности.",
   "phrase": "for work",
   "relation": "prep",
   "headword": "work",
@@ -4624,6 +4858,7 @@
    "the mists of time"
   ],
   "hint": "t__ m____ o_ t___",
+  "translation": "Никто точно не знает, когда зародилась эта традиция, — она теряется во тьме веков.",
   "phrase": "the mists of time",
   "relation": "phrase",
   "headword": "time",
@@ -4643,6 +4878,7 @@
    "at ~"
   ],
   "hint": "a_",
+  "translation": "Брат сейчас на работе, так что дома будет только к шести.",
   "phrase": "at work",
   "relation": "prep",
   "headword": "work",
@@ -4662,6 +4898,7 @@
    "beaters"
   ],
   "hint": "b______",
+  "translation": "Эта новая компания по производству смартфонов за пять лет вырвалась в мировые лидеры.",
   "phrase": "world beaters",
   "relation": "noun+noun",
   "headword": "world",
@@ -4681,6 +4918,7 @@
    "at"
   ],
   "hint": "a_",
+  "translation": "Она всё утро работала за компьютером, чтобы закончить проект до обеда.",
   "phrase": "at work",
   "relation": "prep",
   "headword": "work",
@@ -4700,6 +4938,7 @@
    "all around/over/round the ~"
   ],
   "hint": "a__ o___ t__",
+  "translation": "Люди со всего мира каждый год приезжают в этот музей посмотреть на знаменитые картины.",
   "phrase": "all around the world",
   "relation": "prep",
   "headword": "world",
@@ -4719,6 +4958,7 @@
    "put a name to sb/sth"
   ],
   "hint": "p__ a n___ t_",
+  "translation": "Я никак не мог вспомнить название старой песни, игравшей в кафе.",
   "phrase": "put a name to sb",
   "relation": "phrase",
   "headword": "name",
@@ -4738,6 +4978,7 @@
    "off ~"
   ],
   "hint": "o__",
+  "translation": "Отец взял неделю отпуска, чтобы помочь нам с переездом в новый дом.",
   "phrase": "off work",
   "relation": "prep",
   "headword": "work",
@@ -4757,6 +4998,7 @@
    "with"
   ],
   "hint": "w___",
+  "translation": "Ей нравится работать с командой над решением сложных задач в офисе.",
   "phrase": "with work",
   "relation": "prep",
   "headword": "work",
@@ -4776,6 +5018,7 @@
    "at a/the~"
   ],
   "hint": "a_ t__",
+  "translation": "Бабушка была учительницей в те времена, когда женщины редко имели профессию.",
   "phrase": "at a time",
   "relation": "prep",
   "headword": "time",
@@ -4795,6 +5038,7 @@
    "as"
   ],
   "hint": "a_",
+  "translation": "Она пять лет проработала медсестрой в больнице, прежде чем сменила профессию.",
   "phrase": "as work",
   "relation": "prep",
   "headword": "work",
@@ -4814,6 +5058,7 @@
    "be hearing/imagining/seeing"
   ],
   "hint": "b___ s_____",
+  "translation": "Мне, кажется, в последнее время мерещится всякое — так я устал от работы.",
   "phrase": "be hearing thing",
   "relation": "verb+obj",
   "headword": "thing",
@@ -4833,6 +5078,7 @@
    "over/with ~"
   ],
   "hint": "o___",
+  "translation": "Со временем он научился готовить лучше, пробуя каждую неделю новые рецепты.",
   "phrase": "over time",
   "relation": "prep",
   "headword": "time",
@@ -4852,6 +5098,7 @@
    "at ~"
   ],
   "hint": "a_",
+  "translation": "Она была на работе, когда сын позвонил сказать, что потерял ключи.",
   "phrase": "at work",
   "relation": "prep",
   "headword": "work",
@@ -4871,6 +5118,7 @@
    "at a/the ~"
   ],
   "hint": "a_ a",
+  "translation": "Мы пускаем не больше десяти посетителей за раз, чтобы в музее не было толчеи.",
   "phrase": "at a time",
   "relation": "prep",
   "headword": "time",
@@ -4890,6 +5138,7 @@
    "in (your) ~"
   ],
   "hint": "i_",
+  "translation": "Многие испытывают стресс, когда им некомфортно в рабочей обстановке.",
   "phrase": "in your work",
   "relation": "prep",
   "headword": "work",
@@ -4909,6 +5158,7 @@
    "revolve around sb/sth"
   ],
   "hint": "r_______ a_____",
+  "translation": "Его сын-подросток считает, что мир вертится вокруг его смартфона и друзей.",
   "phrase": "world revolve around sb",
   "relation": "noun+verb",
   "headword": "world",

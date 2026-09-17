@@ -43,6 +43,8 @@ ANKI_CSS = """
 .sentence { font-size: 23px; margin-bottom: 14px; }
 .gap { color: #b0641e; font-weight: 600; letter-spacing: 1px; }
 .nightMode .gap { color: #e5a05a; }
+.translation { font-size: 18px; color: #6a6a66; margin-bottom: 12px; }
+.nightMode .translation { color: #a8a8a2; }
 .hint { font-size: 17px; color: #8a8a85; letter-spacing: 2px; font-family: monospace; }
 .answer { font-size: 26px; font-weight: 600; color: #1f7a4d; margin-bottom: 10px; }
 .nightMode .answer { color: #6ecf9a; }
@@ -54,8 +56,12 @@ hr { border: none; border-top: 1px solid #ddd; margin: 16px 0; }
 .nightMode hr { border-top-color: #3a3a3a; }
 """
 
+# Перевод стоит на лицевой стороне, а не на обороте: он задаёт смысл, который
+# нужно выразить по-английски. Без него пропуск допускает слишком много
+# осмысленных вариантов — это угадайка, а не упражнение на продукцию.
 FRONT_TEMPLATE = """
 <div class="sentence">{{Text}}</div>
+<div class="translation">{{Translation}}</div>
 <div class="hint">{{Hint}}</div>
 """
 
@@ -100,6 +106,7 @@ def _card_fields(card: dict) -> list[str]:
         text,
         html.escape(card["answer"]),
         html.escape(card["hint"]),
+        html.escape(card.get("translation") or ""),
         full,
         html.escape(f"варианты кластера: {accept}"),
         html.escape(card["phrase"]),
@@ -120,11 +127,14 @@ def cmd_anki(args: argparse.Namespace) -> int:
         cards = cards[: args.limit]
 
     model = genanki.Model(
-        _stable_id("collocation-cloze-model-v1"),
+        # Версия в имени обязательна: Anki опознаёт тип заметки по этому
+        # идентификатору, и при смене набора полей его нужно поднимать.
+        _stable_id("collocation-cloze-model-v2"),
         "Коллокация (пропуск)",
         fields=[
-            {"name": "Text"}, {"name": "Answer"}, {"name": "Hint"}, {"name": "Full"},
-            {"name": "Accept"}, {"name": "Phrase"}, {"name": "Meta"}, {"name": "CardId"},
+            {"name": "Text"}, {"name": "Answer"}, {"name": "Hint"},
+            {"name": "Translation"}, {"name": "Full"}, {"name": "Accept"},
+            {"name": "Phrase"}, {"name": "Meta"}, {"name": "CardId"},
         ],
         templates=[
             {"name": "Пропуск", "qfmt": FRONT_TEMPLATE, "afmt": BACK_TEMPLATE}
@@ -179,6 +189,7 @@ HTML_PAGE = """<!DOCTYPE html>
   .num {{ float: right; color: #aaa; font-size: 13px; }}
   .sentence {{ font-size: 18px; }}
   .gap {{ color: #b0641e; font-weight: 600; letter-spacing: 1px; }}
+  .translation {{ color: #888; font-size: 16px; margin-top: 8px; }}
   .hint {{ font-family: monospace; color: #999; letter-spacing: 2px; font-size: 15px;
           margin-top: 6px; }}
   details {{ margin-top: 10px; }}
@@ -196,6 +207,7 @@ HTML_PAGE = """<!DOCTYPE html>
 HTML_CARD = """<div class="card">
   <span class="num">#{position}</span>
   <div class="sentence">{text}</div>
+  <div class="translation">{translation}</div>
   <div class="hint">{hint}</div>
   <details><summary>показать ответ</summary>
     <div class="answer">{answer}</div>
@@ -226,6 +238,7 @@ def cmd_html(args: argparse.Namespace) -> int:
             HTML_CARD.format(
                 position=card["position"],
                 text=html.escape(card["text"]).replace("___", GAP_HTML),
+                translation=html.escape(card.get("translation") or ""),
                 hint=html.escape(card["hint"]),
                 answer=html.escape(card["answer"]),
                 accept=html.escape(", ".join(card["accept"])),

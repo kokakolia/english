@@ -23,6 +23,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from ..normalize import store
+from ..translate import store as translations_store
 from . import quality
 
 DECKS_DIR = Path(__file__).resolve().parents[2] / "decks"
@@ -61,6 +62,13 @@ def make_cards(conn, args) -> tuple[list[dict], dict[str, int]]:
     everything, candidates = _load_rows(conn)
     index = quality.rival_index(everything)
 
+    # Переводы живут отдельно и привязаны к тексту предложения, а не к карточке.
+    translations_conn = translations_store.connect()
+    try:
+        translations = translations_store.load_all(translations_conn)
+    finally:
+        translations_conn.close()
+
     cards: list[dict] = []
     rejected: dict[str, int] = {}
     max_ambiguity = AMBIGUITY_ORDER[args.max_ambiguity]
@@ -96,6 +104,7 @@ def make_cards(conn, args) -> tuple[list[dict], dict[str, int]]:
                 "answer": answer,
                 "accept": accept,
                 "hint": verdict.hint,
+                "translation": translations.get(translations_store.key_for(example)),
                 "phrase": phrase,
                 "relation": relation,
                 "headword": headword,
@@ -114,10 +123,18 @@ def make_cards(conn, args) -> tuple[list[dict], dict[str, int]]:
 
 
 def content_version(cards: list[dict]) -> str:
-    """Хэш содержимого: меняется только когда меняются сами карточки."""
+    """Хэш содержимого: меняется только когда меняются сами карточки.
+
+    В хэш входит всё, что пользователь видит на карточке, включая перевод:
+    иначе исправленный перевод не доехал бы до приложения, которое сверяет
+    версии и решило бы, что обновляться не нужно.
+    """
     digest = hashlib.sha1()
     for card in cards:
-        digest.update(f"{card['id']}|{card['text']}|{card['answer']}".encode("utf-8"))
+        digest.update(
+            f"{card['id']}|{card['text']}|{card['answer']}"
+            f"|{card.get('translation') or ''}".encode("utf-8")
+        )
     return digest.hexdigest()[:12]
 
 
@@ -243,6 +260,10 @@ def cmd_run(args: argparse.Namespace) -> int:
     for reason, count in sorted(rejected.items(), key=lambda item: -item[1]):
         print(f"  {count:>5}  {reason}")
 
+    translated = sum(1 for card in cards if card.get("translation"))
+    print(f"с переводом: {translated} из {len(cards)} "
+          f"({translated / len(cards):.0%})")
+
     by_ambiguity: dict[str, int] = {}
     for card in cards:
         by_ambiguity[card["ambiguity"]] = by_ambiguity.get(card["ambiguity"], 0) + 1
@@ -270,6 +291,8 @@ def cmd_preview(args: argparse.Namespace) -> int:
             shown += 1
             level = card["cefr"] or "—"
             print(f"{card['position']:>5}. {card['text']}")
+            if card.get("translation"):
+                print(f"       {card['translation']}")
             print(f"       ответ: {card['answer']}   подсказка: {card['hint']}")
             print(f"       принимаем: {', '.join(card['accept'])}")
             print(f"       {card['relation']} · {card['band']} · CEFR {level} · "

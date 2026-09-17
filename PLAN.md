@@ -68,6 +68,7 @@
       "id": "c_9f2a...",
       "type": "cloze",
       "front": "We need to ___ a decision by Friday.",
+      "translation": "Нам нужно принять решение до пятницы.",
       "answer": "make",
       "accept": ["make", "take", "reach"],
       "hint": "m___",

@@ -8,6 +8,7 @@
    "in honour of sb/sth"
   ],
   "hint": "i_ h_____ o_",
+  "translation": "Мы назвали дочь Софией в честь моей бабушки.",
   "phrase": "in honour of sb name",
   "relation": "prep",
   "headword": "name",
@@ -29,6 +30,7 @@
    "in sb/sth's ~"
   ],
   "hint": "i_",
+  "translation": "Бронь в отеле оформили на имя моей мамы, так как платила она.",
   "phrase": "in sb name",
   "relation": "prep",
   "headword": "name",
@@ -48,6 +50,7 @@
    "look bleak/grim"
   ],
   "hint": "l_____ g___",
+  "translation": "Когда команда лишилась лучшего игрока, дела на остаток сезона стали выглядеть мрачно.",
   "phrase": "thing look bleak",
   "relation": "noun+verb",
   "headword": "thing",
@@ -67,6 +70,7 @@
    "at sb's/the ~"
   ],
   "hint": "a_",
+  "translation": "В прошлую субботу мы чудесно поужинали у них дома.",
   "phrase": "at sb's house",
   "relation": "prep",
   "headword": "house",
@@ -88,6 +92,7 @@
    "give sb/sth"
   ],
   "hint": "g___",
+  "translation": "Она дала проекту больше времени, потому что первый срок был слишком жёстким.",
   "phrase": "give sb time",
   "relation": "verb+obj",
   "headword": "time",
@@ -107,6 +112,7 @@
    "incentive"
   ],
   "hint": "i_________",
+  "translation": "Компания предлагает премии как стимул к работе, чтобы сотрудники сохраняли мотивацию.",
   "phrase": "work incentive",
   "relation": "noun+noun",
   "headword": "work",
@@ -126,6 +132,7 @@
    "a backlog of work"
   ],
   "hint": "a b______ o_ w___",
+  "translation": "В офисе скопились незавершённые дела, которые надо закрыть на этой неделе.",
   "phrase": "a backlog of work",
   "relation": "phrase",
   "headword": "work",
@@ -145,6 +152,7 @@
    "in a/the ~"
   ],
   "hint": "i_ t__",
+  "translation": "Борьба главного героя прослеживается в творчестве многих современных художников.",
   "phrase": "in a work",
   "relation": "prep",
   "headword": "work",
