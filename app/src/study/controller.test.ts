@@ -127,15 +127,6 @@ describe("раскрытие карточки", () => {
     expect(controller.state().phase).toBe("answered");
   });
 
-  it("показывает сроки на кнопках до выбора оценки", async () => {
-    const controller = await makeController();
-    controller.reveal();
-
-    const intervals = controller.state().intervals!;
-    expect(intervals.again).toBeLessThanOrEqual(intervals.good);
-    expect(intervals.good).toBeLessThan(intervals.easy);
-  });
-
   it("повторное раскрытие ничего не ломает", async () => {
     const controller = await makeController();
     const first = controller.state().card?.id;
@@ -331,9 +322,6 @@ describe("отмена оценки", () => {
     const state = controller.state();
     expect(state.phase).toBe("answered");
     expect(state.card?.id).toBe(first);
-    // Сроки на кнопках должны быть теми же, что и в первый раз: иначе
-    // выбирать придётся вслепую.
-    expect(state.intervals).not.toBeNull();
   });
 
   it("возвращает прогресс FSRS к прежнему состоянию", async () => {

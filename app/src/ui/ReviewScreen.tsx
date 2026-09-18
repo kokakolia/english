@@ -14,7 +14,7 @@ import { useEffect } from "react";
 
 import { GRADES, type Grade } from "../srs";
 import { keyAction, type StudyController, type StudyState } from "../study/controller";
-import { formatInterval, plural } from "./format";
+import { plural } from "./format";
 import { GradeIcon, Leaf, MoodPlant, PanelFlourish, UndoArrow } from "./Ornaments";
 
 /**
@@ -273,9 +273,6 @@ export function ReviewScreen({ controller, state, onFinish }: Props) {
               >
                 <GradeIcon grade={grade} />
                 <span className="grade-label">{GRADE_LABELS[grade]}</span>
-                <span className="grade-interval">
-                  {state.intervals ? formatInterval(state.intervals[grade]) : ""}
-                </span>
                 <span className="grade-key">{index + 1}</span>
               </button>
             ))}

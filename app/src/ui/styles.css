@@ -590,7 +590,6 @@ body {
   }
 }
 
-.grade-interval,
 .grade-key {
   font-size: clamp(10px, 0.9vw, 12px);
   color: var(--brass);

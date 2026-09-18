@@ -61,8 +61,6 @@ export interface StudyState {
   phase: StudyPhase;
   card: DeckCard | null;
   hintVisible: boolean;
-  /** Сколько дней до следующего показа при каждой оценке. */
-  intervals: Record<Grade, number> | null;
   /**
    * Сколько раз за занятие поставлена каждая оценка.
    *
@@ -187,7 +185,6 @@ export async function createStudyController(
     phase: "loading",
     card: null,
     hintVisible: false,
-    intervals: null,
     tally: { ...EMPTY_TALLY },
     counts: EMPTY_COUNTS,
     backlog: 0,
@@ -209,21 +206,6 @@ export async function createStudyController(
     for (const listener of listeners) listener(state);
   }
 
-  /** Сроки на кнопках оценки: их видно до того, как выбрал. */
-  function previewIntervals(card: DeckCard): Record<Grade, number> {
-    const now = clock();
-    const current =
-      progress.get(card.id) ??
-      ({ ...scheduler.create(card.id, now), deckId } as StoredProgress);
-    const preview = scheduler.preview(current, now);
-    return {
-      again: preview.again.intervalDays,
-      hard: preview.hard.intervalDays,
-      good: preview.good.intervalDays,
-      easy: preview.easy.intervalDays,
-    };
-  }
-
   function advance(): void {
     const card = session?.current() ?? null;
     if (card === null) {
@@ -231,7 +213,6 @@ export async function createStudyController(
         phase: "finished",
         card: null,
         hintVisible: false,
-        intervals: null,
         session: session?.progress() ?? EMPTY_SESSION,
       });
       return;
@@ -240,7 +221,6 @@ export async function createStudyController(
       phase: "question",
       card,
       hintVisible: false,
-      intervals: null,
       session: session?.progress() ?? EMPTY_SESSION,
     });
   }
@@ -309,7 +289,7 @@ export async function createStudyController(
     reveal() {
       const card = state.card;
       if (state.phase !== "question" || card === null) return;
-      publish({ phase: "answered", intervals: previewIntervals(card) });
+      publish({ phase: "answered" });
     },
 
     async grade(grade) {
@@ -386,7 +366,6 @@ export async function createStudyController(
         phase: "answered",
         card: step.card,
         hintVisible: false,
-        intervals: previewIntervals(step.card),
         tally,
         session: session?.progress() ?? EMPTY_SESSION,
         canUndo: undoStack.length > 0,
