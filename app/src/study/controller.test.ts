@@ -181,11 +181,19 @@ describe("разбор нажатий", () => {
     expect(keyAction("answered", "Enter")).toEqual({ kind: "grade", grade: "good" });
   });
 
+  it("Backspace отменяет в любом рабочем состоянии", () => {
+    expect(keyAction("question", "Backspace")).toEqual({ kind: "undo" });
+    expect(keyAction("answered", "Backspace")).toEqual({ kind: "undo" });
+    expect(keyAction("finished", "Backspace")).toEqual({ kind: "undo" });
+  });
+
   it("прочие клавиши и прочие состояния игнорируются", () => {
     expect(keyAction("answered", "x")).toBeNull();
     expect(keyAction("loading", " ")).toBeNull();
     expect(keyAction("finished", "Enter")).toBeNull();
     expect(keyAction("empty", "1")).toBeNull();
+    expect(keyAction("loading", "Backspace")).toBeNull();
+    expect(keyAction("empty", "Backspace")).toBeNull();
   });
 
   it("одно нажатие даёт ровно одно действие", async () => {
@@ -280,6 +288,169 @@ describe("оценка и запись", () => {
     expect(controller.state().phase).toBe("finished");
     expect(controller.state().session.completed).toBe(3);
     expect(await db.reviews.count()).toBe(3);
+  });
+});
+
+describe("отмена оценки", () => {
+  it("в начале занятия отменять нечего", async () => {
+    const controller = await makeController();
+    expect(controller.state().canUndo).toBe(false);
+
+    await controller.undo();
+    expect(controller.state().phase).toBe("question");
+    expect(await db.reviews.count()).toBe(0);
+  });
+
+  it("возвращает ту же карточку с раскрытым ответом", async () => {
+    const controller = await makeController();
+    const first = controller.state().card!.id;
+
+    controller.reveal();
+    await controller.grade("good");
+    expect(controller.state().card?.id).not.toBe(first);
+
+    await controller.undo();
+    const state = controller.state();
+    expect(state.phase).toBe("answered");
+    expect(state.card?.id).toBe(first);
+    // Сроки на кнопках должны быть теми же, что и в первый раз: иначе
+    // выбирать придётся вслепую.
+    expect(state.intervals).not.toBeNull();
+  });
+
+  it("возвращает прогресс FSRS к прежнему состоянию", async () => {
+    const controller = await makeController();
+    const first = controller.state().card!.id;
+
+    controller.reveal();
+    await controller.grade("easy");
+    expect(await db.progress.get(first)).toBeDefined();
+
+    await controller.undo();
+    // Карточку видели впервые — значит и прогресса быть не должно.
+    expect(await db.progress.get(first)).toBeUndefined();
+  });
+
+  it("возвращает прогресс уже знакомой карточки, а не стирает его", async () => {
+    const controller = await makeController();
+    const first = controller.state().card!.id;
+
+    controller.reveal();
+    await controller.grade("good");
+    const afterFirst = await db.progress.get(first);
+
+    // Второй заход по той же карточке: теперь прогресс уже был.
+    await controller.restart();
+    let guard = 0;
+    while (controller.state().card?.id !== first && guard < 20) {
+      guard += 1;
+      controller.reveal();
+      await controller.grade("good");
+    }
+    controller.reveal();
+    await controller.grade("again");
+    await controller.undo();
+
+    expect(await db.progress.get(first)).toEqual(afterFirst);
+  });
+
+  it("не стирает запись журнала, а помечает её отменённой", async () => {
+    const controller = await makeController();
+    const first = controller.state().card!.id;
+
+    controller.reveal();
+    await controller.grade("again");
+    await controller.undo();
+
+    const history = await cardHistory(db, first);
+    expect(history).toHaveLength(1);
+    expect(history[0]).toMatchObject({ grade: "again", undone: true });
+  });
+
+  it("возвращает очередь, а не только карточку", async () => {
+    const controller = await makeController();
+    const first = controller.state().card!.id;
+    const before = controller.state().session;
+
+    // «Не знал» ставит карточку обратно в очередь — отмена должна убрать и это.
+    controller.reveal();
+    await controller.grade("again");
+    expect(controller.state().session.repeats).toBe(1);
+
+    await controller.undo();
+    expect(controller.state().session).toEqual(before);
+    expect(controller.state().card?.id).toBe(first);
+  });
+
+  it("возвращает счёт оценок", async () => {
+    const controller = await makeController();
+
+    controller.reveal();
+    await controller.grade("easy");
+    await controller.undo();
+
+    expect(controller.state().tally).toEqual({ again: 0, hard: 0, good: 0, easy: 0 });
+  });
+
+  it("отменяет несколько оценок подряд", async () => {
+    const controller = await makeController();
+    const first = controller.state().card!.id;
+
+    controller.reveal();
+    await controller.grade("good");
+    controller.reveal();
+    await controller.grade("good");
+
+    await controller.undo();
+    await controller.undo();
+
+    expect(controller.state().card?.id).toBe(first);
+    expect(controller.state().canUndo).toBe(false);
+    expect(controller.state().session.answered).toBe(0);
+    expect(await db.progress.count()).toBe(0);
+  });
+
+  it("позволяет переставить оценку после отмены", async () => {
+    const controller = await makeController();
+    const first = controller.state().card!.id;
+
+    controller.reveal();
+    await controller.grade("again");
+    await controller.undo();
+    await controller.grade("easy");
+
+    expect(controller.state().tally).toMatchObject({ again: 0, easy: 1 });
+    // В журнале обе записи: отменённая и настоящая.
+    const history = await cardHistory(db, first);
+    expect(history.map((row) => [row.grade, row.undone ?? false])).toEqual([
+      ["again", true],
+      ["easy", false],
+    ]);
+  });
+
+  it("работает с экрана итогов", async () => {
+    const controller = await makeController();
+    let guard = 0;
+    while (controller.state().phase === "question" && guard < 20) {
+      guard += 1;
+      controller.reveal();
+      await controller.grade("good");
+    }
+    expect(controller.state().phase).toBe("finished");
+
+    await controller.undo();
+    expect(controller.state().phase).toBe("answered");
+    expect(controller.state().session.completed).toBe(2);
+  });
+
+  it("новое занятие обнуляет историю отмен", async () => {
+    const controller = await makeController();
+    controller.reveal();
+    await controller.grade("good");
+    expect(controller.state().canUndo).toBe(true);
+
+    await controller.restart();
+    expect(controller.state().canUndo).toBe(false);
   });
 });
 

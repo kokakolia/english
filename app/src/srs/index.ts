@@ -52,4 +52,5 @@ export {
   type Session,
   type SessionOptions,
   type SessionProgress,
+  type SessionSnapshot,
 } from "./session";

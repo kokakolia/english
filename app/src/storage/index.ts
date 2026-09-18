@@ -40,9 +40,11 @@ export {
   loadProgress,
   recordReview,
   resetCard,
+  undoReview,
   type DeckCounts,
   type ReviewInput,
   type ReviewResult,
+  type UndoInput,
 } from "./study";
 
 export {

@@ -15,7 +15,7 @@ import { useEffect } from "react";
 import { GRADES, type Grade } from "../srs";
 import { keyAction, type StudyController, type StudyState } from "../study/controller";
 import { formatInterval, plural } from "./format";
-import { GradeIcon, Leaf, MoodPlant, PanelFlourish } from "./Ornaments";
+import { GradeIcon, Leaf, MoodPlant, PanelFlourish, UndoArrow } from "./Ornaments";
 
 /**
  * Подписи оценок из макета.
@@ -39,7 +39,34 @@ interface Props {
   onFinish: () => void;
 }
 
-function ProgressHeader({ state }: { state: StudyState }) {
+/**
+ * Кнопка отмены.
+ *
+ * Держится скромно и не исчезает, когда отменять нечего, а гаснет: кнопка,
+ * появляющаяся и пропадающая, дёргает соседей и сама сдвигается под курсором.
+ */
+function UndoButton({ controller, state }: { controller: StudyController; state: StudyState }) {
+  return (
+    <button
+      type="button"
+      className="undo"
+      onClick={() => void controller.undo()}
+      disabled={!state.canUndo || state.saving}
+      title="Вернуться к предыдущей карточке (Backspace)"
+    >
+      <UndoArrow />
+      <span className="undo-label">Назад</span>
+    </button>
+  );
+}
+
+function ProgressHeader({
+  controller,
+  state,
+}: {
+  controller: StudyController;
+  state: StudyState;
+}) {
   const total = Math.max(1, state.session.remaining + state.session.answered);
   const done = state.session.answered;
   // Точки — грубая полоса прогресса: карточек за день бывает и полторы сотни,
@@ -49,6 +76,7 @@ function ProgressHeader({ state }: { state: StudyState }) {
   return (
     <header className="topbar">
       <div className="head">
+        <UndoButton controller={controller} state={state} />
         <div className="dots">
           {Array.from({ length: DOT_COUNT }, (_, index) => (
             <span key={index} className={index < filled ? "dot" : "dot dot--empty"} />
@@ -72,7 +100,15 @@ function ProgressHeader({ state }: { state: StudyState }) {
 }
 
 /** Итоги занятия. Показываются один раз в конце, а не после каждой карточки. */
-function Summary({ state, onFinish }: { state: StudyState; onFinish: () => void }) {
+function Summary({
+  controller,
+  state,
+  onFinish,
+}: {
+  controller: StudyController;
+  state: StudyState;
+  onFinish: () => void;
+}) {
   const { tally, session } = state;
   const strong = tally.good + tally.easy;
   const answers = session.answered;
@@ -119,7 +155,19 @@ function Summary({ state, onFinish }: { state: StudyState; onFinish: () => void 
         </div>
       </div>
 
-      <footer className="bottombar">
+      <footer className="bottombar bottombar--done">
+        {state.canUndo && (
+          // На итогах отмена нужна не меньше: промахнуться по кнопке легче
+          // всего на последней карточке, когда занятие уже позади.
+          <button
+            type="button"
+            className="pill pill--quiet"
+            onClick={() => void controller.undo()}
+            disabled={state.saving}
+          >
+            Вернуть карточку
+          </button>
+        )}
         <button type="button" className="pill" onClick={onFinish}>
           К началу
         </button>
@@ -144,6 +192,7 @@ export function ReviewScreen({ controller, state, onFinish }: Props) {
 
       event.preventDefault();
       if (action.kind === "reveal") controller.reveal();
+      else if (action.kind === "undo") void controller.undo();
       else void controller.grade(action.grade);
     }
 
@@ -152,7 +201,7 @@ export function ReviewScreen({ controller, state, onFinish }: Props) {
   }, [controller]);
 
   if (state.phase === "finished" || state.phase === "empty") {
-    return <Summary state={state} onFinish={onFinish} />;
+    return <Summary controller={controller} state={state} onFinish={onFinish} />;
   }
 
   const card = state.card;
@@ -163,7 +212,7 @@ export function ReviewScreen({ controller, state, onFinish }: Props) {
 
   return (
     <section className="screen screen--review">
-      <ProgressHeader state={state} />
+      <ProgressHeader controller={controller} state={state} />
 
       <div className="middle">
         <div className="panel">

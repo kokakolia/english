@@ -139,6 +139,22 @@ export function Leaf({ className = "" }: { className?: string }) {
   );
 }
 
+/** Стрелка отмены: дуга против часовой стрелки. */
+export function UndoArrow() {
+  return (
+    <svg className="undo-icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false">
+      <path
+        d="M4 8 A 5.5 5.5 0 1 1 5.6 12.6"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      />
+      <path d="M1.5 4.5 L4 8.4 L7.8 6.6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 /** Значки на кнопках оценки: от увядшего к цветущему. */
 export function GradeIcon({ grade }: { grade: "again" | "hard" | "good" | "easy" }) {
   if (grade === "again") {

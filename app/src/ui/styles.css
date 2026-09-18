@@ -214,6 +214,52 @@ body {
   gap: 12px;
 }
 
+/* Отмена последней оценки. Стоит в шапке слева — там же, где «назад» у
+   любого экрана, и подальше от кнопок оценки, чтобы промах по ней не лечился
+   новым промахом. */
+.undo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  padding: 6px 12px 6px 9px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: none;
+  color: var(--brass);
+  font-family: var(--font-display);
+  font-size: clamp(12px, 1.2vw, 15px);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.undo:hover:not(:disabled) {
+  border-color: rgba(184, 137, 43, 0.5);
+}
+
+.undo:disabled {
+  /* Не прячем, а гасим: исчезающая кнопка сдвигала бы точки прогресса на
+     каждой первой карточке занятия. */
+  opacity: 0.3;
+  cursor: default;
+}
+
+.undo-icon {
+  width: clamp(15px, 1.5vw, 18px);
+  height: clamp(15px, 1.5vw, 18px);
+  flex: none;
+}
+
+@media (max-width: 420px) {
+  .undo-label {
+    display: none;
+  }
+}
+
 .dots {
   display: flex;
   gap: clamp(5px, 0.6vw, 7px);
@@ -431,6 +477,28 @@ body {
 .pill:disabled {
   opacity: 0.5;
   cursor: default;
+}
+
+/* Второстепенная кнопка: то же начертание, но без рамки и тише по цвету —
+   рядом с «К началу» она не должна спорить за внимание. */
+.pill--quiet {
+  background: none;
+  border-color: transparent;
+  color: var(--brass);
+  padding-left: clamp(16px, 2vw, 24px);
+  padding-right: clamp(16px, 2vw, 24px);
+}
+
+.pill--quiet:hover:not(:disabled) {
+  border-color: rgba(184, 137, 43, 0.4);
+}
+
+/* Итоги: две кнопки в строку, а на узком экране — одна под другой. */
+.bottombar--done {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 .pill--wide {

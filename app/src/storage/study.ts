@@ -40,6 +40,14 @@ export interface ReviewInput {
 export interface ReviewResult {
   progress: StoredProgress;
   intervalDays: number;
+  /** Идентификатор записи журнала — по нему её можно пометить отменённой. */
+  reviewId: number;
+  /**
+   * Прогресс, который был до этой оценки, или `null`, если карточку видели
+   * впервые. Вернуть FSRS назад пересчётом нельзя: переход необратим, и
+   * единственный способ отменить оценку — положить обратно то, что было.
+   */
+  previous: StoredProgress | null;
 }
 
 /**
@@ -55,10 +63,13 @@ export async function recordReview(
 
   let stored: StoredProgress | undefined;
   let intervalDays = 0;
+  let reviewId = 0;
+  let before: StoredProgress | null = null;
 
   await db.transaction("rw", db.progress, db.reviews, async () => {
+    before = (await db.progress.get(input.cardId)) ?? null;
     const previous =
-      (await db.progress.get(input.cardId)) ??
+      before ??
       ({ ...scheduler.create(input.cardId, now), deckId: input.deckId } as StoredProgress);
 
     const outcome = scheduler.review(previous, input.grade, now);
@@ -78,13 +89,46 @@ export async function recordReview(
     };
 
     await db.progress.put(stored);
-    await db.reviews.add(entry);
+    reviewId = await db.reviews.add(entry);
   });
 
   if (stored === undefined) {
     throw new Error("не удалось записать повторение");
   }
-  return { progress: stored, intervalDays };
+  return { progress: stored, intervalDays, reviewId, previous: before };
+}
+
+export interface UndoInput {
+  cardId: string;
+  /** Запись журнала, которую нужно пометить отменённой. */
+  reviewId: number;
+  /** Прогресс до отменяемой оценки; `null`, если карточку видели впервые. */
+  previous: StoredProgress | null;
+}
+
+/**
+ * Отменяет последнюю оценку по карточке.
+ *
+ * Прогресс возвращается к сохранённому состоянию, а запись журнала остаётся на
+ * месте с пометкой `undone`. Удалять её нельзя: журнал — это то, что было, а
+ * не то, что мы хотели бы видеть. Зато пометка позволяет не учитывать промах в
+ * статистике и при будущей подгонке параметров FSRS.
+ *
+ * Обе половины идут одной транзакцией по той же причине, что и запись: прогресс
+ * без журнала или журнал без прогресса чинить будет нечем.
+ */
+export async function undoReview(
+  db: AppDatabase,
+  input: UndoInput,
+): Promise<void> {
+  await db.transaction("rw", db.progress, db.reviews, async () => {
+    if (input.previous === null) {
+      await db.progress.delete(input.cardId);
+    } else {
+      await db.progress.put(input.previous);
+    }
+    await db.reviews.update(input.reviewId, { undone: true });
+  });
 }
 
 export interface DeckCounts {

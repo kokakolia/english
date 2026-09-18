@@ -39,6 +39,21 @@ export interface SessionProgress {
   repeats: number;
 }
 
+/**
+ * Полное состояние сессии на какой-то момент.
+ *
+ * Нужен для отмены. Отменять `answer` обратным действием («вынуть карточку
+ * оттуда, куда её положили, и вернуть в начало») — значит держать в голове
+ * все ветки `answer` и ошибиться на первой же правке. Снимок не зависит от
+ * того, что именно делал `answer`, и потому не устаревает.
+ */
+export interface SessionSnapshot {
+  queue: readonly DeckCard[];
+  answered: number;
+  completed: number;
+  repeats: number;
+}
+
 export interface Session {
   /** Текущая карточка или `null`, если сессия закончена. */
   current(): DeckCard | null;
@@ -46,6 +61,10 @@ export interface Session {
   answer(grade: Grade): void;
   progress(): SessionProgress;
   isFinished(): boolean;
+  /** Снять состояние, чтобы потом вернуться к нему. */
+  snapshot(): SessionSnapshot;
+  /** Вернуться к снятому состоянию. */
+  restore(snapshot: SessionSnapshot): void;
 }
 
 const DEFAULT_AGAIN_GAP = 3;
@@ -95,6 +114,20 @@ export function createSession(
 
     isFinished() {
       return queue.length === 0;
+    },
+
+    snapshot() {
+      // Копия списка, а не ссылка: иначе снимок будет меняться вместе с
+      // очередью и вернёт нас туда же, откуда мы уходили.
+      return { queue: queue.slice(), answered, completed, repeats };
+    },
+
+    restore(snapshot) {
+      queue.length = 0;
+      queue.push(...snapshot.queue);
+      answered = snapshot.answered;
+      completed = snapshot.completed;
+      repeats = snapshot.repeats;
     },
   };
 }

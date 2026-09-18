@@ -32,12 +32,14 @@ import {
   type Scheduler,
   type Session,
   type SessionProgress,
+  type SessionSnapshot,
 } from "../srs";
 import {
   getStudySettings,
   loadCards,
   loadProgress,
   recordReview,
+  undoReview,
   type AppDatabase,
   type StoredProgress,
   type StudySettings,
@@ -71,6 +73,8 @@ export interface StudyState {
   counts: QueueCounts;
   backlog: number;
   session: SessionProgress;
+  /** Есть ли что отменять: хотя бы одна оценка за это занятие. */
+  canUndo: boolean;
   /** Идёт запись в базу: кнопки оценки на это время блокируются. */
   saving: boolean;
   error: string | null;
@@ -84,6 +88,11 @@ export interface StudyController {
   reveal(): void;
   /** Оценить карточку, записать и перейти к следующей. */
   grade(grade: Grade): Promise<void>;
+  /**
+   * Отменить последнюю оценку и вернуться к той карточке с раскрытым ответом.
+   * Отменять можно подряд, до начала занятия.
+   */
+  undo(): Promise<void>;
   /** Построить очередь заново — например, после смены настроек. */
   restart(): Promise<void>;
   settings(): StudySettings;
@@ -113,7 +122,23 @@ const EMPTY_TALLY: Record<Grade, number> = { again: 0, hard: 0, good: 0, easy: 0
 export type KeyAction =
   | { kind: "reveal" }
   | { kind: "grade"; grade: Grade }
+  | { kind: "undo" }
   | null;
+
+/**
+ * Что нужно знать, чтобы отменить одну оценку.
+ *
+ * Здесь лежит именно то состояние, которое оценка меняет и которое нельзя
+ * вычислить обратно: прогресс FSRS (переход необратим), порядок очереди
+ * (карточка могла уехать в середину) и счёт оценок.
+ */
+interface UndoStep {
+  card: DeckCard;
+  grade: Grade;
+  reviewId: number;
+  previous: StoredProgress | null;
+  session: SessionSnapshot;
+}
 
 /**
  * Разбор нажатия — отдельной чистой функцией.
@@ -128,9 +153,16 @@ export type KeyAction =
  * «что делать по этой клавише» живёт здесь и проверяется тестами.
  */
 export function keyAction(phase: StudyPhase, key: string): KeyAction {
+  if (phase === "loading" || phase === "empty") return null;
+
   if (phase === "question") {
-    return key === " " || key === "Enter" ? { kind: "reveal" } : null;
+    if (key === " " || key === "Enter") return { kind: "reveal" };
   }
+  // Отмена нужна именно тогда, когда следующая карточка уже на экране: промах
+  // по кнопке замечают, увидев не то предложение. Поэтому она работает во всех
+  // рабочих состояниях, а не только там, где видны кнопки оценки.
+  if (key === "Backspace") return { kind: "undo" };
+
   if (phase !== "answered") return null;
 
   const index = ["1", "2", "3", "4"].indexOf(key);
@@ -160,6 +192,7 @@ export async function createStudyController(
     counts: EMPTY_COUNTS,
     backlog: 0,
     session: EMPTY_SESSION,
+    canUndo: false,
     saving: false,
     error: null,
   };
@@ -169,6 +202,7 @@ export async function createStudyController(
   let progress = new Map<string, StoredProgress>();
   let settings = await getStudySettings(db);
   let session: Session | null = null;
+  const undoStack: UndoStep[] = [];
 
   function publish(patch: Partial<StudyState>): void {
     state = { ...state, ...patch };
@@ -232,11 +266,13 @@ export async function createStudyController(
       });
 
       session = createSession(queue.cards, { againGap: settings.againGap });
+      undoStack.length = 0;
       publish({
         tally: { ...EMPTY_TALLY },
         counts: queue.counts,
         backlog: queue.backlog,
         session: session.progress(),
+        canUndo: false,
       });
 
       if (queue.cards.length === 0) {
@@ -288,6 +324,17 @@ export async function createStudyController(
           scheduler,
         });
         progress.set(card.id, result.progress);
+        // Снимок снимается до `session.answer`, иначе он опишет уже
+        // изменённую очередь и возврат приведёт не туда.
+        if (session !== null) {
+          undoStack.push({
+            card,
+            grade,
+            reviewId: result.reviewId,
+            previous: result.previous,
+            session: session.snapshot(),
+          });
+        }
       } catch (cause) {
         publish({ saving: false, error: `не удалось сохранить ответ: ${String(cause)}` });
         return;
@@ -297,8 +344,50 @@ export async function createStudyController(
       publish({
         saving: false,
         tally: { ...state.tally, [grade]: state.tally[grade] + 1 },
+        canUndo: undoStack.length > 0,
       });
       advance();
+    },
+
+    async undo() {
+      if (state.saving || undoStack.length === 0) return;
+      if (state.phase === "loading" || state.phase === "empty") return;
+
+      const step = undoStack[undoStack.length - 1];
+      if (step === undefined) return;
+
+      publish({ saving: true, error: null });
+      try {
+        await undoReview(db, {
+          cardId: step.card.id,
+          reviewId: step.reviewId,
+          previous: step.previous,
+        });
+      } catch (cause) {
+        publish({ saving: false, error: `не удалось отменить ответ: ${String(cause)}` });
+        return;
+      }
+
+      // Со шага снимаем только после успешной записи: иначе неудачная отмена
+      // потеряет возможность попробовать ещё раз.
+      undoStack.pop();
+      if (step.previous === null) progress.delete(step.card.id);
+      else progress.set(step.card.id, step.previous);
+      session?.restore(step.session);
+
+      const tally = { ...state.tally };
+      tally[step.grade] = Math.max(0, tally[step.grade] - 1);
+
+      publish({
+        phase: "answered",
+        card: step.card,
+        hintVisible: false,
+        intervals: previewIntervals(step.card),
+        tally,
+        session: session?.progress() ?? EMPTY_SESSION,
+        canUndo: undoStack.length > 0,
+        saving: false,
+      });
     },
 
     restart: build,

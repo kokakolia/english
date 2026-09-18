@@ -100,4 +100,36 @@ describe("сессия повторения", () => {
     session.answer("good");
     expect(session.progress().answered).toBe(0);
   });
+
+  it("снимок возвращает и порядок, и счётчики", () => {
+    const cards = makeDeck(4, 4);
+    const session = createSession(cards, { againGap: 1 });
+    const before = session.snapshot();
+    const first = session.current();
+
+    // «Не знал» меняет и очередь, и счётчики — вернуться нужно ко всему сразу.
+    session.answer("again");
+    expect(session.current()).not.toBe(first);
+
+    session.restore(before);
+    expect(session.current()).toBe(first);
+    expect(session.progress()).toEqual({
+      remaining: 4,
+      answered: 0,
+      completed: 0,
+      repeats: 0,
+    });
+  });
+
+  it("снимок не меняется вместе с очередью", () => {
+    const cards = makeDeck(3, 3);
+    const session = createSession(cards);
+    const snapshot = session.snapshot();
+
+    session.answer("good");
+    session.answer("good");
+    session.restore(snapshot);
+
+    expect(session.progress().remaining).toBe(3);
+  });
 });
