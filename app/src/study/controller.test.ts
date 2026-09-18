@@ -276,6 +276,24 @@ describe("оценка и запись", () => {
     expect(seen).toContain(first);
   });
 
+  it("«плохо помню» тоже возвращает карточку в этом же заходе", async () => {
+    const controller = await makeController();
+    const first = controller.state().card!.id;
+
+    controller.reveal();
+    await controller.grade("hard");
+    expect(controller.state().card?.id).not.toBe(first);
+    expect(controller.state().session.repeats).toBe(1);
+
+    const seen: string[] = [];
+    while (controller.state().phase === "question" && seen.length < 12) {
+      seen.push(controller.state().card!.id);
+      controller.reveal();
+      await controller.grade("good");
+    }
+    expect(seen).toContain(first);
+  });
+
   it("доходит до конца очереди", async () => {
     const controller = await makeController();
     let guard = 0;

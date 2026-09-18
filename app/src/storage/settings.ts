@@ -19,6 +19,10 @@ export interface StudySettings {
   requestRetention: number;
   /** Через сколько карточек возвращать ту, на которой ошиблись. */
   againGap: number;
+  /** Возвращать ли в этом же заходе карточки, оценённые «плохо помню». */
+  repeatHard: boolean;
+  /** Через сколько карточек возвращать «плохо помню». */
+  hardGap: number;
   /** Засчитывать ли ответ с опечаткой без переспроса. */
   acceptTypos: boolean;
 }
@@ -29,6 +33,8 @@ export const DEFAULT_STUDY_SETTINGS: StudySettings = {
   siblingGap: 4,
   requestRetention: 0.9,
   againGap: 3,
+  repeatHard: true,
+  hardGap: 6,
   acceptTypos: false,
 };
 

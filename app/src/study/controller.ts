@@ -265,7 +265,11 @@ export async function createStudyController(
         now,
       });
 
-      session = createSession(queue.cards, { againGap: settings.againGap });
+      session = createSession(queue.cards, {
+        againGap: settings.againGap,
+        repeatHard: settings.repeatHard,
+        hardGap: settings.hardGap,
+      });
       undoStack.length = 0;
       publish({
         tally: { ...EMPTY_TALLY },

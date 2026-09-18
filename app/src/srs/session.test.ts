@@ -78,20 +78,45 @@ describe("сессия повторения", () => {
     });
   });
 
-  it("по умолчанию не возвращает карточки, оценённые как трудные", () => {
+  it("по умолчанию возвращает и карточки, оценённые как трудные", () => {
     const cards = makeDeck(2, 2);
     const session = createSession(cards);
+    session.answer("hard");
+    expect(session.isFinished()).toBe(false);
+    expect(session.progress().repeats).toBe(1);
+  });
+
+  it("возврат трудных выключается настройкой", () => {
+    const cards = makeDeck(2, 2);
+    const session = createSession(cards, { repeatHard: false });
     session.answer("hard");
     session.answer("hard");
     expect(session.isFinished()).toBe(true);
   });
 
-  it("возврат трудных включается настройкой", () => {
-    const cards = makeDeck(2, 2);
-    const session = createSession(cards, { repeatHard: true, againGap: 0 });
+  it("трудную возвращает дальше, чем ту, на которой ошиблись", () => {
+    // Восемь разных карточек, чтобы отступ было куда отмерять.
+    const first = createSession(makeDeck(8, 8), { againGap: 2, hardGap: 5 });
+    const hardCard = first.current();
+    first.answer("hard");
+
+    const seen: (string | null)[] = [];
+    for (let step = 0; step < 5; step += 1) {
+      seen.push(first.current()?.id ?? null);
+      first.answer("good");
+    }
+    // Ставили пятой по счёту — значит впереди неё прошло ровно пять других.
+    expect(seen).not.toContain(hardCard?.id);
+    expect(first.current()?.id).toBe(hardCard?.id);
+  });
+
+  it("отступ трудных по умолчанию вдвое больше отступа ошибок", () => {
+    const session = createSession(makeDeck(8, 8), { againGap: 2 });
+    const hardCard = session.current();
     session.answer("hard");
-    expect(session.isFinished()).toBe(false);
-    expect(session.progress().repeats).toBe(1);
+
+    for (let step = 0; step < 4; step += 1) session.answer("good");
+    expect(session.current()?.id).toBe(hardCard?.id);
   });
 
   it("ответ на пустой сессии ничего не ломает", () => {

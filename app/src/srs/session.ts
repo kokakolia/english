@@ -22,10 +22,21 @@ export interface SessionOptions {
    */
   againGap?: number;
   /**
-   * Возвращать ли карточки, оценённые как `hard`. По умолчанию нет: ответ был
-   * верным, просто дался тяжело, и планировщик уже назначил короткий интервал.
+   * Возвращать ли карточки, оценённые как `hard`. По умолчанию да.
+   *
+   * Формально ответ был верным, и FSRS считает это успехом, а не провалом.
+   * Но «плохо помню» означает, что вспомнилось не сразу, и второй показ в тот
+   * же заход — ровно то, ради чего эта оценка и нажимается.
    */
   repeatHard?: boolean;
+  /**
+   * Через сколько карточек возвращать «плохо помню».
+   *
+   * Отступ больше, чем у «не знал»: там нужно успеть забыть подсказку, здесь
+   * память уже сработала, и слишком близкий повтор превратится в списывание.
+   * По умолчанию вдвое больше `againGap`.
+   */
+  hardGap?: number;
 }
 
 export interface SessionProgress {
@@ -74,7 +85,8 @@ export function createSession(
   options: SessionOptions = {},
 ): Session {
   const againGap = options.againGap ?? DEFAULT_AGAIN_GAP;
-  const repeatHard = options.repeatHard ?? false;
+  const repeatHard = options.repeatHard ?? true;
+  const hardGap = options.hardGap ?? againGap * 2;
 
   const queue: DeckCard[] = cards.slice();
   let answered = 0;
@@ -84,6 +96,10 @@ export function createSession(
   function shouldRepeat(grade: Grade): boolean {
     if (grade === "again") return true;
     return repeatHard && grade === "hard";
+  }
+
+  function gapFor(grade: Grade): number {
+    return grade === "hard" ? hardGap : againGap;
   }
 
   return {
@@ -101,7 +117,7 @@ export function createSession(
         // Ставим не в конец, а через несколько карточек: в конце длинной
         // очереди возврат превратится в новое знакомство, а не в повторную
         // попытку. Если очередь короче отступа, карточка встанет в конец.
-        const position = Math.min(againGap, queue.length);
+        const position = Math.min(gapFor(grade), queue.length);
         queue.splice(position, 0, card);
       } else {
         completed += 1;
