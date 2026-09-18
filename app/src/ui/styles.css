@@ -34,8 +34,14 @@
   --font-display: "Marcellus", "Cormorant Garamond", Georgia, serif;
 
   --column: 660px;
-  --panel-pad: clamp(26px, 4vw, 50px);
-  --step: clamp(14px, 2vw, 22px);
+  /* Поля карточки: по горизонтали от ширины окна, по вертикали от высоты.
+     Раньше обе стороны считались от ширины, и на широком, но невысоком экране
+     карточка забирала по 50 пикселей сверху и снизу из пятисот доступных. */
+  --panel-pad-x: clamp(20px, 3.4vw, 44px);
+  --panel-pad-y: clamp(18px, 3.2vh, 34px);
+  /* Единый вертикальный ритм карточки: отступ между её частями. Тоже от
+     высоты — расстояния должны сжиматься там, где не хватает именно высоты. */
+  --step: clamp(11px, 2vh, 19px);
 }
 
 * {
@@ -283,7 +289,7 @@ body {
   -webkit-backdrop-filter: blur(18px);
   border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: clamp(18px, 2vw, 24px);
-  padding: var(--panel-pad);
+  padding: var(--panel-pad-y) var(--panel-pad-x);
   box-shadow:
     0 26px 56px rgba(31, 58, 46, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.55);
@@ -311,16 +317,16 @@ body {
 
 .label {
   font-family: var(--font-display);
-  font-size: clamp(13px, 1.3vw, 17px);
+  font-size: clamp(12px, 1.2vw, 15px);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--gold-deep);
-  margin-bottom: clamp(14px, 1.6vw, 20px);
+  margin-bottom: var(--step);
 }
 
 .sentence {
-  font-size: clamp(21px, 2.6vw, 32px);
-  line-height: 1.5;
+  font-size: clamp(19px, min(2.5vw, 4.2vh), 30px);
+  line-height: 1.45;
   color: var(--ink);
   margin: 0;
 }
@@ -341,34 +347,34 @@ body {
 }
 
 .translation {
-  margin: clamp(14px, 1.6vw, 20px) 0 0;
+  margin: var(--step) 0 0;
   font-style: italic;
-  font-size: clamp(16px, 1.7vw, 21px);
+  font-size: clamp(15px, min(1.7vw, 2.8vh), 20px);
   color: var(--sage);
 }
 
 .hint {
-  margin: clamp(12px, 1.4vw, 18px) 0 0;
+  margin: var(--step) 0 0;
   font-family: var(--font-display);
   letter-spacing: 8px;
-  font-size: clamp(16px, 1.7vw, 21px);
+  font-size: clamp(16px, min(1.7vw, 2.8vh), 21px);
   color: var(--gold-deep);
 }
 
 .note {
-  margin: clamp(14px, 1.6vw, 20px) 0 0;
-  padding: clamp(12px, 1.3vw, 16px) clamp(14px, 1.6vw, 20px);
+  margin: var(--step) 0 0;
+  padding: clamp(10px, 1.5vh, 15px) clamp(12px, 1.4vw, 18px);
   border-left: 3px solid var(--ink);
   background: rgba(31, 58, 46, 0.06);
   border-radius: 0 10px 10px 0;
-  font-size: clamp(14px, 1.5vw, 18px);
-  line-height: 1.6;
+  font-size: clamp(13px, min(1.5vw, 2.3vh), 17px);
+  line-height: 1.55;
   color: var(--ink-soft);
 }
 
 .also {
-  margin: clamp(10px, 1vw, 14px) 0 0;
-  font-size: clamp(13px, 1.4vw, 16px);
+  margin: calc(var(--step) * 0.7) 0 0;
+  font-size: clamp(12px, 1.3vw, 15px);
   color: var(--brass);
 }
 
@@ -377,7 +383,15 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin-top: clamp(14px, 1.6vw, 20px);
+  margin-top: var(--step);
+}
+
+/* Концевая виньетка — единственное на карточке, что ничего не сообщает.
+   Когда высоты в обрез, она уходит первой: лучше показать заметку целиком. */
+@media (max-height: 700px) {
+  .tailpiece {
+    display: none;
+  }
 }
 
 .tailpiece-line {
@@ -497,6 +511,15 @@ body {
   width: clamp(18px, 2vw, 24px);
   height: clamp(18px, 2vw, 24px);
   flex: none;
+}
+
+/* Цифра на кнопке подсказывает горячую клавишу. На сенсорном экране клавиш
+   нет, а место она занимает: четыре такие строки — это два лишних сантиметра
+   высоты, которых не хватает карточке. */
+@media (pointer: coarse) {
+  .grade-key {
+    display: none;
+  }
 }
 
 .grade-interval,
