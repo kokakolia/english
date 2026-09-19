@@ -14,8 +14,25 @@ export default defineConfig({
         lang: "ru",
         start_url: "/",
         display: "standalone",
-        background_color: "#fbfbfa",
-        theme_color: "#fbfbfa",
+        // Цвет заставки при запуске. Совпадает с --paper: при несовпадении
+        // окно на долю секунды вспыхивает белым, прежде чем показать бумагу.
+        background_color: "#f3eedc",
+        theme_color: "#f3eedc",
+        // Без иконок Chrome не считает приложение устанавливаемым и просто не
+        // показывает значок установки, ничего не сообщая. Нужен хотя бы один
+        // PNG от 144 пикселей; кладём 192 и 512, как принято.
+        icons: [
+          { src: "/icon-192.png", sizes: "192x192", type: "image/png" },
+          { src: "/icon-512.png", sizes: "512x512", type: "image/png" },
+          {
+            // Отдельный файл с широким полем: систему вправе обрезать иконку
+            // до своей формы, и в общей у листа срезало бы кончики.
+            src: "/icon-maskable-512.png",
+            sizes: "512x512",
+            type: "image/png",
+            purpose: "maskable",
+          },
+        ],
       },
       workbox: {
         // Колода должна попасть в офлайн-кэш вместе с кодом: без неё

@@ -39,4 +39,6 @@ await rm(target, { recursive: true, force: true });
 await mkdir(target, { recursive: true });
 await cp(source, target, { recursive: true });
 
-console.log(`колоды скопированы в ${target}`);
+// Сообщение по-английски намеренно: сборку запускают из Коллокации.cmd, а
+// консоль Windows читает вывод node в CP866 и превращает кириллицу в мусор.
+console.log(`decks copied to ${target}`);

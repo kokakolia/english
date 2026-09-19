@@ -6,6 +6,7 @@
   "description": "Интервальное повторение английских коллокаций",
   "scripts": {
     "decks": "node scripts/sync-decks.mjs",
+    "icons": "node scripts/make-icons.mjs",
     "predev": "npm run decks",
     "dev": "vite",
     "start": "npm run build && vite preview --open",
