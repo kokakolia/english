@@ -317,6 +317,7 @@ body {
 }
 
 .menu-list {
+  animation: menu-in 0.14s ease-out both;
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
@@ -445,9 +446,72 @@ body {
   opacity: 0.7;
 }
 
+/* ===== Движение =====
+ *
+ * Правило одно: движение объясняет, что произошло, и заканчивается быстро.
+ * Карточка сменилась — она приходит снизу; ответ раскрылся — он проявляется
+ * на месте. Дольше четверти секунды ничего не длится: на сотне карточек в
+ * день каждая лишняя десятая складывается в ожидание.
+ *
+ * Всё, что здесь описано, выключается разом ниже, если человек просил у
+ * системы поменьше движения. */
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.reveal {
+  animation: reveal-in 0.22s ease-out both;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Ответ проявляется без сдвига: он стоит внутри строки, и сдвиг дёргал бы
+   соседние слова. */
+.reveal-answer {
+  animation: fade-in 0.2s ease-out both;
+}
+
 /* ===== Панель ===== */
 
 .panel {
+  animation: card-in 0.24s ease-out both;
   position: relative;
   background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(18px);
@@ -674,6 +738,17 @@ body {
   transition:
     transform 0.15s ease,
     filter 0.15s ease;
+}
+
+.grade {
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.12s ease;
+}
+
+.grade:active:not(:disabled) {
+  transform: translateY(1px);
 }
 
 .grade:hover:not(:disabled) {
@@ -912,4 +987,18 @@ body {
   margin: 0;
   color: var(--rust);
   font-size: clamp(13px, 1.4vw, 16px);
+}
+
+/* Уважение к системной настройке «меньше движения». Это не любезность:
+   у части людей анимация вызывает тошноту и головокружение, а приложение
+   открывают каждый день. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

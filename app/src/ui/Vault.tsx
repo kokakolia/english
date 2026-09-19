@@ -20,7 +20,16 @@
  * теперь о нём говорит тихая метка на кнопке меню, а подробности внутри.
  */
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+import {
+  canSaveSilently,
+  forgetFolder,
+  gunzipIfNeeded,
+  gzip,
+  savedFolderName,
+  saveBackupFile,
+} from "../app/backup-file";
 
 import {
   formatBytes,
@@ -47,31 +56,42 @@ interface Props {
 
 type Note =
   | { kind: "none" }
-  | { kind: "saved"; name: string }
+  | { kind: "saved"; where: string; size: string }
   | { kind: "restored"; result: RestoreResult }
   | { kind: "error"; message: string };
 
 export function Vault({ db, storage, onRestored }: Props) {
   const [busy, setBusy] = useState(false);
   const [note, setNote] = useState<Note>({ kind: "none" });
+  const [folder, setFolder] = useState<string | null>(null);
   const fileInput = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    void savedFolderName(db).then(setFolder);
+  }, [db]);
 
   async function save() {
     setBusy(true);
     setNote({ kind: "none" });
     try {
-      const json = await exportBackupJson(db);
-      const name = backupFileName();
-      // Ссылка с `download` — единственный способ отдать файл из браузера,
-      // не спрашивая разрешений и не завися от File System Access API,
-      // которого нет в Firefox и Safari.
-      const url = URL.createObjectURL(new Blob([json], { type: "application/json" }));
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = name;
-      link.click();
-      URL.revokeObjectURL(url);
-      setNote({ kind: "saved", name });
+      // Без карточек: они лежат в самом приложении и подтягиваются заново при
+      // запуске. В копии они занимали шесть седьмых объёма, ничего при этом
+      // не сохраняя, — потерять можно только прогресс и журнал.
+      const json = await exportBackupJson(db, { includeCards: false });
+      const data = await gzip(json);
+      const name = backupFileName(new Date(), "json.gz");
+
+      const outcome = await saveBackupFile(db, name, data);
+      if (outcome.kind === "cancelled") {
+        setNote({ kind: "none" });
+        return;
+      }
+      setNote({
+        kind: "saved",
+        where: outcome.kind === "saved" ? outcome.folder : "Загрузки",
+        size: formatBytes(outcome.bytes),
+      });
+      setFolder(await savedFolderName(db));
     } catch (cause) {
       setNote({ kind: "error", message: `не удалось сохранить копию: ${String(cause)}` });
     } finally {
@@ -83,7 +103,8 @@ export function Vault({ db, storage, onRestored }: Props) {
     setBusy(true);
     setNote({ kind: "none" });
     try {
-      const data: unknown = JSON.parse(await file.text());
+      // Копия может быть и сжатой, и обычной: старые файлы должны читаться.
+      const data: unknown = JSON.parse(await gunzipIfNeeded(file));
       // `merge`, а не `replace`: по каждой карточке берётся более свежий
       // прогресс. Восстановление из старой копии не должно стирать то, что
       // выучено после неё, — а именно так поступил бы `replace`.
@@ -110,7 +131,13 @@ export function Vault({ db, storage, onRestored }: Props) {
             disabled={busy}
           >
             <span className="menu-item-label">Сохранить копию</span>
-            <span className="menu-item-hint">весь прогресс одним файлом</span>
+            <span className="menu-item-hint">
+              {folder !== null
+                ? `молча в папку «${folder}»`
+                : canSaveSilently()
+                  ? "первый раз спросит папку, дальше молча"
+                  : "файл уйдёт в загрузки"}
+            </span>
           </button>
 
           <button
@@ -127,13 +154,28 @@ export function Vault({ db, storage, onRestored }: Props) {
           <input
             ref={fileInput}
             type="file"
-            accept="application/json,.json"
+            accept="application/json,.json,.gz"
             className="vault-file"
             onChange={(event) => {
               const file = event.target.files?.[0];
               if (file !== undefined) void restore(file);
             }}
           />
+
+          {folder !== null && (
+            <button
+              type="button"
+              role="menuitem"
+              className="menu-item"
+              onClick={() => {
+                void forgetFolder(db).then(() => setFolder(null));
+                setNote({ kind: "none" });
+              }}
+            >
+              <span className="menu-item-label">Выбрать другую папку</span>
+              <span className="menu-item-hint">сейчас копии идут в «{folder}»</span>
+            </button>
+          )}
 
           <StorageNote storage={storage} />
           <NoteLine note={note} />
@@ -187,7 +229,13 @@ function BuildStamp() {
 function NoteLine({ note }: { note: Note }) {
   if (note.kind === "none") return null;
   if (note.kind === "error") return <p className="menu-foot menu-foot--warn">{note.message}</p>;
-  if (note.kind === "saved") return <p className="menu-foot">Копия сохранена: {note.name}</p>;
+  if (note.kind === "saved") {
+    return (
+      <p className="menu-foot">
+        Копия сохранена в «{note.where}», {note.size}.
+      </p>
+    );
+  }
 
   const { result } = note;
   return (

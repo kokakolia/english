@@ -220,7 +220,10 @@ export function ReviewScreen({ controller, state, onFinish }: Props) {
       <ProgressHeader controller={controller} state={state} />
 
       <div className="middle">
-        <div className="panel">
+        {/* `key` по карточке — не украшение: без него React переиспользует
+            узел, css-анимация не перезапускается, и смена карточки выглядит
+            подменой текста на месте. С ключом узел создаётся заново. */}
+        <div className="panel" key={card.id}>
           <PanelFlourish position="start" />
           <PanelFlourish position="end" />
 
@@ -229,7 +232,7 @@ export function ReviewScreen({ controller, state, onFinish }: Props) {
           <p className="sentence">
             {before}
             {answered ? (
-              <strong className="answer">{card.answer}</strong>
+              <strong className="answer reveal-answer">{card.answer}</strong>
             ) : (
               <span className="gap">_____</span>
             )}
@@ -240,13 +243,13 @@ export function ReviewScreen({ controller, state, onFinish }: Props) {
 
           {!answered && <p className="hint">{card.hint}</p>}
 
-          {answered && card.note !== null && <p className="note">{card.note}</p>}
+          {answered && card.note !== null && <p className="note reveal">{card.note}</p>}
 
           {answered && card.also.length > 0 && (
             // В макете этой строки нет, но без неё самопроверка врёт: партнёры
             // кластера взаимозаменяемы, и вспомнивший `take` вместо `make`
             // ответил верно.
-            <p className="also">так же подошло бы: {card.also.join(", ")}</p>
+            <p className="also reveal">так же подошло бы: {card.also.join(", ")}</p>
           )}
 
           {answered && (

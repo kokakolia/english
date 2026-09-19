@@ -201,7 +201,7 @@ export async function exportBackupJson(
 }
 
 /** Имя файла с датой: копии складываются в папку и не перетирают друг друга. */
-export function backupFileName(now: Date = new Date()): string {
+export function backupFileName(now: Date = new Date(), extension = "json"): string {
   const stamp = now.toISOString().slice(0, 19).replace(/[:T]/g, "-");
-  return `collocations-backup-${stamp}.json`;
+  return `collocations-backup-${stamp}.${extension}`;
 }
