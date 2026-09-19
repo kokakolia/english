@@ -137,6 +137,7 @@ export function Vault({ db, storage, onRestored }: Props) {
 
           <StorageNote storage={storage} />
           <NoteLine note={note} />
+          <BuildStamp />
         </>
       )}
     </Dropdown>
@@ -174,6 +175,13 @@ function StorageNote({ storage }: { storage: StorageStatus | null }) {
       не сотрёт его сам.
     </p>
   );
+}
+
+/** Когда собрана открытая версия. Ответ на вопрос «обновилось ли». */
+function BuildStamp() {
+  // В тестах и вне сборки vite подстановки нет — молчим, а не падаем.
+  if (typeof __BUILD_STAMP__ === "undefined") return null;
+  return <p className="menu-foot">Сборка от {__BUILD_STAMP__}</p>;
 }
 
 function NoteLine({ note }: { note: Note }) {
