@@ -126,8 +126,30 @@ export function PanelFlourish({ position }: { position: "start" | "end" }) {
   );
 }
 
-/** Лист-разделитель между линиями. */
+/**
+ * Метка-разделитель у заголовка и счётчика.
+ *
+ * В светлой теме это лист с прожилкой. В тёмной прожилка превращает его в
+ * зерно: на синем узкая фигура с чертой посередине читается как семечко, а не
+ * как лист. В макете тёмной темы на этом месте стоит пустой контур эллипса —
+ * его и рисуем.
+ */
 export function Leaf({ className = "" }: { className?: string }) {
+  if (useDark()) {
+    return (
+      <svg className={className} viewBox="0 0 12 16" aria-hidden="true" focusable="false">
+        <ellipse
+          cx="6"
+          cy="8"
+          rx="4"
+          ry="7"
+          fill="none"
+          stroke="var(--ornament-accent)"
+          strokeWidth="1"
+        />
+      </svg>
+    );
+  }
   return (
     <svg className={className} viewBox="0 0 12 16" aria-hidden="true" focusable="false">
       <path
