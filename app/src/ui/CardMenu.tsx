@@ -16,10 +16,8 @@
  * действия, и соседство с кнопками оценки кончилось бы промахами.
  */
 
-import { useEffect, useRef, useState } from "react";
-
 import type { CardAction } from "../study/controller";
-import { DotsIcon } from "./Ornaments";
+import { Dropdown } from "./Dropdown";
 
 const ITEMS: { action: CardAction; label: string; hint: string }[] = [
   { action: "bury", label: "Отложить до завтра", hint: "карточка нормальная, но не сейчас" },
@@ -33,47 +31,10 @@ interface Props {
 }
 
 export function CardMenu({ disabled, onPick }: Props) {
-  const [open, setOpen] = useState(false);
-  const root = useRef<HTMLDivElement>(null);
-
-  // Закрытие по клику мимо и по Escape. Без этого меню остаётся висеть над
-  // следующей карточкой и ловит нажатие, предназначенное оценке.
-  useEffect(() => {
-    if (!open) return;
-
-    function onDown(event: MouseEvent) {
-      if (root.current !== null && !root.current.contains(event.target as Node)) {
-        setOpen(false);
-      }
-    }
-    function onKey(event: KeyboardEvent) {
-      if (event.key === "Escape") setOpen(false);
-    }
-
-    document.addEventListener("mousedown", onDown);
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.removeEventListener("mousedown", onDown);
-      document.removeEventListener("keydown", onKey);
-    };
-  }, [open]);
-
   return (
-    <div className="menu" ref={root}>
-      <button
-        type="button"
-        className="menu-button"
-        onClick={() => setOpen((value) => !value)}
-        disabled={disabled}
-        aria-expanded={open}
-        aria-haspopup="menu"
-        title="Действия над карточкой"
-      >
-        <DotsIcon />
-      </button>
-
-      {open && (
-        <div className="menu-list" role="menu">
+    <Dropdown title="Действия над карточкой" disabled={disabled}>
+      {(close) => (
+        <>
           {ITEMS.map((item) => (
             <button
               key={item.action}
@@ -81,7 +42,7 @@ export function CardMenu({ disabled, onPick }: Props) {
               role="menuitem"
               className="menu-item"
               onClick={() => {
-                setOpen(false);
+                close();
                 onPick(item.action);
               }}
             >
@@ -90,8 +51,8 @@ export function CardMenu({ disabled, onPick }: Props) {
             </button>
           ))}
           <p className="menu-foot">Любое из этих действий отменяется кнопкой «Назад».</p>
-        </div>
+        </>
       )}
-    </div>
+    </Dropdown>
   );
 }

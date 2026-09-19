@@ -18,7 +18,7 @@ interface Props {
   backlog: number;
   offline: boolean;
   onStart: () => void;
-  /** Блок сохранности прогресса. Живёт отдельным компонентом. */
+  /** Меню сохранности прогресса. Живёт отдельным компонентом. */
   vault?: ReactNode;
 }
 
@@ -27,6 +27,10 @@ export function DayScreen({ deckName, counts, backlog, offline, onStart, vault }
 
   return (
     <section className="screen screen--day">
+      {/* Меню прижато к правому верхнему углу — там же, где меню карточки
+          на экране повторения, чтобы не искать его в двух местах. */}
+      <div className="day-top">{vault}</div>
+
       <div className="day-head">
         <Leaf className="counter-leaf" />
         <h1 className="display">{deckName}</h1>
@@ -76,8 +80,6 @@ export function DayScreen({ deckName, counts, backlog, offline, onStart, vault }
           Свежую колоду достать не удалось — занимаемся тем, что уже загружено.
         </p>
       )}
-
-      {vault}
     </section>
   );
 }

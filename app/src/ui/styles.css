@@ -292,6 +292,25 @@ body {
   cursor: default;
 }
 
+/* Метка «внутри есть о чём знать». Раньше на её месте был красный блок под
+   кнопкой «Учить»; условие не меняется день ото дня, а экран дня видят перед
+   каждым занятием, и несбрасываемое предупреждение через неделю перестаёт
+   читаться. Точка сообщает то же самое, не занимая экран. */
+.menu-button--marked::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--rust);
+}
+
+.menu-button {
+  position: relative;
+}
+
 .dots-icon {
   width: 16px;
   height: 16px;
@@ -347,6 +366,17 @@ body {
   line-height: 1.4;
   color: var(--brass);
   opacity: 0.85;
+}
+
+/* Тревожный, но не кричащий: это не ошибка, а условие работы. */
+.menu-foot--warn {
+  color: var(--rust);
+  opacity: 1;
+}
+
+.menu-item:disabled {
+  opacity: 0.45;
+  cursor: default;
 }
 
 .dots {
@@ -582,43 +612,17 @@ body {
   border-color: rgba(184, 137, 43, 0.4);
 }
 
-/* Уменьшённая кнопка — для второстепенных действий на экране дня. */
-.pill--small {
-  padding: clamp(8px, 1vh, 11px) clamp(16px, 2vw, 22px);
-  font-size: clamp(12px, 1.2vw, 14px);
-  letter-spacing: 0.08em;
-}
-
 /* ===== Сохранность прогресса ===== */
-
-.vault {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  align-items: center;
-  text-align: center;
-  margin-top: clamp(4px, 1vh, 12px);
-}
-
-.vault-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-}
 
 .vault-file {
   display: none;
 }
 
-/* Предупреждение о том, что браузер может стереть прогресс. Цвет тревожный,
-   но не кричащий: это не ошибка, а условие, в котором приходится работать. */
-.warn {
-  margin: 0;
-  max-width: 46ch;
-  color: var(--rust);
-  font-size: clamp(12px, 1.2vw, 14px);
-  line-height: 1.5;
+/* Меню экрана дня прижато к правому верхнему углу — там же, где меню карточки
+   на экране повторения. */
+.day-top {
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* Итоги: две кнопки в строку, а на узком экране — одна под другой. */

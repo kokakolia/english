@@ -11,11 +11,24 @@
  *
  * Второе — **дать унести копию**. Файл, лежащий вне браузера, — единственное,
  * что переживёт очистку данных сайта, переустановку системы и смену машины.
+ *
+ * Всё это спрятано за тремя точками, а не разложено на экране дня. Первая
+ * версия показывала предупреждение красным блоком под кнопкой «Учить», и это
+ * было неправильно: условие не меняется день ото дня, а экран дня человек
+ * видит каждый раз перед занятием. Предупреждение, которое нельзя убрать,
+ * через неделю перестаёт читаться — остаётся только раздражение. Поэтому
+ * теперь о нём говорит тихая метка на кнопке меню, а подробности внутри.
  */
 
 import { useRef, useState } from "react";
 
-import { formatBytes, type StorageStatus } from "../app/persistence";
+import {
+  formatBytes,
+  isInstalled,
+  storageAdvice,
+  storageAtRisk,
+  type StorageStatus,
+} from "../app/persistence";
 import {
   backupFileName,
   exportBackupJson,
@@ -23,6 +36,7 @@ import {
   type AppDatabase,
   type RestoreResult,
 } from "../storage";
+import { Dropdown } from "./Dropdown";
 
 interface Props {
   db: AppDatabase;
@@ -85,62 +99,77 @@ export function Vault({ db, storage, onRestored }: Props) {
   }
 
   return (
-    <div className="vault">
-      <div className="vault-row">
-        <button type="button" className="pill pill--small" onClick={() => void save()} disabled={busy}>
-          Сохранить копию
-        </button>
-        <button
-          type="button"
-          className="pill pill--small pill--quiet"
-          onClick={() => fileInput.current?.click()}
-          disabled={busy}
-        >
-          Восстановить
-        </button>
-        <input
-          ref={fileInput}
-          type="file"
-          accept="application/json,.json"
-          className="vault-file"
-          onChange={(event) => {
-            const file = event.target.files?.[0];
-            if (file !== undefined) void restore(file);
-          }}
-        />
-      </div>
+    <Dropdown title="Копия и хранилище" marked={storageAtRisk(storage)}>
+      {() => (
+        <>
+          <button
+            type="button"
+            role="menuitem"
+            className="menu-item"
+            onClick={() => void save()}
+            disabled={busy}
+          >
+            <span className="menu-item-label">Сохранить копию</span>
+            <span className="menu-item-hint">весь прогресс одним файлом</span>
+          </button>
 
-      <StorageLine storage={storage} />
-      <NoteLine note={note} />
-    </div>
+          <button
+            type="button"
+            role="menuitem"
+            className="menu-item"
+            onClick={() => fileInput.current?.click()}
+            disabled={busy}
+          >
+            <span className="menu-item-label">Восстановить из копии</span>
+            <span className="menu-item-hint">берётся более свежее, выученное не пропадёт</span>
+          </button>
+
+          <input
+            ref={fileInput}
+            type="file"
+            accept="application/json,.json"
+            className="vault-file"
+            onChange={(event) => {
+              const file = event.target.files?.[0];
+              if (file !== undefined) void restore(file);
+            }}
+          />
+
+          <StorageNote storage={storage} />
+          <NoteLine note={note} />
+        </>
+      )}
+    </Dropdown>
   );
 }
 
-function StorageLine({ storage }: { storage: StorageStatus | null }) {
-  if (storage === null) return null;
+function StorageNote({ storage }: { storage: StorageStatus | null }) {
+  const advice = storageAdvice(storage, isInstalled());
+  if (advice === null) return null;
 
-  if (!storage.supported) {
+  if (advice === "unsupported") {
     return (
-      <p className="quiet">
+      <p className="menu-foot menu-foot--warn">
         Браузер не умеет постоянное хранилище — держите копию в файле.
       </p>
     );
   }
 
-  const size = storage.usage === null ? null : formatBytes(storage.usage);
-
-  if (!storage.persisted) {
+  if (advice === "install" || advice === "stuck") {
     return (
-      <p className="warn">
+      <p className="menu-foot menu-foot--warn">
         Браузер не дал разрешения хранить данные постоянно: при нехватке места
-        он вправе их стереть. Установите приложение как программу — тогда
-        разрешение обычно выдаётся, — и держите копию в файле.
+        он вправе их стереть.{" "}
+        {advice === "stuck"
+          ? "Приложение уже установлено, но разрешения это не добавило — остаётся копия в файле."
+          : "Установите приложение как программу — тогда разрешение обычно выдаётся."}
       </p>
     );
   }
 
+  const size = storage?.usage == null ? null : formatBytes(storage.usage);
   return (
-    <p className="quiet">
+    <p className="menu-foot">
       Прогресс хранится постоянно{size === null ? "" : `, занято ${size}`}. Браузер
       не сотрёт его сам.
     </p>
@@ -149,12 +178,12 @@ function StorageLine({ storage }: { storage: StorageStatus | null }) {
 
 function NoteLine({ note }: { note: Note }) {
   if (note.kind === "none") return null;
-  if (note.kind === "error") return <p className="error">{note.message}</p>;
-  if (note.kind === "saved") return <p className="quiet">Копия сохранена: {note.name}</p>;
+  if (note.kind === "error") return <p className="menu-foot menu-foot--warn">{note.message}</p>;
+  if (note.kind === "saved") return <p className="menu-foot">Копия сохранена: {note.name}</p>;
 
   const { result } = note;
   return (
-    <p className="quiet">
+    <p className="menu-foot">
       Восстановлено: карточек {result.cards}, прогресса {result.progress}, записей
       журнала {result.reviews}
       {result.duplicateReviews > 0 && ` (${result.duplicateReviews} уже были)`}.
