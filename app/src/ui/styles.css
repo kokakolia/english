@@ -83,6 +83,7 @@
      эти имена. */
   --ornament-stem: #1f3a2e;
   --ornament-accent: #b8892b;
+  --ornament-core: #6e5314;
 
   --column: 660px;
   /* Поля карточки: по горизонтали от ширины окна, по вертикали от высоты.
@@ -163,6 +164,7 @@
 
     --ornament-stem: #4fa8ff;
     --ornament-accent: #6ec9ff;
+    --ornament-core: #e7f3fc;
   }
 }
 
@@ -214,6 +216,7 @@
 
   --ornament-stem: #4fa8ff;
   --ornament-accent: #6ec9ff;
+  --ornament-core: #e7f3fc;
 }
 
 * {

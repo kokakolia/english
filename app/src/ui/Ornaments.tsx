@@ -42,7 +42,10 @@ export function OrnamentDefs() {
             <circle cx="-3.5" cy="4.8" r="3" />
             <circle cx="-5.6" cy="-1.8" r="3" />
           </g>
-          <circle r="1.8" fill="var(--ornament-stem)" />
+          {/* Сердцевина цветка — своя переменная, а не цвет стебля. При
+              переводе на переменные я свёл её к стеблю, и в светлой теме
+              тёмное золото стало тёмно-зелёным. */}
+          <circle r="1.8" fill="var(--ornament-core)" />
         </symbol>
 
         <filter id="grain">
