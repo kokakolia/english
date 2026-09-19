@@ -110,10 +110,10 @@ export function CornerFern({ corner }: { corner: "tl" | "tr" | "bl" | "br" }) {
  * прямой, на низком — сжималась и выгибалась дугой. Форма вьюнка не должна
  * зависеть от размера окна.
  */
-export function SideVine() {
+export function SideVine({ side = "right" }: { side?: "left" | "right" }) {
   return (
     <svg
-      className="ornament-vine"
+      className={`ornament-vine ornament-vine--${side}`}
       viewBox="1360 100 80 760"
       aria-hidden="true"
       focusable="false"

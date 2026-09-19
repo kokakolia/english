@@ -273,27 +273,17 @@ body {
   height: 100%;
 }
 
+/* Папоротники остались только в правых углах: слева вместо них лоза. */
 .ornament-fern {
   width: clamp(120px, 16vw, 230px);
   height: clamp(170px, 23vw, 328px);
   opacity: 0.5;
 }
 
-.ornament-fern--tl {
-  top: -28px;
-  left: -44px;
-}
-
 .ornament-fern--tr {
   top: -28px;
   right: -44px;
   transform: scaleX(-1);
-}
-
-.ornament-fern--bl {
-  bottom: -28px;
-  left: -44px;
-  transform: scaleY(-1);
 }
 
 .ornament-fern--br {
@@ -307,9 +297,19 @@ body {
    гуляющую кривизну. */
 .ornament-vine {
   top: 0;
-  right: 0;
   height: 100%;
   aspect-ratio: 80 / 760;
+}
+
+.ornament-vine--right {
+  right: 0;
+}
+
+/* Левая лоза — та же фигура зеркально. Отражением, а не вторым путём: один
+   рисунок на обе стороны нельзя рассинхронизировать правкой. */
+.ornament-vine--left {
+  left: 0;
+  transform: scaleX(-1);
 }
 
 /* Вьюнок жмётся к тексту на узком экране — там он лишний. */

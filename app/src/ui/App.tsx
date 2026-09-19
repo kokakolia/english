@@ -141,11 +141,12 @@ export function App() {
         <>
           <OrnamentDefs />
           <Background />
-          <CornerFern corner="tl" />
+          {/* Слева — лоза вдоль края вместо папоротников: та же фигура, что
+              справа, зеркально. Папоротники остались только в правых углах. */}
           <CornerFern corner="tr" />
-          <CornerFern corner="bl" />
           <CornerFern corner="br" />
-          <SideVine />
+          <SideVine side="left" />
+          <SideVine side="right" />
         </>
       )}
         {renderStage()}
