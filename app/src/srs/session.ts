@@ -70,6 +70,14 @@ export interface Session {
   current(): DeckCard | null;
   /** Оценить текущую карточку и перейти к следующей. */
   answer(grade: Grade): void;
+  /**
+   * Убрать текущую карточку из захода, не засчитывая ответ.
+   *
+   * Нужно для действий над карточкой — приостановки, закапывания, сброса.
+   * Это не ответ: счётчики занятия не должны считать выключенную карточку
+   * ни отвеченной, ни закрытой.
+   */
+  drop(): void;
   progress(): SessionProgress;
   isFinished(): boolean;
   /** Снять состояние, чтобы потом вернуться к нему. */
@@ -122,6 +130,10 @@ export function createSession(
       } else {
         completed += 1;
       }
+    },
+
+    drop() {
+      queue.shift();
     },
 
     progress() {

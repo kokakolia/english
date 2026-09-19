@@ -81,6 +81,16 @@ async function makeController(
   });
 }
 
+async function collect(controller: StudyController): Promise<string[]> {
+  const seen: string[] = [];
+  while (controller.state().phase === "question" && seen.length < 20) {
+    seen.push(controller.state().card!.id);
+    controller.reveal();
+    await controller.grade("good");
+  }
+  return seen;
+}
+
 beforeEach(async () => {
   counter += 1;
   db = new AppDatabase(`study-${counter}`);
@@ -457,6 +467,126 @@ describe("отмена оценки", () => {
 
     await controller.restart();
     expect(controller.state().canUndo).toBe(false);
+  });
+});
+
+describe("действия над карточкой", () => {
+  it("приостановленная карточка уходит из захода и не возвращается завтра", async () => {
+    const controller = await makeController();
+    const first = controller.state().card!.id;
+
+    await controller.apply("suspend");
+    expect(controller.state().card?.id).not.toBe(first);
+    // Ответом это не считается: счётчики занятия описывают вспоминание.
+    expect(controller.state().session.answered).toBe(0);
+
+    // Новое занятие через неделю — карточки всё ещё нет.
+    const later = await makeController({
+      clock: () => new Date(NOW.getTime() + 7 * 86_400_000),
+    });
+    const seen: string[] = [];
+    while (later.state().phase === "question" && seen.length < 12) {
+      seen.push(later.state().card!.id);
+      later.reveal();
+      await later.grade("good");
+    }
+    expect(seen).not.toContain(first);
+  });
+
+  it("закопанная карточка пропадает на сегодня и возвращается завтра", async () => {
+    const controller = await makeController();
+    const first = controller.state().card!.id;
+
+    await controller.apply("bury");
+
+    const today = await makeController();
+    expect(await collect(today)).not.toContain(first);
+
+    const tomorrow = await makeController({
+      clock: () => new Date(NOW.getTime() + 86_400_000),
+    });
+    expect(await collect(tomorrow)).toContain(first);
+  });
+
+  it("сброс возвращает карточку в состояние «новая»", async () => {
+    const controller = await makeController();
+    const first = controller.state().card!.id;
+
+    controller.reveal();
+    await controller.grade("easy");
+    expect(await db.progress.get(first)).toBeDefined();
+
+    // Ищем ту же карточку в новом заходе назавтра — «отлично помню» на новой
+    // карточке даёт срок в дни, поэтому сегодня она уже не покажется.
+    const second = await makeController({
+      clock: () => new Date(NOW.getTime() + 30 * 86_400_000),
+    });
+    let guard = 0;
+    while (second.state().card?.id !== first && second.state().phase === "question" && guard < 20) {
+      guard += 1;
+      second.reveal();
+      await second.grade("good");
+    }
+    // Тест бессмыслен, если карточку не нашли: проверяем это прямо.
+    expect(second.state().card?.id).toBe(first);
+
+    await second.apply("reset");
+    expect(await db.progress.get(first)).toBeUndefined();
+  });
+
+  it("действие отменяется той же кнопкой «Назад»", async () => {
+    const controller = await makeController();
+    const first = controller.state().card!.id;
+
+    await controller.apply("suspend");
+    expect(controller.state().canUndo).toBe(true);
+    expect((await db.progress.get(first))?.suspended).toBe(true);
+
+    await controller.undo();
+    expect(controller.state().card?.id).toBe(first);
+    // Карточки не было в базе до приостановки — значит и после отмены не должно.
+    expect(await db.progress.get(first)).toBeUndefined();
+    expect(controller.state().session.remaining).toBe(3);
+  });
+
+  it("отмена действия не раскрывает ответ, если его не раскрывали", async () => {
+    const controller = await makeController();
+    const first = controller.state().card!.id;
+
+    // Карточку отложили, не пытаясь вспомнить.
+    expect(controller.state().phase).toBe("question");
+    await controller.apply("bury");
+    await controller.undo();
+
+    expect(controller.state().card?.id).toBe(first);
+    expect(controller.state().phase).toBe("question");
+  });
+
+  it("отмена действия возвращает раскрытый ответ, если его раскрывали", async () => {
+    const controller = await makeController();
+    controller.reveal();
+    expect(controller.state().phase).toBe("answered");
+
+    await controller.apply("bury");
+    await controller.undo();
+
+    expect(controller.state().phase).toBe("answered");
+  });
+
+  it("отмена действия не трогает счёт оценок", async () => {
+    const controller = await makeController();
+    controller.reveal();
+    await controller.grade("good");
+    await controller.apply("bury");
+    await controller.undo();
+
+    expect(controller.state().tally.good).toBe(1);
+  });
+
+  it("действие не пишет в журнал: это не ответ", async () => {
+    const controller = await makeController();
+    await controller.apply("suspend");
+    expect(await db.reviews.count()).toBe(0);
   });
 });
 

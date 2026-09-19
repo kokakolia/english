@@ -155,6 +155,17 @@ export function UndoArrow() {
   );
 }
 
+/** Три точки: меню действий над карточкой. */
+export function DotsIcon() {
+  return (
+    <svg className="dots-icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false">
+      <circle cx="9" cy="3.5" r="1.6" fill="currentColor" />
+      <circle cx="9" cy="9" r="1.6" fill="currentColor" />
+      <circle cx="9" cy="14.5" r="1.6" fill="currentColor" />
+    </svg>
+  );
+}
+
 /** Значки на кнопках оценки: от увядшего к цветущему. */
 export function GradeIcon({ grade }: { grade: "again" | "hard" | "good" | "easy" }) {
   if (grade === "again") {

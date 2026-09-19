@@ -8,6 +8,8 @@
     "decks": "node scripts/sync-decks.mjs",
     "predev": "npm run decks",
     "dev": "vite",
+    "start": "npm run build && vite preview --open",
+    "serve": "vite preview --open",
     "prebuild": "npm run decks",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",

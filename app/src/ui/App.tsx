@@ -9,6 +9,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 import { bootstrap } from "../app/bootstrap";
+import { ensurePersistentStorage, type StorageStatus } from "../app/persistence";
 import {
   deckCounts,
   getStudySettings,
@@ -20,6 +21,7 @@ import { createStudyController, type StudyController, type StudyState } from "..
 import { DayScreen } from "./DayScreen";
 import { Background, CornerFern, OrnamentDefs, SideVine } from "./Ornaments";
 import { ReviewScreen } from "./ReviewScreen";
+import { Vault } from "./Vault";
 
 type Stage =
   | { kind: "loading" }
@@ -34,6 +36,7 @@ export function App() {
   const [offline, setOffline] = useState(false);
   const [controller, setController] = useState<StudyController | null>(null);
   const [state, setState] = useState<StudyState | null>(null);
+  const [storage, setStorage] = useState<StorageStatus | null>(null);
 
   const showDay = useCallback(
     async (database: AppDatabase, deckId: string) => {
@@ -52,8 +55,12 @@ export function App() {
   useEffect(() => {
     let cancelled = false;
     void (async () => {
+      // Разрешение спрашивается до открытия колоды: если браузер откажет,
+      // человек увидит это на первом же экране, а не после месяца занятий.
+      const status = await ensurePersistentStorage();
       const result = await bootstrap();
       if (cancelled) return;
+      setStorage(status);
 
       const first = result.decks[0];
       if (first === undefined) {
@@ -124,6 +131,17 @@ export function App() {
           backlog={stage.counts.backlog}
           offline={offline}
           onStart={() => void startStudy()}
+          vault={
+            db === null ? null : (
+              <Vault
+                db={db}
+                storage={storage}
+                onRestored={() => {
+                  if (db !== null && deck !== null) void showDay(db, deck.id);
+                }}
+              />
+            )
+          }
         />
       );
     }

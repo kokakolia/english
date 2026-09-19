@@ -35,12 +35,17 @@ import {
   type SessionSnapshot,
 } from "../srs";
 import {
+  buryCard,
   getStudySettings,
   loadCards,
   loadProgress,
   recordReview,
+  resetCard,
+  restoreProgress,
+  suspendCard,
   undoReview,
   type AppDatabase,
+  type PreviousProgress,
   type StoredProgress,
   type StudySettings,
 } from "../storage";
@@ -87,10 +92,12 @@ export interface StudyController {
   /** Оценить карточку, записать и перейти к следующей. */
   grade(grade: Grade): Promise<void>;
   /**
-   * Отменить последнюю оценку и вернуться к той карточке с раскрытым ответом.
-   * Отменять можно подряд, до начала занятия.
+   * Отменить последний шаг и вернуться к той карточке с раскрытым ответом.
+   * Отменять можно подряд, до начала занятия: и оценки, и действия.
    */
   undo(): Promise<void>;
+  /** Приостановить, закопать или сбросить текущую карточку. */
+  apply(action: CardAction): Promise<void>;
   /** Построить очередь заново — например, после смены настроек. */
   restart(): Promise<void>;
   settings(): StudySettings;
@@ -123,20 +130,47 @@ export type KeyAction =
   | { kind: "undo" }
   | null;
 
+/** Что можно сделать с карточкой помимо оценки. */
+export type CardAction =
+  /** Убрать из оборота до отмены: карточка сломана. */
+  | "suspend"
+  /** Спрятать до завтра: карточка нормальная, но не сейчас. */
+  | "bury"
+  /** Вернуть в состояние «новая»: расписание разъехалось с реальностью. */
+  | "reset";
+
 /**
- * Что нужно знать, чтобы отменить одну оценку.
+ * Что нужно знать, чтобы отменить один шаг.
  *
- * Здесь лежит именно то состояние, которое оценка меняет и которое нельзя
+ * Здесь лежит именно то состояние, которое шаг меняет и которое нельзя
  * вычислить обратно: прогресс FSRS (переход необратим), порядок очереди
  * (карточка могла уехать в середину) и счёт оценок.
  */
-interface UndoStep {
-  card: DeckCard;
-  grade: Grade;
-  reviewId: number;
-  previous: StoredProgress | null;
-  session: SessionSnapshot;
-}
+type UndoStep =
+  | {
+      kind: "grade";
+      card: DeckCard;
+      grade: Grade;
+      reviewId: number;
+      previous: PreviousProgress;
+      session: SessionSnapshot;
+    }
+  | {
+      kind: "action";
+      card: DeckCard;
+      action: CardAction;
+      previous: PreviousProgress;
+      session: SessionSnapshot;
+      /**
+       * Был ли ответ раскрыт в момент действия.
+       *
+       * Отмена обязана вернуть ровно то, что было. Отменённая оценка всегда
+       * возвращает раскрытый ответ — его уже видели. А действие можно
+       * применить и до попытки вспомнить, и тогда раскрытый ответ испортил бы
+       * карточку: вспоминать уже нечего.
+       */
+      phase: "question" | "answered";
+    };
 
 /**
  * Разбор нажатия — отдельной чистой функцией.
@@ -312,6 +346,7 @@ export async function createStudyController(
         // изменённую очередь и возврат приведёт не туда.
         if (session !== null) {
           undoStack.push({
+            kind: "grade",
             card,
             grade,
             reviewId: result.reviewId,
@@ -342,13 +377,19 @@ export async function createStudyController(
 
       publish({ saving: true, error: null });
       try {
-        await undoReview(db, {
-          cardId: step.card.id,
-          reviewId: step.reviewId,
-          previous: step.previous,
-        });
+        if (step.kind === "grade") {
+          await undoReview(db, {
+            cardId: step.card.id,
+            reviewId: step.reviewId,
+            previous: step.previous,
+          });
+        } else {
+          // Действия над карточкой меняют ровно одну строку прогресса, и
+          // вернуть её прежнее содержимое достаточно: журнала они не пишут.
+          await restoreProgress(db, step.card.id, step.previous);
+        }
       } catch (cause) {
-        publish({ saving: false, error: `не удалось отменить ответ: ${String(cause)}` });
+        publish({ saving: false, error: `не удалось отменить: ${String(cause)}` });
         return;
       }
 
@@ -360,10 +401,12 @@ export async function createStudyController(
       session?.restore(step.session);
 
       const tally = { ...state.tally };
-      tally[step.grade] = Math.max(0, tally[step.grade] - 1);
+      if (step.kind === "grade") {
+        tally[step.grade] = Math.max(0, tally[step.grade] - 1);
+      }
 
       publish({
-        phase: "answered",
+        phase: step.kind === "grade" ? "answered" : step.phase,
         card: step.card,
         hintVisible: false,
         tally,
@@ -371,6 +414,51 @@ export async function createStudyController(
         canUndo: undoStack.length > 0,
         saving: false,
       });
+    },
+
+    async apply(action) {
+      const card = state.card;
+      if (card === null || state.saving) return;
+      if (state.phase !== "question" && state.phase !== "answered") return;
+
+      publish({ saving: true, error: null });
+      let previous: PreviousProgress;
+      try {
+        const now = clock();
+        if (action === "suspend") {
+          previous = await suspendCard(db, { cardId: card.id, deckId, now, scheduler });
+        } else if (action === "bury") {
+          previous = await buryCard(db, { cardId: card.id, deckId, now, scheduler });
+        } else {
+          previous = await resetCard(db, card.id);
+        }
+      } catch (cause) {
+        publish({ saving: false, error: `не удалось применить действие: ${String(cause)}` });
+        return;
+      }
+
+      if (session !== null) {
+        undoStack.push({
+          kind: "action",
+          card,
+          action,
+          previous,
+          session: session.snapshot(),
+          phase: state.phase === "answered" ? "answered" : "question",
+        });
+      }
+
+      // Карта прогресса в памяти должна совпасть с базой, иначе следующая
+      // сборка очереди увидит не то, что записано.
+      const updated = await db.progress.get(card.id);
+      if (updated === undefined) progress.delete(card.id);
+      else progress.set(card.id, updated);
+
+      // Карточка уходит из захода, но ответом это не считается: счётчики
+      // занятия описывают вспоминание, а не уборку.
+      session?.drop();
+      publish({ saving: false, canUndo: undoStack.length > 0 });
+      advance();
     },
 
     restart: build,

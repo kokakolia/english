@@ -6,6 +6,8 @@
  * придётся только вёрстку.
  */
 
+import type { ReactNode } from "react";
+
 import type { DeckCounts } from "../storage";
 import { plural } from "./format";
 import { Leaf, PanelFlourish } from "./Ornaments";
@@ -16,9 +18,11 @@ interface Props {
   backlog: number;
   offline: boolean;
   onStart: () => void;
+  /** Блок сохранности прогресса. Живёт отдельным компонентом. */
+  vault?: ReactNode;
 }
 
-export function DayScreen({ deckName, counts, backlog, offline, onStart }: Props) {
+export function DayScreen({ deckName, counts, backlog, offline, onStart, vault }: Props) {
   const ready = counts.fresh > 0 || counts.due > 0;
 
   return (
@@ -72,6 +76,8 @@ export function DayScreen({ deckName, counts, backlog, offline, onStart }: Props
           Свежую колоду достать не удалось — занимаемся тем, что уже загружено.
         </p>
       )}
+
+      {vault}
     </section>
   );
 }

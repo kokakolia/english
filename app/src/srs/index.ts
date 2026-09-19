@@ -25,6 +25,8 @@ export {
   createScheduler,
   defaultScheduler,
   isDue,
+  isHidden,
+  nextDayStart,
   type ReviewOutcome,
   type Scheduler,
   type SchedulerOptions,

@@ -11,7 +11,14 @@
  * а не после.
  */
 
-import { defaultScheduler, isDue, type Grade, type Scheduler } from "../srs";
+import {
+  defaultScheduler,
+  isDue,
+  isHidden,
+  nextDayStart,
+  type Grade,
+  type Scheduler,
+} from "../srs";
 import type { AnswerVerdict, CardProgress } from "../srs";
 import type { AppDatabase, StoredProgress, StoredReview } from "./db";
 
@@ -191,14 +198,110 @@ export async function cardHistory(
   return rows;
 }
 
+/** Что было с карточкой до действия — чтобы действие можно было отменить. */
+export type PreviousProgress = StoredProgress | null;
+
 /**
  * Сбрасывает прогресс по карточке, не трогая журнал.
  *
  * Журнал остаётся: он описывает то, что действительно происходило, и
  * переписывать историю задним числом нельзя, даже по просьбе пользователя.
+ *
+ * Возвращает прежнюю запись — по ней сброс отменяется.
  */
-export async function resetCard(db: AppDatabase, cardId: string): Promise<void> {
-  await db.progress.delete(cardId);
+export async function resetCard(
+  db: AppDatabase,
+  cardId: string,
+): Promise<PreviousProgress> {
+  let before: PreviousProgress = null;
+  await db.transaction("rw", db.progress, async () => {
+    before = (await db.progress.get(cardId)) ?? null;
+    await db.progress.delete(cardId);
+  });
+  return before;
+}
+
+export interface HideInput {
+  cardId: string;
+  deckId: string;
+  now?: Date;
+  scheduler?: Scheduler;
+}
+
+/**
+ * Убирает карточку из оборота до отмены.
+ *
+ * Если карточку ещё ни разу не показывали, запись прогресса заводится в
+ * состоянии «новая»: приостановка не должна засчитывать её как начатую, иначе
+ * возврат в оборот выдал бы карточку с выдуманным расписанием.
+ */
+export async function suspendCard(
+  db: AppDatabase,
+  input: HideInput,
+): Promise<PreviousProgress> {
+  return writeFlag(db, input, (row) => ({ ...row, suspended: true }));
+}
+
+/** Возвращает приостановленную карточку в оборот. */
+export async function unsuspendCard(
+  db: AppDatabase,
+  input: HideInput,
+): Promise<PreviousProgress> {
+  return writeFlag(db, input, (row) => ({ ...row, suspended: false }));
+}
+
+/** Прячет карточку до начала следующих суток. */
+export async function buryCard(
+  db: AppDatabase,
+  input: HideInput,
+): Promise<PreviousProgress> {
+  const until = nextDayStart(input.now ?? new Date()).toISOString();
+  return writeFlag(db, input, (row) => ({ ...row, buriedUntil: until }));
+}
+
+async function writeFlag(
+  db: AppDatabase,
+  input: HideInput,
+  change: (row: StoredProgress) => StoredProgress,
+): Promise<PreviousProgress> {
+  const now = input.now ?? new Date();
+  const scheduler = input.scheduler ?? defaultScheduler;
+  let before: PreviousProgress = null;
+
+  await db.transaction("rw", db.progress, async () => {
+    before = (await db.progress.get(input.cardId)) ?? null;
+    const base: StoredProgress =
+      before ??
+      ({ ...scheduler.create(input.cardId, now), deckId: input.deckId } as StoredProgress);
+    await db.progress.put(change(base));
+  });
+
+  return before;
+}
+
+/**
+ * Возвращает запись прогресса на место — или удаляет её, если записи не было.
+ *
+ * Общая отмена для всех действий над карточкой: они меняют ровно одну строку,
+ * и вернуть её прежнее содержимое достаточно.
+ */
+export async function restoreProgress(
+  db: AppDatabase,
+  cardId: string,
+  previous: PreviousProgress,
+): Promise<void> {
+  if (previous === null) await db.progress.delete(cardId);
+  else await db.progress.put(previous);
+}
+
+/** Сколько карточек колоды убрано из оборота. */
+export async function hiddenCount(
+  db: AppDatabase,
+  deckId: string,
+  now: Date = new Date(),
+): Promise<number> {
+  const rows = await db.progress.where("deckId").equals(deckId).toArray();
+  return rows.filter((row) => isHidden(row, now)).length;
 }
 
 /** Текущий прогресс по карточке, если он есть. */

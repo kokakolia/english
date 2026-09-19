@@ -14,6 +14,7 @@ import { useEffect } from "react";
 
 import { GRADES, type Grade } from "../srs";
 import { keyAction, type StudyController, type StudyState } from "../study/controller";
+import { CardMenu } from "./CardMenu";
 import { plural } from "./format";
 import { GradeIcon, Leaf, MoodPlant, PanelFlourish, UndoArrow } from "./Ornaments";
 
@@ -89,6 +90,10 @@ function ProgressHeader({
           </span>
           <Leaf className="counter-leaf counter-leaf--flip" />
         </div>
+        <CardMenu
+          disabled={state.saving || state.card === null}
+          onPick={(action) => void controller.apply(action)}
+        />
       </div>
       <div className="rule">
         <span className="rule-line" />

@@ -158,3 +158,24 @@ export const defaultScheduler = createScheduler();
 export function isDue(progress: CardProgress, now: Date): boolean {
   return new Date(progress.due).getTime() <= now.getTime();
 }
+
+/**
+ * Убрана ли карточка из оборота рукой человека.
+ *
+ * Проверяется раньше срока показа: приостановленная карточка не должна
+ * попадать в очередь, даже когда её срок давно наступил.
+ */
+export function isHidden(progress: CardProgress, now: Date): boolean {
+  if (progress.suspended === true) return true;
+  const buried = progress.buriedUntil;
+  if (buried === undefined || buried === null) return false;
+  return new Date(buried).getTime() > now.getTime();
+}
+
+/** Начало следующих суток по местному времени — докуда закапывается карточка. */
+export function nextDayStart(now: Date): Date {
+  const start = new Date(now);
+  start.setHours(0, 0, 0, 0);
+  start.setDate(start.getDate() + 1);
+  return start;
+}

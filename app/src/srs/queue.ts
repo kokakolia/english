@@ -13,7 +13,7 @@
  * повторений, пачкой в конце достаются уже уставшему.
  */
 
-import { isDue } from "./scheduler";
+import { isDue, isHidden } from "./scheduler";
 import type { CardProgress, DeckCard } from "./types";
 
 export interface QueueSettings {
@@ -215,6 +215,9 @@ export function buildQueue({
 
   for (const card of cards) {
     const state = lookup(progress, card.id);
+    // Раньше всего остального: приостановленная или закопанная карточка
+    // выпадает из очереди независимо от того, новая она или просроченная.
+    if (state !== undefined && isHidden(state, now)) continue;
     if (state === undefined || state.state === "new") {
       fresh.push(card);
       continue;
