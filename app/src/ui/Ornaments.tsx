@@ -154,6 +154,61 @@ export function SideVine({ side = "right" }: { side?: "left" | "right" }) {
   );
 }
 
+/**
+ * Папоротник вдоль края: тот же куст, но формой повторяющий лозу.
+ *
+ * Обычный папоротник рисуется в углу и вдоль края читается дугой — короткий
+ * изогнутый вайя поперёк кадра. Здесь у него **стебель лозы**: та же волна во
+ * всю высоту с едва заметным дрожанием, а листочки сидят на ней.
+ *
+ * Листочки чередуются по сторонам стебля, как у настоящего папоротника, и
+ * растут от верхушки к основанию: вверху мельче, внизу крупнее. Их центры
+ * посчитаны по самой кривой стебля, а не подобраны на глаз, — иначе они
+ * съезжают со стебля, что однажды уже вышло.
+ */
+export function SideFern({ side = "left" }: { side?: "left" | "right" }) {
+  return (
+    <svg
+      className={`ornament-vine ornament-vine--${side}`}
+      viewBox="1360 100 80 760"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <g fill="none" stroke="var(--ornament-stem)" strokeWidth="1.6" opacity="0.5">
+        <path
+          d="M 1428 100
+             C 1428 147 1431 147 1431 195
+             C 1431 242 1425 242 1425 290
+             C 1425 337 1431 337 1431 385
+             C 1431 432 1425 432 1425 480
+             C 1425 527 1431 527 1431 575
+             C 1431 622 1425 622 1425 670
+             C 1425 717 1431 717 1431 765
+             C 1431 812 1428 812 1428 860"
+        />
+      </g>
+      <g fill="var(--ornament-stem)" opacity="0.5">
+            <ellipse cx="1425.9" cy="132" rx="6.0" ry="2.4" transform="rotate(-28 1425.9 132)" />
+            <ellipse cx="1433.6" cy="176" rx="6.3" ry="2.5" transform="rotate(28 1433.6 176)" />
+            <ellipse cx="1427.3" cy="220" rx="6.6" ry="2.6" transform="rotate(-28 1427.3 220)" />
+            <ellipse cx="1428.9" cy="264" rx="6.9" ry="2.7" transform="rotate(28 1428.9 264)" />
+            <ellipse cx="1422.2" cy="308" rx="7.1" ry="2.8" transform="rotate(-28 1422.2 308)" />
+            <ellipse cx="1433.0" cy="352" rx="7.4" ry="2.8" transform="rotate(28 1433.0 352)" />
+            <ellipse cx="1427.4" cy="396" rx="7.7" ry="2.9" transform="rotate(-28 1427.4 396)" />
+            <ellipse cx="1430.6" cy="440" rx="8.0" ry="3.0" transform="rotate(28 1430.6 440)" />
+            <ellipse cx="1421.3" cy="484" rx="8.3" ry="3.1" transform="rotate(-28 1421.3 484)" />
+            <ellipse cx="1432.0" cy="528" rx="8.6" ry="3.2" transform="rotate(28 1432.0 528)" />
+            <ellipse cx="1427.0" cy="572" rx="8.8" ry="3.3" transform="rotate(-28 1427.0 572)" />
+            <ellipse cx="1432.9" cy="616" rx="9.1" ry="3.4" transform="rotate(28 1432.9 616)" />
+            <ellipse cx="1420.9" cy="660" rx="9.4" ry="3.5" transform="rotate(-28 1420.9 660)" />
+            <ellipse cx="1430.8" cy="704" rx="9.7" ry="3.6" transform="rotate(28 1430.8 704)" />
+            <ellipse cx="1426.2" cy="748" rx="10.0" ry="3.6" transform="rotate(-28 1426.2 748)" />
+            <ellipse cx="1435.2" cy="792" rx="10.3" ry="3.7" transform="rotate(28 1435.2 792)" />
+      </g>
+    </svg>
+  );
+}
+
 /** Завиток в углу панели. */
 export function PanelFlourish({ position }: { position: "start" | "end" }) {
   return (

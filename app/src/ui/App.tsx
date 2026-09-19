@@ -27,7 +27,7 @@ import {
   KelpCorner,
   Plankton,
 } from "./DeepOrnaments";
-import { Background, CornerFern, OrnamentDefs, SideVine } from "./Ornaments";
+import { Background, CornerFern, OrnamentDefs, SideFern, SideVine } from "./Ornaments";
 import { ReviewScreen } from "./ReviewScreen";
 import { DarkProvider } from "./ThemeContext";
 import { Vault } from "./Vault";
@@ -141,11 +141,11 @@ export function App() {
         <>
           <OrnamentDefs />
           <Background />
-          {/* Слева — лоза вдоль края вместо папоротников: та же фигура, что
-              справа, зеркально. Папоротники остались только в правых углах. */}
+          {/* Слева — папоротник вдоль края: тот же куст, но формой
+              повторяющий лозу. Папоротники в углах остались справа. */}
           <CornerFern corner="tr" />
           <CornerFern corner="br" />
-          <SideVine side="left" />
+          <SideFern side="left" />
           <SideVine side="right" />
         </>
       )}
