@@ -89,7 +89,11 @@ export function KelpCorner({ side }: { side: "left" | "right" }) {
       aria-hidden="true"
       focusable="false"
     >
-      <g filter="url(#deep-soft)">
+      {/* Без размытия. Оно задано в единицах viewBox, а у водорослей масштаб
+          в полтора раза крупнее, чем у пучка справа: одно и то же
+          `stdDeviation` давало им вдвое более толстую размывку, и рядом с
+          чётким пучком они выглядели не мягкими, а расфокусированными. */}
+      <g>
         <use href="#kelp" x="0" y="12" width="140" height="220" />
         <g transform="translate(74,36) scale(0.72)" opacity="0.75">
           <use href="#kelp" x="0" y="0" width="140" height="220" />
@@ -117,9 +121,11 @@ export function GlowTendrils() {
   return (
     <svg
       className="ornament-tendrils"
-      // Кадр по содержимому, а не «на глазок»: при `preserveAspectRatio="none"`
-      // пучок сплющивало по вертикали на пятую часть.
-      viewBox="1340 8 104 396"
+      // Кадр начинается ровно от точки, из которой растут нити (1400, 20):
+      // тогда `top: 0` притягивает пучок к верхнему краю, и он висит на нём,
+      // а не парит в воздухе. Раньше кадр начинался выше, и между краем окна
+      // и креплением оставался зазор.
+      viewBox="1340 20 104 384"
       preserveAspectRatio="xMidYMid meet"
       aria-hidden="true"
       focusable="false"
