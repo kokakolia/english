@@ -82,22 +82,39 @@ export function Background() {
   );
 }
 
-/** Папоротник в углу. Повёрнутый экземпляр ставится через CSS. */
+/**
+ * Папоротник в углу. Повёрнутый экземпляр ставится через CSS.
+ *
+ * `viewBox` обязателен: без него svg считает свои координаты пикселями бокса,
+ * и содержимое 230×328 единиц обрезалось краем на любом окне у́же 1438
+ * пикселей. В макете этого нет — там всё лежит в одном холсте 1440×900.
+ */
 export function CornerFern({ corner }: { corner: "tl" | "tr" | "bl" | "br" }) {
   return (
-    <svg className={`ornament-fern ornament-fern--${corner}`} aria-hidden="true" focusable="false">
+    <svg
+      className={`ornament-fern ornament-fern--${corner}`}
+      viewBox="0 0 230 328"
+      aria-hidden="true"
+      focusable="false"
+    >
       <use href="#fern" width="230" height="328" />
     </svg>
   );
 }
 
-/** Вьюнок с цветами вдоль правого края — только на широком экране. */
+/**
+ * Вьюнок с цветами вдоль правого края — только на широком экране.
+ *
+ * Масштаб равномерный. С `preserveAspectRatio="none"` кадр 80×760 растягивался
+ * в бокс высотой во весь экран: на высоком окне волна вытягивалась и шла
+ * прямой, на низком — сжималась и выгибалась дугой. Форма вьюнка не должна
+ * зависеть от размера окна.
+ */
 export function SideVine() {
   return (
     <svg
       className="ornament-vine"
       viewBox="1360 100 80 760"
-      preserveAspectRatio="none"
       aria-hidden="true"
       focusable="false"
     >
