@@ -9,6 +9,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 import { bootstrap } from "../app/bootstrap";
+import { applyTheme, isDarkNow, readTheme, saveTheme, type ThemeChoice } from "../app/theme";
 import { ensurePersistentStorage, type StorageStatus } from "../app/persistence";
 import {
   deckCounts,
@@ -19,6 +20,13 @@ import {
 } from "../storage";
 import { createStudyController, type StudyController, type StudyState } from "../study/controller";
 import { DayScreen } from "./DayScreen";
+import {
+  DeepBackground,
+  DeepDefs,
+  GlowTendrils,
+  KelpCorner,
+  Plankton,
+} from "./DeepOrnaments";
 import { Background, CornerFern, OrnamentDefs, SideVine } from "./Ornaments";
 import { ReviewScreen } from "./ReviewScreen";
 import { Vault } from "./Vault";
@@ -37,6 +45,26 @@ export function App() {
   const [controller, setController] = useState<StudyController | null>(null);
   const [state, setState] = useState<StudyState | null>(null);
   const [storage, setStorage] = useState<StorageStatus | null>(null);
+  const [theme, setThemeState] = useState<ThemeChoice>(() => readTheme());
+  const [dark, setDark] = useState(() => isDarkNow(readTheme()));
+
+  // Слежение за системной настройкой: пока выбрано «как в системе», вечернее
+  // переключение должно доходить до открытого приложения, а не ждать перезапуска.
+  useEffect(() => {
+    applyTheme(theme);
+    setDark(isDarkNow(theme));
+    if (theme !== "system") return;
+
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const onChange = () => setDark(media.matches);
+    media.addEventListener("change", onChange);
+    return () => media.removeEventListener("change", onChange);
+  }, [theme]);
+
+  const setTheme = useCallback((choice: ThemeChoice) => {
+    saveTheme(choice);
+    setThemeState(choice);
+  }, []);
 
   const showDay = useCallback(
     async (database: AppDatabase, deckId: string) => {
@@ -98,13 +126,26 @@ export function App() {
 
   return (
     <main className="app">
-      <OrnamentDefs />
-      <Background />
-      <CornerFern corner="tl" />
-      <CornerFern corner="tr" />
-      <CornerFern corner="bl" />
-      <CornerFern corner="br" />
-      <SideVine />
+      {dark ? (
+        <>
+          <DeepDefs />
+          <DeepBackground />
+          <KelpCorner side="left" />
+          <KelpCorner side="right" />
+          <GlowTendrils />
+          <Plankton />
+        </>
+      ) : (
+        <>
+          <OrnamentDefs />
+          <Background />
+          <CornerFern corner="tl" />
+          <CornerFern corner="tr" />
+          <CornerFern corner="bl" />
+          <CornerFern corner="br" />
+          <SideVine />
+        </>
+      )}
       {renderStage()}
     </main>
   );
@@ -136,6 +177,8 @@ export function App() {
               <Vault
                 db={db}
                 storage={storage}
+                theme={theme}
+                onTheme={setTheme}
                 onRestored={() => {
                   if (db !== null && deck !== null) void showDay(db, deck.id);
                 }}

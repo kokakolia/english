@@ -33,6 +33,57 @@
   --font-body: "Lora", Georgia, serif;
   --font-display: "Marcellus", "Cormorant Garamond", Georgia, serif;
 
+  /* Ролевые переменные. Правило простое: вёрстка ниже не знает про золото и
+     бумагу, она знает про «поверхность панели» и «линию». Тема меняет их
+     значения, а разметка и правила остаются те же — иначе тёмная тема
+     превращается в вторую копию всех стилей, которая расходится с первой на
+     первой же правке. */
+  --bg: var(--paper);
+  --text: var(--ink);
+  --text-soft: var(--sage);
+  --text-dim: var(--brass);
+  --accent: var(--gold);
+  --accent-deep: var(--gold-deep);
+  --accent-dark: var(--gold-dark);
+  --answer-colour: var(--amber);
+
+  --panel-bg: rgba(255, 255, 255, 0.4);
+  --panel-border: rgba(255, 255, 255, 0.7);
+  --panel-shadow: 0 26px 56px rgba(31, 58, 46, 0.2);
+  --panel-inset: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  --panel-blur: 18px;
+
+  --menu-bg: rgba(253, 252, 247, 0.98);
+  --menu-border: rgba(184, 137, 43, 0.45);
+  --menu-shadow: 0 18px 40px rgba(31, 58, 46, 0.22);
+  --hover-bg: rgba(184, 137, 43, 0.12);
+  --control-border-hover: rgba(184, 137, 43, 0.5);
+  --control-bg: rgba(255, 255, 255, 0.55);
+  --scroll-thumb: rgba(184, 137, 43, 0.5);
+
+  --note-bg: rgba(31, 58, 46, 0.06);
+  --note-border: var(--ink);
+  --tally-bg: rgba(255, 255, 255, 0.45);
+  --glow: rgba(184, 137, 43, 0.35);
+  --warn-colour: var(--rust);
+
+  /* Оценки: цвет текста и рамки. В тёмной теме вместо «увядшее — цветущее»
+     работает яркость свечения, поэтому значения у тем разные. */
+  --again-line: rgba(166, 70, 43, 0.45);
+  --again-text: #7a3a22;
+  --hard-line: rgba(184, 137, 43, 0.5);
+  --hard-text: #7c6415;
+  --good-line: rgba(79, 113, 74, 0.5);
+  --good-text: #35502f;
+  --easy-line: rgba(184, 137, 43, 0.7);
+  --easy-text: var(--gold-dark);
+  --grade-glow: none;
+
+  /* Орнаменты. Светлая тема — сад, тёмная — морское дно; общего у них только
+     эти имена. */
+  --ornament-stem: #1f3a2e;
+  --ornament-accent: #b8892b;
+
   --column: 660px;
   /* Поля карточки: по горизонтали от ширины окна, по вертикали от высоты.
      Раньше обе стороны считались от ширины, и на широком, но невысоком экране
@@ -42,6 +93,127 @@
   /* Единый вертикальный ритм карточки: отступ между её частями. Тоже от
      высоты — расстояния должны сжиматься там, где не хватает именно высоты. */
   --step: clamp(11px, 2vh, 19px);
+}
+
+/* ===== Тёмная тема =====
+ *
+ * Не инверсия светлой, а другой мир: светлая — сад на бумаге, тёмная — морское
+ * дно. Взято из макета `design/dark-*.html`, но не разметкой, а языком.
+ *
+ * Макет собран как холст 1440×900, который целиком масштабируется скриптом
+ * под окно. Для показа это удобно, для работы — нет: на другом экране
+ * ужимается и текст, и поля. Поэтому сюда перенесены палитра, свечение и
+ * орнаменты, а размеры остались тянущимися, как в светлой теме.
+ *
+ * Две точки входа: системная настройка и ручной выбор. `data-theme` на
+ * <html> перекрывает систему, потому что «у меня в системе тёмная, но это
+ * приложение хочу светлым» — законное желание.
+ */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --bg: #02040a;
+    --text: #e7f3fc;
+    --text-soft: #6d8aa3;
+    --text-dim: #4c7196;
+    --accent: #6ec9ff;
+    --accent-deep: #a9e0ff;
+    --accent-dark: #bfe6ff;
+    --answer-colour: #bfe6ff;
+
+    /* Панель почти не имеет собственного цвета: на тёмном её выделяет не
+       заливка, а светящийся край. Заливка посветлее выглядела бы серой
+       заплатой. */
+    --panel-bg: rgba(80, 150, 220, 0.05);
+    --panel-border: rgba(110, 201, 255, 0.22);
+    --panel-shadow:
+      0 0 46px rgba(79, 168, 255, 0.12),
+      0 24px 50px rgba(0, 0, 0, 0.6);
+    --panel-inset: none;
+    --panel-blur: 20px;
+
+    --menu-bg: rgba(6, 14, 26, 0.97);
+    --menu-border: rgba(110, 201, 255, 0.28);
+    --menu-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+    --hover-bg: rgba(110, 201, 255, 0.1);
+    --control-border-hover: rgba(110, 201, 255, 0.55);
+    --control-bg: rgba(110, 201, 255, 0.07);
+    --scroll-thumb: rgba(110, 201, 255, 0.4);
+
+    --note-bg: rgba(110, 201, 255, 0.06);
+    --note-border: #6ec9ff;
+    --tally-bg: rgba(110, 201, 255, 0.05);
+    --glow: rgba(110, 201, 255, 0.35);
+  --warn-colour: #ff9a7a;
+
+    /* В светлой теме оценки различаются цветом — от ржавого к золотому.
+       На тёмном цвет читается хуже, а яркость лучше, поэтому здесь работает
+       она: от тусклой к светящейся. */
+    --again-line: rgba(61, 90, 120, 0.55);
+    --again-text: #6d8aa3;
+    --hard-line: rgba(78, 130, 168, 0.55);
+    --hard-text: #7cadce;
+    --good-line: rgba(110, 201, 255, 0.6);
+    --good-text: #bfe6ff;
+    --easy-line: #a9e0ff;
+    --easy-text: #e7f3fc;
+    --grade-glow: 0 0 18px rgba(169, 224, 255, 0.28);
+
+    --ornament-stem: #4fa8ff;
+    --ornament-accent: #6ec9ff;
+  }
+}
+
+/* Ручной выбор. Повторяет блок выше целиком: списком селекторов их не
+   объединить — у `@media` и атрибута разная природа. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #02040a;
+  --text: #e7f3fc;
+  --text-soft: #6d8aa3;
+  --text-dim: #4c7196;
+  --accent: #6ec9ff;
+  --accent-deep: #a9e0ff;
+  --accent-dark: #bfe6ff;
+  --answer-colour: #bfe6ff;
+
+  --panel-bg: rgba(80, 150, 220, 0.05);
+  --panel-border: rgba(110, 201, 255, 0.22);
+  --panel-shadow:
+    0 0 46px rgba(79, 168, 255, 0.12),
+    0 24px 50px rgba(0, 0, 0, 0.6);
+  --panel-inset: none;
+  --panel-blur: 20px;
+
+  --menu-bg: rgba(6, 14, 26, 0.97);
+  --menu-border: rgba(110, 201, 255, 0.28);
+  --menu-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
+  --hover-bg: rgba(110, 201, 255, 0.1);
+  --control-border-hover: rgba(110, 201, 255, 0.55);
+  --control-bg: rgba(110, 201, 255, 0.07);
+  --scroll-thumb: rgba(110, 201, 255, 0.4);
+
+  --note-bg: rgba(110, 201, 255, 0.06);
+  --note-border: #6ec9ff;
+  --tally-bg: rgba(110, 201, 255, 0.05);
+  --glow: rgba(110, 201, 255, 0.35);
+  --warn-colour: #ff9a7a;
+
+  --again-line: rgba(61, 90, 120, 0.55);
+  --again-text: #6d8aa3;
+  --hard-line: rgba(78, 130, 168, 0.55);
+  --hard-text: #7cadce;
+  --good-line: rgba(110, 201, 255, 0.6);
+  --good-text: #bfe6ff;
+  --easy-line: #a9e0ff;
+  --easy-text: #e7f3fc;
+  --grade-glow: 0 0 18px rgba(169, 224, 255, 0.28);
+
+  --ornament-stem: #4fa8ff;
+  --ornament-accent: #6ec9ff;
 }
 
 * {
@@ -56,8 +228,8 @@ body {
      никуда не уезжают. */
   height: 100%;
   overflow: hidden;
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--bg);
+  color: var(--text);
   font-family: var(--font-body);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -83,7 +255,10 @@ body {
 
 .ornament-bg,
 .ornament-fern,
-.ornament-vine {
+.ornament-vine,
+.ornament-kelp,
+.ornament-tendrils,
+.ornament-plankton {
   position: absolute;
   pointer-events: none;
   z-index: 0;
@@ -138,6 +313,63 @@ body {
   }
 }
 
+/* ===== Орнаменты тёмной темы ===== */
+
+/* Водоросли растут со дна, поэтому цепляются за низ, а не за углы, как
+   папоротники. Ширина от окна, высота — от высоты: на невысоком экране
+   заросли не должны подниматься до карточки. */
+.ornament-kelp {
+  bottom: -10px;
+  width: clamp(90px, 16vw, 240px);
+  height: clamp(130px, 30vh, 360px);
+  opacity: 0.55;
+}
+
+/* На телефоне заросли оказываются прямо под кнопками оценки и спорят с ними
+   за внимание: доля экрана у них та же, что на ПК, а экран вчетверо у́же.
+   Поэтому здесь они и мельче, и тусклее. */
+@media (max-width: 700px) {
+  .ornament-kelp {
+    width: clamp(70px, 22vw, 110px);
+    opacity: 0.3;
+  }
+}
+
+.ornament-kelp--left {
+  left: -30px;
+}
+
+.ornament-kelp--right {
+  right: -30px;
+  transform: scaleX(-1);
+}
+
+/* Светящийся пучок — на месте вьюнка светлой темы, и прячется там же. */
+.ornament-tendrils {
+  top: clamp(20px, 6vh, 90px);
+  right: 0;
+  width: clamp(90px, 9vw, 130px);
+  height: clamp(240px, 46vh, 460px);
+  opacity: 0.85;
+}
+
+@media (max-width: 900px) {
+  .ornament-tendrils {
+    display: none;
+  }
+}
+
+.ornament-plankton {
+  opacity: 0.7;
+}
+
+/* На узком экране планктон у краёв налезает на текст. */
+@media (max-width: 700px) {
+  .ornament-plankton {
+    display: none;
+  }
+}
+
 .screen {
   position: relative;
   z-index: 1;
@@ -169,7 +401,7 @@ body {
   /* Тонкая полоса в цвет орнамента: она должна быть видна — это единственный
      признак, что текст продолжается ниже, — но не спорить с оформлением. */
   scrollbar-width: thin;
-  scrollbar-color: rgba(184, 137, 43, 0.5) transparent;
+  scrollbar-color: var(--scroll-thumb) transparent;
 }
 
 .middle::-webkit-scrollbar {
@@ -181,7 +413,7 @@ body {
 }
 
 .middle::-webkit-scrollbar-thumb {
-  background: rgba(184, 137, 43, 0.45);
+  background: var(--scroll-thumb);
   border-radius: 999px;
 }
 
@@ -200,7 +432,7 @@ body {
 }
 
 .quiet {
-  color: var(--brass);
+  color: var(--text-dim);
   font-size: clamp(13px, 1.4vw, 15px);
   margin: 0;
 }
@@ -226,7 +458,7 @@ body {
   border: 1px solid transparent;
   border-radius: 999px;
   background: none;
-  color: var(--brass);
+  color: var(--text-dim);
   font-family: var(--font-display);
   font-size: clamp(12px, 1.2vw, 15px);
   letter-spacing: 0.08em;
@@ -238,7 +470,7 @@ body {
 }
 
 .undo:hover:not(:disabled) {
-  border-color: rgba(184, 137, 43, 0.5);
+  border-color: var(--control-border-hover);
 }
 
 .undo:disabled {
@@ -278,13 +510,13 @@ body {
   border: 1px solid transparent;
   border-radius: 999px;
   background: none;
-  color: var(--brass);
+  color: var(--text-dim);
   cursor: pointer;
   transition: border-color 0.15s ease;
 }
 
 .menu-button:hover:not(:disabled) {
-  border-color: rgba(184, 137, 43, 0.5);
+  border-color: var(--control-border-hover);
 }
 
 .menu-button:disabled {
@@ -304,7 +536,7 @@ body {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--rust);
+  background: var(--warn-colour);
 }
 
 .menu-button {
@@ -326,11 +558,11 @@ body {
   display: flex;
   flex-direction: column;
   padding: 6px;
-  border: 1px solid rgba(184, 137, 43, 0.45);
+  border: 1px solid var(--menu-border);
   border-radius: 14px;
-  background: rgba(253, 252, 247, 0.98);
+  background: var(--menu-bg);
   backdrop-filter: blur(12px);
-  box-shadow: 0 18px 40px rgba(31, 58, 46, 0.22);
+  box-shadow: var(--menu-shadow);
 }
 
 .menu-item {
@@ -346,18 +578,18 @@ body {
 }
 
 .menu-item:hover {
-  background: rgba(184, 137, 43, 0.12);
+  background: var(--hover-bg);
 }
 
 .menu-item-label {
   font-family: var(--font-display);
   font-size: 15px;
-  color: var(--ink);
+  color: var(--text);
 }
 
 .menu-item-hint {
   font-size: 12px;
-  color: var(--brass);
+  color: var(--text-dim);
   line-height: 1.35;
 }
 
@@ -365,13 +597,13 @@ body {
   margin: 6px 10px 4px;
   font-size: 11.5px;
   line-height: 1.4;
-  color: var(--brass);
+  color: var(--text-dim);
   opacity: 0.85;
 }
 
 /* Тревожный, но не кричащий: это не ошибка, а условие работы. */
 .menu-foot--warn {
-  color: var(--rust);
+  color: var(--warn-colour);
   opacity: 1;
 }
 
@@ -389,12 +621,12 @@ body {
   width: clamp(14px, 1.5vw, 20px);
   height: clamp(14px, 1.5vw, 20px);
   border-radius: 50%;
-  background: var(--gold);
+  background: var(--accent);
 }
 
 .dot--empty {
   background: none;
-  border: 1.5px solid var(--gold);
+  border: 1.5px solid var(--accent);
 }
 
 .counter {
@@ -417,7 +649,7 @@ body {
   font-family: var(--font-display);
   font-size: clamp(15px, 1.6vw, 21px);
   letter-spacing: 0.08em;
-  color: var(--brass);
+  color: var(--text-dim);
   text-transform: uppercase;
 }
 
@@ -430,19 +662,19 @@ body {
 .rule-line {
   flex: 1;
   height: 1px;
-  background: linear-gradient(to right, transparent, var(--gold));
+  background: linear-gradient(to right, transparent, var(--accent));
   opacity: 0.6;
 }
 
 .rule-line--rev {
-  background: linear-gradient(to left, transparent, var(--gold));
+  background: linear-gradient(to left, transparent, var(--accent));
 }
 
 .rule-dot {
   width: 6px;
   height: 6px;
   transform: rotate(45deg);
-  background: var(--gold);
+  background: var(--accent);
   opacity: 0.7;
 }
 
@@ -513,15 +745,15 @@ body {
 .panel {
   animation: card-in 0.24s ease-out both;
   position: relative;
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: var(--panel-bg);
+  backdrop-filter: blur(var(--panel-blur));
+  -webkit-backdrop-filter: blur(var(--panel-blur));
+  border: 1px solid var(--panel-border);
   border-radius: clamp(18px, 2vw, 24px);
   padding: var(--panel-pad-y) var(--panel-pad-x);
   box-shadow:
-    0 26px 56px rgba(31, 58, 46, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+    var(--panel-shadow),
+    var(--panel-inset);
   /* Отступ под тень: иначе она обрезается краем прокручиваемой середины. */
   margin: 0 0 6px;
 }
@@ -549,29 +781,29 @@ body {
   font-size: clamp(12px, 1.2vw, 15px);
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--gold-deep);
+  color: var(--accent-deep);
   margin-bottom: var(--step);
 }
 
 .sentence {
   font-size: clamp(19px, min(2.5vw, 4.2vh), 30px);
   line-height: 1.45;
-  color: var(--ink);
+  color: var(--text);
   margin: 0;
 }
 
 .gap {
   display: inline-block;
   min-width: clamp(66px, 7vw, 92px);
-  border-bottom: 3px solid var(--gold);
+  border-bottom: 3px solid var(--accent);
   color: transparent;
 }
 
 .answer {
   font-weight: 400;
-  color: var(--amber);
+  color: var(--answer-colour);
   text-decoration: underline;
-  text-decoration-color: var(--gold);
+  text-decoration-color: var(--accent);
   text-underline-offset: 3px;
 }
 
@@ -579,7 +811,7 @@ body {
   margin: var(--step) 0 0;
   font-style: italic;
   font-size: clamp(15px, min(1.7vw, 2.8vh), 20px);
-  color: var(--sage);
+  color: var(--text-soft);
 }
 
 .hint {
@@ -587,24 +819,24 @@ body {
   font-family: var(--font-display);
   letter-spacing: 8px;
   font-size: clamp(16px, min(1.7vw, 2.8vh), 21px);
-  color: var(--gold-deep);
+  color: var(--accent-deep);
 }
 
 .note {
   margin: var(--step) 0 0;
   padding: clamp(10px, 1.5vh, 15px) clamp(12px, 1.4vw, 18px);
-  border-left: 3px solid var(--ink);
-  background: rgba(31, 58, 46, 0.06);
+  border-left: 3px solid var(--note-border);
+  background: var(--note-bg);
   border-radius: 0 10px 10px 0;
   font-size: clamp(13px, min(1.5vw, 2.3vh), 17px);
   line-height: 1.55;
-  color: var(--ink-soft);
+  color: var(--text-soft);
 }
 
 .also {
   margin: calc(var(--step) * 0.7) 0 0;
   font-size: clamp(12px, 1.3vw, 15px);
-  color: var(--brass);
+  color: var(--text-dim);
 }
 
 .tailpiece {
@@ -626,7 +858,7 @@ body {
 .tailpiece-line {
   width: 30px;
   height: 1px;
-  background: var(--gold);
+  background: var(--accent);
   opacity: 0.5;
 }
 
@@ -642,9 +874,9 @@ body {
   align-self: center;
   padding: clamp(13px, 1.4vw, 17px) clamp(30px, 4vw, 46px);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid var(--gold);
-  color: var(--gold-dark);
+  background: var(--control-bg);
+  border: 1px solid var(--accent);
+  color: var(--accent-dark);
   font-family: var(--font-display);
   font-size: clamp(15px, 1.5vw, 19px);
   letter-spacing: 0.1em;
@@ -667,13 +899,13 @@ body {
 .pill--quiet {
   background: none;
   border-color: transparent;
-  color: var(--brass);
+  color: var(--text-dim);
   padding-left: clamp(16px, 2vw, 24px);
   padding-right: clamp(16px, 2vw, 24px);
 }
 
 .pill--quiet:hover:not(:disabled) {
-  border-color: rgba(184, 137, 43, 0.4);
+  border-color: var(--control-border-hover);
 }
 
 /* ===== Сохранность прогресса ===== */
@@ -728,7 +960,7 @@ body {
   gap: clamp(4px, 0.6vw, 8px);
   padding: clamp(8px, 1.2vh, 16px) clamp(4px, 0.8vw, 8px);
   border-radius: clamp(12px, 1.4vw, 16px);
-  background: rgba(255, 255, 255, 0.5);
+  background: var(--control-bg);
   border: 1px solid transparent;
   font-family: var(--font-body);
   font-size: clamp(11px, 1.1vw, 15px);
@@ -763,23 +995,24 @@ body {
 }
 
 .grade--again {
-  border-color: rgba(166, 70, 43, 0.45);
-  color: #7a3a22;
+  border-color: var(--again-line);
+  color: var(--again-text);
 }
 
 .grade--hard {
-  border-color: rgba(184, 137, 43, 0.5);
-  color: #7c6415;
+  border-color: var(--hard-line);
+  color: var(--hard-text);
 }
 
 .grade--good {
-  border-color: rgba(79, 113, 74, 0.5);
-  color: #35502f;
+  border-color: var(--good-line);
+  color: var(--good-text);
 }
 
 .grade--easy {
-  border-color: rgba(184, 137, 43, 0.7);
-  color: var(--gold-dark);
+  border-color: var(--easy-line);
+  color: var(--easy-text);
+  box-shadow: var(--grade-glow);
 }
 
 .grade-icon {
@@ -799,7 +1032,7 @@ body {
 
 .grade-key {
   font-size: clamp(10px, 0.9vw, 12px);
-  color: var(--brass);
+  color: var(--text-dim);
   letter-spacing: 0.04em;
 }
 
@@ -823,7 +1056,7 @@ body {
   height: clamp(150px, 20vw, 200px);
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(184, 137, 43, 0.35), rgba(184, 137, 43, 0) 70%);
+  background: radial-gradient(circle, var(--glow), transparent 70%);
   pointer-events: none;
 }
 
@@ -839,11 +1072,11 @@ body {
 }
 
 .feedback-title--weak {
-  color: #5b5b45;
+  color: var(--text-soft);
 }
 
 .feedback-title--strong {
-  color: var(--gold-dark);
+  color: var(--accent-dark);
 }
 
 .feedback-sub {
@@ -852,18 +1085,18 @@ body {
 }
 
 .feedback-sub--weak {
-  color: #6b6b55;
+  color: var(--text-dim);
 }
 
 .feedback-sub--strong {
-  color: #6e5314;
+  color: var(--accent-dark);
 }
 
 .feedback-grade {
   margin: clamp(8px, 1vw, 14px) 0 0;
   font-size: clamp(12px, 1.2vw, 15.5px);
   letter-spacing: 0.04em;
-  color: #8a7a50;
+  color: var(--text-dim);
   text-transform: uppercase;
 }
 
@@ -880,13 +1113,13 @@ body {
 .summary-title {
   margin-top: clamp(6px, 1vh, 14px);
   font-size: clamp(22px, 2.6vw, 32px);
-  color: var(--gold-dark);
+  color: var(--accent-dark);
 }
 
 .summary-sub {
   margin: 0;
   font-size: clamp(15px, 1.6vw, 19px);
-  color: #6e5314;
+  color: var(--accent-dark);
 }
 
 .tally {
@@ -905,7 +1138,7 @@ body {
   gap: 10px;
   padding: clamp(5px, 0.8vh, 9px) clamp(10px, 1.4vw, 14px);
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.45);
+  background: var(--tally-bg);
   font-size: clamp(13px, 1.4vw, 16px);
 }
 
@@ -922,19 +1155,19 @@ body {
 }
 
 .tally-row--again {
-  color: #7a3a22;
+  color: var(--again-text);
 }
 
 .tally-row--hard {
-  color: #7c6415;
+  color: var(--hard-text);
 }
 
 .tally-row--good {
-  color: #35502f;
+  color: var(--good-text);
 }
 
 .tally-row--easy {
-  color: var(--gold-dark);
+  color: var(--accent-dark);
 }
 
 /* ===== Экран начала дня ===== */
@@ -972,20 +1205,20 @@ body {
   font-size: clamp(12px, 1.2vw, 15px);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--gold-deep);
+  color: var(--accent-deep);
 }
 
 .counts dd {
   margin: 0;
   font-family: var(--font-display);
   font-size: clamp(30px, 4vw, 48px);
-  color: var(--ink);
+  color: var(--text);
   line-height: 1;
 }
 
 .error {
   margin: 0;
-  color: var(--rust);
+  color: var(--warn-colour);
   font-size: clamp(13px, 1.4vw, 16px);
 }
 

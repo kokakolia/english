@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Тёмная тема — карточка (ПК)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Lora:ital,wght@0,400;0,500;1,400&display=swap">
+<style>
+  html, body { margin: 0; padding: 0; background: #000; width: 100%; height: 100%; overflow: hidden; }
+  * { box-sizing: border-box; }
+  a { color: #6EC9FF; }
+  a:hover { color: #A9E0FF; }
+  .dm-btn { border: none; cursor: pointer; font-family: 'Lora', serif; }
+  .dm-btn:hover { filter: brightness(1.08); }
+  .dm-grade:hover { transform: translateY(-2px); }
+  .dm-screen { display: none; }
+  .dm-screen.is-active { display: block; }
+</style>
+</head>
+<body>
+
+<div id="stage" style="width: 1440px; height: 900px; position: absolute; top: 50%; left: 50%; overflow: hidden; background: #000000; font-family: 'Lora', serif; box-sizing: border-box; transform-origin: center center;">
+
+  <svg viewBox="0 0 1440 900" width="1440" height="900" style="position: absolute; top: 0; left: 0;" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="dm-glow" x="-40%" y="-40%" width="180%" height="180%">
+        <feGaussianBlur stdDeviation="0.7"></feGaussianBlur>
+      </filter>
+      <filter id="dm-glow-soft" x="-100%" y="-100%" width="300%" height="300%">
+        <feGaussianBlur stdDeviation="6"></feGaussianBlur>
+      </filter>
+      <filter id="dm-tendril" x="-60%" y="-60%" width="220%" height="220%">
+        <feGaussianBlur stdDeviation="0.6"></feGaussianBlur>
+      </filter>
+      <filter id="dm-tip-glow" x="-150%" y="-150%" width="400%" height="400%">
+        <feGaussianBlur stdDeviation="3"></feGaussianBlur>
+      </filter>
+      <radialGradient id="dm-vignette" cx="50%" cy="25%" r="72%">
+        <stop offset="0%" stop-color="#070B16"></stop>
+        <stop offset="55%" stop-color="#020308"></stop>
+        <stop offset="100%" stop-color="#000000"></stop>
+      </radialGradient>
+      <symbol id="dm-feather-kelp" viewBox="0 0 140 220">
+        <path d="M20 214 C 30 170 15 130 35 90 C 50 60 25 30 45 0" fill="none" stroke="#4FA8FF" stroke-width="4" stroke-linecap="round"></path>
+        <g fill="#4FA8FF">
+          <path d="M20 214 C 8 204 4 190 8 178 C 20 184 24 200 20 214 Z"></path>
+          <path d="M27 188 C 40 180 46 168 44 156 C 30 160 24 174 27 188 Z"></path>
+          <path d="M18 162 C 4 156 -2 144 0 132 C 14 136 20 150 18 162 Z"></path>
+          <path d="M32 138 C 46 132 52 120 50 108 C 36 111 30 126 32 138 Z"></path>
+          <path d="M22 112 C 8 107 1 95 3 84 C 17 87 24 100 22 112 Z"></path>
+          <path d="M36 86 C 49 80 54 69 52 58 C 39 61 33 74 36 86 Z"></path>
+          <path d="M28 60 C 15 56 8 45 10 34 C 23 37 30 49 28 60 Z"></path>
+          <path d="M40 34 C 52 28 56 18 54 8 C 42 11 37 23 40 34 Z"></path>
+        </g>
+      </symbol>
+      <symbol id="dm-plankton" viewBox="-8 -8 16 16">
+        <circle r="3.2" fill="#BFE6FF"></circle>
+      </symbol>
+    </defs>
+
+    <rect x="0" y="0" width="1440" height="900" fill="url(#dm-vignette)"></rect>
+
+    <g filter="url(#dm-glow)" opacity="0.9">
+      <use href="#dm-feather-kelp" x="-30" y="565" width="200" height="410"></use>
+      <use href="#dm-feather-kelp" x="60" y="545" width="150" height="410" transform="rotate(8 135 750)"></use>
+    </g>
+
+    <g filter="url(#dm-glow-soft)" opacity="0.4" stroke="#2E6FA8" stroke-width="2" fill="none">
+      <path d="M 30 120 C 50 220 22 320 44 420 C 62 500 32 580 50 660"></path>
+    </g>
+    <g filter="url(#dm-glow)" opacity="0.85">
+      <use href="#dm-plankton" x="18" y="240" width="14" height="14"></use>
+      <use href="#dm-plankton" x="40" y="440" width="16" height="16"></use>
+    </g>
+
+    <g transform="translate(0,-75)">
+      <g filter="url(#dm-tendril)" stroke="#6EC9FF" stroke-width="2.4" fill="none" opacity="0.85">
+        <path d="M1400 50 C 1370 130 1400 190 1360 260 C 1330 320 1360 350 1350 380"></path>
+        <path d="M1400 50 C 1390 140 1360 200 1385 270 C 1400 320 1370 350 1380 400"></path>
+        <path d="M1400 50 C 1400 140 1420 200 1400 270 C 1385 320 1410 350 1400 420"></path>
+        <path d="M1400 50 C 1410 140 1438 200 1416 270 C 1404 320 1428 350 1418 400"></path>
+        <path d="M1400 50 C 1418 130 1400 190 1428 258 C 1446 316 1414 348 1430 378"></path>
+      </g>
+      <g filter="url(#dm-tip-glow)" fill="#BFE6FF">
+        <circle cx="1350" cy="380" r="4"></circle>
+        <circle cx="1380" cy="400" r="4.5"></circle>
+        <circle cx="1400" cy="420" r="4"></circle>
+        <circle cx="1418" cy="400" r="3.8"></circle>
+        <circle cx="1430" cy="378" r="4.2"></circle>
+      </g>
+      <g fill="#E7F3FC">
+        <circle cx="1350" cy="380" r="1.6"></circle>
+        <circle cx="1380" cy="400" r="1.8"></circle>
+        <circle cx="1400" cy="420" r="1.6"></circle>
+        <circle cx="1418" cy="400" r="1.5"></circle>
+        <circle cx="1430" cy="378" r="1.7"></circle>
+      </g>
+    </g>
+    <g filter="url(#dm-glow)" opacity="0.85">
+      <use href="#dm-plankton" x="1388" y="620" width="13" height="13"></use>
+    </g>
+  </svg>
+
+  <div style="position: relative; z-index: 1; height: 100%; box-sizing: border-box; padding: 40px 56px; display: flex; flex-direction: column;">
+
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+      <div style="display: flex; align-items: center; gap: 8px; font-family: 'Marcellus', serif; font-size: 14px; letter-spacing: 0.14em; color: #4C7196; text-transform: uppercase;">
+        <svg width="14" height="14" viewBox="0 0 14 14"><path d="M9 2 L3 7 L9 12" fill="none" stroke="#4C7196" stroke-width="1.4"></path></svg>
+        Назад
+      </div>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <div style="display: flex; gap: 8px;">
+          <div style="width: 9px; height: 9px; border-radius: 50%; border: 1.3px solid #6EC9FF;"></div>
+          <div style="width: 9px; height: 9px; border-radius: 50%; border: 1.3px solid #6EC9FF;"></div>
+          <div style="width: 9px; height: 9px; border-radius: 50%; border: 1.3px solid #6EC9FF;"></div>
+          <div style="width: 9px; height: 9px; border-radius: 50%; border: 1.3px solid #6EC9FF;"></div>
+          <div style="width: 9px; height: 9px; border-radius: 50%; border: 1.3px solid #6EC9FF;"></div>
+          <div style="width: 9px; height: 9px; border-radius: 50%; border: 1.3px solid #1E3450;"></div>
+          <div style="width: 9px; height: 9px; border-radius: 50%; border: 1.3px solid #1E3450;"></div>
+          <div style="width: 9px; height: 9px; border-radius: 50%; border: 1.3px solid #1E3450;"></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <svg width="10" height="16" viewBox="0 0 10 16"><ellipse cx="5" cy="8" rx="4" ry="7" fill="none" stroke="#6EC9FF" stroke-width="1"></ellipse></svg>
+          <div style="font-family: 'Marcellus', serif; font-size: 17px; letter-spacing: 0.1em; color: #BFE6FF;">5&nbsp;/&nbsp;31</div>
+          <svg width="10" height="16" viewBox="0 0 10 16"><ellipse cx="5" cy="8" rx="4" ry="7" fill="none" stroke="#6EC9FF" stroke-width="1"></ellipse></svg>
+        </div>
+      </div>
+      <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="2.5" r="1.4" fill="#4C7196"></circle><circle cx="8" cy="8" r="1.4" fill="#4C7196"></circle><circle cx="8" cy="13.5" r="1.4" fill="#4C7196"></circle></svg>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 8px; margin-top: 20px;">
+      <div style="flex: 1; height: 1px; background: linear-gradient(to right, transparent, #1E3450); opacity: 0.9;"></div>
+      <div style="width: 6px; height: 6px; transform: rotate(45deg); background: #6EC9FF;"></div>
+      <div style="flex: 1; height: 1px; background: linear-gradient(to left, transparent, #1E3450); opacity: 0.9;"></div>
+    </div>
+
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 30px;">
+      <div style="width: 660px;">
+
+      <div id="screen-front" class="dm-screen is-active">
+        <div style="position: relative; background: rgba(80,150,220,0.05); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(110,201,255,0.22); border-radius: 20px; padding: 46px 50px; box-shadow: 0 0 46px rgba(79,168,255,0.12), 0 24px 50px rgba(0,0,0,0.6);">
+          <svg width="22" height="22" viewBox="0 0 26 26" style="position: absolute; top: 14px; left: 16px; opacity: 0.5;"><path d="M2 24 C2 10 10 2 24 2" fill="none" stroke="#6EC9FF" stroke-width="1.2"></path></svg>
+          <svg width="22" height="22" viewBox="0 0 26 26" style="position: absolute; bottom: 14px; right: 16px; transform: rotate(180deg); opacity: 0.5;"><path d="M2 24 C2 10 10 2 24 2" fill="none" stroke="#6EC9FF" stroke-width="1.2"></path></svg>
+          <div style="font-family: 'Marcellus', serif; font-size: 16px; letter-spacing: 0.16em; text-transform: uppercase; color: #6EC9FF; margin-bottom: 20px;">Заполните пропуск</div>
+          <div style="font-size: 30px; line-height: 1.5; color: #E7F3FC;">
+            I'm afraid there's <span style="display: inline-block; min-width: 84px; border-bottom: 2px solid #6EC9FF; color: transparent;">_____</span> difference between these two models, so either one will work fine.
+          </div>
+          <div style="margin-top: 20px; font-style: italic; font-size: 19px; color: #6D8AA3;">Боюсь, между этими двумя моделями нет большой разницы, так что подойдёт любая.</div>
+          <div style="margin-top: 18px; font-family: 'Marcellus', serif; letter-spacing: 6px; font-size: 19px; color: #6EC9FF;">n_ g____</div>
+          <button class="dm-btn" onclick="showBack()" style="margin-top: 34px; padding: 16px 44px; border-radius: 999px; background: rgba(110,201,255,0.07); border: 1px solid #6EC9FF; box-shadow: 0 0 22px rgba(110,201,255,0.22); color: #D3EEFF; font-family: 'Marcellus', serif; font-size: 17px; letter-spacing: 0.1em; text-transform: uppercase;">Показать ответ</button>
+        </div>
+      </div>
+
+      <div id="screen-back" class="dm-screen">
+        <div style="position: relative; background: rgba(80,150,220,0.05); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(110,201,255,0.22); border-radius: 20px; padding: 46px 50px; box-shadow: 0 0 46px rgba(79,168,255,0.12), 0 24px 50px rgba(0,0,0,0.6);">
+          <svg width="22" height="22" viewBox="0 0 26 26" style="position: absolute; top: 14px; left: 16px; opacity: 0.5;"><path d="M2 24 C2 10 10 2 24 2" fill="none" stroke="#6EC9FF" stroke-width="1.2"></path></svg>
+          <svg width="22" height="22" viewBox="0 0 26 26" style="position: absolute; bottom: 14px; right: 16px; transform: rotate(180deg); opacity: 0.5;"><path d="M2 24 C2 10 10 2 24 2" fill="none" stroke="#6EC9FF" stroke-width="1.2"></path></svg>
+          <div style="font-family: 'Marcellus', serif; font-size: 16px; letter-spacing: 0.16em; text-transform: uppercase; color: #6EC9FF; margin-bottom: 20px;">Ответ</div>
+          <div style="font-size: 30px; line-height: 1.5; color: #E7F3FC;">
+            I'm afraid there's <strong style="color: #BFE6FF; text-decoration: underline; text-decoration-color: #6EC9FF; text-underline-offset: 3px;">no great</strong> difference between these two models, so either one will work fine.
+          </div>
+          <div style="margin-top: 20px; font-style: italic; font-size: 19px; color: #6D8AA3;">Боюсь, между этими двумя моделями нет большой разницы, так что подойдёт любая.</div>
+          <div style="margin-top: 20px; padding: 15px 18px; border-left: 3px solid #6EC9FF; background: rgba(110,201,255,0.06); border-radius: 0 10px 10px 0; font-size: 17px; line-height: 1.6; color: #B9D6E8;">no great + существительное — используется, чтобы сказать, что разница/проблема несущественна: there&rsquo;s no great harm in it.</div>
+          <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 20px;">
+            <div style="width: 28px; height: 1px; background: #6EC9FF; opacity: 0.4;"></div>
+            <svg width="11" height="11" viewBox="-6 -6 12 12" style="opacity: 0.7;"><circle r="2.8" fill="#6EC9FF"></circle></svg>
+            <div style="width: 28px; height: 1px; background: #6EC9FF; opacity: 0.4;"></div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 12px; margin-top: 20px;">
+          <button class="dm-btn dm-grade" onclick="grade('Не знал','через 1 минуту','weak')" style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 9px; padding: 16px 6px; border-radius: 16px; background: rgba(110,201,255,0.03); border: 1px solid rgba(61,90,120,0.55);">
+            <span style="width: 30px; height: 30px; border-radius: 50%; border: 1.6px solid #3D5A78; display: flex; align-items: center; justify-content: center; font-family: 'Marcellus', serif; font-size: 15px; color: #3D5A78;">1</span>
+            <span style="font-size: 13.5px; letter-spacing: 0.02em; color: #4C7196;">Не знал</span>
+          </button>
+          <button class="dm-btn dm-grade" onclick="grade('Плохо помню','через 10 минут','weak')" style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 9px; padding: 16px 6px; border-radius: 16px; background: rgba(110,201,255,0.045); border: 1px solid rgba(78,130,168,0.55);">
+            <span style="width: 30px; height: 30px; border-radius: 50%; background: rgba(110,201,255,0.16); border: 1.6px solid #6D9FC2; display: flex; align-items: center; justify-content: center; font-family: 'Marcellus', serif; font-size: 15px; color: #A9D2EA;">2</span>
+            <span style="font-size: 13.5px; letter-spacing: 0.02em; color: #7CADCE;">Плохо помню</span>
+          </button>
+          <button class="dm-btn dm-grade" onclick="grade('Помню','через 3 дня','strong')" style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 9px; padding: 16px 6px; border-radius: 16px; background: rgba(110,201,255,0.06); border: 1px solid rgba(110,201,255,0.6); box-shadow: 0 0 12px rgba(110,201,255,0.14);">
+            <span style="width: 30px; height: 30px; border-radius: 50%; background: rgba(110,201,255,0.32); border: 1.6px solid #6EC9FF; box-shadow: 0 0 10px rgba(110,201,255,0.5); display: flex; align-items: center; justify-content: center; font-family: 'Marcellus', serif; font-size: 15px; color: #E7F3FC;">3</span>
+            <span style="font-size: 13.5px; letter-spacing: 0.02em; color: #BFE6FF;">Помню</span>
+          </button>
+          <button class="dm-btn dm-grade" onclick="grade('Отлично помню','через 9 дней','strong')" style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 9px; padding: 16px 6px; border-radius: 16px; background: rgba(110,201,255,0.08); border: 1px solid #A9E0FF; box-shadow: 0 0 18px rgba(169,224,255,0.32);">
+            <span style="width: 30px; height: 30px; border-radius: 50%; background: rgba(191,230,255,0.55); border: 1.6px solid #E7F3FC; box-shadow: 0 0 16px rgba(191,230,255,0.75); display: flex; align-items: center; justify-content: center; font-family: 'Marcellus', serif; font-size: 15px; color: #06121F;">4</span>
+            <span style="font-size: 13.5px; letter-spacing: 0.02em; color: #E7F3FC;">Отлично помню</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="screen-feedback" class="dm-screen" style="text-align: center;">
+
+        <div id="feedback-weak">
+          <svg width="150" height="150" viewBox="0 0 110 110" style="margin: 0 auto; display: block;">
+            <circle cx="55" cy="55" r="34" fill="none" stroke="#233246" stroke-width="1" stroke-dasharray="2 5" opacity="0.7"></circle>
+            <circle cx="55" cy="55" r="7" fill="#1B2A3D"></circle>
+            <circle cx="55" cy="55" r="7" fill="none" stroke="#3D5A78" stroke-width="1.4"></circle>
+            <path d="M55 20 L55 30" stroke="#233246" stroke-width="1.4"></path>
+            <path d="M55 80 L55 90" stroke="#233246" stroke-width="1.4"></path>
+            <path d="M20 55 L30 55" stroke="#233246" stroke-width="1.4"></path>
+            <path d="M80 55 L90 55" stroke="#233246" stroke-width="1.4"></path>
+          </svg>
+          <div style="margin-top: 14px; font-family: 'Marcellus', serif; font-size: 27px; color: #7C93AA;">Ничего страшного</div>
+          <div style="margin-top: 8px; font-size: 19px; color: #4C7196;">Повторим карточку <span id="interval-weak"></span></div>
+        </div>
+
+        <div id="feedback-strong" style="position: relative;">
+          <div style="position: absolute; left: 50%; top: 56px; width: 210px; height: 210px; transform: translate(-50%,-50%); border-radius: 50%; background: radial-gradient(circle, rgba(110,201,255,0.35), rgba(110,201,255,0) 70%);"></div>
+          <svg width="150" height="150" viewBox="0 0 110 110" style="position: relative; margin: 0 auto; display: block;">
+            <g stroke="#6EC9FF" stroke-width="1.8" fill="none" opacity="0.85">
+              <path d="M55 55 C 40 46 34 30 40 16"></path>
+              <path d="M55 55 C 68 44 76 28 70 14"></path>
+              <path d="M55 55 C 44 68 42 86 52 98"></path>
+              <path d="M55 55 C 68 66 74 84 66 98"></path>
+            </g>
+            <circle cx="55" cy="55" r="14" fill="#BFE6FF" opacity="0.9"></circle>
+            <circle cx="55" cy="55" r="6.5" fill="#F2FAFF"></circle>
+          </svg>
+          <div style="margin-top: 14px; font-family: 'Marcellus', serif; font-size: 27px; color: #E7F3FC;">Отлично!</div>
+          <div style="margin-top: 8px; font-size: 19px; color: #6EC9FF;">Следующий показ — <span id="interval-strong"></span></div>
+        </div>
+
+        <div style="margin-top: 14px; font-size: 15px; letter-spacing: 0.04em; color: #3D5A78; text-transform: uppercase;">Вы выбрали: <span id="grade-label"></span></div>
+        <button class="dm-btn" onclick="goNext()" style="margin-top: 26px; padding: 16px 40px; border-radius: 999px; background: rgba(110,201,255,0.07); border: 1px solid #6EC9FF; color: #D3EEFF; font-family: 'Marcellus', serif; font-size: 17px; letter-spacing: 0.1em; text-transform: uppercase;">Далее</button>
+      </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function show(id) {
+    document.querySelectorAll('.dm-screen').forEach(function (el) { el.classList.remove('is-active'); });
+    document.getElementById(id).classList.add('is-active');
+  }
+  function showBack() {
+    show('screen-back');
+  }
+  function grade(label, interval, mood) {
+    document.getElementById('feedback-weak').style.display = mood === 'weak' ? 'block' : 'none';
+    document.getElementById('feedback-strong').style.display = mood === 'strong' ? 'block' : 'none';
+    document.getElementById('interval-weak').textContent = interval;
+    document.getElementById('interval-strong').textContent = interval;
+    document.getElementById('grade-label').textContent = label;
+    show('screen-feedback');
+  }
+  function goNext() {
+    show('screen-front');
+  }
+
+  function fitStage() {
+    var scale = Math.min(window.innerWidth / 1440, window.innerHeight / 900) * 0.96;
+    document.getElementById('stage').style.transform = 'translate(-50%, -50%) scale(' + scale + ')';
+  }
+  window.addEventListener('resize', fitStage);
+  fitStage();
+</script>
+</body>
+</html>

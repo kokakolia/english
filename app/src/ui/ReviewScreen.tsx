@@ -256,7 +256,7 @@ export function ReviewScreen({ controller, state, onFinish }: Props) {
             <div className="tailpiece">
               <span className="tailpiece-line" />
               <svg className="tailpiece-leaf" viewBox="0 0 10 10" aria-hidden="true">
-                <path d="M5 9 C1 7 1 3 5 1 C9 3 9 7 5 9 Z" fill="#B8892B" />
+                <path d="M5 9 C1 7 1 3 5 1 C9 3 9 7 5 9 Z" fill="var(--ornament-accent)" />
               </svg>
               <span className="tailpiece-line" />
             </div>

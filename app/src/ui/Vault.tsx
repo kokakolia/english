@@ -45,14 +45,30 @@ import {
   type AppDatabase,
   type RestoreResult,
 } from "../storage";
+import type { ThemeChoice } from "../app/theme";
 import { Dropdown } from "./Dropdown";
 
 interface Props {
   db: AppDatabase;
   storage: StorageStatus | null;
+  theme: ThemeChoice;
+  onTheme: (choice: ThemeChoice) => void;
   /** Перечитать экран дня: после восстановления счётчики другие. */
   onRestored: () => void;
 }
+
+const THEME_LABELS: Record<ThemeChoice, string> = {
+  system: "как в системе",
+  light: "светлая",
+  dark: "тёмная",
+};
+
+/** Следующий выбор по кругу. Три состояния не влезают в переключатель. */
+const NEXT_THEME: Record<ThemeChoice, ThemeChoice> = {
+  system: "light",
+  light: "dark",
+  dark: "system",
+};
 
 type Note =
   | { kind: "none" }
@@ -60,7 +76,7 @@ type Note =
   | { kind: "restored"; result: RestoreResult }
   | { kind: "error"; message: string };
 
-export function Vault({ db, storage, onRestored }: Props) {
+export function Vault({ db, storage, theme, onTheme, onRestored }: Props) {
   const [busy, setBusy] = useState(false);
   const [note, setNote] = useState<Note>({ kind: "none" });
   const [folder, setFolder] = useState<string | null>(null);
@@ -176,6 +192,18 @@ export function Vault({ db, storage, onRestored }: Props) {
               <span className="menu-item-hint">сейчас копии идут в «{folder}»</span>
             </button>
           )}
+
+          <button
+            type="button"
+            role="menuitem"
+            className="menu-item"
+            onClick={() => onTheme(NEXT_THEME[theme])}
+          >
+            <span className="menu-item-label">Тема: {THEME_LABELS[theme]}</span>
+            <span className="menu-item-hint">
+              нажмите, чтобы выбрать {THEME_LABELS[NEXT_THEME[theme]]}
+            </span>
+          </button>
 
           <StorageNote storage={storage} />
           <NoteLine note={note} />
