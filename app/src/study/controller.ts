@@ -128,6 +128,8 @@ export type KeyAction =
   | { kind: "reveal" }
   | { kind: "grade"; grade: Grade }
   | { kind: "undo" }
+  /** Закончить занятие и вернуться к началу. */
+  | { kind: "exit" }
   | null;
 
 /** Что можно сделать с карточкой помимо оценки. */
@@ -194,6 +196,7 @@ export function keyAction(phase: StudyPhase, key: string): KeyAction {
   // по кнопке замечают, увидев не то предложение. Поэтому она работает во всех
   // рабочих состояниях, а не только там, где видны кнопки оценки.
   if (key === "Backspace") return { kind: "undo" };
+  if (key === "Escape") return { kind: "exit" };
 
   if (phase !== "answered") return null;
 

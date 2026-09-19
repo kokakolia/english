@@ -7,6 +7,8 @@
  * углов, вьюнок — правого края, зерно кроет всё поле.
  */
 
+import { useDark } from "./ThemeContext";
+
 export function OrnamentDefs() {
   return (
     <svg className="ornament-defs" aria-hidden="true" focusable="false">
@@ -166,8 +168,80 @@ export function DotsIcon() {
   );
 }
 
-/** Значки на кнопках оценки: от увядшего к цветущему. */
-export function GradeIcon({ grade }: { grade: "again" | "hard" | "good" | "easy" }) {
+type Grade = "again" | "hard" | "good" | "easy";
+
+/**
+ * Значки на кнопках оценки.
+ *
+ * В светлой теме — росток от увядшего к цветущему, в тёмной — огонёк от
+ * погасшего к яркому. Фигуры разные не ради разнообразия: росток на морском
+ * дне не читается, а огонёк в саду ничего не значит.
+ */
+export function GradeIcon({ grade }: { grade: Grade }) {
+  return useDark() ? <DeepGradeIcon grade={grade} /> : <GardenGradeIcon grade={grade} />;
+}
+
+/**
+ * Морской набор: огонёк от погасшего к яркому.
+ *
+ * Всё построено на концентрических кругах и различается толщиной и свечением.
+ * Первая версия рисовала расходящиеся нити, как у большой картинки на итогах,
+ * — при двадцати четырёх пикселях они превращались в кашу и читались как рожки.
+ * Круг остаётся кругом в любом размере.
+ */
+function DeepGradeIcon({ grade }: { grade: Grade }) {
+  if (grade === "again") {
+    return (
+      <svg className="grade-icon" viewBox="0 0 22 22" aria-hidden="true" focusable="false">
+        <circle
+          cx="11"
+          cy="11"
+          r="7.5"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.2"
+          strokeDasharray="2 3.5"
+          opacity="0.8"
+        />
+      </svg>
+    );
+  }
+  if (grade === "hard") {
+    return (
+      <svg className="grade-icon" viewBox="0 0 22 22" aria-hidden="true" focusable="false">
+        <circle cx="11" cy="11" r="7.5" fill="none" stroke="currentColor" strokeWidth="1.2" opacity="0.65" />
+        <circle cx="11" cy="11" r="2.6" fill="currentColor" opacity="0.55" />
+      </svg>
+    );
+  }
+  if (grade === "good") {
+    return (
+      <svg className="grade-icon" viewBox="0 0 22 22" aria-hidden="true" focusable="false">
+        <circle cx="11" cy="11" r="8.5" fill="currentColor" opacity="0.16" />
+        <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" strokeWidth="1.2" />
+        <circle cx="11" cy="11" r="3.6" fill="currentColor" />
+      </svg>
+    );
+  }
+  return (
+    <svg className="grade-icon" viewBox="0 0 22 22" aria-hidden="true" focusable="false">
+      <circle cx="11" cy="11" r="10" fill="currentColor" opacity="0.18" />
+      <circle cx="11" cy="11" r="7.2" fill="currentColor" opacity="0.4" />
+      <circle cx="11" cy="11" r="4.6" fill="currentColor" />
+      {/* Искры по сторонам: единственное, что отличает «отлично» от «помню»
+          силуэтом, а не одной лишь яркостью. */}
+      <g fill="currentColor">
+        <circle cx="11" cy="1.4" r="1.1" />
+        <circle cx="11" cy="20.6" r="1.1" />
+        <circle cx="1.4" cy="11" r="1.1" />
+        <circle cx="20.6" cy="11" r="1.1" />
+      </g>
+    </svg>
+  );
+}
+
+/** Садовый набор: от увядшего к цветущему. */
+function GardenGradeIcon({ grade }: { grade: Grade }) {
   if (grade === "again") {
     return (
       <svg className="grade-icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false">
@@ -213,8 +287,50 @@ export function GradeIcon({ grade }: { grade: "again" | "hard" | "good" | "easy"
   );
 }
 
-/** Картинка на экране отклика: увядший росток или цветущий. */
+/** Картинка на итогах: в светлой теме росток, в тёмной — огонёк. */
 export function MoodPlant({ mood }: { mood: "weak" | "strong" }) {
+  return useDark() ? <DeepMood mood={mood} /> : <GardenMood mood={mood} />;
+}
+
+function DeepMood({ mood }: { mood: "weak" | "strong" }) {
+  if (mood === "weak") {
+    return (
+      <svg className="mood-plant" viewBox="0 0 110 110" aria-hidden="true" focusable="false">
+        <circle
+          cx="55"
+          cy="55"
+          r="34"
+          fill="none"
+          stroke="var(--again-line)"
+          strokeWidth="1"
+          strokeDasharray="2 5"
+        />
+        <circle cx="55" cy="55" r="7" fill="none" stroke="var(--again-text)" strokeWidth="1.4" />
+        <g stroke="var(--again-line)" strokeWidth="1.4">
+          <path d="M55 20 L55 30" />
+          <path d="M55 80 L55 90" />
+          <path d="M20 55 L30 55" />
+          <path d="M80 55 L90 55" />
+        </g>
+      </svg>
+    );
+  }
+  return (
+    <svg className="mood-plant" viewBox="0 0 110 110" aria-hidden="true" focusable="false">
+      <g stroke="var(--accent)" strokeWidth="1.8" fill="none" opacity="0.85">
+        <path d="M55 55 C 40 46 34 30 40 16" />
+        <path d="M55 55 C 68 44 76 28 70 14" />
+        <path d="M55 55 C 44 68 42 86 52 98" />
+        <path d="M55 55 C 68 66 74 84 66 98" />
+      </g>
+      <circle cx="55" cy="55" r="22" fill="var(--glow)" />
+      <circle cx="55" cy="55" r="14" fill="var(--accent-dark)" opacity="0.9" />
+      <circle cx="55" cy="55" r="6.5" fill="var(--text)" />
+    </svg>
+  );
+}
+
+function GardenMood({ mood }: { mood: "weak" | "strong" }) {
   if (mood === "weak") {
     return (
       <svg className="mood-plant" viewBox="0 0 120 120" aria-hidden="true" focusable="false">

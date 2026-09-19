@@ -29,6 +29,7 @@ import {
 } from "./DeepOrnaments";
 import { Background, CornerFern, OrnamentDefs, SideVine } from "./Ornaments";
 import { ReviewScreen } from "./ReviewScreen";
+import { DarkProvider } from "./ThemeContext";
 import { Vault } from "./Vault";
 
 type Stage =
@@ -125,7 +126,8 @@ export function App() {
   }
 
   return (
-    <main className="app">
+    <DarkProvider dark={dark}>
+      <main className="app">
       {dark ? (
         <>
           <DeepDefs />
@@ -146,8 +148,9 @@ export function App() {
           <SideVine />
         </>
       )}
-      {renderStage()}
-    </main>
+        {renderStage()}
+      </main>
+    </DarkProvider>
   );
 
   function renderStage() {

@@ -69,13 +69,31 @@ export function DeepBackground() {
   );
 }
 
-/** Водоросли в нижнем углу. Правый экземпляр отражён через CSS. */
+/**
+ * Водоросли в нижнем углу. Правый экземпляр отражён через CSS.
+ *
+ * `viewBox` обязателен и подобран по содержимому. Без него svg считает свои
+ * координаты пикселями бокса: куст 149×306 рисовался в боксе 205×240 —
+ * низ обрезало, а сам куст сидел не там, где нужно.
+ *
+ * `width`/`height` у `<use>` равны размерам `viewBox` символа. Любые другие
+ * включают подгонку внутри `<use>`, и символ повисает по центру отведённого
+ * места вместо того, чтобы стоять, где поставили.
+ */
 export function KelpCorner({ side }: { side: "left" | "right" }) {
   return (
-    <svg className={`ornament-kelp ornament-kelp--${side}`} aria-hidden="true" focusable="false">
-      <g filter="url(#deep-soft)" opacity="0.85">
-        <use href="#kelp" x="0" y="0" width="200" height="380" />
-        <use href="#kelp" x="90" y="20" width="150" height="360" opacity="0.8" />
+    <svg
+      className={`ornament-kelp ornament-kelp--${side}`}
+      viewBox="-4 0 122 232"
+      preserveAspectRatio="xMinYMax meet"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <g filter="url(#deep-soft)">
+        <use href="#kelp" x="0" y="12" width="140" height="220" />
+        <g transform="translate(74,36) scale(0.72)" opacity="0.75">
+          <use href="#kelp" x="0" y="0" width="140" height="220" />
+        </g>
       </g>
     </svg>
   );
@@ -86,34 +104,45 @@ export function KelpCorner({ side }: { side: "left" | "right" }) {
  * Только на широком экране: на телефоне он налезал бы на карточку.
  */
 export function GlowTendrils() {
+  // Огоньки стоят ровно на концах нитей: координаты списаны с последних точек
+  // путей. Раньше они сдвигались общим `translate`, и совпадение держалось на
+  // честном слове — стоило подправить путь, и огонёк повисал в стороне.
   const tips: [number, number, number][] = [
-    [1350, 380, 4],
-    [1380, 400, 4.5],
-    [1400, 420, 4],
-    [1418, 400, 3.8],
-    [1430, 378, 4.2],
+    [1350, 350, 4],
+    [1380, 370, 4.5],
+    [1400, 390, 4],
+    [1418, 370, 3.8],
+    [1430, 348, 4.2],
   ];
   return (
     <svg
       className="ornament-tendrils"
-      viewBox="1330 0 120 460"
-      preserveAspectRatio="none"
+      // Кадр по содержимому, а не «на глазок»: при `preserveAspectRatio="none"`
+      // пучок сплющивало по вертикали на пятую часть.
+      viewBox="1340 8 104 396"
+      preserveAspectRatio="xMidYMid meet"
       aria-hidden="true"
       focusable="false"
     >
-      <g filter="url(#deep-soft)" stroke="var(--ornament-accent)" strokeWidth="2.4" fill="none" opacity="0.8">
+      <g
+        filter="url(#deep-soft)"
+        stroke="var(--ornament-accent)"
+        strokeWidth="2.4"
+        fill="none"
+        opacity="0.8"
+      >
         <path d="M1400 20 C 1370 100 1400 160 1360 230 C 1330 290 1360 320 1350 350" />
         <path d="M1400 20 C 1390 110 1360 170 1385 240 C 1400 290 1370 320 1380 370" />
         <path d="M1400 20 C 1400 110 1420 170 1400 240 C 1385 290 1410 320 1400 390" />
         <path d="M1400 20 C 1410 110 1438 170 1416 240 C 1404 290 1428 320 1418 370" />
         <path d="M1400 20 C 1418 100 1400 160 1428 228 C 1446 286 1414 318 1430 348" />
       </g>
-      <g filter="url(#deep-tip)" fill="#bfe6ff" transform="translate(0,-30)">
+      <g filter="url(#deep-tip)" fill="#bfe6ff">
         {tips.map(([cx, cy, r]) => (
           <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r={r} />
         ))}
       </g>
-      <g fill="#e7f3fc" transform="translate(0,-30)">
+      <g fill="#e7f3fc">
         {tips.map(([cx, cy]) => (
           <circle key={`core-${cx}-${cy}`} cx={cx} cy={cy} r={1.6} />
         ))}

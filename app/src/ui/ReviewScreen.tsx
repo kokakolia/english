@@ -10,7 +10,7 @@
  * на виду, сколько бы ни было текста, и страница не уезжает целиком.
  */
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import { GRADES, type Grade } from "../srs";
 import { keyAction, type StudyController, type StudyState } from "../study/controller";
@@ -64,9 +64,11 @@ function UndoButton({ controller, state }: { controller: StudyController; state:
 function ProgressHeader({
   controller,
   state,
+  onExit,
 }: {
   controller: StudyController;
   state: StudyState;
+  onExit: () => void;
 }) {
   const total = Math.max(1, state.session.remaining + state.session.answered);
   const done = state.session.answered;
@@ -93,6 +95,7 @@ function ProgressHeader({
         <CardMenu
           disabled={state.saving || state.card === null}
           onPick={(action) => void controller.apply(action)}
+          onExit={onExit}
         />
       </div>
       <div className="rule">
@@ -182,6 +185,13 @@ function Summary({
 }
 
 export function ReviewScreen({ controller, state, onFinish }: Props) {
+  // Обработчик клавиш вешается один раз за занятие и потому видит только
+  // первый `onFinish`. Ссылка держит его свежим, не перевешивая обработчик:
+  // перевешивание — та самая ошибка, из-за которой одно нажатие делало два
+  // шага.
+  const exit = useRef(onFinish);
+  exit.current = onFinish;
+
   // Обработчик вешается один раз за занятие и спрашивает состояние сам.
   // Если перевешивать его на каждую смену состояния, одно нажатие успевает
   // сделать два шага: React перерисовывает экран внутри того же события, а
@@ -198,6 +208,7 @@ export function ReviewScreen({ controller, state, onFinish }: Props) {
       event.preventDefault();
       if (action.kind === "reveal") controller.reveal();
       else if (action.kind === "undo") void controller.undo();
+      else if (action.kind === "exit") exit.current();
       else void controller.grade(action.grade);
     }
 
@@ -217,7 +228,7 @@ export function ReviewScreen({ controller, state, onFinish }: Props) {
 
   return (
     <section className="screen screen--review">
-      <ProgressHeader controller={controller} state={state} />
+      <ProgressHeader controller={controller} state={state} onExit={onFinish} />
 
       <div className="middle">
         {/* `key` по карточке — не украшение: без него React переиспользует

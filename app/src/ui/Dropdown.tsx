@@ -36,7 +36,13 @@ export function Dropdown({ title, disabled = false, marked = false, children }: 
       }
     }
     function onKey(event: KeyboardEvent) {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key !== "Escape") return;
+      setOpen(false);
+      // Нажатие не идёт дальше: тем же Escape закрывается занятие, и без
+      // остановки одно нажатие закрыло бы и меню, и занятие разом. Обработчик
+      // занятия висит на window, этот — на document, и document в пути
+      // всплытия раньше.
+      event.stopPropagation();
     }
 
     document.addEventListener("mousedown", onDown);

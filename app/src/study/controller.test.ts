@@ -188,6 +188,15 @@ describe("разбор нажатий", () => {
     expect(keyAction("finished", "Backspace")).toEqual({ kind: "undo" });
   });
 
+  it("Escape заканчивает занятие из любого рабочего состояния", () => {
+    expect(keyAction("question", "Escape")).toEqual({ kind: "exit" });
+    expect(keyAction("answered", "Escape")).toEqual({ kind: "exit" });
+    expect(keyAction("finished", "Escape")).toEqual({ kind: "exit" });
+    // На этих экранах занятия ещё нет — и заканчивать нечего.
+    expect(keyAction("loading", "Escape")).toBeNull();
+    expect(keyAction("empty", "Escape")).toBeNull();
+  });
+
   it("прочие клавиши и прочие состояния игнорируются", () => {
     expect(keyAction("answered", "x")).toBeNull();
     expect(keyAction("loading", " ")).toBeNull();

@@ -28,9 +28,11 @@ const ITEMS: { action: CardAction; label: string; hint: string }[] = [
 interface Props {
   disabled: boolean;
   onPick: (action: CardAction) => void;
+  /** Закончить занятие и вернуться к началу. */
+  onExit: () => void;
 }
 
-export function CardMenu({ disabled, onPick }: Props) {
+export function CardMenu({ disabled, onPick, onExit }: Props) {
   return (
     <Dropdown title="Действия над карточкой" disabled={disabled}>
       {(close) => (
@@ -51,6 +53,21 @@ export function CardMenu({ disabled, onPick }: Props) {
             </button>
           ))}
           <p className="menu-foot">Любое из этих действий отменяется кнопкой «Назад».</p>
+
+          {/* Выход отделён чертой: он не про карточку, а про занятие целиком,
+              и соседство без разделителя путало бы одно с другим. */}
+          <button
+            type="button"
+            role="menuitem"
+            className="menu-item menu-item--apart"
+            onClick={() => {
+              close();
+              onExit();
+            }}
+          >
+            <span className="menu-item-label">Закончить занятие</span>
+            <span className="menu-item-hint">вернуться к началу · Esc</span>
+          </button>
         </>
       )}
     </Dropdown>
