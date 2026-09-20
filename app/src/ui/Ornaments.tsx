@@ -181,7 +181,7 @@ export function SideFern({ side = "left" }: { side?: "left" | "right" }) {
       {/* Стебель толще лозы и заметно извилистее: размах 16 единиц против
         * шести, кривизна на полуволну 0,168 против 0,063. Лозе прямизна шла,
         * папоротнику — нет: у него изгиб и есть характер. */}
-      <g fill="none" stroke="var(--ornament-stem)" strokeWidth="2.6" opacity="0.55">
+      <g fill="none" stroke="var(--ornament-stem)" strokeWidth="3.6" opacity="0.55">
         <path
           d="M 1424 100
              C 1424 147.5 1432 147.5 1432 195
@@ -194,24 +194,22 @@ export function SideFern({ side = "left" }: { side?: "left" | "right" }) {
              C 1432 812.5 1424 812.5 1424 860"
         />
       </g>
+      {/* Листочки реже, чем у обычного папоротника: на толстом стебле частая
+        * гребёнка сливается в полосу, и куст перестаёт читаться кустом. */}
       <g fill="var(--ornament-stem)" opacity="0.55">
-        <ellipse cx="1420.9" cy="130" rx="9.0" ry="3.4" transform="rotate(-30 1420.9 130)" />
-        <ellipse cx="1435.9" cy="172" rx="9.4" ry="3.5" transform="rotate(30 1435.9 172)" />
-        <ellipse cx="1426.1" cy="214" rx="9.7" ry="3.7" transform="rotate(-30 1426.1 214)" />
-        <ellipse cx="1424.9" cy="256" rx="10.1" ry="3.8" transform="rotate(30 1424.9 256)" />
-        <ellipse cx="1411.0" cy="298" rx="10.4" ry="3.9" transform="rotate(-30 1411.0 298)" />
-        <ellipse cx="1430.2" cy="340" rx="10.8" ry="4.1" transform="rotate(30 1430.2 340)" />
-        <ellipse cx="1426.4" cy="382" rx="11.2" ry="4.2" transform="rotate(-30 1426.4 382)" />
-        <ellipse cx="1432.5" cy="424" rx="11.5" ry="4.3" transform="rotate(30 1432.5 424)" />
-        <ellipse cx="1410.6" cy="466" rx="11.9" ry="4.5" transform="rotate(-30 1410.6 466)" />
-        <ellipse cx="1424.6" cy="508" rx="12.2" ry="4.6" transform="rotate(30 1424.6 508)" />
-        <ellipse cx="1423.8" cy="550" rx="12.6" ry="4.7" transform="rotate(-30 1423.8 550)" />
-        <ellipse cx="1437.7" cy="592" rx="13.0" ry="4.9" transform="rotate(30 1437.7 592)" />
-        <ellipse cx="1413.7" cy="634" rx="13.3" ry="5.0" transform="rotate(-30 1413.7 634)" />
-        <ellipse cx="1422.9" cy="676" rx="13.7" ry="5.1" transform="rotate(30 1422.9 676)" />
-        <ellipse cx="1417.2" cy="718" rx="14.0" ry="5.2" transform="rotate(-30 1417.2 718)" />
-        <ellipse cx="1439.1" cy="760" rx="14.4" ry="5.4" transform="rotate(30 1439.1 760)" />
-        <ellipse cx="1422.3" cy="802" rx="14.8" ry="5.5" transform="rotate(-30 1422.3 802)" />
+        <ellipse cx="1421.4" cy="136" rx="9.5" ry="3.6" transform="rotate(-30 1421.4 136)" />
+        <ellipse cx="1437.0" cy="192" rx="10.0" ry="3.8" transform="rotate(30 1437.0 192)" />
+        <ellipse cx="1416.9" cy="248" rx="10.6" ry="4.0" transform="rotate(-30 1416.9 248)" />
+        <ellipse cx="1422.1" cy="304" rx="11.1" ry="4.2" transform="rotate(30 1422.1 304)" />
+        <ellipse cx="1424.3" cy="360" rx="11.6" ry="4.4" transform="rotate(-30 1424.3 360)" />
+        <ellipse cx="1434.9" cy="416" rx="12.1" ry="4.6" transform="rotate(30 1434.9 416)" />
+        <ellipse cx="1409.8" cy="472" rx="12.7" ry="4.8" transform="rotate(-30 1409.8 472)" />
+        <ellipse cx="1430.8" cy="528" rx="13.2" ry="5.0" transform="rotate(30 1430.8 528)" />
+        <ellipse cx="1424.9" cy="584" rx="13.7" ry="5.2" transform="rotate(-30 1424.9 584)" />
+        <ellipse cx="1426.0" cy="640" rx="14.2" ry="5.4" transform="rotate(30 1426.0 640)" />
+        <ellipse cx="1410.7" cy="696" rx="14.8" ry="5.5" transform="rotate(-30 1410.7 696)" />
+        <ellipse cx="1439.2" cy="752" rx="15.3" ry="5.7" transform="rotate(30 1439.2 752)" />
+        <ellipse cx="1420.8" cy="808" rx="15.8" ry="5.9" transform="rotate(-30 1420.8 808)" />
       </g>
     </svg>
   );
