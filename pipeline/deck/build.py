@@ -26,6 +26,7 @@ from ..normalize import store
 from ..normalize.build import _sequence_for
 from ..normalize.inflect import phrase_regex
 from ..normalize.variants import expand
+from ..sentences import store as sentence_fixes
 from ..translate import store as translations_store
 from ..usage import store as usage_store
 from . import quality
@@ -70,6 +71,8 @@ def make_cards(conn, args) -> tuple[list[dict], dict[str, int]]:
     # Переводы живут отдельно и привязаны к тексту предложения, а не к карточке.
     translations = translations_store.load_all()
     usage_notes = usage_store.load_all()
+    fixes = sentence_fixes.load_all()
+    stale: list[tuple[str, str]] = []
 
     cards: list[dict] = []
     rejected: dict[str, int] = {}
@@ -85,6 +88,12 @@ def make_cards(conn, args) -> tuple[list[dict], dict[str, int]]:
 
         accept = json.loads(accept_json)
         answer = example[gap_start:gap_end]
+
+        # Правка предложения, если она есть. Проверку качества проходит
+        # исходное предложение: правка делается руками и уже просмотрена
+        # глазами, а прогонять её через автоматику значит рисковать тем, что
+        # исправленная карточка отсеется по признакам, придуманным для сырья.
+        fixed = fixes.get(sentence_fixes.key_for(example))
         own = {word.lower() for word in accept}
         rivals = quality.count_rivals(
             index, record_id, (headword, relation, sense), own, answer
@@ -99,15 +108,31 @@ def make_cards(conn, args) -> tuple[list[dict], dict[str, int]]:
             rejected["ambiguous"] = rejected.get("ambiguous", 0) + 1
             continue
 
+        text = example[:gap_start] + "___" + example[gap_end:]
+        if fixed is not None:
+            text, answer = fixed
+            # Правка меняет предложение, а перевод и заметка написаны под
+            # старое. Молча оставить их — худший исход: карточка выглядит
+            # исправной, а объясняет выброшенный текст. Поэтому о таких
+            # случаях сборка говорит вслух.
+            if translations_store.key_for(text.replace("___", answer)) not in translations:
+                stale.append((record_id, text))
+
         cards.append(
             {
                 "id": record_id,
                 "type": "cloze",
-                "text": example[:gap_start] + "___" + example[gap_end:],
+                "text": text,
                 "answer": answer,
                 "accept": accept,
                 "hint": verdict.hint,
-                "translation": translations.get(translations_store.key_for(example)),
+                # Перевод ищется сперва по исправленному предложению, потом по
+                # исходному: правка не должна обнулять уже сделанный перевод,
+                # но при желании ему можно дать свой.
+                "translation": (
+                    translations.get(translations_store.key_for(text.replace("___", answer)))
+                    or translations.get(translations_store.key_for(example))
+                ),
                 "answers": answer_forms(
                     json.loads(variants_json), pattern_position, headword, answer
                 ),
@@ -126,6 +151,13 @@ def make_cards(conn, args) -> tuple[list[dict], dict[str, int]]:
         )
         if args.limit and len(cards) >= args.limit:
             break
+
+    if stale:
+        print("")
+        print(f"правок без своего перевода: {len(stale)}")
+        for record_id, text in stale[:10]:
+            print(f"   {record_id}  {text}")
+        print("   перевод взят от исходного предложения и может не подходить")
 
     return cards, rejected
 

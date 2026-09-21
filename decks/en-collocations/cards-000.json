@@ -925,18 +925,18 @@
  {
   "id": "c_3201ae507d55097e",
   "type": "cloze",
-  "text": "I have ___ last seen her so angry about a simple mistake.",
+  "text": "The ceasefire looked promising, but everyone knew it would ___ last.",
   "answer": "never",
   "accept": [
    "never"
   ],
   "hint": "n____",
-  "translation": "Я никогда прежде не видел её такой злой из-за простой ошибки.",
+  "translation": "Перемирие выглядело обнадёживающе, но все понимали, что оно не продлится.",
   "answers": [
    "never"
   ],
   "also": [],
-  "note": "never + глагол в Present Perfect — ни разу за всю жизнь. Наречие стоит перед смысловым глаголом: I have never seen.",
+  "note": "never last — о том, что не продержится: перемирие, мода, хорошая погода. last здесь глагол «длиться», а не «последний».",
   "phrase": "never last",
   "relation": "adv+verb",
   "headword": "last",
