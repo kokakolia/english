@@ -1268,15 +1268,16 @@
  {
   "id": "c_200a2c7ff8a335b2",
   "type": "cloze",
-  "text": "I'd like to ___ your thoughts about which restaurant we should try tonight.",
-  "answer": "have",
+  "text": "Wait, I've just ___ a thought: why don't we take the train instead?",
+  "answer": "had",
   "accept": [
    "have"
   ],
-  "hint": "h___",
-  "translation": "Хотелось бы услышать твоё мнение, в какой ресторан пойти сегодня.",
+  "hint": "h__",
+  "translation": "Погоди, мне тут пришла мысль: а может, поедем на поезде?",
   "answers": [
-   "have"
+   "have",
+   "had"
   ],
   "also": [],
   "note": "have a thought — мысль, пришедшая в голову. Часто вводит реплику: I've had a thought...",
@@ -3074,23 +3075,23 @@
  {
   "id": "c_b08ce5700ee29331",
   "type": "cloze",
-  "text": "She ___ a thought about quitting her job every Monday morning.",
-  "answer": "thinks",
+  "text": "Every Monday morning she ___ the same thought: maybe it's time to quit her job.",
+  "answer": "has",
   "accept": [
    "have",
    "think"
   ],
-  "hint": "t_____",
-  "translation": "Она каждый понедельник утром задумывается о том, чтобы уволиться.",
+  "hint": "h__",
+  "translation": "Каждый понедельник утром ей приходит одна и та же мысль: может, пора уволиться.",
   "answers": [
    "have",
    "think",
-   "thinks"
+   "has"
   ],
   "also": [
-   "have"
+   "think"
   ],
-  "note": "have a thought — мысль, которая пришла в голову. Вариант think a thought звучит избыточно и встречается редко.",
+  "note": "have a thought — мысль приходит сама, без усилия. С the same — о навязчивой: every morning she has the same thought.",
   "phrase": "have thought",
   "relation": "verb+obj",
   "headword": "thought",

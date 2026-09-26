@@ -121,6 +121,66 @@ def test_version_hash() -> None:
                content_version(cards) != content_version(other))
 
 
+def test_sentence_fixes() -> None:
+    """Правка предложения пересчитывает всё, что зависело от старого ответа.
+
+    Обе проверки ниже — следы настоящих ошибок. Правка `have` → `had`
+    оставила подсказку `h___` на четыре буквы при трёх; правка `thinks` → `has`
+    предложила бы в «так же подошло бы» слово `have`, то есть то же самое.
+    """
+    from .build import other_cluster_members
+    from ..sentences.store import load_all as _unused  # noqa: F401  импорт проверяет модуль
+
+    check("правка: подсказка от нового ответа", quality.make_hint("had"), "h__")
+    check("правка: подсказка многословного ответа",
+          quality.make_hint("goes on to"), "g___ o_ t_")
+
+    check("правка: also опознаёт форму have в has",
+          other_cluster_members(["have", "think"], None, "has"), ["think"])
+    check("правка: also опознаёт форму think в thinks",
+          other_cluster_members(["have", "think"], None, "thinks"), ["have"])
+    check("правка: одиночный кластер даёт пустой also",
+          other_cluster_members(["have"], None, "had"), [])
+
+
+def test_fix_store_rejects_bad_gaps() -> None:
+    """Правка с числом пропусков не равным одному не применяется.
+
+    Без пропуска карточка показала бы готовый ответ, с двумя — приложение
+    разбирает текст на «до» и «после» и молча теряет хвост.
+    """
+    import tempfile
+    from pathlib import Path
+    from ..sentences import store as fixes
+
+    original_path = fixes.TSV_PATH
+    with tempfile.TemporaryDirectory() as tmp:
+        fixes.TSV_PATH = Path(tmp) / "fixes.tsv"
+        fixes.SENTENCES_DIR = Path(tmp)
+        try:
+            rows = [
+                fixes.HEADER,
+                "\t".join(["k1", "src", "no gap here", "x"]),
+                "\t".join(["k2", "src", "two ___ gaps ___ here", "x"]),
+                "\t".join(["k3", "src", "one ___ gap", "x"]),
+            ]
+            fixes.TSV_PATH.write_text("\n".join(rows) + "\n", encoding="utf-8")
+            loaded = fixes.load_all()
+            check("правка: без пропуска отброшена", "k1" in loaded, False)
+            check("правка: с двумя пропусками отброшена", "k2" in loaded, False)
+            check("правка: с одним пропуском принята", "k3" in loaded, True)
+
+            raised = False
+            try:
+                fixes.save("x", "a ___ b ___ c", "y")
+            except ValueError:
+                raised = True
+            check("правка: save не пишет два пропуска", raised, True)
+        finally:
+            fixes.TSV_PATH = original_path
+            fixes.SENTENCES_DIR = original_path.parent
+
+
 def main() -> int:
     tests = [value for name, value in sorted(globals().items()) if name.startswith("test_")]
     for test in tests:

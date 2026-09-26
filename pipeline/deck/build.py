@@ -109,8 +109,21 @@ def make_cards(conn, args) -> tuple[list[dict], dict[str, int]]:
             continue
 
         text = example[:gap_start] + "___" + example[gap_end:]
+        hint = verdict.hint
+        also = other_cluster_members(accept, matched, answer)
         if fixed is not None:
             text, answer = fixed
+            # «Так же подошло бы» тоже пересчитывается. Прежний `matched`
+            # описывает выброшенное предложение: после правки `thinks` → `has`
+            # карточка предложила бы в качестве замены `have` — то же самое
+            # слово. Без `matched` функция опознаёт использованный вариант по
+            # самому ответу.
+            also = other_cluster_members(accept, None, answer)
+            # Подсказку пересчитываем от нового ответа. Она строится по его
+            # буквам, и после правки `have` → `had` старая `h___` обещала бы
+            # четыре буквы при трёх — ровно та ложь, которую подсказка обязана
+            # исключать.
+            hint = quality.make_hint(answer)
             # Правка меняет предложение, а перевод и заметка написаны под
             # старое. Молча оставить их — худший исход: карточка выглядит
             # исправной, а объясняет выброшенный текст. Поэтому о таких
@@ -125,7 +138,7 @@ def make_cards(conn, args) -> tuple[list[dict], dict[str, int]]:
                 "text": text,
                 "answer": answer,
                 "accept": accept,
-                "hint": verdict.hint,
+                "hint": hint,
                 # Перевод ищется сперва по исправленному предложению, потом по
                 # исходному: правка не должна обнулять уже сделанный перевод,
                 # но при желании ему можно дать свой.
@@ -136,7 +149,7 @@ def make_cards(conn, args) -> tuple[list[dict], dict[str, int]]:
                 "answers": answer_forms(
                     json.loads(variants_json), pattern_position, headword, answer
                 ),
-                "also": other_cluster_members(accept, matched, answer),
+                "also": also,
                 "note": usage_notes.get(record_id),
                 "phrase": phrase,
                 "relation": relation,
