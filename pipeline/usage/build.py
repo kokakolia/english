@@ -32,8 +32,9 @@ def cards_of(deck_id: str) -> list[dict]:
 
 
 def cmd_todo(args: argparse.Namespace) -> int:
-    known = store.load_all()
-    pending = [card for card in cards_of(args.deck_id) if card["id"] not in known]
+    cards = cards_of(args.deck_id)
+    known = store.notes_for(cards)
+    pending = [card for card in cards if card["id"] not in known]
     if not pending:
         print("все заметки написаны")
         return 0
@@ -64,7 +65,8 @@ def cmd_load(args: argparse.Namespace) -> int:
         print(f"нет файла {path}", file=sys.stderr)
         return 1
 
-    phrases = {card["id"]: card["phrase"] for card in cards_of(args.deck_id)}
+    cards = cards_of(args.deck_id)
+    phrases = {card["id"]: card["phrase"] for card in cards}
     items: list[tuple[str, str, str]] = []
     bad = 0
     for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
@@ -82,15 +84,15 @@ def cmd_load(args: argparse.Namespace) -> int:
             continue
         items.append((card_id, phrases[card_id], parts[1]))
 
-    added, updated = store.save_many(items)
+    added, updated = store.save_many(items, {c["id"]: store.context_key(c["accept"], c["text"], c["answer"]) for c in cards})
     print(f"добавлено: {added}, обновлено: {updated}, пропущено строк: {bad}")
     print(f"файл: {store.TSV_PATH}")
     return 1 if bad else 0
 
 
 def cmd_stats(args: argparse.Namespace) -> int:
-    known = store.load_all()
     cards = cards_of(args.deck_id)
+    known = store.notes_for(cards)
     live = {card["id"] for card in cards}
     covered = sum(1 for card_id in live if card_id in known)
 
@@ -111,9 +113,10 @@ def cmd_prune(args: argparse.Namespace) -> int:
 
 
 def cmd_show(args: argparse.Namespace) -> int:
-    known = store.load_all()
+    cards = cards_of(args.deck_id)
+    known = store.notes_for(cards)
     shown = 0
-    for card in cards_of(args.deck_id):
+    for card in cards:
         note = known.get(card["id"])
         if not note:
             continue

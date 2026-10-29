@@ -7,23 +7,23 @@
 
 Как и переводы, заметки написаны руками и повторным запуском не
 восстанавливаются, поэтому лежат **в репозитории**: `notes/usage-ru.tsv`,
-три колонки — идентификатор коллокации, подпись (для читаемости) и текст.
+четыре колонки — ID, подпись, текст и хэш контекста.
 
-Ключ — `card.id`, то есть тот же стабильный идентификатор коллокации: хэш от
-заголовочного слова, типа отношения, значения и набора партнёров. Если словарь
-переcкачают и набор партнёров в кластере изменится, заметка к нему больше не
-подойдёт и перестанет использоваться — это правильное поведение, потому что
-она описывает именно этот набор.
+Ключ — постоянный card.id из реестра. Четвёртая колонка хранит хэш
+контекста (набор партнёров, клоуз и ответ). При его изменении заметка
+потребует проверки, но ID карточки и прогресс сохранятся.
 """
 
 from __future__ import annotations
 
+import hashlib
+import json
 from pathlib import Path
 
 NOTES_DIR = Path(__file__).resolve().parents[2] / "notes"
 TSV_PATH = NOTES_DIR / "usage-ru.tsv"
 
-HEADER = "# id\tподпись\tзаметка"
+HEADER = "# id\tподпись\tзаметка\tконтекст"
 
 
 def _normalize(text: str) -> str:
@@ -39,9 +39,9 @@ def load_rows() -> dict[str, tuple[str, str]]:
         if not line.strip() or line.startswith("#"):
             continue
         parts = line.split("\t")
-        if len(parts) != 3:
+        if len(parts) not in (3, 4):
             continue
-        card_id, phrase, note = parts
+        card_id, phrase, note = parts[:3]
         rows[card_id] = (phrase, note)
     return rows
 
@@ -51,23 +51,47 @@ def load_all() -> dict[str, str]:
     return {card_id: note for card_id, (_, note) in load_rows().items()}
 
 
-def _write(rows: dict[str, tuple[str, str]]) -> None:
+def context_key(accept: list[str], text: str, answer: str) -> str:
+    payload = [sorted(w.lower() for w in accept), _normalize(text), _normalize(answer)]
+    return hashlib.sha256(json.dumps(payload, ensure_ascii=False).encode("utf-8")).hexdigest()
+
+
+def load_contexts() -> dict[str, str]:
+    if not TSV_PATH.exists():
+        return {}
+    return {parts[0]: parts[3] for line in TSV_PATH.read_text(encoding="utf-8").splitlines()
+            if not line.startswith("#") and len(parts := line.split("\t")) == 4}
+
+
+def notes_for(cards: list[dict]) -> dict[str, str]:
+    notes, contexts = load_all(), load_contexts()
+    return {c["id"]: notes[c["id"]] for c in cards if c["id"] in notes and
+            contexts.get(c["id"]) == context_key(c["accept"], c["text"], c["answer"])}
+
+
+def _write(rows: dict[str, tuple[str, str]], contexts: dict[str, str] | None = None) -> None:
+    contexts = contexts if contexts is not None else load_contexts()
     NOTES_DIR.mkdir(parents=True, exist_ok=True)
     lines = [HEADER]
     # Сортируем по подписи: так соседние строки описывают похожие коллокации.
     for card_id, (phrase, note) in sorted(rows.items(), key=lambda item: item[1][0]):
-        lines.append(f"{card_id}\t{phrase}\t{note}")
+        lines.append(f"{card_id}\t{phrase}\t{note}\t{contexts.get(card_id, '')}")
     TSV_PATH.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
-def save_many(items: list[tuple[str, str, str]]) -> tuple[int, int]:
+def save_many(items: list[tuple[str, str, str]], contexts: dict[str, str] | None = None) -> tuple[int, int]:
     """Сохраняет тройки (id, подпись, заметка). Возвращает (добавлено, обновлено)."""
     rows = load_rows()
+    saved_contexts = load_contexts()
+    context_changed = False
     added = updated = 0
     for card_id, phrase, note in items:
         card_id, phrase, note = card_id.strip(), _normalize(phrase), _normalize(note)
         if not card_id or not note:
             continue
+        if contexts and card_id in contexts and saved_contexts.get(card_id) != contexts[card_id]:
+            saved_contexts[card_id] = contexts[card_id]
+            context_changed = True
         existing = rows.get(card_id)
         if existing is None:
             added += 1
@@ -76,8 +100,8 @@ def save_many(items: list[tuple[str, str, str]]) -> tuple[int, int]:
         else:
             continue
         rows[card_id] = (phrase, note)
-    if added or updated:
-        _write(rows)
+    if added or updated or context_changed:
+        _write(rows, saved_contexts)
     return added, updated
 
 

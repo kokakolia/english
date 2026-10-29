@@ -31,7 +31,7 @@ function deckFile(
       version,
       language: "en",
       card_type: "cloze",
-      built_at: "2026-04-01T00:00:00Z",
+      built_at: version === "v1" ? "2026-04-01T00:00:00Z" : "2026-04-01T00:00:00.001Z",
       count: cards.length,
       chunks: ["cards-000.json"],
     },

@@ -7,7 +7,6 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
 from dataclasses import asdict, dataclass, field
 
@@ -43,17 +42,8 @@ class Collocation:
         Пример в него не входит: замена предложения не должна создавать новую
         карточку и обнулять прогресс (принцип 2 в PLAN.md).
         """
-        key = "|".join(
-            [
-                self.source_dict,
-                self.headword.lower(),
-                (self.head_pos or "").lower(),
-                self.relation,
-                self.sense or "",
-                "/".join(sorted(word.lower() for word in self.accept)),
-            ]
-        )
-        return "c_" + hashlib.sha1(key.encode("utf-8")).hexdigest()[:16]
+        from .identities import registry
+        return registry().resolve(self)
 
     @property
     def has_cloze(self) -> bool:

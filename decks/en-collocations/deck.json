@@ -1,10 +1,10 @@
 {
  "id": "en-collocations",
  "name": "Английские коллокации",
- "version": "d2066f7b768e",
+ "version": "9d928ee5d00d",
  "language": "en",
  "card_type": "cloze",
- "built_at": "2026-09-26T14:12:53+00:00",
+ "built_at": "2026-10-29T15:29:42+00:00",
  "source": {
   "dict": "ozdic",
   "note": "Словарные статьи ozdic (материал восходит к Oxford Collocations Dictionary); примеры и уровни — из данных того же сайта."
@@ -12,12 +12,22 @@
  "count": 1008,
  "chunk_size": 250,
  "chunks": [
-  "cards-000.json",
-  "cards-001.json",
-  "cards-002.json",
-  "cards-003.json",
-  "cards-004.json"
+  "cards-000-a4c4dcf99070daf8.json",
+  "cards-001-5c8d7fd5bf2430f3.json",
+  "cards-002-ca20ff0cbe94316c.json",
+  "cards-003-16578a4686ec1061.json",
+  "cards-004-d8bffb62972d178f.json"
  ],
+ "integrity": {
+  "algorithm": "sha256-canonical-json-v1",
+  "chunks": {
+   "cards-000-a4c4dcf99070daf8.json": "a4c4dcf99070daf82e92c4bdff45ede1448feed18bd0d4644531fce4ea99a211",
+   "cards-001-5c8d7fd5bf2430f3.json": "5c8d7fd5bf2430f31c3200a89a762b509580ee0c32d683540974d69f540d1e48",
+   "cards-002-ca20ff0cbe94316c.json": "ca20ff0cbe94316c5b38d15723d751591cbc64b0a71220239842f5ff535de7a4",
+   "cards-003-16578a4686ec1061.json": "16578a4686ec106130a8e7f5c7272b96e0881545963c28df4308375db8b3bf8b",
+   "cards-004-d8bffb62972d178f.json": "d8bffb62972d178f21dc17e931652f6c86b1af5cf9e23f42c6d0bae115fe81d0"
+  }
+ },
  "stats": {
   "relation": {
    "verb+obj": 224,

@@ -24,7 +24,7 @@
 import {
   buildQueue,
   createSession,
-  defaultScheduler,
+  createScheduler,
   GRADES,
   type DeckCard,
   type Grade,
@@ -36,7 +36,9 @@ import {
 } from "../srs";
 import {
   buryCard,
+  DEFAULT_STUDY_SETTINGS,
   getStudySettings,
+  studiedToday,
   loadCards,
   loadProgress,
   recordReview,
@@ -55,6 +57,8 @@ export type StudyPhase =
   | "loading"
   /** На сегодня всё: очередь пуста с самого начала. */
   | "empty"
+  /** Ошибка подготовки занятия; это не отсутствие заданий. */
+  | "error"
   /** Показан пропуск, ответ скрыт. */
   | "question"
   /** Ответ раскрыт, ждём оценки. */
@@ -186,7 +190,21 @@ type UndoStep =
  * Поэтому обработчик вешается один раз и спрашивает состояние сам, а решение
  * «что делать по этой клавише» живёт здесь и проверяется тестами.
  */
-export function keyAction(phase: StudyPhase, key: string): KeyAction {
+export interface KeyContext {
+  interactive?: boolean;
+  menuOpen?: boolean;
+  defaultPrevented?: boolean;
+  repeat?: boolean;
+  isComposing?: boolean;
+  altKey?: boolean;
+  ctrlKey?: boolean;
+  metaKey?: boolean;
+  shiftKey?: boolean;
+}
+
+export function keyAction(phase: StudyPhase, key: string, context: KeyContext = {}): KeyAction {
+  if (Object.values(context).some(Boolean)) return null;
+  if (phase === "error") return key === "Escape" ? { kind: "exit" } : null;
   if (phase === "loading" || phase === "empty") return null;
 
   if (phase === "question") {
@@ -216,7 +234,7 @@ export async function createStudyController(
 ): Promise<StudyController> {
   const { db, deckId } = options;
   const clock = options.clock ?? (() => new Date());
-  const scheduler = options.scheduler ?? defaultScheduler;
+  let scheduler: Scheduler;
 
   let state: StudyState = {
     phase: "loading",
@@ -234,7 +252,7 @@ export async function createStudyController(
   const listeners = new Set<(state: StudyState) => void>();
   let cards: DeckCard[] = [];
   let progress = new Map<string, StoredProgress>();
-  let settings = await getStudySettings(db);
+  let settings: StudySettings = { ...DEFAULT_STUDY_SETTINGS };
   let session: Session | null = null;
   const undoStack: UndoStep[] = [];
 
@@ -263,9 +281,10 @@ export async function createStudyController(
   }
 
   async function build(): Promise<void> {
-    publish({ phase: "loading", error: null });
+    publish({ phase: "loading", card: null, error: null, saving: false });
     try {
       settings = await getStudySettings(db);
+      scheduler = options.scheduler ?? createScheduler({ requestRetention: settings.requestRetention });
       cards = await loadCards(db, deckId);
       progress = await loadProgress(db, deckId);
 
@@ -280,6 +299,7 @@ export async function createStudyController(
           seed: options.seed ?? Math.floor(now.getTime() / 86_400_000),
         },
         now,
+        studiedToday: await studiedToday(db, deckId, now),
       });
 
       session = createSession(queue.cards, {
@@ -302,7 +322,7 @@ export async function createStudyController(
       }
       advance();
     } catch (cause) {
-      publish({ phase: "empty", error: `не удалось собрать очередь: ${String(cause)}` });
+      publish({ phase: "error", card: null, error: `Не удалось подготовить занятие: ${String(cause)}` });
     }
   }
 
@@ -385,11 +405,12 @@ export async function createStudyController(
             cardId: step.card.id,
             reviewId: step.reviewId,
             previous: step.previous,
+            now: clock(),
           });
         } else {
           // Действия над карточкой меняют ровно одну строку прогресса, и
           // вернуть её прежнее содержимое достаточно: журнала они не пишут.
-          await restoreProgress(db, step.card.id, step.previous);
+          await restoreProgress(db, step.card.id, step.previous, clock());
         }
       } catch (cause) {
         publish({ saving: false, error: `не удалось отменить: ${String(cause)}` });
@@ -433,7 +454,7 @@ export async function createStudyController(
         } else if (action === "bury") {
           previous = await buryCard(db, { cardId: card.id, deckId, now, scheduler });
         } else {
-          previous = await resetCard(db, card.id);
+          previous = await resetCard(db, card.id, now);
         }
       } catch (cause) {
         publish({ saving: false, error: `не удалось применить действие: ${String(cause)}` });

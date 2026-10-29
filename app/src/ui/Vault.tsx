@@ -46,6 +46,7 @@ import {
   type RestoreResult,
 } from "../storage";
 import type { ThemeChoice } from "../app/theme";
+import { updateSafety } from "../app/update-safety";
 import { Dropdown } from "./Dropdown";
 
 interface Props {
@@ -87,13 +88,12 @@ export function Vault({ db, storage, theme, onTheme, onRestored }: Props) {
   }, [db]);
 
   async function save() {
+    const release = updateSafety.begin();
     setBusy(true);
     setNote({ kind: "none" });
     try {
-      // Без карточек: они лежат в самом приложении и подтягиваются заново при
-      // запуске. В копии они занимали шесть седьмых объёма, ничего при этом
-      // не сохраняя, — потерять можно только прогресс и журнал.
-      const json = await exportBackupJson(db, { includeCards: false });
+      // Самодостаточная копия переживает смену версии и исчезновение колоды.
+      const json = await exportBackupJson(db);
       const data = await gzip(json);
       const name = backupFileName(new Date(), "json.gz");
 
@@ -112,10 +112,12 @@ export function Vault({ db, storage, theme, onTheme, onRestored }: Props) {
       setNote({ kind: "error", message: `не удалось сохранить копию: ${String(cause)}` });
     } finally {
       setBusy(false);
+      release();
     }
   }
 
   async function restore(file: File) {
+    const release = updateSafety.begin();
     setBusy(true);
     setNote({ kind: "none" });
     try {
@@ -132,6 +134,7 @@ export function Vault({ db, storage, theme, onTheme, onRestored }: Props) {
     } finally {
       setBusy(false);
       if (fileInput.current !== null) fileInput.current.value = "";
+      release();
     }
   }
 

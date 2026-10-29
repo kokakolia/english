@@ -6,6 +6,7 @@
  * лежат в базе и меняются, а не зашиты в код.
  */
 
+import { validStudySettings } from "./validation";
 import type { AppDatabase } from "./db";
 
 export interface StudySettings {
@@ -61,7 +62,7 @@ export async function getStudySettings(db: AppDatabase): Promise<StudySettings> 
   const stored = await getSetting<Partial<StudySettings>>(db, STUDY_KEY, {});
   // Слияние с умолчаниями, а не замена: добавленная в новой версии настройка
   // не должна оказаться неопределённой у того, кто уже что-то менял.
-  return { ...DEFAULT_STUDY_SETTINGS, ...stored };
+  return { ...DEFAULT_STUDY_SETTINGS, ...(validStudySettings(stored) ? stored : {}) };
 }
 
 export async function updateStudySettings(
@@ -69,6 +70,7 @@ export async function updateStudySettings(
   changes: Partial<StudySettings>,
 ): Promise<StudySettings> {
   const merged = { ...(await getStudySettings(db)), ...changes };
+  if (!validStudySettings(merged)) throw new Error("неверные настройки занятия");
   await setSetting(db, STUDY_KEY, merged);
   return merged;
 }

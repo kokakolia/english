@@ -198,6 +198,8 @@ export interface BuildQueueInput {
   progress: ProgressLookup;
   settings?: Partial<QueueSettings>;
   now: Date;
+  /** Уже начатые сегодня новые и уже повторённые review-карточки. */
+  studiedToday?: { fresh: number; review: number };
 }
 
 export function buildQueue({
@@ -205,6 +207,7 @@ export function buildQueue({
   progress,
   settings,
   now,
+  studiedToday = { fresh: 0, review: 0 },
 }: BuildQueueInput): DayQueue {
   const config: QueueSettings = { ...DEFAULT_SETTINGS, ...settings };
   const random = createRandom(config.seed ?? 1);
@@ -237,9 +240,10 @@ export function buildQueue({
   // Недоученные карточки лимитом не режутся: они уже начаты, и отложить их
   // значит потерять тот самый короткий интервал, ради которого они в этом
   // состоянии находятся.
-  const dueLimited = shuffle(review, random).slice(0, config.reviewsPerDay);
-  const backlog = Math.max(0, review.length - config.reviewsPerDay);
-  const freshLimited = fresh.slice(0, config.newPerDay);
+  const reviewBudget = Math.max(0, config.reviewsPerDay - studiedToday.review);
+  const dueLimited = shuffle(review, random).slice(0, reviewBudget);
+  const backlog = Math.max(0, review.length - reviewBudget);
+  const freshLimited = fresh.slice(0, Math.max(0, config.newPerDay - studiedToday.fresh));
 
   const repeats = spaceOutSiblings(
     [...learning, ...dueLimited],

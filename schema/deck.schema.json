@@ -34,7 +34,14 @@
     "chunks": {
       "type": "array",
       "description": "Файлы с карточками, по порядку изучения. Разбиты на части ради ленивой загрузки в приложении.",
-      "items": { "type": "string", "pattern": "^cards-[0-9]{3}\\.json$" }
+      "items": { "type": "string", "pattern": "^cards-[0-9]{3}(-[0-9a-f]{16})?\\.json$" }
+    },
+    "integrity": {
+      "type": "object", "required": ["algorithm", "chunks"], "additionalProperties": false,
+      "properties": {
+        "algorithm": { "const": "sha256-canonical-json-v1" },
+        "chunks": { "type": "object", "additionalProperties": { "type": "string", "pattern": "^[0-9a-f]{64}$" } }
+      }
     },
     "stats": { "type": "object", "additionalProperties": true }
   },
@@ -53,7 +60,7 @@
         "text": {
           "type": "string",
           "description": "Предложение с пропуском, обозначенным ___",
-          "pattern": "___"
+          "pattern": "^(?:(?!___).)*___(?:(?!___).)*$"
         },
         "answer": {
           "type": "string",
@@ -64,7 +71,7 @@
           "type": "array",
           "minItems": 1,
           "items": { "type": "string" },
-          "description": "Словарные формы всех партнёров кластера. Все они считаются правильным ответом: это взаимозаменяемые варианты, и наказывать за любой из них нельзя."
+          "description": "Словарные формы партнёров кластера. Пригодность каждого в конкретном предложении зависит от смысла и грамматической формы."
         },
         "hint": {
           "type": "string",
@@ -83,7 +90,7 @@
         "also": {
           "type": "array",
           "items": { "type": "string" },
-          "description": "Остальные партнёры кластера, кроме того, что стоит в этом предложении. Пустой массив — значит показывать нечего: партнёр в кластере один."
+          "description": "Другие словарные партнёры кластера. Значение и грамматическая форма зависят от контекста: это не готовые замены пропуска в текущем предложении."
         },
         "note": {
           "type": ["string", "null"],

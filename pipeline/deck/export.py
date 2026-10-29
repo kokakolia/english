@@ -111,7 +111,7 @@ def _card_fields(card: dict) -> list[str]:
         html.escape(card["hint"]),
         html.escape(card.get("translation") or ""),
         full,
-        html.escape(f"ещё варианты: {also}") if also else "",
+        html.escape(f"другие сочетания с этим словом: {also}") if also else "",
         html.escape(card.get("note") or ""),
         card["id"],
     ]
@@ -251,7 +251,7 @@ def cmd_html(args: argparse.Namespace) -> int:
                 answer=html.escape(card["answer"]),
                 note=(f'<div class="note">{html.escape(card["note"])}</div>'
                       if card.get("note") else ""),
-                also=(f'<div class="accept">ещё варианты: '
+                also=(f'<div class="accept">другие сочетания с этим словом: '
                       f'{html.escape(", ".join(card["also"]))}</div>'
                       if card.get("also") else ""),
                 flags=(f'<div class="flags">пометки: {", ".join(flags)}</div>'

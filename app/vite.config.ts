@@ -27,6 +27,7 @@ export default defineConfig({
         lang: "ru",
         start_url: "/",
         display: "standalone",
+        launch_handler: { client_mode: "focus-existing" },
         // Цвет заставки при запуске. Совпадает с --paper: при несовпадении
         // окно на долю секунды вспыхивает белым, прежде чем показать бумагу.
         background_color: "#f3eedc",

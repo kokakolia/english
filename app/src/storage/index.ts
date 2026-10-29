@@ -34,6 +34,7 @@ export {
 } from "./decks";
 
 export {
+  studiedToday,
   cardHistory,
   deckCounts,
   getProgress,

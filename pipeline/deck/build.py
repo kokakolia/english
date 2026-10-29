@@ -18,8 +18,10 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
+import tempfile
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 from ..normalize import store
@@ -71,6 +73,7 @@ def make_cards(conn, args) -> tuple[list[dict], dict[str, int]]:
     # Переводы живут отдельно и привязаны к тексту предложения, а не к карточке.
     translations = translations_store.load_all()
     usage_notes = usage_store.load_all()
+    note_contexts = usage_store.load_contexts()
     fixes = sentence_fixes.load_all()
     stale: list[tuple[str, str]] = []
 
@@ -139,18 +142,18 @@ def make_cards(conn, args) -> tuple[list[dict], dict[str, int]]:
                 "answer": answer,
                 "accept": accept,
                 "hint": hint,
-                # Перевод ищется сперва по исправленному предложению, потом по
-                # исходному: правка не должна обнулять уже сделанный перевод,
-                # но при желании ему можно дать свой.
+                # Исправленному предложению нужен собственный перевод.
+                # Перевод исходного примера не объясняет новую фразу.
                 "translation": (
                     translations.get(translations_store.key_for(text.replace("___", answer)))
-                    or translations.get(translations_store.key_for(example))
+                    or (translations.get(translations_store.key_for(example)) if fixed is None else None)
                 ),
                 "answers": answer_forms(
                     json.loads(variants_json), pattern_position, headword, answer
                 ),
                 "also": also,
-                "note": usage_notes.get(record_id),
+                "note": (usage_notes.get(record_id) if note_contexts.get(record_id) ==
+                         usage_store.context_key(accept, text, answer) else None),
                 "phrase": phrase,
                 "relation": relation,
                 "headword": headword,
@@ -170,7 +173,7 @@ def make_cards(conn, args) -> tuple[list[dict], dict[str, int]]:
         print(f"правок без своего перевода: {len(stale)}")
         for record_id, text in stale[:10]:
             print(f"   {record_id}  {text}")
-        print("   перевод взят от исходного предложения и может не подходить")
+        print("   перевод не подставлен: исправленному предложению нужен свой перевод")
 
     return cards, rejected
 
@@ -236,21 +239,37 @@ def content_version(cards: list[dict]) -> str:
     иначе исправленный перевод не доехал бы до приложения, которое сверяет
     версии и решило бы, что обновляться не нужно.
     """
-    digest = hashlib.sha1()
-    for card in cards:
-        digest.update(
-            f"{card['id']}|{card['text']}|{card['answer']}"
-            f"|{card.get('translation') or ''}|{card.get('note') or ''}".encode("utf-8")
-        )
-    return digest.hexdigest()[:12]
+    return content_hash(cards)[:12]
+
+
+
+def content_hash(value) -> str:
+    payload = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def write_json_atomic(path: Path, value) -> None:
+    """Публикует файл только после полной записи и flush/fsync."""
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=path.parent,
+                                         prefix=".publishing-", suffix=".tmp", delete=False) as output:
+            temporary = Path(output.name)
+            json.dump(value, output, ensure_ascii=False, indent=1)
+            output.flush()
+            os.fsync(output.fileno())
+        os.replace(temporary, path)
+    finally:
+        if temporary is not None and temporary.exists():
+            temporary.unlink()
 
 
 def validate(deck: dict, chunks: list[list[dict]]) -> list[str]:
-    """Проверка по схеме. Без jsonschema — предупреждение, но не отказ."""
+    """Проверка по схеме; без валидатора публикация запрещена."""
     try:
         import jsonschema
     except ImportError:
-        return ["jsonschema не установлен, проверка по схеме пропущена"]
+        return ["jsonschema не установлен: публикация без проверки схемы запрещена"]
 
     schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
     card_schema = {**schema["$defs"]["card"], "$defs": schema["$defs"]}
@@ -278,7 +297,8 @@ def write_deck(deck_id: str, name: str, cards: list[dict], chunk_size: int,
     deck_dir.mkdir(parents=True, exist_ok=True)
 
     chunks = [cards[i : i + chunk_size] for i in range(0, len(cards), chunk_size)]
-    names = [f"cards-{index:03d}.json" for index in range(len(chunks))]
+    hashes = [content_hash(chunk) for chunk in chunks]
+    names = [f"cards-{index:03d}-{digest[:16]}.json" for index, digest in enumerate(hashes)]
 
     stats: dict[str, dict] = {"relation": {}, "band": {}, "cefr": {}, "ambiguity": {}}
     for card in cards:
@@ -286,17 +306,26 @@ def write_deck(deck_id: str, name: str, cards: list[dict], chunk_size: int,
             value = str(card.get(key))
             stats[key][value] = stats[key].get(value, 0) + 1
 
+    built_at = datetime.now(timezone.utc)
+    built_at = built_at.replace(microsecond=(built_at.microsecond // 1000) * 1000)
+    previous = deck_dir / "deck.json"
+    if previous.exists():
+        previous_meta = json.loads(previous.read_text(encoding="utf-8"))
+        previous_time = datetime.fromisoformat(previous_meta["built_at"].replace("Z", "+00:00"))
+        built_at = max(built_at, previous_time + timedelta(milliseconds=1))
+
     deck = {
         "id": deck_id,
         "name": name,
         "version": content_version(cards),
         "language": "en",
         "card_type": "cloze",
-        "built_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "built_at": built_at.isoformat(timespec="milliseconds"),
         "source": {"dict": "ozdic", "note": source_note},
         "count": len(cards),
         "chunk_size": chunk_size,
         "chunks": names,
+        "integrity": {"algorithm": "sha256-canonical-json-v1", "chunks": dict(zip(names, hashes))},
         "stats": stats,
     }
 
@@ -305,21 +334,13 @@ def write_deck(deck_id: str, name: str, cards: list[dict], chunk_size: int,
         print(f"проверка по схеме: {len(problems)} замечаний", file=sys.stderr)
         for problem in problems[:5]:
             print(f"  {problem}", file=sys.stderr)
-        if not problems[0].startswith("jsonschema не установлен"):
-            raise SystemExit("колода не записана: она не соответствует схеме")
+        raise SystemExit("колода не записана: проверка не пройдена")
 
-    # Старые части убираем: иначе после уменьшения колоды останутся лишние файлы.
-    for stale in deck_dir.glob("cards-*.json"):
-        if stale.name not in names:
-            stale.unlink()
-
+    # Имена частей зависят от содержимого: старый манифест остаётся рабочим
+    # даже при обрыве публикации. Старые части не удаляем, пока их могут читать.
     for file_name, chunk in zip(names, chunks):
-        (deck_dir / file_name).write_text(
-            json.dumps(chunk, ensure_ascii=False, indent=1), encoding="utf-8"
-        )
-    (deck_dir / "deck.json").write_text(
-        json.dumps(deck, ensure_ascii=False, indent=1), encoding="utf-8"
-    )
+        write_json_atomic(deck_dir / file_name, chunk)
+    write_json_atomic(deck_dir / "deck.json", deck)
 
     _refresh_index()
     return deck_dir
@@ -340,9 +361,8 @@ def _refresh_index() -> None:
             }
         )
     DECKS_DIR.mkdir(parents=True, exist_ok=True)
-    (DECKS_DIR / "index.json").write_text(
-        json.dumps({"decks": decks}, ensure_ascii=False, indent=1), encoding="utf-8"
-    )
+    write_json_atomic(DECKS_DIR / "index.json", {"decks": decks})
+
 
 
 def cmd_run(args: argparse.Namespace) -> int:

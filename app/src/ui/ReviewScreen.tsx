@@ -202,7 +202,15 @@ export function ReviewScreen({ controller, state, onFinish }: Props) {
       const current = controller.state();
       if (current.saving) return;
 
-      const action = keyAction(current.phase, event.key);
+      const target = event.target instanceof Element ? event.target : null;
+      const action = keyAction(current.phase, event.key, {
+        interactive: target !== null && target.closest('button, a[href], input, textarea, select, [contenteditable]:not([contenteditable="false"]), [role="button"], [role="menuitem"], [role="textbox"], [tabindex]:not([tabindex="-1"])') !== null,
+        menuOpen: document.querySelector('[role="menu"]') !== null,
+        defaultPrevented: event.defaultPrevented,
+        repeat: event.repeat,
+        isComposing: event.isComposing,
+        altKey: event.altKey, ctrlKey: event.ctrlKey, metaKey: event.metaKey, shiftKey: event.shiftKey,
+      });
       if (action === null) return;
 
       event.preventDefault();
@@ -215,6 +223,20 @@ export function ReviewScreen({ controller, state, onFinish }: Props) {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [controller]);
+
+  if (state.phase === "error") {
+    return (
+      <section className="screen" role="alert">
+        <h1 className="display">Не удалось начать занятие</h1>
+        <p className="error">{state.error}</p>
+        <p>Прогресс сохранён. Попробуйте ещё раз или вернитесь к началу.</p>
+        <button type="button" className="pill" onClick={() => void controller.restart()}>Повторить попытку</button>
+        <button type="button" className="pill pill--quiet" onClick={onFinish}>К началу</button>
+      </section>
+    );
+  }
+
+  if (state.phase === "loading") return <section className="screen" aria-live="polite">Готовим очередь…</section>;
 
   if (state.phase === "finished" || state.phase === "empty") {
     return <Summary controller={controller} state={state} onFinish={onFinish} />;
@@ -257,10 +279,9 @@ export function ReviewScreen({ controller, state, onFinish }: Props) {
           {answered && card.note !== null && <p className="note reveal">{card.note}</p>}
 
           {answered && card.also.length > 0 && (
-            // В макете этой строки нет, но без неё самопроверка врёт: партнёры
-            // кластера взаимозаменяемы, и вспомнивший `take` вместо `make`
-            // ответил верно.
-            <p className="also reveal">так же подошло бы: {card.also.join(", ")}</p>
+            // Партнёры словарного кластера могут относиться к другому смыслу
+            // и не обязаны подходить в это предложение или иметь ту же форму.
+            <p className="also reveal">другие сочетания с этим словом: {card.also.join(", ")}</p>
           )}
 
           {answered && (

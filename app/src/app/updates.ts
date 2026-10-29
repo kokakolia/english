@@ -7,11 +7,14 @@
  * старое и лишь заводит установку нового работника в фоне.
  *
  * Снаружи это выглядит как «приложение не обновилось», и проверить догадку
- * нечем. Поэтому здесь два действия: проверить обновление сразу и перезагрузить
- * страницу, когда новый работник взял управление.
+ * нечем. Поэтому здесь два действия: проверить обновление сразу и запросить
+ * перезагрузку, когда новый работник взял управление. Она произойдёт на экране
+ * дня, после занятия и завершения всех операций с данными и файлами копий.
  */
 
-export function watchForUpdates(): void {
+import { updateSafety } from "./update-safety";
+
+export function watchForUpdates(safety = updateSafety): void {
   if (!("serviceWorker" in navigator)) return;
 
   // Был ли кто-то у руля до нас. На самой первой установке контроллера ещё
@@ -23,7 +26,7 @@ export function watchForUpdates(): void {
   navigator.serviceWorker.addEventListener("controllerchange", () => {
     if (!hadController || reloading) return;
     reloading = true;
-    window.location.reload();
+    safety.request();
   });
 
   // Проверка обновления не ждёт следующего запуска. `ready` не выполнится,

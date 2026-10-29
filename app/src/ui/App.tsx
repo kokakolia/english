@@ -6,9 +6,11 @@
  * мы будем менять, а логику нет.
  */
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { bootstrap } from "../app/bootstrap";
+import { watchDay } from "../app/day-refresh";
+import { updateSafety } from "../app/update-safety";
 import { applyTheme, isDarkNow, readTheme, saveTheme, type ThemeChoice } from "../app/theme";
 import { ensurePersistentStorage, type StorageStatus } from "../app/persistence";
 import {
@@ -48,6 +50,14 @@ export function App() {
   const [storage, setStorage] = useState<StorageStatus | null>(null);
   const [theme, setThemeState] = useState<ThemeChoice>(() => readTheme());
   const [dark, setDark] = useState(() => isDarkNow(readTheme()));
+  const [loadAttempt, setLoadAttempt] = useState(0);
+  const currentStage = useRef(stage.kind);
+  currentStage.current = stage.kind;
+
+  useEffect(() => {
+    updateSafety.setSafe(stage.kind === "day" && controller === null);
+    return () => updateSafety.setSafe(false);
+  }, [stage.kind, controller]);
 
   // Слежение за системной настройкой: пока выбрано «как в системе», вечернее
   // переключение должно доходить до открытого приложения, а не ждать перезапуска.
@@ -68,43 +78,62 @@ export function App() {
   }, []);
 
   const showDay = useCallback(
-    async (database: AppDatabase, deckId: string) => {
+    async (database: AppDatabase, deckId: string, isCurrent: () => boolean = () => true) => {
       const settings = await getStudySettings(database);
       const counts = await deckCounts(
         database,
         deckId,
         new Date(),
         settings.reviewsPerDay,
+        settings.newPerDay,
       );
-      setStage({ kind: "day", counts });
+      if (isCurrent()) setStage({ kind: "day", counts });
     },
     [],
   );
 
   useEffect(() => {
-    let cancelled = false;
-    void (async () => {
-      // Разрешение спрашивается до открытия колоды: если браузер откажет,
-      // человек увидит это на первом же экране, а не после месяца занятий.
-      const status = await ensurePersistentStorage();
-      const result = await bootstrap();
-      if (cancelled) return;
-      setStorage(status);
+    if (stage.kind !== "day" || db === null || deck === null) return;
+    let current = true;
+    const isCurrent = () => current && currentStage.current === "day";
+    const stop = watchDay(
+      () => showDay(db, deck.id, isCurrent),
+      cause => { if (isCurrent()) setStage({ kind: "error", message: `Не удалось обновить состояние колоды: ${String(cause)}` }); },
+    );
+    return () => { current = false; stop(); };
+  }, [stage.kind, db, deck, showDay]);
 
-      const first = result.decks[0];
-      if (first === undefined) {
-        setStage({ kind: "error", message: result.error ?? "колода не найдена" });
-        return;
+  useEffect(() => {
+    let cancelled = false;
+    setStage({ kind: "loading" });
+    setController(null);
+    setState(null);
+    void (async () => {
+      try {
+        // Разрешение спрашивается до открытия колоды: если браузер откажет,
+        // человек увидит это на первом же экране, а не после месяца занятий.
+        const status = await ensurePersistentStorage();
+        const result = await bootstrap();
+        if (cancelled) return;
+        setStorage(status);
+
+        const first = result.decks[0];
+        if (first === undefined) {
+          setStage({ kind: "error", message: result.error ?? "колода не найдена" });
+          return;
+        }
+        setDb(result.db);
+        setDeck(first);
+        setOffline(result.offline);
+        await showDay(result.db, first.id, () => !cancelled);
+      } catch (cause) {
+        if (!cancelled) setStage({ kind: "error", message: `Не удалось загрузить приложение: ${String(cause)}` });
       }
-      setDb(result.db);
-      setDeck(first);
-      setOffline(result.offline);
-      await showDay(result.db, first.id);
     })();
     return () => {
       cancelled = true;
     };
-  }, [showDay]);
+  }, [showDay, loadAttempt]);
 
   // Подписка на контроллер: он сам сообщает, когда состояние изменилось.
   useEffect(() => {
@@ -114,15 +143,25 @@ export function App() {
   }, [controller]);
 
   async function startStudy() {
-    if (db === null || deck === null) return;
+    if (db === null || deck === null || stage.kind !== "day") return;
+    updateSafety.setSafe(false);
+    currentStage.current = "study";
     setStage({ kind: "study" });
-    setController(await createStudyController({ db, deckId: deck.id }));
+    try {
+      setController(await createStudyController({ db, deckId: deck.id }));
+    } catch (cause) {
+      setStage({ kind: "error", message: `Не удалось начать занятие: ${String(cause)}` });
+    }
   }
 
   async function finishStudy() {
     setController(null);
     setState(null);
-    if (db !== null && deck !== null) await showDay(db, deck.id);
+    try {
+      if (db !== null && deck !== null) await showDay(db, deck.id);
+    } catch (cause) {
+      setStage({ kind: "error", message: `Не удалось прочитать состояние колоды: ${String(cause)}` });
+    }
   }
 
   return (
@@ -161,9 +200,10 @@ export function App() {
 
     if (stage.kind === "error") {
       return (
-        <section className="screen">
+        <section className="screen" role="alert">
           <h1 className="display">Не удалось начать</h1>
           <p className="error">{stage.message}</p>
+          <button type="button" className="pill" onClick={() => setLoadAttempt(value => value + 1)}>Повторить попытку</button>
         </section>
       );
     }
@@ -184,7 +224,7 @@ export function App() {
                 theme={theme}
                 onTheme={setTheme}
                 onRestored={() => {
-                  if (db !== null && deck !== null) void showDay(db, deck.id);
+                  if (db !== null && deck !== null) void finishStudy();
                 }}
               />
             )

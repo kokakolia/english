@@ -18,6 +18,7 @@
 import Dexie, { type Table } from "dexie";
 
 import type { CardProgress, DeckCard, ReviewEntry } from "../srs";
+import { withReviewIds } from "./review-id";
 
 /** Метаданные импортированной колоды. */
 export interface StoredDeck {
@@ -44,6 +45,13 @@ export type StoredCard = DeckCard & { deckId: string };
  */
 export type StoredProgress = CardProgress & { deckId: string };
 
+/** Последнее изменение, в том числе удаление прогресса при сбросе/отмене. */
+export interface ProgressChange {
+  cardId: string;
+  deckId: string;
+  changedAt: string;
+}
+
 /** Запись журнала. Идентификатор проставляет база. */
 export type StoredReview = ReviewEntry & { id?: number };
 
@@ -58,6 +66,7 @@ export class AppDatabase extends Dexie {
   progress!: Table<StoredProgress, string>;
   reviews!: Table<StoredReview, number>;
   settings!: Table<SettingRow, string>;
+  changes!: Table<ProgressChange, string>;
 
   constructor(name = "collocation-srs") {
     super(name);
@@ -71,6 +80,13 @@ export class AppDatabase extends Dexie {
       progress: "cardId, deckId, due, state, [deckId+due]",
       reviews: "++id, cardId, reviewedAt, [cardId+reviewedAt]",
       settings: "key",
+    });
+    this.version(2).stores({ changes: "cardId, deckId" });
+    this.version(3).stores({
+      reviews: "++id, &eventId, cardId, reviewedAt, [cardId+reviewedAt]",
+    }).upgrade(async transaction => {
+      const reviews = transaction.table("reviews");
+      await reviews.bulkPut(withReviewIds(await reviews.toArray()));
     });
   }
 }

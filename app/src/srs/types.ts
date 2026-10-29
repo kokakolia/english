@@ -86,6 +86,8 @@ export interface CardProgress {
  * пишется сырьём и никогда не переписывается задним числом.
  */
 export interface ReviewEntry {
+  /** Постоянный идентификатор события; у старых копий назначается при импорте. */
+  eventId?: string;
   cardId: string;
   reviewedAt: string;
   grade: Grade;

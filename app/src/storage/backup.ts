@@ -1,3 +1,4 @@
+import { updateSafety } from "../app/update-safety";
 /**
  * Резервная копия всей базы одним файлом.
  *
@@ -13,10 +14,12 @@
  */
 
 import type { AppDatabase, StoredCard, StoredDeck, StoredProgress, StoredReview } from "./db";
-import type { SettingRow } from "./db";
+import type { SettingRow, ProgressChange } from "./db";
+import { withReviewIds } from "./review-id";
+import { object, text, date, validCard, validProgress, validReview, validStoredDeck, validStudySettings, uniqueIds } from "./validation";
 
 export const BACKUP_FORMAT = "collocation-srs-backup";
-export const BACKUP_FORMAT_VERSION = 1;
+export const BACKUP_FORMAT_VERSION = 3;
 
 export interface BackupFile {
   format: typeof BACKUP_FORMAT;
@@ -27,6 +30,7 @@ export interface BackupFile {
   progress: StoredProgress[];
   reviews: StoredReview[];
   settings: SettingRow[];
+  changes?: ProgressChange[];
 }
 
 export interface ExportOptions {
@@ -42,25 +46,29 @@ export async function exportBackup(
   db: AppDatabase,
   options: ExportOptions = {},
 ): Promise<BackupFile> {
-  const includeCards = options.includeCards ?? true;
-  const [decks, cards, progress, reviews, settings] = await Promise.all([
-    db.decks.toArray(),
-    includeCards ? db.cards.toArray() : Promise.resolve([]),
-    db.progress.toArray(),
-    db.reviews.toArray(),
-    db.settings.toArray(),
-  ]);
+  const release = updateSafety.begin();
+  try {
+    const includeCards = options.includeCards ?? true;
+    // Единый снимок: оценка из другой вкладки не разрывает прогресс и журнал.
+    const [decks, cards, progress, reviews, settings, changes] = await db.transaction(
+      "r", [db.decks, db.cards, db.progress, db.reviews, db.settings, db.changes], async () => Promise.all([
+        db.decks.toArray(), includeCards ? db.cards.toArray() : Promise.resolve([]),
+        db.progress.toArray(), db.reviews.toArray(), db.settings.toArray(), db.changes.toArray(),
+      ]),
+    );
 
-  return {
-    format: BACKUP_FORMAT,
-    formatVersion: BACKUP_FORMAT_VERSION,
-    createdAt: (options.now ?? new Date()).toISOString(),
-    decks,
-    cards,
-    progress,
-    reviews,
-    settings,
-  };
+    return {
+      format: BACKUP_FORMAT,
+      formatVersion: BACKUP_FORMAT_VERSION,
+      createdAt: (options.now ?? new Date()).toISOString(),
+      decks,
+      cards,
+      progress,
+      reviews: withReviewIds(reviews),
+      settings: settings.filter(row => row.key !== "backupFolder"),
+      changes,
+    };
+  } finally { release(); }
 }
 
 export class BackupFormatError extends Error {}
@@ -73,18 +81,52 @@ function assertBackup(data: unknown): asserts data is BackupFile {
   if (file.format !== BACKUP_FORMAT) {
     throw new BackupFormatError("это не копия этого приложения");
   }
-  if (typeof file.formatVersion !== "number") {
+  if (!Number.isInteger(file.formatVersion) || (file.formatVersion ?? 0) < 1) {
     throw new BackupFormatError("в копии не указана версия формата");
   }
-  if (file.formatVersion > BACKUP_FORMAT_VERSION) {
+  if (file.formatVersion! > BACKUP_FORMAT_VERSION) {
     throw new BackupFormatError(
       `копия сделана более новой версией приложения (формат ${file.formatVersion})`,
     );
   }
-  for (const key of ["decks", "progress", "reviews", "settings"] as const) {
+  for (const key of ["decks", "cards", "progress", "reviews", "settings"] as const) {
     if (!Array.isArray(file[key])) {
       throw new BackupFormatError(`в копии нет раздела «${key}»`);
     }
+  }
+  if (!date(file.createdAt)) throw new BackupFormatError("неверная дата копии");
+  const checks: [string, unknown[], (value: unknown) => boolean, string | null][] = [
+    ["decks", file.decks!, validStoredDeck, "id"],
+    ["cards", file.cards!, value => validCard(value) && object(value) && text(value.deckId), "id"],
+    ["progress", file.progress!, validProgress, "cardId"],
+    ["reviews", file.reviews!, validReview, null],
+    ["settings", file.settings!, value => object(value) && text(value.key) &&
+      (value.key !== "study" || validStudySettings(value.value)), "key"],
+  ];
+  if (file.formatVersion! >= 2 || file.changes !== undefined) {
+    if (!Array.isArray(file.changes)) throw new BackupFormatError("нет истории изменений прогресса");
+    checks.push(["changes", file.changes, value => object(value) && text(value.cardId) && text(value.deckId) && date(value.changedAt), "cardId"]);
+  }
+  for (const [name, rows, check, key] of checks) {
+    if (!rows.every(check) || (key !== null && !uniqueIds(rows, key))) {
+      throw new BackupFormatError(`повреждён раздел «${name}»`);
+    }
+  }
+  const deckIds = new Set(file.decks!.map(deck => deck.id));
+  const identified = file.reviews!.filter(row => row.eventId !== undefined);
+  if (!uniqueIds(identified, "eventId") || (file.formatVersion === 3 && identified.length !== file.reviews!.length)) {
+    throw new BackupFormatError("неверные идентификаторы событий журнала");
+  }
+  if ([...file.cards!, ...file.progress!, ...(file.changes ?? [])].some(row => !deckIds.has(row.deckId))) {
+    throw new BackupFormatError("запись ссылается на неизвестную колоду");
+  }
+  for (const deck of file.decks!) {
+    const count = file.cards!.filter(card => card.deckId === deck.id).length;
+    if (count !== 0 && count !== deck.count) throw new BackupFormatError("в копии неполная колода");
+  }
+  const progressDecks = new Map(file.progress!.map(row => [row.cardId, row.deckId]));
+  if ((file.changes ?? []).some(row => progressDecks.has(row.cardId) && progressDecks.get(row.cardId) !== row.deckId)) {
+    throw new BackupFormatError("история изменений ссылается на другую колоду");
   }
 }
 
@@ -110,86 +152,107 @@ export interface RestoreOptions {
   mode?: RestoreMode;
 }
 
-/** Какая из двух записей прогресса новее. */
-function newer(left: StoredProgress, right: StoredProgress): StoredProgress {
-  const leftTime = left.lastReview ?? "";
-  const rightTime = right.lastReview ?? "";
-  if (leftTime === rightTime) return left.reps >= right.reps ? left : right;
-  return leftTime > rightTime ? left : right;
-}
-
 export async function restoreBackup(
   db: AppDatabase,
   data: unknown,
   options: RestoreOptions = {},
 ): Promise<RestoreResult> {
-  assertBackup(data);
-  const mode = options.mode ?? "replace";
-  const result: RestoreResult = {
-    mode,
-    decks: data.decks.length,
-    cards: data.cards?.length ?? 0,
-    progress: data.progress.length,
-    reviews: data.reviews.length,
-    settings: data.settings.length,
-    duplicateReviews: 0,
-  };
+  const release = updateSafety.begin();
+  try {
+    assertBackup(data);
+    const incomingReviews = withReviewIds(data.reviews);
+    const mode = options.mode ?? "replace";
+    const result: RestoreResult = {
+      mode,
+      decks: data.decks.length,
+      cards: data.cards?.length ?? 0,
+      progress: data.progress.length,
+      reviews: data.reviews.length,
+      settings: data.settings.length,
+      duplicateReviews: 0,
+    };
 
-  await db.transaction(
-    "rw",
-    db.decks,
-    db.cards,
-    db.progress,
-    db.reviews,
-    db.settings,
-    async () => {
-      if (mode === "replace") {
-        await Promise.all([
-          db.decks.clear(),
-          db.cards.clear(),
-          db.progress.clear(),
-          db.reviews.clear(),
-          db.settings.clear(),
-        ]);
-      }
-
-      await db.decks.bulkPut(data.decks);
-      if (data.cards.length > 0) await db.cards.bulkPut(data.cards);
-      await db.settings.bulkPut(data.settings);
-
-      if (mode === "replace") {
-        await db.progress.bulkPut(data.progress);
-        // Идентификаторы журнала присваивает база: переносим записи без них,
-        // иначе можно затереть чужую строку с тем же номером.
-        await db.reviews.bulkAdd(data.reviews.map(({ id: _id, ...entry }) => entry));
-        return;
-      }
-
-      const merged: StoredProgress[] = [];
-      for (const incoming of data.progress) {
-        const existing = await db.progress.get(incoming.cardId);
-        merged.push(existing === undefined ? incoming : newer(existing, incoming));
-      }
-      await db.progress.bulkPut(merged);
-
-      // Повторение однозначно определяется карточкой и моментом времени:
-      // одно и то же событие не может произойти дважды в одну миллисекунду.
-      for (const entry of data.reviews) {
-        const exists = await db.reviews
-          .where("[cardId+reviewedAt]")
-          .equals([entry.cardId, entry.reviewedAt])
-          .count();
-        if (exists > 0) {
-          result.duplicateReviews += 1;
-          continue;
+    await db.transaction(
+      "rw",
+      [db.decks, db.cards, db.progress, db.reviews, db.settings, db.changes],
+      async () => {
+        if (mode === "replace") {
+          await Promise.all([
+            db.decks.clear(),
+            db.cards.clear(),
+            db.progress.clear(),
+            db.reviews.clear(),
+            db.settings.clear(),
+            db.changes.clear(),
+          ]);
         }
-        const { id: _id, ...rest } = entry;
-        await db.reviews.add(rest);
-      }
-    },
-  );
 
-  return result;
+        // Старая копия не понижает версию установленной колоды. Облегчённая
+        // копия не объявляет отсутствующие карточки уже загруженными.
+        for (const deck of data.decks) {
+          const existing = await db.decks.get(deck.id);
+          const cards = data.cards.filter(card => card.deckId === deck.id);
+          const complete = cards.length === deck.count;
+          if (!existing || (complete && Date.parse(deck.builtAt) > Date.parse(existing.builtAt))) {
+            await db.decks.put(deck);
+            if (complete) {
+              await db.cards.where("deckId").equals(deck.id).delete();
+              await db.cards.bulkPut(cards);
+            }
+          } else if (existing.version === deck.version && complete &&
+            await db.cards.where("deckId").equals(deck.id).count() !== deck.count) {
+            await db.cards.where("deckId").equals(deck.id).delete();
+            await db.cards.bulkPut(cards);
+          }
+        }
+        await db.settings.bulkPut(data.settings.filter(row => row.key !== "backupFolder"));
+
+        if (mode === "replace") {
+          await db.progress.bulkPut(data.progress);
+          await db.changes.bulkPut(data.changes ?? []);
+          await db.reviews.bulkAdd(incomingReviews.map(({ id: _id, ...entry }) => entry));
+          return;
+        }
+
+        const incomingProgress = new Map(data.progress.map(row => [row.cardId, row]));
+        const incomingChanges = new Map((data.changes ?? []).map(row => [row.cardId, row]));
+        const ids = new Set([...incomingProgress.keys(), ...incomingChanges.keys()]);
+        for (const cardId of ids) {
+          const incoming = incomingProgress.get(cardId);
+          const change = incomingChanges.get(cardId);
+          const existing = await db.progress.get(cardId);
+          const localChange = await db.changes.get(cardId);
+          // В старых копиях времени действий нет: lastReview — только запасной
+          // вариант, а известная локальная отмена/сброс всегда защищены change.
+          const localTime = Date.parse(localChange?.changedAt ?? existing?.lastReview ?? "") || 0;
+          const incomingTime = Date.parse(change?.changedAt ?? incoming?.lastReview ?? "") || 0;
+          const hasLocal = existing !== undefined || localChange !== undefined;
+          if (hasLocal && localTime >= incomingTime) continue;
+          if (incoming) await db.progress.put(incoming);
+          else await db.progress.delete(cardId);
+          if (change) await db.changes.put(change);
+          else await db.changes.delete(cardId);
+        }
+
+        // UUID события не зависит от часов и локального auto-increment ID.
+        for (const entry of incomingReviews) {
+          const existing = await db.reviews
+            .where("eventId")
+            .equals(entry.eventId)
+            .first();
+          if (existing !== undefined) {
+            if (entry.undone && existing.id !== undefined) await db.reviews.update(existing.id, { undone: true });
+            result.duplicateReviews += 1;
+            continue;
+          }
+          const { id: _id, ...rest } = entry;
+          await db.reviews.add(rest);
+        }
+      },
+    );
+
+    return result;
+  } finally { release(); }
 }
 
 /** Копия как строка, готовая к сохранению в файл. */

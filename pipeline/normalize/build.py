@@ -29,7 +29,7 @@ from .variants import PLACEHOLDERS, expand
 
 # Версия правил разбора. Поднять при любом изменении логики нормализации —
 # тогда следующий `run` пересоберёт базу целиком.
-VERSION = "0.3.0"
+VERSION = "0.4.0"
 
 SOURCE_DICT = "ozdic"
 
@@ -201,6 +201,8 @@ def normalize_entry(entry: dict, slug: str, freq_pct: int | None) -> list[Colloc
                         source_slug=slug,
                     )
                 )
+    if len({record.id for record in records}) != len(records):
+        raise ValueError(f"разделение кластера {headword}: назначьте отдельные ID в card-identities.json")
     return records
 
 
@@ -252,9 +254,13 @@ def cmd_run(args: argparse.Namespace) -> int:
         processed += 1
         total_records += len(records)
         if processed % 200 == 0:
+            from .identities import registry
+            registry().save()
             conn.commit()
             print(f"  обработано статей: {processed}", flush=True)
 
+    from .identities import registry
+    registry().save()
     conn.commit()
     print(
         f"статей разобрано: {processed}, пропущено как актуальные: {skipped}\n"

@@ -169,6 +169,40 @@ def test_locate() -> None:
           _locate(example, "game", BEFORE, ["indoor", "outdoor"]), None)
 
 
+def test_stable_identity() -> None:
+    from copy import deepcopy
+    from types import SimpleNamespace
+    from .identities import IdentityRegistry, legacy_id, registry
+
+    def record(accept, **changes):
+        return SimpleNamespace(**dict(source_dict="test", headword="decision", head_pos="noun",
+                                      relation="verb+obj", sense=None, accept=accept, **changes))
+
+    first = record(["make", "take"])
+    identities = IdentityRegistry([])
+    original = identities.resolve(first)
+    check("ID: совместим с исходным хэшем", original, legacy_id(first))
+    check("ID: добавление партнёра", identities.resolve(record(["make", "take", "reach"])), original)
+    check("ID: порядок партнёров", identities.resolve(record(["reach", "take", "make"])), original)
+    check("ID: удаление партнёра", identities.resolve(record(["take"])), original)
+    check_true("ID: новое гнездо получает отдельный ID", identities.resolve(record(["do"])) != original)
+    try:
+        identities.resolve(record(["take", "do"]))
+        check_true("ID: слияние требует ручного решения", False)
+    except ValueError:
+        pass
+
+    # Все уже выпущенные ID сохранены при переходе на реестр.
+    entries = deepcopy(registry().entries)
+    for entry in entries:
+        source, headword, head_pos, relation, sense = entry["scope"]
+        candidate = SimpleNamespace(source_dict=source, headword=headword, head_pos=head_pos,
+                                    relation=relation, sense=sense, accept=entry["partners"])
+        # Выпущенные записи пока имеют один исходный набор партнёров.
+        check("ID: выпущенная карточка " + entry["id"],
+              IdentityRegistry([deepcopy(entry)]).resolve(candidate), entry["id"])
+
+
 def main() -> int:
     tests = [value for name, value in sorted(globals().items()) if name.startswith("test_")]
     for test in tests:

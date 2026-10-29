@@ -1,6 +1,6 @@
 import "fake-indexeddb/auto";
 
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { createScheduler } from "../srs";
 import { makeCard } from "../srs/testing";
@@ -99,8 +99,40 @@ beforeEach(async () => {
 });
 
 afterEach(async () => {
+  vi.restoreAllMocks();
   db.close();
   await db.delete();
+});
+
+describe("ошибка подготовки занятия", () => {
+  it("отказ чтения настроек возвращает ошибку с возможностью повторить", async () => {
+    vi.spyOn(db.settings, "get").mockRejectedValueOnce(new Error("settings unavailable"));
+    const controller = await makeController();
+    expect(controller.state()).toMatchObject({ phase: "error", card: null });
+    expect(controller.state().error).toContain("settings unavailable");
+    await controller.restart();
+    expect(controller.state()).toMatchObject({ phase: "question", error: null });
+  });
+
+  it("отказ чтения карточек не притворяется пустой очередью", async () => {
+    vi.spyOn(db.cards, "where").mockImplementationOnce(() => { throw new Error("cards unavailable"); });
+    const controller = await makeController();
+    expect(controller.state().phase).toBe("error");
+    expect(controller.state().error).toContain("cards unavailable");
+    await controller.restart();
+    expect(controller.state().phase).toBe("question");
+  });
+});
+
+describe("сокращения не перехватывают клавиатуру у интерфейса", () => {
+  it.each(["interactive", "menuOpen", "defaultPrevented", "repeat", "isComposing", "altKey", "ctrlKey", "metaKey", "shiftKey"])("не срабатывают при %s", flag => {
+    expect(keyAction("answered", "Enter", { [flag]: true })).toBeNull();
+    expect(keyAction("question", " ", { [flag]: true })).toBeNull();
+  });
+  it("экран ошибки позволяет выйти, но не поставить оценку", () => {
+    expect(keyAction("error", "Escape")).toEqual({ kind: "exit" });
+    expect(keyAction("error", "Enter")).toBeNull();
+  });
 });
 
 describe("начало занятия", () => {

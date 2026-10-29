@@ -1,0 +1,6848 @@
+[
+ {
+  "id": "c_60aa2ced59a58565",
+  "type": "cloze",
+  "text": "After the accident, he slowly ___ the use of his left arm.",
+  "answer": "recovered",
+  "accept": [
+   "recover",
+   "regain"
+  ],
+  "hint": "r________",
+  "translation": "После аварии он постепенно восстановил способность владеть левой рукой.",
+  "answers": [
+   "recover",
+   "regain",
+   "recovered"
+  ],
+  "also": [
+   "regain"
+  ],
+  "note": "recover / regain the use of sth — вернуть подвижность. Обычно о конечности после травмы.",
+  "phrase": "recover use",
+  "relation": "verb+obj",
+  "headword": "use",
+  "sense": "ability/permission to use sth",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1395
+ },
+ {
+  "id": "c_65754892639732b0",
+  "type": "cloze",
+  "text": "Most home ___ find it easier to store their photos in the cloud.",
+  "answer": "users",
+  "accept": [
+   "user"
+  ],
+  "hint": "u____",
+  "translation": "Большинству домашних пользователей проще хранить фотографии в облаке.",
+  "answers": [
+   "user",
+   "users"
+  ],
+  "also": [],
+  "note": "a home user — частный, домашний пользователь. Противопоставляется корпоративному.",
+  "phrase": "home user",
+  "relation": "noun+noun",
+  "headword": "home",
+  "sense": "place where sb/sth lives",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1396
+ },
+ {
+  "id": "c_0fe6896041a34ace",
+  "type": "cloze",
+  "text": "He quit his job and left the office ___.",
+  "answer": "without a backward look",
+  "accept": [
+   "without a backward look"
+  ],
+  "hint": "w______ a b_______ l___",
+  "translation": "Он уволился и вышел из офиса, не оглянувшись.",
+  "answers": [
+   "without a backward look"
+  ],
+  "also": [],
+  "note": "without a backward look / glance — не оглянувшись. О решительном уходе, без сожалений.",
+  "phrase": "without a backward look",
+  "relation": "phrase",
+  "headword": "look",
+  "sense": "act of looking at/considering sth",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1397
+ },
+ {
+  "id": "c_3ea29ea34b66fc96",
+  "type": "cloze",
+  "text": "A good dictionary can be ___ help when you're learning new vocabulary.",
+  "answer": "of",
+  "accept": [
+   "of ~"
+  ],
+  "hint": "o_",
+  "translation": "Хороший словарь может быть подспорьем, когда учишь новую лексику.",
+  "answers": [
+   "of"
+  ],
+  "also": [],
+  "note": "be of help (to sb) — быть полезным. Формальнее, чем help; предлог of обязателен.",
+  "phrase": "of help",
+  "relation": "prep",
+  "headword": "help",
+  "sense": null,
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1401
+ },
+ {
+  "id": "c_28845bc8c0fed452",
+  "type": "cloze",
+  "text": "The ___ thing about moving to a new city is how quickly you make new friends.",
+  "answer": "funny",
+  "accept": [
+   "amazing",
+   "curious",
+   "exciting",
+   "extraordinary",
+   "funny",
+   "interesting",
+   "remarkable",
+   "startling",
+   "strange",
+   "striking",
+   "surprising",
+   "weird"
+  ],
+  "hint": "f____",
+  "translation": "Забавная штука с переездом в новый город: как быстро ты заводишь новых друзей.",
+  "answers": [
+   "amazing",
+   "curious",
+   "exciting",
+   "extraordinary",
+   "funny",
+   "interesting",
+   "remarkable",
+   "startling",
+   "strange",
+   "striking",
+   "surprising",
+   "weird"
+  ],
+  "also": [
+   "amazing",
+   "curious",
+   "exciting",
+   "extraordinary",
+   "interesting",
+   "remarkable",
+   "startling",
+   "strange",
+   "striking",
+   "surprising",
+   "weird"
+  ],
+  "note": "an amazing / strange / funny thing — удивительная вещь. Часто зачин рассказа: the funny thing is...",
+  "phrase": "amazing thing",
+  "relation": "adj+noun",
+  "headword": "thing",
+  "sense": "fact/event/situation/action",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1402
+ },
+ {
+  "id": "c_6dcf5f5b2e891da7",
+  "type": "cloze",
+  "text": "We ___ housed our guests in the spare bedroom while their apartment was being repaired.",
+  "answer": "temporarily",
+  "accept": [
+   "temporarily"
+  ],
+  "hint": "t__________",
+  "translation": "Мы временно поселили гостей в свободной спальне, пока их квартиру ремонтировали.",
+  "answers": [
+   "temporarily"
+  ],
+  "also": [],
+  "note": "temporarily house sb — временно разместить. Глагол house — «предоставить жильё».",
+  "phrase": "temporarily house",
+  "relation": "adv+verb",
+  "headword": "house",
+  "sense": null,
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1406
+ },
+ {
+  "id": "c_8b9ac14bd10f57e7",
+  "type": "cloze",
+  "text": "The end ___ of the project was better than everyone expected.",
+  "answer": "result",
+  "accept": [
+   "product",
+   "result"
+  ],
+  "hint": "r_____",
+  "translation": "Итоговый результат проекта оказался лучше, чем все ожидали.",
+  "answers": [
+   "product",
+   "result"
+  ],
+  "also": [
+   "product"
+  ],
+  "note": "the end product / result — конечный продукт, итог. Существительное end в роли определения.",
+  "phrase": "end product",
+  "relation": "noun+noun",
+  "headword": "end",
+  "sense": "last part of sth",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1408
+ },
+ {
+  "id": "c_80381186cd2d4ba5",
+  "type": "cloze",
+  "text": "She decided to leave her job because of her family ___ and young children at home.",
+  "answer": "commitments",
+  "accept": [
+   "commitments"
+  ],
+  "hint": "c__________",
+  "translation": "Она решила уйти с работы из-за семейных обязательств и маленьких детей дома.",
+  "answers": [
+   "commitments"
+  ],
+  "also": [],
+  "note": "family commitments — семейные обязательства. Стандартная формулировка для объяснения отказа или ухода.",
+  "phrase": "family commitments",
+  "relation": "noun+noun",
+  "headword": "family",
+  "sense": "group of people related to each other",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1409
+ },
+ {
+  "id": "c_96d809cea9b9f340",
+  "type": "cloze",
+  "text": "My father was a school ___ for thirty years before he retired.",
+  "answer": "teacher",
+  "accept": [
+   "teacher (also schoolteacher)"
+  ],
+  "hint": "t______",
+  "translation": "Мой отец тридцать лет проработал школьным учителем, прежде чем вышел на пенсию.",
+  "answers": [
+   "teacher",
+   "schoolteacher"
+  ],
+  "also": [],
+  "note": "a school teacher — школьный учитель. Пишется и слитно: schoolteacher.",
+  "phrase": "school teacher",
+  "relation": "noun+noun",
+  "headword": "school",
+  "sense": null,
+  "cefr": "A1",
+  "band": "rare",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1417
+ },
+ {
+  "id": "c_e60c9c91f8672009",
+  "type": "cloze",
+  "text": "My new bedroom furniture comes ___ set with a bed, two nightstands, and a dresser.",
+  "answer": "in a",
+  "accept": [
+   "in a/the ~"
+  ],
+  "hint": "i_ a",
+  "translation": "Мебель для новой спальни идёт комплектом: кровать, две тумбочки и комод.",
+  "answers": [
+   "in a",
+   "in the"
+  ],
+  "also": [],
+  "note": "come in a set — продаваться комплектом. Оборот in a set о наборе предметов.",
+  "phrase": "in a set",
+  "relation": "prep",
+  "headword": "set",
+  "sense": "group of similar things",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1420
+ },
+ {
+  "id": "c_fbbb483aa099b8da",
+  "type": "cloze",
+  "text": "After losing three games, the basketball team finally returned to their ___ ways last night.",
+  "answer": "winning",
+  "accept": [
+   "winning"
+  ],
+  "hint": "w______",
+  "translation": "Проиграв три матча, баскетбольная команда вчера наконец вернулась к победам.",
+  "answers": [
+   "winning"
+  ],
+  "also": [],
+  "note": "return to winning ways — снова начать выигрывать. Спортивное клише из репортажей.",
+  "phrase": "winning way",
+  "relation": "adj+noun",
+  "headword": "way",
+  "sense": "method/style",
+  "cefr": "B1",
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1424
+ },
+ {
+  "id": "c_df2c013a02184851",
+  "type": "cloze",
+  "text": "After leaving her job in the city, she decided to ___ in the countryside.",
+  "answer": "build a new life",
+  "accept": [
+   "build/make/start a new life"
+  ],
+  "hint": "b____ a n__ l___",
+  "translation": "Бросив работу в городе, она решила построить новую жизнь в деревне.",
+  "answers": [
+   "build a new life",
+   "make a new life",
+   "start a new life"
+  ],
+  "also": [],
+  "note": "build / start a new life — начать жизнь заново. Обычно после переезда или потрясения.",
+  "phrase": "build a new life",
+  "relation": "phrase",
+  "headword": "life",
+  "sense": "way of living",
+  "cefr": "A2",
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1428
+ },
+ {
+  "id": "c_acf3d9d5875e5faa",
+  "type": "cloze",
+  "text": "The company produces about 500 cars ___ year at this factory.",
+  "answer": "per",
+  "accept": [
+   "per ~"
+  ],
+  "hint": "p__",
+  "translation": "Завод выпускает около пятисот автомобилей в год.",
+  "answers": [
+   "per"
+  ],
+  "also": [],
+  "note": "per year — в год, ежегодно. Формальное; в обычной речи a year: 500 cars a year.",
+  "phrase": "per year",
+  "relation": "prep",
+  "headword": "year",
+  "sense": null,
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1429
+ },
+ {
+  "id": "c_36fa351d6fd27c22",
+  "type": "cloze",
+  "text": "The president ___ day announced new policies to address the growing economic crisis.",
+  "answer": "of the",
+  "accept": [
+   "of the ~"
+  ],
+  "hint": "o_ t__",
+  "translation": "Тогдашний президент объявил о новых мерах для борьбы с растущим экономическим кризисом.",
+  "answers": [
+   "of the"
+  ],
+  "also": [],
+  "note": "the president of the day — тогдашний президент. Оборот of the day означает «в то время занимавший пост».",
+  "phrase": "of the day",
+  "relation": "prep",
+  "headword": "day",
+  "sense": "hours of the day when you work",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1430
+ },
+ {
+  "id": "c_f37531aea8d4f49d",
+  "type": "cloze",
+  "text": "I ___ use my phone to check emails before starting work.",
+  "answer": "normally",
+  "accept": [
+   "frequently",
+   "generally",
+   "habitually",
+   "normally",
+   "regularly",
+   "usually"
+  ],
+  "hint": "n_______",
+  "translation": "Обычно я проверяю почту с телефона перед началом работы.",
+  "answers": [
+   "frequently",
+   "generally",
+   "habitually",
+   "normally",
+   "regularly",
+   "usually"
+  ],
+  "also": [
+   "frequently",
+   "generally",
+   "habitually",
+   "regularly",
+   "usually"
+  ],
+  "note": "commonly / regularly / habitually used — обычно используемый. habitually подчёркивает привычку, regularly — регулярность.",
+  "phrase": "frequently use",
+  "relation": "adv+verb",
+  "headword": "use",
+  "sense": null,
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1432
+ },
+ {
+  "id": "c_6b43e2d68314d89c",
+  "type": "cloze",
+  "text": "My grandmother's cooking made our house the ___ home of family gatherings in our neighborhood.",
+  "answer": "legendary",
+  "accept": [
+   "legendary"
+  ],
+  "hint": "l________",
+  "translation": "Благодаря бабушкиной стряпне наш дом стал легендарным местом семейных застолий в районе.",
+  "answers": [
+   "legendary"
+  ],
+  "also": [],
+  "note": "a legendary home / place — легендарное место. Преувеличение ради тёплой оценки.",
+  "phrase": "legendary home",
+  "relation": "adj+noun",
+  "headword": "home",
+  "sense": "place where sb/sth lives",
+  "cefr": "B1",
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1433
+ },
+ {
+  "id": "c_2c0ce0c7301b8c71",
+  "type": "cloze",
+  "text": "She received a disapproving look ___ her mother when she arrived home late.",
+  "answer": "from",
+  "accept": [
+   "~ from"
+  ],
+  "hint": "f___",
+  "translation": "Мать посмотрела на неё с осуждением, когда она пришла домой поздно.",
+  "answers": [
+   "from"
+  ],
+  "also": [],
+  "note": "a look from sb — взгляд, брошенный кем-то. Предлог from указывает, от кого он исходил.",
+  "phrase": "look from",
+  "relation": "prep",
+  "headword": "look",
+  "sense": "exploring/looking for sth",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1434
+ },
+ {
+  "id": "c_de7a1cab2717df59",
+  "type": "cloze",
+  "text": "He ___ stated that he would not accept the job offer.",
+  "answer": "definitely",
+  "accept": [
+   "categorically",
+   "definitely",
+   "positively",
+   "unequivocally"
+  ],
+  "hint": "d_________",
+  "translation": "Он однозначно заявил, что не примет предложение о работе.",
+  "answers": [
+   "categorically",
+   "definitely",
+   "positively",
+   "unequivocally"
+  ],
+  "also": [
+   "categorically",
+   "positively",
+   "unequivocally"
+  ],
+  "note": "categorically / definitely state — заявить категорически. Из языка официальных опровержений.",
+  "phrase": "categorically state",
+  "relation": "adv+verb",
+  "headword": "state",
+  "sense": null,
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1437
+ },
+ {
+  "id": "c_4e122e26b416ccf5",
+  "type": "cloze",
+  "text": "I couldn't finish the project without help ___ my teammates.",
+  "answer": "from",
+  "accept": [
+   "~ from"
+  ],
+  "hint": "f___",
+  "translation": "Я не смог бы закончить проект без помощи товарищей по команде.",
+  "answers": [
+   "from"
+  ],
+  "also": [],
+  "note": "help from sb — помощь от кого-то. Предлог from указывает источник.",
+  "phrase": "help from",
+  "relation": "prep",
+  "headword": "help",
+  "sense": null,
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1438
+ },
+ {
+  "id": "c_8a50c3b85391e0fc",
+  "type": "cloze",
+  "text": "I haven't seen you in months, so tell me how things ___ at your new job.",
+  "answer": "are going",
+  "accept": [
+   "be going"
+  ],
+  "hint": "a__ g____",
+  "translation": "Мы не виделись несколько месяцев — расскажи, как дела на новой работе.",
+  "answers": [
+   "be going",
+   "are going"
+  ],
+  "also": [],
+  "note": "how are things going? — как дела? Разговорная формула, things — жизнь вообще.",
+  "phrase": "thing be going",
+  "relation": "noun+verb",
+  "headword": "thing",
+  "sense": "things: general situation, as it affects sb",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1439
+ },
+ {
+  "id": "c_04235662fc7b02c5",
+  "type": "cloze",
+  "text": "I showed my passport ___ the border guard when I arrived at the airport.",
+  "answer": "to",
+  "accept": [
+   "to"
+  ],
+  "hint": "t_",
+  "translation": "Я показал паспорт пограничнику, когда прилетел в аэропорт.",
+  "answers": [
+   "to"
+  ],
+  "also": [],
+  "note": "show sth to sb — показать кому-то. Предлог to перед адресатом, если он идёт после дополнения.",
+  "phrase": "to show",
+  "relation": "prep",
+  "headword": "show",
+  "sense": "make sth clear; let sb see sth",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1444
+ },
+ {
+  "id": "c_e9f6c71a4c2ff51e",
+  "type": "cloze",
+  "text": "The children's argument started playfully but ___ when someone got hurt.",
+  "answer": "ended in tears",
+  "accept": [
+   "end in tears"
+  ],
+  "hint": "e____ i_ t____",
+  "translation": "Ссора детей началась в шутку, но кончилась слезами, когда кто-то ушибся.",
+  "answers": [
+   "end in tears",
+   "ended in tears"
+  ],
+  "also": [],
+  "note": "end in tears — кончиться слезами. Устойчивое, часто как предупреждение: it'll all end in tears.",
+  "phrase": "end in tears",
+  "relation": "phrase",
+  "headword": "end",
+  "sense": null,
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1445
+ },
+ {
+  "id": "c_b33a7786ea3196bd",
+  "type": "cloze",
+  "text": "It was a ___ thought that we would finally see our grandchildren again after so long.",
+  "answer": "pleasant",
+  "accept": [
+   "comforting",
+   "good",
+   "happy",
+   "pleasant",
+   "positive"
+  ],
+  "hint": "p_______",
+  "translation": "Приятно было думать, что мы наконец увидим внуков после такой долгой разлуки.",
+  "answers": [
+   "comforting",
+   "good",
+   "happy",
+   "pleasant",
+   "positive"
+  ],
+  "also": [
+   "comforting",
+   "good",
+   "happy",
+   "positive"
+  ],
+  "note": "a comforting / pleasant thought — утешительная мысль. Часто в конце рассуждения.",
+  "phrase": "comforting thought",
+  "relation": "adj+noun",
+  "headword": "thought",
+  "sense": "sth that you think",
+  "cefr": "A2",
+  "band": "extended",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1452
+ },
+ {
+  "id": "c_562544e7d51a1904",
+  "type": "cloze",
+  "text": "She decided to ___ her will after inheriting a large fortune from her aunt.",
+  "answer": "revoke",
+  "accept": [
+   "revoke"
+  ],
+  "hint": "r_____",
+  "translation": "Она решила отозвать своё завещание, получив большое наследство от тёти.",
+  "answers": [
+   "revoke"
+  ],
+  "also": [],
+  "note": "revoke a will — отменить завещание. Юридический термин, формальнее, чем cancel.",
+  "phrase": "revoke will",
+  "relation": "verb+obj",
+  "headword": "will",
+  "sense": "legal document",
+  "cefr": "B2",
+  "band": "extended",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1459
+ },
+ {
+  "id": "c_6050fba010a1e80a",
+  "type": "cloze",
+  "text": "My daughter is doing work ___ at a local hospital this summer.",
+  "answer": "experience",
+  "accept": [
+   "experience"
+  ],
+  "hint": "e_________",
+  "translation": "Дочь этим летом проходит практику в местной больнице.",
+  "answers": [
+   "experience"
+  ],
+  "also": [],
+  "note": "work experience — стаж или учебная практика. В Британии — практика школьников на предприятии.",
+  "phrase": "work experience",
+  "relation": "noun+noun",
+  "headword": "work",
+  "sense": "job",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1462
+ },
+ {
+  "id": "c_8320bf921cdd053a",
+  "type": "cloze",
+  "text": "When parents divorce, both often retain ___ rights and responsibilities for their children.",
+  "answer": "parental",
+  "accept": [
+   "parental"
+  ],
+  "hint": "p_______",
+  "translation": "При разводе оба родителя обычно сохраняют родительские права и обязанности в отношении детей.",
+  "answers": [
+   "parental"
+  ],
+  "also": [],
+  "note": "parental rights — родительские права. Всегда во множественном числе, юридический термин.",
+  "phrase": "parental right",
+  "relation": "adj+noun",
+  "headword": "right",
+  "sense": "entitlement",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1463
+ },
+ {
+  "id": "c_98c4e9c5adbdcfdb",
+  "type": "cloze",
+  "text": "People wore hats much more often ___ my grandmother's day.",
+  "answer": "in",
+  "accept": [
+   "in sb's ~"
+  ],
+  "hint": "i_",
+  "translation": "Во времена моей бабушки шляпы носили гораздо чаще.",
+  "answers": [
+   "in"
+  ],
+  "also": [],
+  "note": "in sb's day — во времена кого-то. О прошлом поколении: in my grandmother's day.",
+  "phrase": "in sb's day",
+  "relation": "prep",
+  "headword": "day",
+  "sense": "hours of the day when you work",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1467
+ },
+ {
+  "id": "c_d3d62b9f5106bd82",
+  "type": "cloze",
+  "text": "The smartphone's ___ makes it popular with older customers.",
+  "answer": "ease of use",
+  "accept": [
+   "ease of use"
+  ],
+  "hint": "e___ o_ u__",
+  "translation": "Простота использования смартфона делает его популярным у покупателей постарше.",
+  "answers": [
+   "ease of use"
+  ],
+  "also": [],
+  "note": "ease of use — удобство использования. Термин из описаний техники и интерфейсов.",
+  "phrase": "ease of use",
+  "relation": "phrase",
+  "headword": "use",
+  "sense": "using/being used",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1469
+ },
+ {
+  "id": "c_7aeac759c9bfd4e5",
+  "type": "cloze",
+  "text": "During the war, many families had to ___ their homes and flee to safety.",
+  "answer": "abandon",
+  "accept": [
+   "abandon"
+  ],
+  "hint": "a______",
+  "translation": "Во время войны многим семьям пришлось бросить дома и бежать в безопасное место.",
+  "answers": [
+   "abandon"
+  ],
+  "also": [],
+  "note": "abandon your home — бросить дом. Сильное слово: уйти навсегда и вынужденно.",
+  "phrase": "abandon home",
+  "relation": "verb+obj",
+  "headword": "home",
+  "sense": "place where sb/sth lives",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1470
+ },
+ {
+  "id": "c_3670b290a45c2180",
+  "type": "cloze",
+  "text": "Sarah gave him a look ___ disappointment when he arrived two hours late.",
+  "answer": "of",
+  "accept": [
+   "~ of"
+  ],
+  "hint": "o_",
+  "translation": "Сара посмотрела на него с разочарованием, когда он опоздал на два часа.",
+  "answers": [
+   "of"
+  ],
+  "also": [],
+  "note": "the look of sth — вид, облик чего-то. Оборот с предлогом of о внешнем впечатлении.",
+  "phrase": "look of",
+  "relation": "prep",
+  "headword": "look",
+  "sense": "exploring/looking for sth",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1471
+ },
+ {
+  "id": "c_96bc5c8afa663830",
+  "type": "cloze",
+  "text": "My sister asked me for help ___ her job application last week.",
+  "answer": "with",
+  "accept": [
+   "~ with"
+  ],
+  "hint": "w___",
+  "translation": "Сестра на прошлой неделе попросила меня помочь с заявкой на работу.",
+  "answers": [
+   "with"
+  ],
+  "also": [],
+  "note": "help with sth — помощь с конкретным делом: help with homework, help with the move.",
+  "phrase": "help with",
+  "relation": "prep",
+  "headword": "help",
+  "sense": null,
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1475
+ },
+ {
+  "id": "c_72f0550906e90c4b",
+  "type": "cloze",
+  "text": "If you don't study hard, your exam could ___.",
+  "answer": "end in disaster",
+  "accept": [
+   "end in disaster"
+  ],
+  "hint": "e__ i_ d_______",
+  "translation": "Если не будешь усердно готовиться, экзамен может кончиться катастрофой.",
+  "answers": [
+   "end in disaster"
+  ],
+  "also": [],
+  "note": "end in disaster — кончиться катастрофой. Предлог in указывает, чем именно всё закончилось.",
+  "phrase": "end in disaster",
+  "relation": "phrase",
+  "headword": "end",
+  "sense": null,
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1482
+ },
+ {
+  "id": "c_fb1b8e852399dc20",
+  "type": "cloze",
+  "text": "That restaurant name ___, but I can't remember where I've heard it before.",
+  "answer": "rings a bell",
+  "accept": [
+   "ring a bell"
+  ],
+  "hint": "r____ a b___",
+  "translation": "Название этого ресторана мне что-то напоминает, но не могу вспомнить, где я его слышал.",
+  "answers": [
+   "ring a bell",
+   "rings a bell"
+  ],
+  "also": [],
+  "note": "the name rings a bell — имя кажется знакомым. Метафора звонка: что-то смутно припоминается.",
+  "phrase": "name ring a bell",
+  "relation": "noun+verb",
+  "headword": "name",
+  "sense": "word/words sb/sth is known by",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1485
+ },
+ {
+  "id": "c_028b063351364036",
+  "type": "cloze",
+  "text": "The ___ way between the two buildings kept us dry during the heavy rain.",
+  "answer": "covered",
+  "accept": [
+   "covered"
+  ],
+  "hint": "c______",
+  "translation": "Крытый переход между двумя зданиями укрыл нас от сильного дождя.",
+  "answers": [
+   "covered"
+  ],
+  "also": [],
+  "note": "a covered way — крытый переход. Архитектурный термин; причастие covered — «с крышей».",
+  "phrase": "covered way",
+  "relation": "adj+noun",
+  "headword": "way",
+  "sense": "method/style",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1497
+ },
+ {
+  "id": "c_39b5565b7dd1ca75",
+  "type": "cloze",
+  "text": "My essay is still a ___, so I'll finish it this weekend.",
+  "answer": "work in progress",
+  "accept": [
+   "work in progress"
+  ],
+  "hint": "w___ i_ p_______",
+  "translation": "Моё эссе пока в работе, доделаю его на выходных.",
+  "answers": [
+   "work in progress"
+  ],
+  "also": [],
+  "note": "a work in progress — незаконченная работа. И буквально, и о человеке, который ещё меняется.",
+  "phrase": "work in progress",
+  "relation": "phrase",
+  "headword": "work",
+  "sense": "effort/product of effort",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1498
+ },
+ {
+  "id": "c_a3d163a632f65b6a",
+  "type": "cloze",
+  "text": "The store is closed ___ day but opens for special events in the evening.",
+  "answer": "by",
+  "accept": [
+   "by ~"
+  ],
+  "hint": "b_",
+  "translation": "Днём магазин закрыт, но по вечерам открывается для особых мероприятий.",
+  "answers": [
+   "by"
+  ],
+  "also": [],
+  "note": "by day — днём. Книжное, обычно в паре: by day and by night.",
+  "phrase": "by day",
+  "relation": "prep",
+  "headword": "day",
+  "sense": "time between sunrise and sunset",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1503
+ },
+ {
+  "id": "c_5593880d5976a547",
+  "type": "cloze",
+  "text": "She looked ___ her keys everywhere before finally finding them in her coat pocket.",
+  "answer": "for",
+  "accept": [
+   "~ for"
+  ],
+  "hint": "f__",
+  "translation": "Она искала ключи повсюду и наконец нашла их в кармане пальто.",
+  "answers": [
+   "for"
+  ],
+  "also": [],
+  "note": "a look for sb — взгляд, предназначенный кому-то. Чаще встречается look at и look for в значении «искать».",
+  "phrase": "look for",
+  "relation": "prep",
+  "headword": "look",
+  "sense": "sb/sth's appearance",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1507
+ },
+ {
+  "id": "c_a3c8ce312b927f74",
+  "type": "cloze",
+  "text": "My older sister gave me a lot of help ___ preparing for my job interview.",
+  "answer": "in",
+  "accept": [
+   "~ in"
+  ],
+  "hint": "i_",
+  "translation": "Старшая сестра сильно помогла мне в подготовке к собеседованию.",
+  "answers": [
+   "in"
+  ],
+  "also": [],
+  "note": "help in doing sth — помощь в процессе. После in идёт форма на -ing.",
+  "phrase": "help in",
+  "relation": "prep",
+  "headword": "help",
+  "sense": null,
+  "cefr": "B2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1511
+ },
+ {
+  "id": "c_a8ae6f8fea587d29",
+  "type": "cloze",
+  "text": "I couldn't ___ things the way they were, so I decided to make a change.",
+  "answer": "accept",
+  "accept": [
+   "accept"
+  ],
+  "hint": "a_____",
+  "translation": "Я не мог принять положение вещей таким, каким оно было, и решил что-то изменить.",
+  "answers": [
+   "accept"
+  ],
+  "also": [],
+  "note": "accept things (as they are) — принять положение вещей. Разговорное things — обстоятельства.",
+  "phrase": "accept thing",
+  "relation": "verb+obj",
+  "headword": "thing",
+  "sense": "things: general situation, as it affects sb",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1512
+ },
+ {
+  "id": "c_09a8eaf2083d6863",
+  "type": "cloze",
+  "text": "The carpenter carefully fitted the wooden board ___ place to complete the shelf.",
+  "answer": "into",
+  "accept": [
+   "into ~"
+  ],
+  "hint": "i___",
+  "translation": "Плотник аккуратно вставил деревянную доску на место, чтобы закончить полку.",
+  "answers": [
+   "into"
+  ],
+  "also": [],
+  "note": "fit / fall into place — встать на место. И буквально о детали, и переносно о том, как всё сошлось.",
+  "phrase": "into place",
+  "relation": "prep",
+  "headword": "place",
+  "sense": "particular position/area",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1515
+ },
+ {
+  "id": "c_9cf1c5b0d0b80f49",
+  "type": "cloze",
+  "text": "The new manager made quite a show ___ arriving early every morning.",
+  "answer": "of",
+  "accept": [
+   "~ of"
+  ],
+  "hint": "o_",
+  "translation": "Новый руководитель устроил целое представление из того, что приходит рано каждое утро.",
+  "answers": [
+   "of"
+  ],
+  "also": [],
+  "note": "a show of sth — демонстрация чего-то: силы, уверенности, чувств. Часто с оттенком показного.",
+  "phrase": "show of",
+  "relation": "prep",
+  "headword": "show",
+  "sense": "outward expression of an emotion/attitude",
+  "cefr": "B2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1517
+ },
+ {
+  "id": "c_ef45b02d31531833",
+  "type": "cloze",
+  "text": "Sarah was excited to meet her ___ family for the first time next month.",
+  "answer": "adoptive",
+  "accept": [
+   "adoptive"
+  ],
+  "hint": "a_______",
+  "translation": "Сара с волнением ждала, что в следующем месяце впервые встретится со своей приёмной семьёй.",
+  "answers": [
+   "adoptive"
+  ],
+  "also": [],
+  "note": "adoptive family, adoptive parents — приёмная семья. Про берущих ребёнка; про самого ребёнка — adopted.",
+  "phrase": "adoptive family",
+  "relation": "adj+noun",
+  "headword": "family",
+  "sense": "group of people related to each other",
+  "cefr": "B1",
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1519
+ },
+ {
+  "id": "c_4af0446ccd3364dc",
+  "type": "cloze",
+  "text": "The rescue team ___ the trapped hiker free from the collapsed building.",
+  "answer": "pulled",
+  "accept": [
+   "cut sb/sth",
+   "let sb/sth",
+   "pull sb/sth",
+   "set sb/sth"
+  ],
+  "hint": "p_____",
+  "translation": "Спасатели высвободили застрявшего туриста из-под обрушившегося здания.",
+  "answers": [
+   "cut",
+   "let",
+   "pull",
+   "set",
+   "pulled"
+  ],
+  "also": [
+   "cut sb/sth",
+   "let sb/sth",
+   "set sb/sth"
+  ],
+  "note": "cut / pull / set sb free — освободить. Глагол задаёт способ: разрезать, вытащить, отпустить.",
+  "phrase": "cut sb free",
+  "relation": "verb+adj",
+  "headword": "free",
+  "sense": "not in prison; not restricted/trapped",
+  "cefr": null,
+  "band": "rare",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1525
+ },
+ {
+  "id": "c_be0070af4f8db308",
+  "type": "cloze",
+  "text": "The team's work ___ has improved significantly since they started the new training program.",
+  "answer": "rate",
+  "accept": [
+   "rate"
+  ],
+  "hint": "r___",
+  "translation": "Темп работы команды заметно вырос с начала новой программы тренировок.",
+  "answers": [
+   "rate"
+  ],
+  "also": [],
+  "note": "work rate — темп работы. Из спорта и менеджмента: сколько успевают за единицу времени.",
+  "phrase": "work rate",
+  "relation": "noun+noun",
+  "headword": "work",
+  "sense": "effort/product of effort",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1534
+ },
+ {
+  "id": "c_8a17955270494668",
+  "type": "cloze",
+  "text": "A car suddenly appeared ___ right as we crossed the street.",
+  "answer": "from the",
+  "accept": [
+   "from the ~"
+  ],
+  "hint": "f___ t__",
+  "translation": "Справа внезапно выехала машина, когда мы переходили улицу.",
+  "answers": [
+   "from the"
+  ],
+  "also": [],
+  "note": "from the right — справа. О появлении или движении со стороны.",
+  "phrase": "from the right",
+  "relation": "prep",
+  "headword": "right",
+  "sense": "right side/direction",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1535
+ },
+ {
+  "id": "c_45391be617caa488",
+  "type": "cloze",
+  "text": "My travels to different countries have completely changed my world ___.",
+  "answer": "view",
+  "accept": [
+   "view"
+  ],
+  "hint": "v___",
+  "translation": "Поездки по разным странам полностью изменили мой взгляд на мир.",
+  "answers": [
+   "view"
+  ],
+  "also": [],
+  "note": "world view — мировоззрение. Пишется и слитно: worldview; калька с немецкого Weltanschauung.",
+  "phrase": "world view",
+  "relation": "noun+noun",
+  "headword": "world",
+  "sense": "life/society",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1536
+ },
+ {
+  "id": "c_be56e965ecb9cb86",
+  "type": "cloze",
+  "text": "She couldn't sleep the night before the day ___ her wedding.",
+  "answer": "of",
+  "accept": [
+   "~ of"
+  ],
+  "hint": "o_",
+  "translation": "Она не могла уснуть в ночь перед днём свадьбы.",
+  "answers": [
+   "of"
+  ],
+  "also": [],
+  "note": "the day of sth — день такого-то события: the day of her wedding, the day of the match.",
+  "phrase": "day of",
+  "relation": "prep",
+  "headword": "day",
+  "sense": "period of 24 hours",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1539
+ },
+ {
+  "id": "c_975435e90ea4a82b",
+  "type": "cloze",
+  "text": "We spent the evening enjoying our new home ___ setup with the whole family.",
+  "answer": "entertainment",
+  "accept": [
+   "entertainment"
+  ],
+  "hint": "e____________",
+  "translation": "Мы провели вечер всей семьёй, осваивая новый домашний кинотеатр.",
+  "answers": [
+   "entertainment"
+  ],
+  "also": [],
+  "note": "home entertainment — домашние развлечения: техника, кино, музыка. Термин из рекламы.",
+  "phrase": "home entertainment",
+  "relation": "noun+noun",
+  "headword": "home",
+  "sense": "place where sb/sth lives",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1542
+ },
+ {
+  "id": "c_b47e974e50f6ad12",
+  "type": "cloze",
+  "text": "She took a quick look ___ her mail and found the letter she was waiting for.",
+  "answer": "through",
+  "accept": [
+   "~ through"
+  ],
+  "hint": "t______",
+  "translation": "Она быстро просмотрела почту и нашла письмо, которого ждала.",
+  "answers": [
+   "through"
+  ],
+  "also": [],
+  "note": "look through sth — просмотреть, пролистать. Отличается от look at — «разглядывать».",
+  "phrase": "look through",
+  "relation": "prep",
+  "headword": "look",
+  "sense": "act of looking at/considering sth",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1543
+ },
+ {
+  "id": "c_c90ef65cf2c86a8f",
+  "type": "cloze",
+  "text": "Recent studies ___ the need for regular exercise to maintain good health.",
+  "answer": "underline",
+  "accept": [
+   "emphasize",
+   "heighten",
+   "highlight",
+   "reaffirm",
+   "stress",
+   "underline"
+  ],
+  "hint": "u________",
+  "translation": "Последние исследования подчёркивают необходимость регулярных упражнений для поддержания здоровья.",
+  "answers": [
+   "emphasize",
+   "heighten",
+   "highlight",
+   "reaffirm",
+   "stress",
+   "underline"
+  ],
+  "also": [
+   "emphasize",
+   "heighten",
+   "highlight",
+   "reaffirm",
+   "stress"
+  ],
+  "note": "emphasize / highlight / underline the need — подчеркнуть необходимость. Все три метафоричны: выделить как в тексте.",
+  "phrase": "emphasize need",
+  "relation": "verb+obj",
+  "headword": "need",
+  "sense": "situation where sth is needed/necessary",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1544
+ },
+ {
+  "id": "c_bb1b0241284440b5",
+  "type": "cloze",
+  "text": "Exercise helps ___ improving your overall health and energy levels.",
+  "answer": "in",
+  "accept": [
+   "in"
+  ],
+  "hint": "i_",
+  "translation": "Физические упражнения помогают улучшить общее здоровье и уровень энергии.",
+  "answers": [
+   "in"
+  ],
+  "also": [],
+  "note": "help in sth — помощь в области. Предлог in перед сферой, with — перед конкретным делом.",
+  "phrase": "in help",
+  "relation": "prep",
+  "headword": "help",
+  "sense": "make sth easier/better",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1547
+ },
+ {
+  "id": "c_5e2e850250bcd0d8",
+  "type": "cloze",
+  "text": "I was worried about the job interview, but things ___ better than expected.",
+  "answer": "turned out",
+  "accept": [
+   "turn out"
+  ],
+  "hint": "t_____ o__",
+  "translation": "Я переживал из-за собеседования, но всё обернулось лучше, чем я ожидал.",
+  "answers": [
+   "turn out",
+   "turned out"
+  ],
+  "also": [],
+  "note": "things turn out — всё оборачивается так или иначе. Часто с наречием: turned out better than expected.",
+  "phrase": "thing turn out",
+  "relation": "noun+verb",
+  "headword": "thing",
+  "sense": "things: general situation, as it affects sb",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1548
+ },
+ {
+  "id": "c_1a3dec9a3b7ca889",
+  "type": "cloze",
+  "text": "My friends and I decided to play a game ___ the computer.",
+  "answer": "against",
+  "accept": [
+   "~ against/with",
+   "~ of"
+  ],
+  "hint": "a______",
+  "translation": "Мы с друзьями решили сыграть партию против компьютера.",
+  "answers": [
+   "against",
+   "with",
+   "of"
+  ],
+  "also": [
+   "~ of"
+  ],
+  "note": "a game against sb — матч против соперника. Предлог against про противника, of — про вид игры.",
+  "phrase": "game against",
+  "relation": "prep",
+  "headword": "game",
+  "sense": "activity/sport",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1549
+ },
+ {
+  "id": "c_15fa033fadfb8f16",
+  "type": "cloze",
+  "text": "The picture frame stayed ___ place on the shelf even during the earthquake.",
+  "answer": "in",
+  "accept": [
+   "in ~"
+  ],
+  "hint": "i_",
+  "translation": "Рамка с фотографией осталась на месте на полке даже во время землетрясения.",
+  "answers": [
+   "in"
+  ],
+  "also": [],
+  "note": "in place — на месте, там, где положено. Противоположное — out of place.",
+  "phrase": "in place",
+  "relation": "prep",
+  "headword": "place",
+  "sense": "particular position/area",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1551
+ },
+ {
+  "id": "c_a54227a776d10991",
+  "type": "cloze",
+  "text": "He wore an expensive suit to the party, but it was mostly ___ show.",
+  "answer": "for",
+  "accept": [
+   "for ~"
+  ],
+  "hint": "f__",
+  "translation": "Он надел на вечеринку дорогой костюм, но в основном напоказ.",
+  "answers": [
+   "for"
+  ],
+  "also": [],
+  "note": "for show — напоказ, ради вида. Подразумевает, что настоящей цели нет.",
+  "phrase": "for show",
+  "relation": "prep",
+  "headword": "show",
+  "sense": "outward expression of an emotion/attitude",
+  "cefr": "B2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1553
+ },
+ {
+  "id": "c_53b07a3019f106dc",
+  "type": "cloze",
+  "text": "The new shopping mall is ___ from our house, so we usually take the bus there.",
+  "answer": "quite a way",
+  "accept": [
+   "quite a/some way",
+   "a way ahead/away/off"
+  ],
+  "hint": "q____ a w__",
+  "translation": "Новый торговый центр довольно далеко от нашего дома, поэтому мы обычно ездим туда на автобусе.",
+  "answers": [
+   "quite a way",
+   "quite some way",
+   "a way ahead",
+   "a way away",
+   "a way off"
+  ],
+  "also": [
+   "a way ahead/away/off"
+  ],
+  "note": "quite a way — довольно далеко. Разговорное; way здесь — расстояние.",
+  "phrase": "quite a way",
+  "relation": "phrase",
+  "headword": "way",
+  "sense": "distance in space/time",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1566
+ },
+ {
+  "id": "c_dbf6449acd9a433e",
+  "type": "cloze",
+  "text": "The construction work ___ for several months before the new building was finally ready.",
+  "answer": "went on",
+  "accept": [
+   "continue",
+   "go on"
+  ],
+  "hint": "w___ o_",
+  "translation": "Строительные работы шли несколько месяцев, прежде чем новое здание наконец было готово.",
+  "answers": [
+   "continue",
+   "go on",
+   "went on"
+  ],
+  "also": [
+   "continue"
+  ],
+  "note": "work continues / goes on — работа продолжается. Из новостных сообщений о стройке или расследовании.",
+  "phrase": "work continue",
+  "relation": "noun+verb",
+  "headword": "work",
+  "sense": "book/music/art",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1567
+ },
+ {
+  "id": "c_8eeb26e32eeae3ed",
+  "type": "cloze",
+  "text": "She inherited the family business ___ right of being the eldest daughter.",
+  "answer": "by",
+  "accept": [
+   "by ~ of"
+  ],
+  "hint": "b_",
+  "translation": "Она унаследовала семейный бизнес по праву старшей дочери.",
+  "answers": [
+   "by"
+  ],
+  "also": [],
+  "note": "by right of sth — по праву чего-то: рождения, старшинства, завоевания. Книжный оборот.",
+  "phrase": "by right of",
+  "relation": "prep",
+  "headword": "right",
+  "sense": "entitlement",
+  "cefr": "C1",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1568
+ },
+ {
+  "id": "c_43378d758b477805",
+  "type": "cloze",
+  "text": "If we don't act now, pollution could ___ the world for future generations.",
+  "answer": "destroy",
+  "accept": [
+   "destroy"
+  ],
+  "hint": "d______",
+  "translation": "Если не действовать сейчас, загрязнение может уничтожить мир для будущих поколений.",
+  "answers": [
+   "destroy"
+  ],
+  "also": [],
+  "note": "destroy the world — уничтожить мир. Артикль the обязателен.",
+  "phrase": "destroy world",
+  "relation": "verb+obj",
+  "headword": "world",
+  "sense": "the earth/its people",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1569
+ },
+ {
+  "id": "c_c069814f47e1025f",
+  "type": "cloze",
+  "text": "She felt excited ___ day of her job interview.",
+  "answer": "on the",
+  "accept": [
+   "on the ~ (of)"
+  ],
+  "hint": "o_ t__",
+  "translation": "Она была взволнована в день собеседования.",
+  "answers": [
+   "on the"
+  ],
+  "also": [],
+  "note": "on the day (of sth) — в день чего-то. Предлог on с конкретными днями.",
+  "phrase": "on the day of",
+  "relation": "prep",
+  "headword": "day",
+  "sense": "period of 24 hours",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1572
+ },
+ {
+  "id": "c_f27f9605e13a8c0f",
+  "type": "cloze",
+  "text": "She left her job ___ love for her sick mother.",
+  "answer": "out of",
+  "accept": [
+   "for/out of ~"
+  ],
+  "hint": "o__ o_",
+  "translation": "Она ушла с работы из любви к больной матери.",
+  "answers": [
+   "for of",
+   "out of"
+  ],
+  "also": [],
+  "note": "out of love (for sb) — из любви к кому-то. Предлог out of указывает мотив поступка.",
+  "phrase": "for of love",
+  "relation": "prep",
+  "headword": "love",
+  "sense": null,
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1573
+ },
+ {
+  "id": "c_bfdee6057deed6a5",
+  "type": "cloze",
+  "text": "The teacher caught me looking ___ my friend's test during the exam.",
+  "answer": "at",
+  "accept": [
+   "~ at"
+  ],
+  "hint": "a_",
+  "translation": "Учитель поймал меня на том, что я подглядываю в работу друга на экзамене.",
+  "answers": [
+   "at"
+  ],
+  "also": [],
+  "note": "a look at sth — взгляд на что-то. Оборот have / take a look at.",
+  "phrase": "look at",
+  "relation": "prep",
+  "headword": "look",
+  "sense": "act of looking at/considering sth",
+  "cefr": "A1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1576
+ },
+ {
+  "id": "c_42780707f02681d0",
+  "type": "cloze",
+  "text": "She always packs the ___ things in her bag before leaving for work.",
+  "answer": "essential",
+  "accept": [
+   "basic",
+   "essential"
+  ],
+  "hint": "e________",
+  "translation": "Она всегда кладёт в сумку самое необходимое перед выходом на работу.",
+  "answers": [
+   "basic",
+   "essential"
+  ],
+  "also": [
+   "basic"
+  ],
+  "note": "the basic / essential things — самое необходимое. Во множественном; о базовых нуждах или вещах.",
+  "phrase": "basic thing",
+  "relation": "adj+noun",
+  "headword": "thing",
+  "sense": "used instead of the name of an object",
+  "cefr": "A2",
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1581
+ },
+ {
+  "id": "c_59d47e7b877b2d73",
+  "type": "cloze",
+  "text": "The responsibility for organizing the event was placed ___ Sarah's shoulders.",
+  "answer": "on",
+  "accept": [
+   "on"
+  ],
+  "hint": "o_",
+  "translation": "Ответственность за организацию мероприятия легла на плечи Сары.",
+  "answers": [
+   "on"
+  ],
+  "also": [],
+  "note": "place on sth — делать упор на что-то: place emphasis on, place importance on.",
+  "phrase": "on place",
+  "relation": "prep",
+  "headword": "place",
+  "sense": "emphasis, value, blame, etc.",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 1584
+ },
+ {
+  "id": "c_14d34558ce84e6fc",
+  "type": "cloze",
+  "text": "The charity workers traveled ___ delivering food packages to families in need.",
+  "answer": "from house to house",
+  "accept": [
+   "from ~ to ~"
+  ],
+  "hint": "f___ h____ t_ h____",
+  "translation": "Волонтёры ходили из дома в дом, разнося продуктовые наборы нуждающимся семьям.",
+  "answers": [
+   "from house to house"
+  ],
+  "also": [],
+  "note": "from house to house — из дома в дом. Оборот from X to X без артиклей передаёт повторяющийся обход.",
+  "phrase": "from house to house",
+  "relation": "prep",
+  "headword": "house",
+  "sense": "building that is made for one family to live in",
+  "cefr": "A1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1585
+ },
+ {
+  "id": "c_5b5424ffeaf41d73",
+  "type": "cloze",
+  "text": "The military conducted ___ near the border to deter any potential attacks.",
+  "answer": "a show of force",
+  "accept": [
+   "a show of force/strength"
+  ],
+  "hint": "a s___ o_ f____",
+  "translation": "Военные устроили демонстрацию силы у границы, чтобы отбить охоту нападать.",
+  "answers": [
+   "a show of force",
+   "a show of strength"
+  ],
+  "also": [],
+  "note": "a show of force / strength — демонстрация силы. Из военной и политической лексики.",
+  "phrase": "a show of force",
+  "relation": "phrase",
+  "headword": "show",
+  "sense": "outward expression of an emotion/attitude",
+  "cefr": "B2",
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1586
+ },
+ {
+  "id": "c_d616d966d0689b86",
+  "type": "cloze",
+  "text": "After months of hard work, the team celebrated with a ___ end to their successful project.",
+  "answer": "fitting",
+  "accept": [
+   "fitting"
+  ],
+  "hint": "f______",
+  "translation": "После месяцев тяжёлой работы команда отпраздновала достойное завершение успешного проекта.",
+  "answers": [
+   "fitting"
+  ],
+  "also": [],
+  "note": "a fitting end — достойное, подобающее завершение. Прилагательное fitting — «уместный».",
+  "phrase": "fitting end",
+  "relation": "adj+noun",
+  "headword": "end",
+  "sense": "last part of sth",
+  "cefr": "B1",
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1587
+ },
+ {
+  "id": "c_430817664732ddaf",
+  "type": "cloze",
+  "text": "The documentary about climate change was really ___ and made me reconsider my daily habits.",
+  "answer": "thought-provoking",
+  "accept": [
+   "thought-provoking"
+  ],
+  "hint": "t_______________",
+  "translation": "Документальный фильм о климате заставил задуматься и пересмотреть мои повседневные привычки.",
+  "answers": [
+   "thought-provoking"
+  ],
+  "also": [],
+  "note": "thought-provoking — заставляющий задуматься. Через дефис; о книге, фильме, выступлении.",
+  "phrase": "thought-provoking",
+  "relation": "phrase",
+  "headword": "thought",
+  "sense": "process/act of thinking",
+  "cefr": "B1",
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1592
+ },
+ {
+  "id": "c_17f09be6ea86f3a6",
+  "type": "cloze",
+  "text": "The company improved its work ___ after receiving feedback from employees.",
+  "answer": "practices",
+  "accept": [
+   "practice"
+  ],
+  "hint": "p________",
+  "translation": "Компания улучшила организацию работы, получив отзывы сотрудников.",
+  "answers": [
+   "practice",
+   "practices"
+  ],
+  "also": [],
+  "note": "work practices — принятые способы работы. Во множественном числе, из языка менеджмента.",
+  "phrase": "work practice",
+  "relation": "noun+noun",
+  "headword": "work",
+  "sense": "job",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1600
+ },
+ {
+  "id": "c_94915733bbb0f5b5",
+  "type": "cloze",
+  "text": "The new policy has moved the government further ___ right than most voters expected.",
+  "answer": "on the",
+  "accept": [
+   "on the ~"
+  ],
+  "hint": "o_ t__",
+  "translation": "Новая политика сдвинула правительство дальше вправо, чем ожидало большинство избирателей.",
+  "answers": [
+   "on the"
+  ],
+  "also": [],
+  "note": "on the right — справа. Указывает положение; to the right — направление.",
+  "phrase": "on the right",
+  "relation": "prep",
+  "headword": "right",
+  "sense": "the right: in politics",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1601
+ },
+ {
+  "id": "c_57b931d0749e209f",
+  "type": "cloze",
+  "text": "The new vaccine has attracted world ___ from health organizations everywhere.",
+  "answer": "attention",
+  "accept": [
+   "attention",
+   "opinion"
+  ],
+  "hint": "a________",
+  "translation": "Новая вакцина привлекла внимание всего мира со стороны организаций здравоохранения.",
+  "answers": [
+   "attention",
+   "opinion"
+  ],
+  "also": [
+   "opinion"
+  ],
+  "note": "world attention, world opinion — внимание всего мира, мировое мнение. Из публицистики.",
+  "phrase": "world attention",
+  "relation": "noun+noun",
+  "headword": "world",
+  "sense": "the earth/its people",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1602
+ },
+ {
+  "id": "c_ca7dd170c284feeb",
+  "type": "cloze",
+  "text": "During the ___ years, she gradually built up her confidence and eventually started her own business.",
+  "answer": "intervening",
+  "accept": [
+   "intervening"
+  ],
+  "hint": "i__________",
+  "translation": "За прошедшие годы она постепенно обрела уверенность и в итоге открыла своё дело.",
+  "answers": [
+   "intervening"
+  ],
+  "also": [],
+  "note": "the intervening years — годы, прошедшие между двумя событиями. Книжное, всегда во множественном.",
+  "phrase": "intervening year",
+  "relation": "adj+noun",
+  "headword": "year",
+  "sense": null,
+  "cefr": "B2",
+  "band": "extended",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1604
+ },
+ {
+  "id": "c_c5244719f24863a4",
+  "type": "cloze",
+  "text": "Her cooking skills improved ___ day during her first month at culinary school.",
+  "answer": "by the",
+  "accept": [
+   "by the ~"
+  ],
+  "hint": "b_ t__",
+  "translation": "Её кулинарные навыки росли с каждым днём в первый месяц учёбы в кулинарной школе.",
+  "answers": [
+   "by the"
+  ],
+  "also": [],
+  "note": "by the day — день ото дня. О постепенном изменении: getting better by the day.",
+  "phrase": "by the day",
+  "relation": "prep",
+  "headword": "day",
+  "sense": "period of 24 hours",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1605
+ },
+ {
+  "id": "c_f2a165af96998776",
+  "type": "cloze",
+  "text": "She looked ___ the classroom door to see if the bus had arrived yet.",
+  "answer": "out of",
+  "accept": [
+   "~ out of"
+  ],
+  "hint": "o__ o_",
+  "translation": "Она выглянула за дверь класса посмотреть, не приехал ли автобус.",
+  "answers": [
+   "out of"
+  ],
+  "also": [],
+  "note": "look out of sth — выглянуть откуда-то: из окна, из двери. В американском часто look out.",
+  "phrase": "look out of",
+  "relation": "prep",
+  "headword": "look",
+  "sense": "act of looking at/considering sth",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1609
+ },
+ {
+  "id": "c_7a9ac7d3e42169a8",
+  "type": "cloze",
+  "text": "I hope things ___ between them after their argument last week.",
+  "answer": "work out",
+  "accept": [
+   "go (according) to plan",
+   "go well",
+   "work (out)"
+  ],
+  "hint": "w___ o__",
+  "translation": "Надеюсь, у них всё наладится после ссоры на прошлой неделе.",
+  "answers": [
+   "go according to plan",
+   "go to plan",
+   "go well",
+   "work out",
+   "work"
+  ],
+  "also": [
+   "go (according) to plan",
+   "go well"
+  ],
+  "note": "things go to plan / go well — всё идёт по плану. Часто в отрицании: things didn't go to plan.",
+  "phrase": "thing go according to plan",
+  "relation": "noun+verb",
+  "headword": "thing",
+  "sense": "things: general situation, as it affects sb",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1614
+ },
+ {
+  "id": "c_b9e4d421810b6c23",
+  "type": "cloze",
+  "text": "His loud laugh seemed completely ___ place at the quiet funeral ceremony.",
+  "answer": "out of",
+  "accept": [
+   "out of ~"
+  ],
+  "hint": "o__ o_",
+  "translation": "Его громкий смех совершенно не к месту прозвучал на тихой церемонии прощания.",
+  "answers": [
+   "out of"
+  ],
+  "also": [],
+  "note": "out of place — неуместно, не к месту. И о вещи не на своём месте, и о поведении.",
+  "phrase": "out of place",
+  "relation": "prep",
+  "headword": "place",
+  "sense": "particular position/area",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1617
+ },
+ {
+  "id": "c_a002ce88df630e8d",
+  "type": "cloze",
+  "text": "A sudden thought ___ her when she saw the old photograph on the shelf.",
+  "answer": "struck",
+  "accept": [
+   "come/pop into your mind",
+   "come to sb",
+   "cross your mind",
+   "go/flash/pass/race through your mind",
+   "hit sb",
+   "occur to sb",
+   "strike sb"
+  ],
+  "hint": "s_____",
+  "translation": "Её осенила внезапная мысль, когда она увидела старую фотографию на полке.",
+  "answers": [
+   "come into your mind",
+   "pop into your mind",
+   "come to",
+   "cross your mind",
+   "go through your mind",
+   "flash through your mind",
+   "pass through your mind",
+   "race through your mind",
+   "hit",
+   "occur to",
+   "strike",
+   "struck"
+  ],
+  "also": [
+   "come/pop into your mind",
+   "come to sb",
+   "cross your mind",
+   "go/flash/pass/race through your mind",
+   "hit sb",
+   "occur to sb"
+  ],
+  "note": "a thought occurs to sb / crosses sb's mind — мысль приходит в голову. Подлежащее — мысль, а не человек.",
+  "phrase": "thought come into your mind",
+  "relation": "noun+verb",
+  "headword": "thought",
+  "sense": "sth that you think",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1625
+ },
+ {
+  "id": "c_97e07e0386fcec19",
+  "type": "cloze",
+  "text": "Everyone in a democracy should have the right ___ free speech without fear.",
+  "answer": "of",
+  "accept": [
+   "~ of"
+  ],
+  "hint": "o_",
+  "translation": "В демократическом обществе у каждого должно быть право на свободу слова без страха.",
+  "answers": [
+   "of"
+  ],
+  "also": [],
+  "note": "the right of sth — право на что-то: the right of free speech, the right of way.",
+  "phrase": "right of",
+  "relation": "prep",
+  "headword": "right",
+  "sense": "entitlement",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1634
+ },
+ {
+  "id": "c_991189333cebb159",
+  "type": "cloze",
+  "text": "The famous singer completed her world ___ after visiting 45 different countries last year.",
+  "answer": "tour",
+  "accept": [
+   "tour"
+  ],
+  "hint": "t___",
+  "translation": "Известная певица завершила мировое турне, объехав в прошлом году сорок пять стран.",
+  "answers": [
+   "tour"
+  ],
+  "also": [],
+  "note": "a world tour — мировое турне. Существительное world в роли определения.",
+  "phrase": "world tour",
+  "relation": "noun+noun",
+  "headword": "world",
+  "sense": "the earth/its people",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1635
+ },
+ {
+  "id": "c_b8ed64da64c8092c",
+  "type": "cloze",
+  "text": "My grandmother visits her grandchildren ___ year, usually staying for a few weeks at a time.",
+  "answer": "throughout the",
+  "accept": [
+   "throughout the ~"
+  ],
+  "hint": "t_________ t__",
+  "translation": "Бабушка навещает внуков в течение всего года, обычно оставаясь на пару недель.",
+  "answers": [
+   "throughout the"
+  ],
+  "also": [],
+  "note": "throughout the year — на протяжении всего года. Сильнее, чем during: подчёркивает «весь год без перерыва».",
+  "phrase": "throughout the year",
+  "relation": "prep",
+  "headword": "year",
+  "sense": null,
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1637
+ },
+ {
+  "id": "c_82c5790e070d8d2e",
+  "type": "cloze",
+  "text": "The documentary takes a ___ look at the history of fashion mistakes.",
+  "answer": "light-hearted",
+  "accept": [
+   "humorous",
+   "light-hearted"
+  ],
+  "hint": "l___________",
+  "translation": "Документальный фильм с лёгкой иронией смотрит на историю модных промахов.",
+  "answers": [
+   "humorous",
+   "light-hearted"
+  ],
+  "also": [
+   "humorous"
+  ],
+  "note": "a humorous / light-hearted look at sth — несерьёзный, с юмором взгляд на тему. О книге или фильме.",
+  "phrase": "humorous look",
+  "relation": "adj+noun",
+  "headword": "look",
+  "sense": "act of looking at/considering sth",
+  "cefr": "B1",
+  "band": "extended",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1642
+ },
+ {
+  "id": "c_5fb7dcc32c2196e4",
+  "type": "cloze",
+  "text": "Things ___ differently now that the new manager has arrived at the company.",
+  "answer": "stand",
+  "accept": [
+   "stand"
+  ],
+  "hint": "s____",
+  "translation": "Теперь, когда в компанию пришёл новый руководитель, дела обстоят иначе.",
+  "answers": [
+   "stand"
+  ],
+  "also": [],
+  "note": "things stand — дела обстоят. Устойчиво: as things stand — при нынешнем положении дел.",
+  "phrase": "thing stand",
+  "relation": "noun+verb",
+  "headword": "thing",
+  "sense": "things: general situation, as it affects sb",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1647
+ },
+ {
+  "id": "c_d21409c9c7f62e8e",
+  "type": "cloze",
+  "text": "He was excited to secure a place ___ the university basketball team.",
+  "answer": "on",
+  "accept": [
+   "~ on"
+  ],
+  "hint": "o_",
+  "translation": "Он был рад получить место в университетской баскетбольной команде.",
+  "answers": [
+   "on"
+  ],
+  "also": [],
+  "note": "a place on sth — место в составе: on the team, on the committee. Предлог on, а не in.",
+  "phrase": "place on",
+  "relation": "prep",
+  "headword": "place",
+  "sense": "opportunity to study at a college, play for a team, etc.",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1649
+ },
+ {
+  "id": "c_a032c7628fb4cc0f",
+  "type": "cloze",
+  "text": "The traffic moved ___ right lane as cars exited the highway.",
+  "answer": "to the",
+  "accept": [
+   "to the ~"
+  ],
+  "hint": "t_ t__",
+  "translation": "Поток машин смещался в правый ряд, съезжая с шоссе.",
+  "answers": [
+   "to the"
+  ],
+  "also": [],
+  "note": "to the right — направо. Направление движения; on the right — положение.",
+  "phrase": "to the right",
+  "relation": "prep",
+  "headword": "right",
+  "sense": "right side/direction",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1665
+ },
+ {
+  "id": "c_2375e6dc6fd66d45",
+  "type": "cloze",
+  "text": "She always tries to do the ___ thing, even when it's difficult.",
+  "answer": "right",
+  "accept": [
+   "proper",
+   "right"
+  ],
+  "hint": "r____",
+  "translation": "Она всегда старается поступать правильно, даже когда это трудно.",
+  "answers": [
+   "proper",
+   "right"
+  ],
+  "also": [
+   "proper"
+  ],
+  "note": "the proper / right thing (to do) — правильный поступок. proper чуть формальнее.",
+  "phrase": "proper thing",
+  "relation": "adj+noun",
+  "headword": "thing",
+  "sense": "what is needed/socially acceptable",
+  "cefr": "B1",
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1678
+ },
+ {
+  "id": "c_0c343cdff94cb1a8",
+  "type": "cloze",
+  "text": "The baby cried several times ___ night, so we barely slept.",
+  "answer": "during the",
+  "accept": [
+   "during/in the ~"
+  ],
+  "hint": "d_____ t__",
+  "translation": "Ребёнок несколько раз плакал ночью, так что мы почти не спали.",
+  "answers": [
+   "during the",
+   "in the"
+  ],
+  "also": [],
+  "note": "during the night, in the night — ночью. in the night чаще о пробуждении среди ночи.",
+  "phrase": "during the night",
+  "relation": "prep",
+  "headword": "night",
+  "sense": "when it is dark and most people sleep",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1689
+ },
+ {
+  "id": "c_86decc9f0ac96afc",
+  "type": "cloze",
+  "text": "Despite her quiet appearance, she had a ___ will that no one could easily break.",
+  "answer": "strong",
+  "accept": [
+   "indomitable",
+   "iron",
+   "strong"
+  ],
+  "hint": "s_____",
+  "translation": "Несмотря на тихую внешность, у неё была сильная воля, которую было не сломить.",
+  "answers": [
+   "indomitable",
+   "iron",
+   "strong"
+  ],
+  "also": [
+   "indomitable",
+   "iron"
+  ],
+  "note": "an iron / indomitable will — железная, несгибаемая воля. Метафора твёрдости.",
+  "phrase": "indomitable will",
+  "relation": "adj+noun",
+  "headword": "will",
+  "sense": "power to choose; desire",
+  "cefr": "B1",
+  "band": "rare",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1691
+ },
+ {
+  "id": "c_638c696eebd47f02",
+  "type": "cloze",
+  "text": "The volunteers do ___ work helping elderly people in the community.",
+  "answer": "valuable",
+  "accept": [
+   "valuable"
+  ],
+  "hint": "v_______",
+  "translation": "Волонтёры делают ценную работу, помогая пожилым людям в нашем районе.",
+  "answers": [
+   "valuable"
+  ],
+  "also": [],
+  "note": "valuable work — ценная работа. Неисчисляемое; о вкладе, а не о конкретном труде.",
+  "phrase": "valuable work",
+  "relation": "adj+noun",
+  "headword": "work",
+  "sense": "effort/product of effort",
+  "cefr": "A2",
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1694
+ },
+ {
+  "id": "c_b0234aa5fcd07a0e",
+  "type": "cloze",
+  "text": "She has a free bus pass ___ right because she's over sixty-five years old.",
+  "answer": "as of",
+  "accept": [
+   "as of ~",
+   "by ~"
+  ],
+  "hint": "a_ o_",
+  "translation": "У неё есть бесплатный проездной по праву, потому что ей больше шестидесяти пяти.",
+  "answers": [
+   "as of",
+   "by"
+  ],
+  "also": [
+   "by ~"
+  ],
+  "note": "as of right, by right — по праву, автоматически. Юридический оборот: без просьбы и разрешения.",
+  "phrase": "as of right",
+  "relation": "prep",
+  "headword": "right",
+  "sense": "entitlement",
+  "cefr": "C1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1695
+ },
+ {
+  "id": "c_00c0ab30cd867c14",
+  "type": "cloze",
+  "text": "Many ___ world countries have adopted similar educational standards.",
+  "answer": "English-speaking",
+  "accept": [
+   "Arab",
+   "English-speaking",
+   "Western"
+  ],
+  "hint": "E______________",
+  "translation": "Многие страны англоязычного мира приняли схожие образовательные стандарты.",
+  "answers": [
+   "Arab",
+   "English-speaking",
+   "Western"
+  ],
+  "also": [
+   "Arab",
+   "Western"
+  ],
+  "note": "the Arab / Western / English-speaking world — арабский, западный, англоязычный мир. С артиклем the.",
+  "phrase": "Arab world",
+  "relation": "adj+noun",
+  "headword": "world",
+  "sense": "part of the earth",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 1696
+ },
+ {
+  "id": "c_40d82541246fc9be",
+  "type": "cloze",
+  "text": "In the city, ___ is so fast that people rarely have time to relax.",
+  "answer": "the pace of life",
+  "accept": [
+   "a/the pace of life"
+  ],
+  "hint": "t__ p___ o_ l___",
+  "translation": "В городе темп жизни настолько быстрый, что людям редко удаётся отдохнуть.",
+  "answers": [
+   "a pace of life",
+   "the pace of life"
+  ],
+  "also": [],
+  "note": "the pace of life — темп жизни. Устойчивое сочетание, чаще всего с fast или slow.",
+  "phrase": "a pace of life",
+  "relation": "phrase",
+  "headword": "life",
+  "sense": "way of living",
+  "cefr": "A2",
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1697
+ },
+ {
+  "id": "c_866a8bfafdf95032",
+  "type": "cloze",
+  "text": "After teaching for ten years, she took a ___ year to travel and recharge.",
+  "answer": "sabbatical",
+  "accept": [
+   "sabbatical"
+  ],
+  "hint": "s_________",
+  "translation": "Проработав учителем десять лет, она взяла годовой отпуск, чтобы попутешествовать и восстановиться.",
+  "answers": [
+   "sabbatical"
+  ],
+  "also": [],
+  "note": "a sabbatical year — творческий отпуск на год. Термин из университетской жизни.",
+  "phrase": "sabbatical year",
+  "relation": "adj+noun",
+  "headword": "year",
+  "sense": null,
+  "cefr": null,
+  "band": "rare",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1698
+ },
+ {
+  "id": "c_65b7f116549f0e17",
+  "type": "cloze",
+  "text": "She fell ___ with him the moment they met at the coffee shop.",
+  "answer": "head over heels in love",
+  "accept": [
+   "desperately/hopelessly in love",
+   "head over heels in love",
+   "love at first sight"
+  ],
+  "hint": "h___ o___ h____ i_ l___",
+  "translation": "Она влюбилась в него по уши в тот самый миг, когда они познакомились в кофейне.",
+  "answers": [
+   "desperately in love",
+   "hopelessly in love",
+   "head over heels in love",
+   "love at first sight"
+  ],
+  "also": [
+   "desperately/hopelessly in love",
+   "love at first sight"
+  ],
+  "note": "head over heels in love — влюблён по уши. Образ кувырка; порядок слов закреплён.",
+  "phrase": "desperately in love",
+  "relation": "phrase",
+  "headword": "love",
+  "sense": null,
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1700
+ },
+ {
+  "id": "c_94bf36643a7b5c4f",
+  "type": "cloze",
+  "text": "My father helped me ___ the busy street when I was a small child.",
+  "answer": "across",
+  "accept": [
+   "across"
+  ],
+  "hint": "a_____",
+  "translation": "Отец переводил меня через оживлённую улицу, когда я был маленьким.",
+  "answers": [
+   "across"
+  ],
+  "also": [],
+  "note": "help sb across sth — помочь перейти. Предлог указывает направление: across the street.",
+  "phrase": "across help",
+  "relation": "prep",
+  "headword": "help",
+  "sense": "do sth for sb",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1707
+ },
+ {
+  "id": "c_9eb7ed93004fedfb",
+  "type": "cloze",
+  "text": "Every morning, Sarah does her ___ thing of making coffee before checking her emails.",
+  "answer": "usual",
+  "accept": [
+   "usual"
+  ],
+  "hint": "u____",
+  "translation": "Каждое утро Сара делает своё обычное: варит кофе и только потом проверяет почту.",
+  "answers": [
+   "usual"
+  ],
+  "also": [],
+  "note": "the usual thing — обычное дело, привычный порядок. Часто о рутине: do the usual thing.",
+  "phrase": "usual thing",
+  "relation": "adj+noun",
+  "headword": "thing",
+  "sense": "fact/event/situation/action",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 1708
+ },
+ {
+  "id": "c_750ebc9f5764be79",
+  "type": "cloze",
+  "text": "The new house ___ planted trees in the garden on her first day.",
+  "answer": "owner",
+  "accept": [
+   "buyer",
+   "owner"
+  ],
+  "hint": "o____",
+  "translation": "Новая владелица дома в первый же день посадила в саду деревья.",
+  "answers": [
+   "buyer",
+   "owner"
+  ],
+  "also": [
+   "buyer"
+  ],
+  "note": "a house buyer / owner — покупатель и владелец дома. Существительное house в роли определения.",
+  "phrase": "house buyer",
+  "relation": "noun+noun",
+  "headword": "house",
+  "sense": "building that is made for one family to live in",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1710
+ },
+ {
+  "id": "c_e233702946ef8541",
+  "type": "cloze",
+  "text": "The ___ family received support from their community after the funeral.",
+  "answer": "bereaved",
+  "accept": [
+   "bereaved"
+  ],
+  "hint": "b_______",
+  "translation": "Семья покойного получила поддержку от соседей после похорон.",
+  "answers": [
+   "bereaved"
+  ],
+  "also": [],
+  "note": "the bereaved family — семья покойного. Книжное и уважительное, из соболезнований.",
+  "phrase": "bereaved family",
+  "relation": "adj+noun",
+  "headword": "family",
+  "sense": "group of people related to each other",
+  "cefr": "B1",
+  "band": "rare",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1713
+ },
+ {
+  "id": "c_fa4d4714fc92171c",
+  "type": "cloze",
+  "text": "The campsite charges thirty dollars ___ night for a tent pitch.",
+  "answer": "per",
+  "accept": [
+   "for a/the ~",
+   "on Friday",
+   "etc. ~",
+   "per ~"
+  ],
+  "hint": "p__",
+  "translation": "Кемпинг берёт тридцать долларов за ночь за место под палатку.",
+  "answers": [
+   "for a",
+   "for the",
+   "on Friday",
+   "etc.",
+   "per"
+  ],
+  "also": [
+   "for a/the ~",
+   "on Friday",
+   "etc. ~"
+  ],
+  "note": "for a night, per night — за ночь, посуточно. Из объявлений о жилье и гостиницах.",
+  "phrase": "for a night",
+  "relation": "prep",
+  "headword": "night",
+  "sense": "when it is dark and most people sleep",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1718
+ },
+ {
+  "id": "c_6bfa51c206863b0a",
+  "type": "cloze",
+  "text": "A flexible schedule ___ her to work part-time while studying for her degree.",
+  "answer": "enabled",
+  "accept": [
+   "enable sb to"
+  ],
+  "hint": "e______",
+  "translation": "Гибкий график позволил ей работать неполный день, пока она училась на диплом.",
+  "answers": [
+   "enable",
+   "enabled"
+  ],
+  "also": [],
+  "note": "enable sb to do sth — дать возможность что-то делать. После enable обязателен инфинитив с to.",
+  "phrase": "enable sb to work",
+  "relation": "verb+obj",
+  "headword": "work",
+  "sense": "do a job/task",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1723
+ },
+ {
+  "id": "c_b72193d662954c41",
+  "type": "cloze",
+  "text": "Everyone has a right ___ clean drinking water and basic healthcare.",
+  "answer": "to",
+  "accept": [
+   "~ to"
+  ],
+  "hint": "t_",
+  "translation": "У каждого есть право на чистую питьевую воду и базовую медицинскую помощь.",
+  "answers": [
+   "to"
+  ],
+  "also": [],
+  "note": "the right to sth / to do sth — право на что-то. Предлог to, а не on.",
+  "phrase": "right to",
+  "relation": "prep",
+  "headword": "right",
+  "sense": "entitlement",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1724
+ },
+ {
+  "id": "c_9b8de12f8e426c59",
+  "type": "cloze",
+  "text": "When she lost her job, her entire world ___ overnight.",
+  "answer": "fell apart",
+  "accept": [
+   "fall apart"
+  ],
+  "hint": "f___ a____",
+  "translation": "Когда она потеряла работу, весь её мир рухнул за одну ночь.",
+  "answers": [
+   "fall apart",
+   "fell apart"
+  ],
+  "also": [],
+  "note": "sb's world falls apart — мир рушится. Метафора о крахе привычной жизни.",
+  "phrase": "world fall apart",
+  "relation": "noun+verb",
+  "headword": "world",
+  "sense": "life/society",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1725
+ },
+ {
+  "id": "c_18a01a301032df2d",
+  "type": "cloze",
+  "text": "The children felt homesick after spending two weeks ___ home at summer camp.",
+  "answer": "away from",
+  "accept": [
+   "at ~",
+   "away from ~"
+  ],
+  "hint": "a___ f___",
+  "translation": "Дети затосковали по дому, проведя две недели в летнем лагере.",
+  "answers": [
+   "at",
+   "away from"
+  ],
+  "also": [
+   "at ~"
+  ],
+  "note": "at home, away from home — дома и вне дома. Без артикля; в спорте — «дома» и «в гостях».",
+  "phrase": "at home",
+  "relation": "prep",
+  "headword": "home",
+  "sense": "place where sb/sth lives",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1731
+ },
+ {
+  "id": "c_623ebe7985b3bc5a",
+  "type": "cloze",
+  "text": "After the meal, Sarah carefully packed away all the ___ things in her bag.",
+  "answer": "lunch",
+  "accept": [
+   "breakfast",
+   "lunch"
+  ],
+  "hint": "l____",
+  "translation": "После еды Сара аккуратно сложила все обеденные принадлежности в сумку.",
+  "answers": [
+   "breakfast",
+   "lunch"
+  ],
+  "also": [
+   "breakfast"
+  ],
+  "note": "breakfast / lunch things — посуда и принадлежности для еды. Разговорное things — предметы обихода.",
+  "phrase": "breakfast thing",
+  "relation": "adj+noun",
+  "headword": "thing",
+  "sense": "things: objects/clothing/tools",
+  "cefr": "A2",
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 1737
+ },
+ {
+  "id": "c_69cbde487a44e633",
+  "type": "cloze",
+  "text": "My sister works ___ company that makes software for hospitals.",
+  "answer": "in a",
+  "accept": [
+   "in a/the ~"
+  ],
+  "hint": "i_ a",
+  "translation": "Сестра работает в компании, которая делает программы для больниц.",
+  "answers": [
+   "in a",
+   "in the"
+  ],
+  "also": [],
+  "note": "in a company — в компании, внутри фирмы. Про место работы, а не про общество людей.",
+  "phrase": "in a company",
+  "relation": "prep",
+  "headword": "company",
+  "sense": "business organization",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1745
+ },
+ {
+  "id": "c_e6459e8168bb0c0c",
+  "type": "cloze",
+  "text": "Walking to school is a ___ way for children to get exercise every day.",
+  "answer": "practical",
+  "accept": [
+   "convenient",
+   "easy",
+   "effective",
+   "efficient",
+   "good",
+   "ideal",
+   "practical",
+   "quick",
+   "useful"
+  ],
+  "hint": "p________",
+  "translation": "Ходить в школу пешком — удобный способ для детей получать движение каждый день.",
+  "answers": [
+   "convenient",
+   "easy",
+   "effective",
+   "efficient",
+   "good",
+   "ideal",
+   "practical",
+   "quick",
+   "useful"
+  ],
+  "also": [
+   "convenient",
+   "easy",
+   "effective",
+   "efficient",
+   "good",
+   "ideal",
+   "quick",
+   "useful"
+  ],
+  "note": "a convenient / effective / practical way — удобный, действенный способ. Дальше идёт инфинитив с to.",
+  "phrase": "convenient way",
+  "relation": "adj+noun",
+  "headword": "way",
+  "sense": "method/style",
+  "cefr": "A2",
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1751
+ },
+ {
+  "id": "c_f4004fa7bf1fb9d4",
+  "type": "cloze",
+  "text": "In many families, cooking and cleaning used to be considered ___ work.",
+  "answer": "women's",
+  "accept": [
+   "men's",
+   "women's"
+  ],
+  "hint": "w_____",
+  "translation": "Во многих семьях готовку и уборку раньше считали женской работой.",
+  "answers": [
+   "men's",
+   "women's"
+  ],
+  "also": [
+   "men's"
+  ],
+  "note": "women's work, men's work — женская и мужская работа. Устаревающее деление, часто в критическом контексте.",
+  "phrase": "men's work",
+  "relation": "adj+noun",
+  "headword": "work",
+  "sense": "effort/product of effort",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1752
+ },
+ {
+  "id": "c_b7caefd9ada4a9b3",
+  "type": "cloze",
+  "text": "The company has complete control right ___ how the product is designed and sold.",
+  "answer": "over",
+  "accept": [
+   "~ over"
+  ],
+  "hint": "o___",
+  "translation": "У компании есть полное право решать, как проектировать и продавать продукт.",
+  "answers": [
+   "over"
+  ],
+  "also": [],
+  "note": "rights over sth — права на что-то, власть над чем-то. Предлог over подчёркивает контроль.",
+  "phrase": "right over",
+  "relation": "prep",
+  "headword": "right",
+  "sense": "entitlement",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1753
+ },
+ {
+  "id": "c_3ad8b3b560eb8cba",
+  "type": "cloze",
+  "text": "Brazil is the home ___ the world's largest rainforest and many unique animal species.",
+  "answer": "of",
+  "accept": [
+   "~ of"
+  ],
+  "hint": "o_",
+  "translation": "Бразилия — родина крупнейшего в мире тропического леса и множества уникальных животных.",
+  "answers": [
+   "of"
+  ],
+  "also": [],
+  "note": "the home of sth — родина, место происхождения чего-то: Brazil is the home of samba.",
+  "phrase": "home of",
+  "relation": "prep",
+  "headword": "home",
+  "sense": "place where sb/sth lives",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1760
+ },
+ {
+  "id": "c_974685864c43172c",
+  "type": "cloze",
+  "text": "The old car was ___ help, so we decided to buy a new one instead.",
+  "answer": "beyond",
+  "accept": [
+   "beyond ~"
+  ],
+  "hint": "b_____",
+  "translation": "Старой машине уже ничем нельзя было помочь, и мы решили купить новую.",
+  "answers": [
+   "beyond"
+  ],
+  "also": [],
+  "note": "be beyond help — уже не спасти. Предлог beyond означает «за пределами возможного».",
+  "phrase": "beyond help",
+  "relation": "prep",
+  "headword": "help",
+  "sense": null,
+  "cefr": "B1",
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1765
+ },
+ {
+  "id": "c_02f2c8ce8f87d24b",
+  "type": "cloze",
+  "text": "The meeting ended ___ everyone agreeing to try the new plan next month.",
+  "answer": "with",
+  "accept": [
+   "with"
+  ],
+  "hint": "w___",
+  "translation": "Встреча закончилась тем, что все согласились попробовать новый план в следующем месяце.",
+  "answers": [
+   "with"
+  ],
+  "also": [],
+  "note": "end with sth — завершиться чем-то. with про финальный элемент, in про результат.",
+  "phrase": "with end",
+  "relation": "prep",
+  "headword": "end",
+  "sense": null,
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1770
+ },
+ {
+  "id": "c_17491cc8db5a5c35",
+  "type": "cloze",
+  "text": "The marketing team had significant influence ___ company.",
+  "answer": "within the",
+  "accept": [
+   "within a/the ~"
+  ],
+  "hint": "w_____ t__",
+  "translation": "Отдел маркетинга имел значительное влияние внутри компании.",
+  "answers": [
+   "within a",
+   "within the"
+  ],
+  "also": [],
+  "note": "within a company — внутри компании. Формальнее, чем in; подчёркивает границы организации.",
+  "phrase": "within a company",
+  "relation": "prep",
+  "headword": "company",
+  "sense": "business organization",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1774
+ },
+ {
+  "id": "c_b7c20fef8a65bc5f",
+  "type": "cloze",
+  "text": "She has visited that museum ___ times over the years.",
+  "answer": "countless",
+  "accept": [
+   "countless"
+  ],
+  "hint": "c________",
+  "translation": "За эти годы она побывала в том музее бессчётное число раз.",
+  "answers": [
+   "countless"
+  ],
+  "also": [],
+  "note": "countless times — бессчётное число раз. Прилагательное countless всегда с множественным числом.",
+  "phrase": "countless time",
+  "relation": "adj+noun",
+  "headword": "time",
+  "sense": "occasion",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1779
+ },
+ {
+  "id": "c_4eb4a66491be084b",
+  "type": "cloze",
+  "text": "The kitchen work ___ was cluttered with dirty dishes and old newspapers.",
+  "answer": "surface",
+  "accept": [
+   "surface"
+  ],
+  "hint": "s______",
+  "translation": "Рабочая поверхность на кухне была завалена грязной посудой и старыми газетами.",
+  "answers": [
+   "surface"
+  ],
+  "also": [],
+  "note": "a work surface — рабочая поверхность, столешница. Кухонный и производственный термин.",
+  "phrase": "work surface",
+  "relation": "noun+noun",
+  "headword": "work",
+  "sense": "effort/product of effort",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1781
+ },
+ {
+  "id": "c_d27bbb6336586550",
+  "type": "cloze",
+  "text": "When you exit the building, you'll find the parking lot ___ right.",
+  "answer": "on the",
+  "accept": [
+   "on the ~"
+  ],
+  "hint": "o_ t__",
+  "translation": "Когда выйдешь из здания, парковка будет справа.",
+  "answers": [
+   "on the"
+  ],
+  "also": [],
+  "note": "on the right — справа. В указаниях дороги и описаниях расположения.",
+  "phrase": "on the right",
+  "relation": "prep",
+  "headword": "right",
+  "sense": "right side/direction",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1782
+ },
+ {
+  "id": "c_793b4205b1a46455",
+  "type": "cloze",
+  "text": "The company promised employees a ___ world of flexible working and better pay.",
+  "answer": "brave new",
+  "accept": [
+   "brave new"
+  ],
+  "hint": "b____ n__",
+  "translation": "Компания пообещала сотрудникам дивный новый мир гибкого графика и повышенных зарплат.",
+  "answers": [
+   "brave new"
+  ],
+  "also": [],
+  "note": "a brave new world — дивный новый мир. Отсылка к Шекспиру и роману Хаксли, часто с иронией.",
+  "phrase": "brave new world",
+  "relation": "adj+noun",
+  "headword": "world",
+  "sense": "life/society",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1783
+ },
+ {
+  "id": "c_be9e940125947421",
+  "type": "cloze",
+  "text": "My grandmother has lived in the same house for ___ year now.",
+  "answer": "under a",
+  "accept": [
+   "over/under a ~"
+  ],
+  "hint": "u____ a",
+  "translation": "Бабушка живёт в этом доме пока что меньше года.",
+  "answers": [
+   "over a",
+   "under a"
+  ],
+  "also": [],
+  "note": "over a year, under a year — больше или меньше года. Предлоги для приблизительного срока.",
+  "phrase": "over a year",
+  "relation": "prep",
+  "headword": "year",
+  "sense": null,
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1785
+ },
+ {
+  "id": "c_cfbff25c0e20e06a",
+  "type": "cloze",
+  "text": "The wedding turned out to be a truly ___ day for the entire family.",
+  "answer": "memorable",
+  "accept": [
+   "auspicious",
+   "big",
+   "eventful",
+   "field",
+   "historic",
+   "memorable",
+   "red-letter",
+   "special"
+  ],
+  "hint": "m________",
+  "translation": "Свадьба обернулась поистине незабываемым днём для всей семьи.",
+  "answers": [
+   "auspicious",
+   "big",
+   "eventful",
+   "field",
+   "historic",
+   "memorable",
+   "red-letter",
+   "special"
+  ],
+  "also": [
+   "auspicious",
+   "big",
+   "eventful",
+   "field",
+   "historic",
+   "red-letter",
+   "special"
+  ],
+  "note": "a memorable / big / red-letter day — памятный, особенный день. red-letter day — от красных дат в календаре.",
+  "phrase": "auspicious day",
+  "relation": "adj+noun",
+  "headword": "day",
+  "sense": "period of 24 hours",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1786
+ },
+ {
+  "id": "c_6592696096ac14a9",
+  "type": "cloze",
+  "text": "She gave a ___ look around her old school classroom after twenty years away.",
+  "answer": "nostalgic",
+  "accept": [
+   "nostalgic"
+  ],
+  "hint": "n________",
+  "translation": "Она с ностальгией оглядела свой старый школьный класс после двадцати лет разлуки.",
+  "answers": [
+   "nostalgic"
+  ],
+  "also": [],
+  "note": "a nostalgic look — ностальгический взгляд. И о взгляде человека, и о взгляде на тему в книге.",
+  "phrase": "nostalgic look",
+  "relation": "adj+noun",
+  "headword": "look",
+  "sense": "act of looking at/considering sth",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1790
+ },
+ {
+  "id": "c_7785dae702cfbfd6",
+  "type": "cloze",
+  "text": "There is a growing need ___ more affordable housing in our city.",
+  "answer": "for",
+  "accept": [
+   "~ for"
+  ],
+  "hint": "f__",
+  "translation": "В нашем городе растёт потребность в доступном жилье.",
+  "answers": [
+   "for"
+  ],
+  "also": [],
+  "note": "the need for sth — потребность в чём-то. Предлог for обязателен, а не of.",
+  "phrase": "need for",
+  "relation": "prep",
+  "headword": "need",
+  "sense": "situation where sth is needed/necessary",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1791
+ },
+ {
+  "id": "c_299314449ef766e1",
+  "type": "cloze",
+  "text": "When she found the wallet, returning it to its owner was the ___ thing to do.",
+  "answer": "decent",
+  "accept": [
+   "decent",
+   "done",
+   "honourable"
+  ],
+  "hint": "d_____",
+  "translation": "Найдя кошелёк, она поступила порядочно и вернула его владельцу.",
+  "answers": [
+   "decent",
+   "done",
+   "honourable"
+  ],
+  "also": [
+   "done",
+   "honourable"
+  ],
+  "note": "the decent / honourable thing (to do) — порядочный поступок. О том, как следует поступить по совести.",
+  "phrase": "decent thing",
+  "relation": "adj+noun",
+  "headword": "thing",
+  "sense": "what is needed/socially acceptable",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1795
+ },
+ {
+  "id": "c_13470c5ed3a0c0f6",
+  "type": "cloze",
+  "text": "Many families in the refugee camp were not ___ housed during the winter months.",
+  "answer": "adequately",
+  "accept": [
+   "adequately"
+  ],
+  "hint": "a_________",
+  "translation": "Многие семьи в лагере беженцев зимой жили в неподобающих условиях.",
+  "answers": [
+   "adequately"
+  ],
+  "also": [],
+  "note": "be adequately housed — иметь подобающее жильё. Формальное, из отчётов о социальных условиях.",
+  "phrase": "adequately house",
+  "relation": "adv+verb",
+  "headword": "house",
+  "sense": null,
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1797
+ },
+ {
+  "id": "c_251de06f66c6b6f9",
+  "type": "cloze",
+  "text": "We need to save money, and ___ end we decided to cook dinner at home every night.",
+  "answer": "to this",
+  "accept": [
+   "to this ~"
+  ],
+  "hint": "t_ t___",
+  "translation": "Нам нужно экономить, и с этой целью мы решили каждый вечер готовить ужин дома.",
+  "answers": [
+   "to this"
+  ],
+  "also": [],
+  "note": "to this end — с этой целью. Книжный связующий оборот; end здесь — цель.",
+  "phrase": "to this end",
+  "relation": "prep",
+  "headword": "end",
+  "sense": "aim/purpose",
+  "cefr": "B2",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1799
+ },
+ {
+  "id": "c_e70c315cbbe7f05c",
+  "type": "cloze",
+  "text": "My parents worry that young people today don't value the traditional ___ family as much as previous generations did.",
+  "answer": "nuclear",
+  "accept": [
+   "conjugal",
+   "nuclear"
+  ],
+  "hint": "n______",
+  "translation": "Родители переживают, что нынешняя молодёжь ценит традиционную семью меньше, чем прежние поколения.",
+  "answers": [
+   "conjugal",
+   "nuclear"
+  ],
+  "also": [
+   "conjugal"
+  ],
+  "note": "the nuclear family — семья из родителей и детей. Социологический термин, противопоставлен extended family.",
+  "phrase": "conjugal family",
+  "relation": "adj+noun",
+  "headword": "family",
+  "sense": "group of people related to each other",
+  "cefr": "B1",
+  "band": "rare",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1800
+ },
+ {
+  "id": "c_1a9d7ebb90d43e9b",
+  "type": "cloze",
+  "text": "My daughter was named ___ her grandmother, who was a famous pianist.",
+  "answer": "for",
+  "accept": [
+   "~ for"
+  ],
+  "hint": "f__",
+  "translation": "Дочь назвали в честь бабушки, которая была известной пианисткой.",
+  "answers": [
+   "for"
+  ],
+  "also": [],
+  "note": "be named for sb — быть названным в честь кого-то. Американское; британцы скажут named after.",
+  "phrase": "name for",
+  "relation": "prep",
+  "headword": "name",
+  "sense": "reputation",
+  "cefr": "B2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1801
+ },
+ {
+  "id": "c_bddae0611ad17f3c",
+  "type": "cloze",
+  "text": "The architect's design for the new museum was considered ___ by critics worldwide.",
+  "answer": "a work of genius",
+  "accept": [
+   "a work of genius"
+  ],
+  "hint": "a w___ o_ g_____",
+  "translation": "Проект нового музея критики во всём мире сочли гениальной работой.",
+  "answers": [
+   "a work of genius"
+  ],
+  "also": [],
+  "note": "a work of genius — гениальное творение. Оборот a work of + существительное: of art, of fiction.",
+  "phrase": "a work of genius",
+  "relation": "phrase",
+  "headword": "work",
+  "sense": "book/music/art",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1809
+ },
+ {
+  "id": "c_d474c4f793e56d61",
+  "type": "cloze",
+  "text": "My teacher was right ___ needing to study harder for the exam.",
+  "answer": "about",
+  "accept": [
+   "about"
+  ],
+  "hint": "a____",
+  "translation": "Учитель был прав насчёт того, что к экзамену надо готовиться усерднее.",
+  "answers": [
+   "about"
+  ],
+  "also": [],
+  "note": "about right — примерно верно. Разговорная оценка: that sounds about right.",
+  "phrase": "about right",
+  "relation": "prep",
+  "headword": "right",
+  "sense": null,
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1810
+ },
+ {
+  "id": "c_f0ad07103f17494e",
+  "type": "cloze",
+  "text": "The two friends have completely different interests and seem ___ despite living next door to each other.",
+  "answer": "worlds apart",
+  "accept": [
+   "worlds apart"
+  ],
+  "hint": "w_____ a____",
+  "translation": "У этих двух друзей совершенно разные интересы, и они словно из разных миров, хотя живут по соседству.",
+  "answers": [
+   "worlds apart"
+  ],
+  "also": [],
+  "note": "worlds apart — как небо и земля. Во множественном числе, о разительном отличии.",
+  "phrase": "worlds apart",
+  "relation": "phrase",
+  "headword": "world",
+  "sense": "life/society",
+  "cefr": "B1",
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1811
+ },
+ {
+  "id": "c_d3ec22c62f36d720",
+  "type": "cloze",
+  "text": "The old bridge was badly ___ need of repair before it became unsafe.",
+  "answer": "in",
+  "accept": [
+   "in ~ (of)"
+  ],
+  "hint": "i_",
+  "translation": "Старый мост остро нуждался в ремонте, пока не стал опасным.",
+  "answers": [
+   "in"
+  ],
+  "also": [],
+  "note": "be in need of sth — нуждаться в чём-то. Формальнее, чем need; часто о ремонте и помощи.",
+  "phrase": "in need of",
+  "relation": "prep",
+  "headword": "need",
+  "sense": "situation where sth is needed/necessary",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1819
+ },
+ {
+  "id": "c_d02123e84b3271f5",
+  "type": "cloze",
+  "text": "The ___ thing we learned from that experience was never to give up.",
+  "answer": "main",
+  "accept": [
+   "crucial",
+   "key",
+   "main",
+   "important",
+   "vital"
+  ],
+  "hint": "m___",
+  "translation": "Главное, что мы вынесли из того опыта, — никогда не сдаваться.",
+  "answers": [
+   "crucial",
+   "key",
+   "main",
+   "important",
+   "vital"
+  ],
+  "also": [
+   "crucial",
+   "key",
+   "important",
+   "vital"
+  ],
+  "note": "the main / key / crucial thing — главное. Часто зачин вывода: the main thing is...",
+  "phrase": "crucial thing",
+  "relation": "adj+noun",
+  "headword": "thing",
+  "sense": "fact/event/situation/action",
+  "cefr": "A2",
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1822
+ },
+ {
+  "id": "c_47f71e7e7290b3f7",
+  "type": "cloze",
+  "text": "The argument between the two friends ended ___ apology and reconciliation.",
+  "answer": "in",
+  "accept": [
+   "in"
+  ],
+  "hint": "i_",
+  "translation": "Ссора двух друзей закончилась извинениями и примирением.",
+  "answers": [
+   "in"
+  ],
+  "also": [],
+  "note": "in the end — в конце концов. Не путать с at the end — «в конце чего-то конкретного».",
+  "phrase": "in end",
+  "relation": "prep",
+  "headword": "end",
+  "sense": null,
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1826
+ },
+ {
+  "id": "c_666559a884f13ceb",
+  "type": "cloze",
+  "text": "There are often disagreements ___ family about money and household responsibilities.",
+  "answer": "within a",
+  "accept": [
+   "within a/the ~"
+  ],
+  "hint": "w_____ a",
+  "translation": "В семье часто случаются разногласия из-за денег и домашних обязанностей.",
+  "answers": [
+   "within a",
+   "within the"
+  ],
+  "also": [],
+  "note": "within a family — внутри семьи. Формальнее, чем in; о том, что не выходит наружу.",
+  "phrase": "within a family",
+  "relation": "prep",
+  "headword": "family",
+  "sense": "group of people related to each other",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1827
+ },
+ {
+  "id": "c_1ccf6b67c725dd2d",
+  "type": "cloze",
+  "text": "The security guard greeted all the regular visitors ___ name every morning.",
+  "answer": "by",
+  "accept": [
+   "by ~"
+  ],
+  "hint": "b_",
+  "translation": "Охранник каждое утро здоровался со всеми постоянными посетителями по имени.",
+  "answers": [
+   "by"
+  ],
+  "also": [],
+  "note": "by name — по имени. Оборот know sb by name — знать по имени, но не лично.",
+  "phrase": "by name",
+  "relation": "prep",
+  "headword": "name",
+  "sense": "word/words sb/sth is known by",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1828
+ },
+ {
+  "id": "c_d5cc967288b3c9cc",
+  "type": "cloze",
+  "text": "We had such a ___ time at the beach last summer.",
+  "answer": "wonderful",
+  "accept": [
+   "enjoyable",
+   "fun",
+   "good",
+   "grand",
+   "great",
+   "marvellous",
+   "pleasant",
+   "splendid",
+   "wonderful"
+  ],
+  "hint": "w________",
+  "translation": "Прошлым летом мы чудесно провели время на пляже.",
+  "answers": [
+   "enjoyable",
+   "fun",
+   "good",
+   "grand",
+   "great",
+   "marvellous",
+   "pleasant",
+   "splendid",
+   "wonderful"
+  ],
+  "also": [
+   "enjoyable",
+   "fun",
+   "good",
+   "grand",
+   "great",
+   "marvellous",
+   "pleasant",
+   "splendid"
+  ],
+  "note": "have a good / great / wonderful time — хорошо провести время. Одна из самых частых фраз о досуге.",
+  "phrase": "enjoyable time",
+  "relation": "adj+noun",
+  "headword": "time",
+  "sense": "when you experience sth in a particular way",
+  "cefr": "A2",
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1834
+ },
+ {
+  "id": "c_e0ce7794c06030c4",
+  "type": "cloze",
+  "text": "She picked up some ___ work at the coffee shop during her gap year.",
+  "answer": "casual",
+  "accept": [
+   "casual"
+  ],
+  "hint": "c_____",
+  "translation": "Она подрабатывала в кофейне во время своего года перерыва перед учёбой.",
+  "answers": [
+   "casual"
+  ],
+  "also": [],
+  "note": "casual work — подработка, нерегулярная занятость. Без артикля; casual — «непостоянный».",
+  "phrase": "casual work",
+  "relation": "adj+noun",
+  "headword": "work",
+  "sense": "job",
+  "cefr": "A2",
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1836
+ },
+ {
+  "id": "c_4cc728f809f53e0a",
+  "type": "cloze",
+  "text": "My sister is visiting from abroad, so we planned several activities ___ day.",
+  "answer": "for the",
+  "accept": [
+   "for a/the ~"
+  ],
+  "hint": "f__ t__",
+  "translation": "Сестра приехала из-за границы, и мы запланировали на день несколько занятий.",
+  "answers": [
+   "for a",
+   "for the"
+  ],
+  "also": [],
+  "note": "for a day — на день, в течение дня. Предлог for отвечает на вопрос «как долго».",
+  "phrase": "for a day",
+  "relation": "prep",
+  "headword": "day",
+  "sense": "period of 24 hours",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1841
+ },
+ {
+  "id": "c_05ea49175f990a54",
+  "type": "cloze",
+  "text": "The conference room is available ___ use by any department that needs to book it.",
+  "answer": "for",
+  "accept": [
+   "for ~"
+  ],
+  "hint": "f__",
+  "translation": "Переговорная доступна для использования любому отделу, которому нужно её забронировать.",
+  "answers": [
+   "for"
+  ],
+  "also": [],
+  "note": "for use — для использования. Формула из инструкций: for use with, for use as.",
+  "phrase": "for use",
+  "relation": "prep",
+  "headword": "use",
+  "sense": "using/being used",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1843
+ },
+ {
+  "id": "c_e50c7366f818912e",
+  "type": "cloze",
+  "text": "That ___ thing broke again just when I needed it most.",
+  "answer": "bloody",
+  "accept": [
+   "bloody"
+  ],
+  "hint": "b_____",
+  "translation": "Эта чёртова штука снова сломалась именно тогда, когда была нужнее всего.",
+  "answers": [
+   "bloody"
+  ],
+  "also": [],
+  "note": "that bloody thing — эта чёртова штука. Британское ругательное усиление, в вежливой речи неуместно.",
+  "phrase": "bloody thing",
+  "relation": "adj+noun",
+  "headword": "thing",
+  "sense": "fact/event/situation/action",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1849
+ },
+ {
+  "id": "c_ad5d7d080cab65fe",
+  "type": "cloze",
+  "text": "By next Friday, all the repairs to the house should be ___ end.",
+  "answer": "at an",
+  "accept": [
+   "at an ~"
+  ],
+  "hint": "a_ a_",
+  "translation": "К следующей пятнице весь ремонт в доме должен подойти к концу.",
+  "answers": [
+   "at an"
+  ],
+  "also": [],
+  "note": "be at an end — подойти к концу, завершиться. Книжное: the war was at an end.",
+  "phrase": "at an end",
+  "relation": "prep",
+  "headword": "end",
+  "sense": "last part of sth",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 1853
+ },
+ {
+  "id": "c_23fc352282138483",
+  "type": "cloze",
+  "text": "There is a woman ___ name of Sarah who works in our office.",
+  "answer": "by the",
+  "accept": [
+   "by the ~ of"
+  ],
+  "hint": "b_ t__",
+  "translation": "У нас в офисе работает женщина по имени Сара.",
+  "answers": [
+   "by the"
+  ],
+  "also": [],
+  "note": "by the name of sb — по имени такой-то. Книжный оборот при первом упоминании человека.",
+  "phrase": "by the name of",
+  "relation": "prep",
+  "headword": "name",
+  "sense": "word/words sb/sth is known by",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 1855
+ },
+ {
+  "id": "c_97c479e35ba3ef18",
+  "type": "cloze",
+  "text": "My flight arrives in the afternoon, so I'll see you later ___ day.",
+  "answer": "in the",
+  "accept": [
+   "in a/the ~"
+  ],
+  "hint": "i_ t__",
+  "translation": "Мой рейс прилетает после обеда, так что увидимся ближе к вечеру.",
+  "answers": [
+   "in a",
+   "in the"
+  ],
+  "also": [],
+  "note": "in a day — за день. Предлог in про срок выполнения, for — про продолжительность.",
+  "phrase": "in a day",
+  "relation": "prep",
+  "headword": "day",
+  "sense": "period of 24 hours",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1868
+ },
+ {
+  "id": "c_0daf04a4ec85d776",
+  "type": "cloze",
+  "text": "These old textbooks might be of use ___ the new students in your class.",
+  "answer": "to",
+  "accept": [
+   "~ to"
+  ],
+  "hint": "t_",
+  "translation": "Эти старые учебники могут пригодиться новым ученикам в твоём классе.",
+  "answers": [
+   "to"
+  ],
+  "also": [],
+  "note": "be of use to sb — быть полезным кому-то. Предлог to указывает, кому именно.",
+  "phrase": "use to",
+  "relation": "prep",
+  "headword": "use",
+  "sense": "how useful sth is",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1869
+ },
+ {
+  "id": "c_2e719557ae7d8d4b",
+  "type": "cloze",
+  "text": "Many people are looking ___ the new year with hope and excitement.",
+  "answer": "towards",
+  "accept": [
+   "~ towards"
+  ],
+  "hint": "t______",
+  "translation": "Многие смотрят в новый год с надеждой и волнением.",
+  "answers": [
+   "towards"
+  ],
+  "also": [],
+  "note": "look towards sth — смотреть в сторону чего-то, рассчитывать на будущее. Часто метафорически.",
+  "phrase": "look towards",
+  "relation": "prep",
+  "headword": "look",
+  "sense": "act of looking at/considering sth",
+  "cefr": "B2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1871
+ },
+ {
+  "id": "c_3761dfbb9901eb77",
+  "type": "cloze",
+  "text": "My manager ___ things so that I could leave early on Friday.",
+  "answer": "arranged",
+  "accept": [
+   "arrange",
+   "deal with",
+   "handle",
+   "look after",
+   "run",
+   "sort out"
+  ],
+  "hint": "a_______",
+  "translation": "Начальник устроил всё так, чтобы я мог уйти пораньше в пятницу.",
+  "answers": [
+   "arrange",
+   "deal with",
+   "handle",
+   "look after",
+   "run",
+   "sort out",
+   "arranged"
+  ],
+  "also": [
+   "deal with",
+   "handle",
+   "look after",
+   "run",
+   "sort out"
+  ],
+  "note": "arrange / sort out / handle things — уладить дела. Разговорное things — вопросы, которые надо решить.",
+  "phrase": "arrange thing",
+  "relation": "verb+obj",
+  "headword": "thing",
+  "sense": "things: general situation, as it affects sb",
+  "cefr": "A2",
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 1874
+ },
+ {
+  "id": "c_cf5def278b478dbb",
+  "type": "cloze",
+  "text": "The book fell over, so I placed it ___ end to keep it upright on the shelf.",
+  "answer": "on",
+  "accept": [
+   "on ~"
+  ],
+  "hint": "o_",
+  "translation": "Книга упала, и я поставил её стоймя, чтобы она держалась на полке.",
+  "answers": [
+   "on"
+  ],
+  "also": [],
+  "note": "on end — стоймя или подряд без перерыва. Два значения: stand it on end и for hours on end.",
+  "phrase": "on end",
+  "relation": "prep",
+  "headword": "end",
+  "sense": "furthest part of sth",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1878
+ },
+ {
+  "id": "c_9311c347470370c6",
+  "type": "cloze",
+  "text": "My parents chose to name me ___ my grandmother because she was very important to them.",
+  "answer": "after",
+  "accept": [
+   "after"
+  ],
+  "hint": "a____",
+  "translation": "Родители решили назвать меня в честь бабушки, потому что она была для них очень важна.",
+  "answers": [
+   "after"
+  ],
+  "also": [],
+  "note": "be named after sb — быть названным в честь кого-то. Британское; американское — named for.",
+  "phrase": "after name",
+  "relation": "prep",
+  "headword": "name",
+  "sense": null,
+  "cefr": "B2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1880
+ },
+ {
+  "id": "c_1af34cf7564d3725",
+  "type": "cloze",
+  "text": "She can only focus on her studies for about two hours ___ time.",
+  "answer": "at a",
+  "accept": [
+   "at a ~"
+  ],
+  "hint": "a_ a",
+  "translation": "Она может сосредоточиться на учёбе примерно два часа за один раз.",
+  "answers": [
+   "at a"
+  ],
+  "also": [],
+  "note": "at a time — за один раз, одновременно. Оборот ten at a time — по десять за раз.",
+  "phrase": "at a time",
+  "relation": "prep",
+  "headword": "time",
+  "sense": "amount of time",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1885
+ },
+ {
+  "id": "c_9f95da71877985f2",
+  "type": "cloze",
+  "text": "She stayed at her friend's house ___ day while her parents were at work.",
+  "answer": "during the",
+  "accept": [
+   "during the ~",
+   "for a/the ~"
+  ],
+  "hint": "d_____ t__",
+  "translation": "Она днём сидела у подруги дома, пока родители были на работе.",
+  "answers": [
+   "during the",
+   "for a",
+   "for the"
+  ],
+  "also": [
+   "for a/the ~"
+  ],
+  "note": "during the day — днём, в течение дня. Противопоставляется ночи.",
+  "phrase": "during the day",
+  "relation": "prep",
+  "headword": "day",
+  "sense": "time between sunrise and sunset",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1892
+ },
+ {
+  "id": "c_daab12b761d16dc5",
+  "type": "cloze",
+  "text": "The restaurant is ___ end of the shopping mall, next to the cinema.",
+  "answer": "at the",
+  "accept": [
+   "at the ~"
+  ],
+  "hint": "a_ t__",
+  "translation": "Ресторан находится в конце торгового центра, рядом с кинотеатром.",
+  "answers": [
+   "at the"
+  ],
+  "also": [],
+  "note": "at the end (of sth) — в конце чего-то конкретного. Не путать с in the end — «в итоге».",
+  "phrase": "at the end",
+  "relation": "prep",
+  "headword": "end",
+  "sense": "furthest part of sth",
+  "cefr": "A1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1902
+ },
+ {
+  "id": "c_dbd223c49f70969c",
+  "type": "cloze",
+  "text": "My daughter was named ___ my grandmother, who was a teacher.",
+  "answer": "for",
+  "accept": [
+   "for"
+  ],
+  "hint": "f__",
+  "translation": "Дочь назвали в честь моей бабушки, которая была учительницей.",
+  "answers": [
+   "for"
+  ],
+  "also": [],
+  "note": "ask for sb's name — спросить имя. В анкетах: ask for your name and address.",
+  "phrase": "for name",
+  "relation": "prep",
+  "headword": "name",
+  "sense": null,
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1904
+ },
+ {
+  "id": "c_229c1de9f1771744",
+  "type": "cloze",
+  "text": "She worked as a teacher ___ time before deciding to study medicine.",
+  "answer": "for a",
+  "accept": [
+   "for a ~"
+  ],
+  "hint": "f__ a",
+  "translation": "Она какое-то время работала учительницей, прежде чем решила учиться на врача.",
+  "answers": [
+   "for a"
+  ],
+  "also": [],
+  "note": "for a time — некоторое время, какое-то время. Книжнее, чем for a while.",
+  "phrase": "for a time",
+  "relation": "prep",
+  "headword": "time",
+  "sense": "amount of time",
+  "cefr": "B2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1909
+ },
+ {
+  "id": "c_5d77b29324d8098b",
+  "type": "cloze",
+  "text": "The kitchen knife is used ___ cutting vegetables and bread.",
+  "answer": "for",
+  "accept": [
+   "for"
+  ],
+  "hint": "f__",
+  "translation": "Кухонный нож используют для нарезки овощей и хлеба.",
+  "answers": [
+   "for"
+  ],
+  "also": [],
+  "note": "for use as sth — для применения в качестве чего-то. Формула из технических описаний.",
+  "phrase": "for use",
+  "relation": "prep",
+  "headword": "use",
+  "sense": null,
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1917
+ },
+ {
+  "id": "c_ae3758d2d560fe78",
+  "type": "cloze",
+  "text": "My grandmother swears that her home ___ of ginger tea always helps when I have a cold.",
+  "answer": "remedy",
+  "accept": [
+   "remedy",
+   "treatment"
+  ],
+  "hint": "r_____",
+  "translation": "Бабушка божится, что её домашнее средство — имбирный чай — всегда помогает мне при простуде.",
+  "answers": [
+   "remedy",
+   "treatment"
+  ],
+  "also": [
+   "treatment"
+  ],
+  "note": "a home remedy — домашнее средство от болезни. Народный рецепт, не аптечный.",
+  "phrase": "home remedy",
+  "relation": "noun+noun",
+  "headword": "home",
+  "sense": "place where sb/sth lives",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1918
+ },
+ {
+  "id": "c_97bc2271f2f3ed13",
+  "type": "cloze",
+  "text": "She looked at me with an ___ expression when I told her about my unusual plan.",
+  "answer": "odd",
+  "accept": [
+   "funny",
+   "odd",
+   "strange"
+  ],
+  "hint": "o__",
+  "translation": "Она посмотрела на меня со странным выражением, когда я рассказал о своём необычном плане.",
+  "answers": [
+   "funny",
+   "odd",
+   "strange"
+  ],
+  "also": [
+   "funny",
+   "strange"
+  ],
+  "note": "a funny / odd / strange look — странный взгляд. funny здесь «чудной», а не «смешной».",
+  "phrase": "funny look",
+  "relation": "prep",
+  "headword": "look",
+  "sense": "exploring/looking for sth",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1919
+ },
+ {
+  "id": "c_f8ed1840f9b9ed8b",
+  "type": "cloze",
+  "text": "She finally found a parking space ___ end of the street.",
+  "answer": "at the",
+  "accept": [
+   "at the ~"
+  ],
+  "hint": "a_ t__",
+  "translation": "Она наконец нашла место для парковки в конце улицы.",
+  "answers": [
+   "at the"
+  ],
+  "also": [],
+  "note": "at the end of sth — в конце чего-то: улицы, дня, списка. Предлог of обязателен.",
+  "phrase": "at the end",
+  "relation": "prep",
+  "headword": "end",
+  "sense": "last part of sth",
+  "cefr": "A1",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1926
+ },
+ {
+  "id": "c_395d21d4a85e991d",
+  "type": "cloze",
+  "text": "She arrived at the airport ___ time to catch her flight to London.",
+  "answer": "in",
+  "accept": [
+   "in ~"
+  ],
+  "hint": "i_",
+  "translation": "Она приехала в аэропорт вовремя, чтобы успеть на рейс в Лондон.",
+  "answers": [
+   "in"
+  ],
+  "also": [],
+  "note": "in time (for sth) — вовремя, успеть к чему-то. Не путать с on time — «точно в назначенный час».",
+  "phrase": "in time",
+  "relation": "prep",
+  "headword": "time",
+  "sense": "time when sth happens/should happen",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 1933
+ },
+ {
+  "id": "c_8565b4445ab331b1",
+  "type": "cloze",
+  "text": "After the injury, he gradually regained the use ___ his right arm through physical therapy.",
+  "answer": "of",
+  "accept": [
+   "~ of"
+  ],
+  "hint": "o_",
+  "translation": "После травмы он постепенно вернул подвижность правой руки благодаря физиотерапии.",
+  "answers": [
+   "of"
+  ],
+  "also": [],
+  "note": "the use of sth — использование чего-то. С определённым артиклем в обороте the use of computers.",
+  "phrase": "use of",
+  "relation": "prep",
+  "headword": "use",
+  "sense": "ability/permission to use sth",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1941
+ },
+ {
+  "id": "c_0b097b2308fa4a52",
+  "type": "cloze",
+  "text": "She glanced at me with an ___ look before entering the exam room.",
+  "answer": "apprehensive",
+  "accept": [
+   "apprehensive",
+   "anxious",
+   "doubtful",
+   "worried"
+  ],
+  "hint": "a___________",
+  "translation": "Она взглянула на меня с тревогой, прежде чем войти в экзаменационную аудиторию.",
+  "answers": [
+   "apprehensive",
+   "anxious",
+   "doubtful",
+   "worried"
+  ],
+  "also": [
+   "anxious",
+   "doubtful",
+   "worried"
+  ],
+  "note": "an anxious / worried look — встревоженный взгляд. Прилагательное описывает читаемую эмоцию.",
+  "phrase": "apprehensive look",
+  "relation": "adj+noun",
+  "headword": "look",
+  "sense": "expression on sb's face",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1943
+ },
+ {
+  "id": "c_25672c33338c97fd",
+  "type": "cloze",
+  "text": "The new car models are ___ show at the exhibition this weekend.",
+  "answer": "on",
+  "accept": [
+   "on ~ (being shown for people to look at)"
+  ],
+  "hint": "o_",
+  "translation": "Новые модели автомобилей выставлены на выставке в эти выходные.",
+  "answers": [
+   "on"
+  ],
+  "also": [],
+  "note": "be on show — быть выставленным напоказ. О выставке или витрине; британское, в США on display.",
+  "phrase": "on show being shown for people to look at",
+  "relation": "prep",
+  "headword": "show",
+  "sense": "public display/exhibition",
+  "cefr": "A2",
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1949
+ },
+ {
+  "id": "c_6a019dc4bcc96321",
+  "type": "cloze",
+  "text": "She felt nervous about the presentation, but her confidence grew ___ time.",
+  "answer": "in",
+  "accept": [
+   "in ~"
+  ],
+  "hint": "i_",
+  "translation": "Она нервничала из-за презентации, но со временем её уверенность выросла.",
+  "answers": [
+   "in"
+  ],
+  "also": [],
+  "note": "in time — со временем, постепенно. Отличается от in time for — «успеть к чему-то».",
+  "phrase": "in time",
+  "relation": "prep",
+  "headword": "time",
+  "sense": "amount of time",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1956
+ },
+ {
+  "id": "c_f51a17bbde409e88",
+  "type": "cloze",
+  "text": "After the accident, she decided to ___ her right to sue the company.",
+  "answer": "waive",
+  "accept": [
+   "waive"
+  ],
+  "hint": "w____",
+  "translation": "После аварии она решила отказаться от права судиться с компанией.",
+  "answers": [
+   "waive"
+  ],
+  "also": [],
+  "note": "waive a right — отказаться от права. Юридический термин: добровольно и осознанно.",
+  "phrase": "waive right",
+  "relation": "verb+obj",
+  "headword": "right",
+  "sense": "entitlement",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1959
+ },
+ {
+  "id": "c_f84f3dffa617f056",
+  "type": "cloze",
+  "text": "The whole street ___ life on Saturday mornings when the market opened.",
+  "answer": "hummed with",
+  "accept": [
+   "burst/hum/teem with"
+  ],
+  "hint": "h_____ w___",
+  "translation": "Вся улица кипела жизнью субботним утром, когда открывался рынок.",
+  "answers": [
+   "burst with",
+   "hum with",
+   "teem with",
+   "hummed with"
+  ],
+  "also": [],
+  "note": "hum / teem / burst with life — кипеть жизнью. Метафора о людном и оживлённом месте.",
+  "phrase": "burst with life",
+  "relation": "verb+obj",
+  "headword": "life",
+  "sense": "liveliness",
+  "cefr": null,
+  "band": "rare",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 1961
+ },
+ {
+  "id": "c_06cfd248acdfbaf8",
+  "type": "cloze",
+  "text": "Several years ___ before she finally returned to her hometown.",
+  "answer": "passed",
+  "accept": [
+   "elapse",
+   "go by",
+   "pass"
+  ],
+  "hint": "p_____",
+  "translation": "Прошло несколько лет, прежде чем она наконец вернулась в родной город.",
+  "answers": [
+   "elapse",
+   "go by",
+   "pass",
+   "passed"
+  ],
+  "also": [
+   "elapse",
+   "go by"
+  ],
+  "note": "years pass / go by / elapse — годы проходят. elapse формальное, из документов и отчётов.",
+  "phrase": "year elapse",
+  "relation": "noun+verb",
+  "headword": "year",
+  "sense": null,
+  "cefr": null,
+  "band": "rare",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1962
+ },
+ {
+  "id": "c_af639755141bd05f",
+  "type": "cloze",
+  "text": "My old bedroom is now used ___ a home office since I started working from home.",
+  "answer": "as",
+  "accept": [
+   "as"
+  ],
+  "hint": "a_",
+  "translation": "Моя старая спальня теперь используется как домашний кабинет, с тех пор как я работаю из дома.",
+  "answers": [
+   "as"
+  ],
+  "also": [],
+  "note": "use sth as sth — использовать в качестве. Предлог as перед новой ролью предмета.",
+  "phrase": "as use",
+  "relation": "prep",
+  "headword": "use",
+  "sense": null,
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1964
+ },
+ {
+  "id": "c_79d2565b81c9e355",
+  "type": "cloze",
+  "text": "The ancient ruins were built ___ time to survive thousands of years of history.",
+  "answer": "in",
+  "accept": [
+   "in ~"
+  ],
+  "hint": "i_",
+  "translation": "Древние руины были построены так, что пережили тысячелетия истории.",
+  "answers": [
+   "in"
+  ],
+  "also": [],
+  "note": "in time to do sth — вовремя, чтобы успеть. Дальше идёт инфинитив с to.",
+  "phrase": "in time",
+  "relation": "prep",
+  "headword": "time",
+  "sense": "what is measured in minutes, hours, days, etc.",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1979
+ },
+ {
+  "id": "c_ea4c257122169f62",
+  "type": "cloze",
+  "text": "Some people believe the world ___ them success just because they work hard.",
+  "answer": "owes",
+  "accept": [
+   "owe sb sth"
+  ],
+  "hint": "o___",
+  "translation": "Некоторые считают, что мир обязан им успехом просто потому, что они много работают.",
+  "answers": [
+   "owe",
+   "owes"
+  ],
+  "also": [],
+  "note": "the world owes sb sth — мир кому-то должен. Всегда с иронией: об инфантильной претензии.",
+  "phrase": "world owe sb sth",
+  "relation": "noun+verb",
+  "headword": "world",
+  "sense": "life/society",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1983
+ },
+ {
+  "id": "c_856ddf0cb3112cf5",
+  "type": "cloze",
+  "text": "After the accident, she had a ___ look of panic on her face.",
+  "answer": "wild",
+  "accept": [
+   "wild"
+  ],
+  "hint": "w___",
+  "translation": "После аварии на её лице застыл дикий взгляд паники.",
+  "answers": [
+   "wild"
+  ],
+  "also": [],
+  "note": "a wild look — дикий, безумный взгляд. О сильном испуге или потрясении.",
+  "phrase": "wild look",
+  "relation": "prep",
+  "headword": "look",
+  "sense": "exploring/looking for sth",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 1987
+ },
+ {
+  "id": "c_ba21f72e24f834e9",
+  "type": "cloze",
+  "text": "The nurse ___ helped the elderly patient down the hospital corridor.",
+  "answer": "solicitously",
+  "accept": [
+   "solicitously"
+  ],
+  "hint": "s___________",
+  "translation": "Медсестра заботливо помогла пожилому пациенту пройти по больничному коридору.",
+  "answers": [
+   "solicitously"
+  ],
+  "also": [],
+  "note": "solicitously help — заботливо помогать. Книжное наречие: с подчёркнутым вниманием к человеку.",
+  "phrase": "solicitously help",
+  "relation": "adv+verb",
+  "headword": "help",
+  "sense": "do sth for sb",
+  "cefr": null,
+  "band": "rare",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1989
+ },
+ {
+  "id": "c_7cb76954b50932c9",
+  "type": "cloze",
+  "text": "She wondered what her ancestors experienced as they journeyed ___ time.",
+  "answer": "through",
+  "accept": [
+   "through ~"
+  ],
+  "hint": "t______",
+  "translation": "Она задумалась, что пережили её предки, проходя сквозь время.",
+  "answers": [
+   "through"
+  ],
+  "also": [],
+  "note": "through time — сквозь время, на протяжении веков. Книжное; обычное «со временем» — over time.",
+  "phrase": "through time",
+  "relation": "prep",
+  "headword": "time",
+  "sense": "what is measured in minutes, hours, days, etc.",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 1999
+ },
+ {
+  "id": "c_c1055f30c4459296",
+  "type": "cloze",
+  "text": "She took the scenic route on ___ and arrived much later than expected.",
+  "answer": "the way there",
+  "accept": [
+   "the way back/down/forward/here/home/in/out/over/there/up"
+  ],
+  "hint": "t__ w__ t____",
+  "translation": "По дороге туда она поехала живописным маршрутом и приехала гораздо позже, чем рассчитывала.",
+  "answers": [
+   "the way back",
+   "the way down",
+   "the way forward",
+   "the way here",
+   "the way home",
+   "the way in",
+   "the way out",
+   "the way over",
+   "the way there",
+   "the way up"
+  ],
+  "also": [],
+  "note": "the way back / home / out — обратный путь, дорога домой, выход. Существительное way с наречием, без предлога.",
+  "phrase": "the way back",
+  "relation": "phrase",
+  "headword": "way",
+  "sense": "method/style",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2000
+ },
+ {
+  "id": "c_9cb2f7b462d0ac54",
+  "type": "cloze",
+  "text": "Many adults still receive financial support from their ___ home.",
+  "answer": "family",
+  "accept": [
+   "boyhood",
+   "childhood",
+   "family",
+   "marital",
+   "matrimonial",
+   "natural",
+   "parental"
+  ],
+  "hint": "f_____",
+  "translation": "Многие взрослые до сих пор получают финансовую поддержку из родительского дома.",
+  "answers": [
+   "boyhood",
+   "childhood",
+   "family",
+   "marital",
+   "matrimonial",
+   "natural",
+   "parental"
+  ],
+  "also": [
+   "boyhood",
+   "childhood",
+   "marital",
+   "matrimonial",
+   "natural",
+   "parental"
+  ],
+  "note": "childhood / family / parental home — родительский дом, дом детства. Прилагательное уточняет период или родство.",
+  "phrase": "boyhood home",
+  "relation": "adj+noun",
+  "headword": "home",
+  "sense": "place where sb/sth lives",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2006
+ },
+ {
+  "id": "c_0aea9581c43dea8e",
+  "type": "cloze",
+  "text": "My grandmother grew up in a ___ place where there were no roads or electricity.",
+  "answer": "remote",
+  "accept": [
+   "faraway",
+   "out-of-the way",
+   "remote"
+  ],
+  "hint": "r_____",
+  "translation": "Бабушка выросла в глухом месте, где не было ни дорог, ни электричества.",
+  "answers": [
+   "faraway",
+   "out-of-the way",
+   "remote"
+  ],
+  "also": [
+   "faraway",
+   "out-of-the way"
+  ],
+  "note": "a remote / faraway / out-of-the-way place — глухое, отдалённое место. faraway книжное и чуть сказочное.",
+  "phrase": "faraway place",
+  "relation": "adj+noun",
+  "headword": "place",
+  "sense": "particular position/area",
+  "cefr": null,
+  "band": "rare",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2010
+ },
+ {
+  "id": "c_2c545f55439080bb",
+  "type": "cloze",
+  "text": "He ___ his way out of the speeding ticket by explaining he was rushing to the hospital.",
+  "answer": "talked",
+  "accept": [
+   "bluff",
+   "talk",
+   "trick"
+  ],
+  "hint": "t_____",
+  "translation": "Он отговорился от штрафа за превышение скорости, объяснив, что спешил в больницу.",
+  "answers": [
+   "bluff",
+   "talk",
+   "trick",
+   "talked"
+  ],
+  "also": [
+   "bluff",
+   "trick"
+  ],
+  "note": "talk / bluff / trick your way out of sth — выкрутиться разговором. Конструкция «глагол + your way» описывает, как продвигаются.",
+  "phrase": "bluff way",
+  "relation": "verb+obj",
+  "headword": "way",
+  "sense": "method/style",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2018
+ },
+ {
+  "id": "c_3140bcd1371e62f3",
+  "type": "cloze",
+  "text": "Many people ___ world speak more than one language every day.",
+  "answer": "in the",
+  "accept": [
+   "in the ~"
+  ],
+  "hint": "i_ t__",
+  "translation": "Многие люди в мире каждый день говорят больше чем на одном языке.",
+  "answers": [
+   "in the"
+  ],
+  "also": [],
+  "note": "in the world — в мире. Часто в превосходной степени: the biggest in the world.",
+  "phrase": "in the world",
+  "relation": "prep",
+  "headword": "world",
+  "sense": "part of the earth",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2021
+ },
+ {
+  "id": "c_d1dbbf56a6109733",
+  "type": "cloze",
+  "text": "The ___ thing would be to save some money before buying a car.",
+  "answer": "sensible",
+  "accept": [
+   "logical",
+   "obvious",
+   "prudent",
+   "sensible"
+  ],
+  "hint": "s_______",
+  "translation": "Разумнее было бы накопить немного денег, прежде чем покупать машину.",
+  "answers": [
+   "logical",
+   "obvious",
+   "prudent",
+   "sensible"
+  ],
+  "also": [
+   "logical",
+   "obvious",
+   "prudent"
+  ],
+  "note": "the sensible / logical / obvious thing (to do) — разумный шаг. Вводит совет: the sensible thing would be to...",
+  "phrase": "logical thing",
+  "relation": "adj+noun",
+  "headword": "thing",
+  "sense": "what is needed/socially acceptable",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2027
+ },
+ {
+  "id": "c_9e7a3a753125325b",
+  "type": "cloze",
+  "text": "When the teacher ___ the name of a famous scientist, the students became more interested in the lesson.",
+  "answer": "invoked",
+  "accept": [
+   "invoke"
+  ],
+  "hint": "i______",
+  "translation": "Когда учитель упомянул имя знаменитого учёного, ученики заинтересовались уроком.",
+  "answers": [
+   "invoke",
+   "invoked"
+  ],
+  "also": [],
+  "note": "invoke a name — упомянуть имя, чтобы сослаться на авторитет. Книжное, с оттенком призывания.",
+  "phrase": "invoke name",
+  "relation": "verb+obj",
+  "headword": "name",
+  "sense": "word/words sb/sth is known by",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2032
+ },
+ {
+  "id": "c_b02aff7c1d8be286",
+  "type": "cloze",
+  "text": "The children were excited because it was finally time ___ bed.",
+  "answer": "for",
+  "accept": [
+   "~ for"
+  ],
+  "hint": "f__",
+  "translation": "Дети были в восторге, потому что наконец пришло время ложиться спать.",
+  "answers": [
+   "for"
+  ],
+  "also": [],
+  "note": "time for sth — время на что-то. Предлог for перед делом, to — перед глаголом.",
+  "phrase": "time for",
+  "relation": "prep",
+  "headword": "time",
+  "sense": "occasion",
+  "cefr": "B2",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2035
+ },
+ {
+  "id": "c_0b5b941215ac4ca9",
+  "type": "cloze",
+  "text": "My parents often debate ___ social media with us at dinner.",
+  "answer": "the rights and wrongs of",
+  "accept": [
+   "the rights and wrongs of sth"
+  ],
+  "hint": "t__ r_____ a__ w_____ o_",
+  "translation": "Родители часто обсуждают с нами за ужином плюсы и минусы социальных сетей.",
+  "answers": [
+   "the rights and wrongs of"
+  ],
+  "also": [],
+  "note": "the rights and wrongs of sth — все за и против, плюсы и минусы. Устойчивая пара во множественном числе.",
+  "phrase": "the rights and wrongs of sth",
+  "relation": "phrase",
+  "headword": "right",
+  "sense": "what is morally good",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2038
+ },
+ {
+  "id": "c_894d816b3a073129",
+  "type": "cloze",
+  "text": "She decided to explore the world ___ professional cooking after watching cooking shows online.",
+  "answer": "of",
+  "accept": [
+   "~ of"
+  ],
+  "hint": "o_",
+  "translation": "Она решила погрузиться в мир профессиональной кухни, насмотревшись кулинарных шоу в интернете.",
+  "answers": [
+   "of"
+  ],
+  "also": [],
+  "note": "the world of sth — мир чего-то: спорта, моды, финансов. Метафора отдельной среды.",
+  "phrase": "world of",
+  "relation": "prep",
+  "headword": "world",
+  "sense": "life/society",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2039
+ },
+ {
+  "id": "c_b0f9cfabbd27dac6",
+  "type": "cloze",
+  "text": "The bus arrived ___ time for once, so we made it to the meeting without rushing.",
+  "answer": "on",
+  "accept": [
+   "on ~"
+  ],
+  "hint": "o_",
+  "translation": "Автобус на этот раз пришёл вовремя, и мы добрались до встречи без спешки.",
+  "answers": [
+   "on"
+  ],
+  "also": [],
+  "note": "on time — точно в назначенный час. Не путать с in time — «успеть, не опоздать».",
+  "phrase": "on time",
+  "relation": "prep",
+  "headword": "time",
+  "sense": "time when sth happens/should happen",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2052
+ },
+ {
+  "id": "c_cb4af97ce81a6a2e",
+  "type": "cloze",
+  "text": "The two departments had to ___ their work carefully to meet the deadline.",
+  "answer": "coordinate",
+  "accept": [
+   "coordinate"
+  ],
+  "hint": "c_________",
+  "translation": "Двум отделам пришлось тщательно согласовывать работу, чтобы уложиться в срок.",
+  "answers": [
+   "coordinate"
+  ],
+  "also": [],
+  "note": "coordinate work — согласовывать работу. Между отделами, людьми, этапами.",
+  "phrase": "coordinate work",
+  "relation": "verb+obj",
+  "headword": "work",
+  "sense": "job",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2054
+ },
+ {
+  "id": "c_ef3a9cbd5ad38b7e",
+  "type": "cloze",
+  "text": "There are millions of different species of insects ___ world.",
+  "answer": "in the",
+  "accept": [
+   "in the ~"
+  ],
+  "hint": "i_ t__",
+  "translation": "В мире существуют миллионы разных видов насекомых.",
+  "answers": [
+   "in the"
+  ],
+  "also": [],
+  "note": "in the world — на свете. Усиливает вопрос или превосходную степень: what in the world?",
+  "phrase": "in the world",
+  "relation": "prep",
+  "headword": "world",
+  "sense": "the earth/its people",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2056
+ },
+ {
+  "id": "c_d39ad50558a3b918",
+  "type": "cloze",
+  "text": "He took a look ___ the refrigerator to see what was available for dinner.",
+  "answer": "into",
+  "accept": [
+   "~ in/into"
+  ],
+  "hint": "i___",
+  "translation": "Он заглянул в холодильник посмотреть, что есть на ужин.",
+  "answers": [
+   "in",
+   "into"
+  ],
+  "also": [],
+  "note": "take a look into sth — заглянуть внутрь: take a look into the refrigerator. Здесь into обозначает направление взгляда; переносное look into a problem — «изучить вопрос, разобраться» — другое употребление.",
+  "phrase": "look in",
+  "relation": "prep",
+  "headword": "look",
+  "sense": "act of looking at/considering sth",
+  "cefr": "A1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2059
+ },
+ {
+  "id": "c_83248bdf29fd246c",
+  "type": "cloze",
+  "text": "We need to ___ before we can move forward as a team.",
+  "answer": "put things straight",
+  "accept": [
+   "get/put things straight"
+  ],
+  "hint": "p__ t_____ s_______",
+  "translation": "Нам нужно всё прояснить, прежде чем двигаться дальше как команда.",
+  "answers": [
+   "get things straight",
+   "put things straight"
+  ],
+  "also": [],
+  "note": "get / put things straight — расставить всё по местам, внести ясность. Разговорное, часто после недоразумения.",
+  "phrase": "get things straight",
+  "relation": "phrase",
+  "headword": "thing",
+  "sense": "things: general situation, as it affects sb",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2061
+ },
+ {
+  "id": "c_5117ad315ef8ca75",
+  "type": "cloze",
+  "text": "My daughter got a place ___ the school orchestra after passing her audition.",
+  "answer": "in",
+  "accept": [
+   "~ at/in"
+  ],
+  "hint": "i_",
+  "translation": "Дочь получила место в школьном оркестре, пройдя прослушивание.",
+  "answers": [
+   "at",
+   "in"
+  ],
+  "also": [],
+  "note": "a place at / in sth — место в учебном заведении или организации. Британцы говорят a place at university.",
+  "phrase": "place at",
+  "relation": "prep",
+  "headword": "place",
+  "sense": "opportunity to study at a college, play for a team, etc.",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2062
+ },
+ {
+  "id": "c_202b0acfe31df529",
+  "type": "cloze",
+  "text": "The famous dancer performed ___ show last night and received a standing ovation.",
+  "answer": "in the",
+  "accept": [
+   "in a/the ~"
+  ],
+  "hint": "i_ t__",
+  "translation": "Знаменитый танцор вчера выступил в шоу и сорвал овации.",
+  "answers": [
+   "in a",
+   "in the"
+  ],
+  "also": [],
+  "note": "in a show — в спектакле, в передаче. Предлог in про участие в постановке.",
+  "phrase": "in a show",
+  "relation": "prep",
+  "headword": "show",
+  "sense": "type of entertainment",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2064
+ },
+ {
+  "id": "c_bfb2ec83adc9558c",
+  "type": "cloze",
+  "text": "My English has improved a lot ___ time since I started taking lessons.",
+  "answer": "over",
+  "accept": [
+   "over ~"
+  ],
+  "hint": "o___",
+  "translation": "Мой английский со временем сильно улучшился с тех пор, как я начал брать уроки.",
+  "answers": [
+   "over"
+  ],
+  "also": [],
+  "note": "over time — со временем, постепенно. Самый обычный способ сказать о медленном изменении.",
+  "phrase": "over time",
+  "relation": "prep",
+  "headword": "time",
+  "sense": "what is measured in minutes, hours, days, etc.",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 2068
+ },
+ {
+  "id": "c_31f1af0085c024ea",
+  "type": "cloze",
+  "text": "I finally found my way ___ the confusing airport terminal after asking several people for directions.",
+  "answer": "out of",
+  "accept": [
+   "~ from",
+   "~ out of"
+  ],
+  "hint": "o__ o_",
+  "translation": "Я наконец нашёл выход из запутанного терминала аэропорта, расспросив нескольких человек.",
+  "answers": [
+   "from",
+   "out of"
+  ],
+  "also": [
+   "~ from"
+  ],
+  "note": "the way out of sth — выход из положения или из здания. Предлог of обязателен.",
+  "phrase": "way from",
+  "relation": "prep",
+  "headword": "way",
+  "sense": "method/style",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2069
+ },
+ {
+  "id": "c_8349818f88f8873b",
+  "type": "cloze",
+  "text": "The opening dance number ___ show was performed by professional dancers.",
+  "answer": "from the",
+  "accept": [
+   "from a/the ~"
+  ],
+  "hint": "f___ t__",
+  "translation": "Открывающий танцевальный номер шоу исполнили профессиональные танцоры.",
+  "answers": [
+   "from a",
+   "from the"
+  ],
+  "also": [],
+  "note": "from a show — из спектакля, из передачи. О номере или отрывке.",
+  "phrase": "from a show",
+  "relation": "prep",
+  "headword": "show",
+  "sense": "type of entertainment",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2080
+ },
+ {
+  "id": "c_fde90e8638d0b77c",
+  "type": "cloze",
+  "text": "The restaurant's name ___ it specializes in fresh seafood dishes from the Mediterranean coast.",
+  "answer": "suggests",
+  "accept": [
+   "imply sth",
+   "suggest sth"
+  ],
+  "hint": "s_______",
+  "translation": "Название ресторана намекает, что там специализируются на свежих морепродуктах со Средиземноморья.",
+  "answers": [
+   "imply",
+   "suggest",
+   "suggests"
+  ],
+  "also": [
+   "imply sth"
+  ],
+  "note": "the name implies / suggests sth — название намекает на что-то. Оборот as the name suggests — «как следует из названия».",
+  "phrase": "name imply sth",
+  "relation": "noun+verb",
+  "headword": "name",
+  "sense": "word/words sb/sth is known by",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 2082
+ },
+ {
+  "id": "c_56405544288d0616",
+  "type": "cloze",
+  "text": "She pushed her way ___ the crowded market to reach the vegetable stall.",
+  "answer": "through",
+  "accept": [
+   "~ through"
+  ],
+  "hint": "t______",
+  "translation": "Она протиснулась через людный рынок к овощному прилавку.",
+  "answers": [
+   "through"
+  ],
+  "also": [],
+  "note": "the way through sth — путь сквозь что-то: толпу, лес, документ.",
+  "phrase": "way through",
+  "relation": "prep",
+  "headword": "way",
+  "sense": "method/style",
+  "cefr": "B2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2085
+ },
+ {
+  "id": "c_94c74122b9eda479",
+  "type": "cloze",
+  "text": "I watched the entire movie ___ without checking my phone.",
+  "answer": "from beginning to end",
+  "accept": [
+   "from beginning to end"
+  ],
+  "hint": "f___ b________ t_ e__",
+  "translation": "Я посмотрел весь фильм от начала до конца, ни разу не заглянув в телефон.",
+  "answers": [
+   "from beginning to end"
+  ],
+  "also": [],
+  "note": "from beginning to end — от начала до конца. Без артиклей в этом обороте.",
+  "phrase": "from beginning to end end",
+  "relation": "prep",
+  "headword": "end",
+  "sense": "last part of sth",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2097
+ },
+ {
+  "id": "c_e0be0fd0a3b045e7",
+  "type": "cloze",
+  "text": "The store will be closed ___ time you arrive after work.",
+  "answer": "by the",
+  "accept": [
+   "by the ~"
+  ],
+  "hint": "b_ t__",
+  "translation": "Магазин уже закроется к тому времени, как ты приедешь после работы.",
+  "answers": [
+   "by the"
+  ],
+  "also": [],
+  "note": "by the time — к тому времени, как. Вводит придаточное, дальше идёт настоящее время вместо будущего.",
+  "phrase": "by the time",
+  "relation": "prep",
+  "headword": "time",
+  "sense": "occasion",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2100
+ },
+ {
+  "id": "c_9f4310ca50b1281d",
+  "type": "cloze",
+  "text": "The quickest way ___ the station is through the park instead of the main road.",
+  "answer": "to",
+  "accept": [
+   "~ from",
+   "~ to"
+  ],
+  "hint": "t_",
+  "translation": "Быстрее всего добраться до вокзала через парк, а не по главной дороге.",
+  "answers": [
+   "from",
+   "to"
+  ],
+  "also": [
+   "~ from"
+  ],
+  "note": "the way from X to Y — дорога от одного места к другому. Пара предлогов from и to.",
+  "phrase": "way from",
+  "relation": "prep",
+  "headword": "way",
+  "sense": "distance in space/time",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2101
+ },
+ {
+  "id": "c_f45bfe48f422fddc",
+  "type": "cloze",
+  "text": "The small shop managed to ___ again after the new manager arrived.",
+  "answer": "get things moving",
+  "accept": [
+   "get/keep things going/moving"
+  ],
+  "hint": "g__ t_____ m_____",
+  "translation": "Маленькому магазину удалось снова сдвинуть дело с мёртвой точки, когда пришёл новый управляющий.",
+  "answers": [
+   "get things going",
+   "get things moving",
+   "keep things going",
+   "keep things moving"
+  ],
+  "also": [],
+  "note": "get / keep things moving — сдвинуть дело с места, не дать ему заглохнуть. Разговорное.",
+  "phrase": "get things going",
+  "relation": "phrase",
+  "headword": "thing",
+  "sense": "things: general situation, as it affects sb",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2109
+ },
+ {
+  "id": "c_4a89d943a1b6f4b5",
+  "type": "cloze",
+  "text": "She ___ a thought for her old friend while walking past their favorite café.",
+  "answer": "spared",
+  "accept": [
+   "give sb/sth",
+   "spare (sb)"
+  ],
+  "hint": "s_____",
+  "translation": "Она вспомнила о старом друге, проходя мимо их любимого кафе.",
+  "answers": [
+   "give",
+   "spare",
+   "spared"
+  ],
+  "also": [
+   "give sb/sth"
+  ],
+  "note": "spare a thought for sb — вспомнить о ком-то, посочувствовать. Часто как призыв: spare a thought for those who...",
+  "phrase": "give sb thought",
+  "relation": "verb+obj",
+  "headword": "thought",
+  "sense": "process/act of thinking",
+  "cefr": null,
+  "band": "rare",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2115
+ },
+ {
+  "id": "c_db4f6ac63267be32",
+  "type": "cloze",
+  "text": "There are several different ways ___ get to the city center from here.",
+  "answer": "to",
+  "accept": [
+   "~ to"
+  ],
+  "hint": "t_",
+  "translation": "Отсюда до центра города можно добраться несколькими разными способами.",
+  "answers": [
+   "to"
+  ],
+  "also": [],
+  "note": "the way to somewhere — дорога куда-то. Артикль the обязателен: ask the way to the station.",
+  "phrase": "way to",
+  "relation": "prep",
+  "headword": "way",
+  "sense": "method/style",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2117
+ },
+ {
+  "id": "c_5907021075bf98a2",
+  "type": "cloze",
+  "text": "She cast a ___ look around the room before whispering the secret to her friend.",
+  "answer": "furtive",
+  "accept": [
+   "furtive"
+  ],
+  "hint": "f______",
+  "translation": "Она украдкой оглядела комнату, прежде чем шепнуть подруге секрет.",
+  "answers": [
+   "furtive"
+  ],
+  "also": [],
+  "note": "a furtive look — украдкой брошенный взгляд. Прилагательное furtive — «скрытный, вороватый».",
+  "phrase": "furtive look",
+  "relation": "adj+noun",
+  "headword": "look",
+  "sense": "act of looking at/considering sth",
+  "cefr": "B1",
+  "band": "rare",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2123
+ },
+ {
+  "id": "c_2bd4dafe9a645449",
+  "type": "cloze",
+  "text": "During our road trip to the coast, we stopped at several interesting towns ___ way.",
+  "answer": "along the",
+  "accept": [
+   "along the ~"
+  ],
+  "hint": "a____ t__",
+  "translation": "Во время поездки к морю мы останавливались в нескольких интересных городках по пути.",
+  "answers": [
+   "along the"
+  ],
+  "also": [],
+  "note": "along the way — по пути, попутно. И буквально о дороге, и о ходе дела.",
+  "phrase": "along the way",
+  "relation": "prep",
+  "headword": "way",
+  "sense": "method/style",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2133
+ },
+ {
+  "id": "c_ffc7633aec853cf9",
+  "type": "cloze",
+  "text": "My parents enjoy reading books, watching films, that ___ on weekends.",
+  "answer": "kind of thing",
+  "accept": [
+   "kind/sort of thing"
+  ],
+  "hint": "k___ o_ t____",
+  "translation": "Родители по выходным любят читать книги, смотреть фильмы и всё в таком духе.",
+  "answers": [
+   "kind of thing",
+   "sort of thing"
+  ],
+  "also": [],
+  "note": "that kind / sort of thing — что-то в этом роде. Разговорная формула для обобщения.",
+  "phrase": "kind of thing",
+  "relation": "phrase",
+  "headword": "thing",
+  "sense": "fact/event/situation/action",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2157
+ },
+ {
+  "id": "c_fe0a6affd087a4b0",
+  "type": "cloze",
+  "text": "There is a scenic path that goes way ___ the river to the village.",
+  "answer": "across",
+  "accept": [
+   "~ across"
+  ],
+  "hint": "a_____",
+  "translation": "Есть живописная тропа, которая идёт через реку до самой деревни.",
+  "answers": [
+   "across"
+  ],
+  "also": [],
+  "note": "the way across sth — путь через что-то: реку, площадь, поле.",
+  "phrase": "way across",
+  "relation": "prep",
+  "headword": "way",
+  "sense": "method/style",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2177
+ },
+ {
+  "id": "c_a8506d284921c5e7",
+  "type": "cloze",
+  "text": "Scientists from different countries ___ world are working together to find a cure for the disease.",
+  "answer": "across the",
+  "accept": [
+   "across the ~"
+  ],
+  "hint": "a_____ t__",
+  "translation": "Учёные из разных стран мира работают сообща, чтобы найти лекарство от болезни.",
+  "answers": [
+   "across the"
+  ],
+  "also": [],
+  "note": "across the world — по всему миру. Синоним around the world, чуть формальнее.",
+  "phrase": "across the world",
+  "relation": "prep",
+  "headword": "world",
+  "sense": "the earth/its people",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2180
+ },
+ {
+  "id": "c_dddfa0ab412aab2f",
+  "type": "cloze",
+  "text": "I really like one thing ___ this job—my coworkers are friendly and helpful.",
+  "answer": "about",
+  "accept": [
+   "~ about"
+  ],
+  "hint": "a____",
+  "translation": "Мне очень нравится в этой работе одна вещь — коллеги приветливые и отзывчивые.",
+  "answers": [
+   "about"
+  ],
+  "also": [],
+  "note": "the thing about sth — что характерно для чего-то. Зачин пояснения: the thing about London is...",
+  "phrase": "thing about",
+  "relation": "prep",
+  "headword": "thing",
+  "sense": "fact/event/situation/action",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2185
+ },
+ {
+  "id": "c_8203979cd13044f5",
+  "type": "cloze",
+  "text": "The restaurant was ___ named The Broken Compass, but everyone loved eating there.",
+  "answer": "oddly",
+  "accept": [
+   "curiously",
+   "delightfully",
+   "exotically",
+   "grandly",
+   "improbably",
+   "oddly",
+   "quaintly",
+   "romantically",
+   "strangely",
+   "wonderfully"
+  ],
+  "hint": "o____",
+  "translation": "Ресторан носил странное название «Сломанный компас», но всем нравилось там есть.",
+  "answers": [
+   "curiously",
+   "delightfully",
+   "exotically",
+   "grandly",
+   "improbably",
+   "oddly",
+   "quaintly",
+   "romantically",
+   "strangely",
+   "wonderfully"
+  ],
+  "also": [
+   "curiously",
+   "delightfully",
+   "exotically",
+   "grandly",
+   "improbably",
+   "quaintly",
+   "romantically",
+   "strangely",
+   "wonderfully"
+  ],
+  "note": "oddly / curiously / romantically named — со странным, причудливым названием. Наречие оценивает название.",
+  "phrase": "curiously name",
+  "relation": "adv+verb",
+  "headword": "name",
+  "sense": null,
+  "cefr": "B1",
+  "band": "extended",
+  "ambiguity": "medium",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 2202
+ },
+ {
+  "id": "c_3ce78fc1074cdf53",
+  "type": "cloze",
+  "text": "The promise of a bonus ___ her to work late every evening that month.",
+  "answer": "motivated",
+  "accept": [
+   "motivate sb to"
+  ],
+  "hint": "m________",
+  "translation": "Обещание премии подтолкнуло её работать допоздна весь тот месяц.",
+  "answers": [
+   "motivate",
+   "motivated"
+  ],
+  "also": [],
+  "note": "motivate sb to do sth — побудить кого-то к действию. После motivate обязателен инфинитив с to.",
+  "phrase": "motivate sb to work",
+  "relation": "verb+obj",
+  "headword": "work",
+  "sense": "do a job/task",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2205
+ },
+ {
+  "id": "c_783b95953d870895",
+  "type": "cloze",
+  "text": "After living in the abandoned house for months, the group established ___ rights.",
+  "answer": "squatters'",
+  "accept": [
+   "squatters'"
+  ],
+  "hint": "s________",
+  "translation": "Прожив в заброшенном доме несколько месяцев, группа приобрела права самовольных жильцов.",
+  "answers": [
+   "squatters'"
+  ],
+  "also": [],
+  "note": "squatters' rights — права самовольных жильцов. С апострофом после s: права принадлежат им.",
+  "phrase": "squatters' right",
+  "relation": "adj+noun",
+  "headword": "right",
+  "sense": "entitlement",
+  "cefr": null,
+  "band": "rare",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2219
+ },
+ {
+  "id": "c_241ddf8a84b83b1b",
+  "type": "cloze",
+  "text": "The superpower sought world ___ during the Cold War era.",
+  "answer": "domination",
+  "accept": [
+   "domination"
+  ],
+  "hint": "d_________",
+  "translation": "Сверхдержава стремилась к мировому господству в эпоху холодной войны.",
+  "answers": [
+   "domination"
+  ],
+  "also": [],
+  "note": "world domination — мировое господство. Из политики и, чаще, из шуток про корпорации.",
+  "phrase": "world domination",
+  "relation": "noun+noun",
+  "headword": "world",
+  "sense": "the earth/its people",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 2220
+ },
+ {
+  "id": "c_4b42a3a5e46e975b",
+  "type": "cloze",
+  "text": "We spent the entire afternoon ___ house because of the heavy rain outside.",
+  "answer": "in the",
+  "accept": [
+   "in a/the ~"
+  ],
+  "hint": "i_ t__",
+  "translation": "Мы просидели весь день дома из-за сильного дождя на улице.",
+  "answers": [
+   "in a",
+   "in the"
+  ],
+  "also": [],
+  "note": "in the house — в доме. Предлог in про нахождение внутри, at про адрес.",
+  "phrase": "in a house",
+  "relation": "prep",
+  "headword": "house",
+  "sense": "building that is made for one family to live in",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2226
+ },
+ {
+  "id": "c_bd50d45b65aa078d",
+  "type": "cloze",
+  "text": "That documentary remains the ___ work on climate change for most scientists today.",
+  "answer": "seminal",
+  "accept": [
+   "definitive",
+   "seminal"
+  ],
+  "hint": "s______",
+  "translation": "Для большинства учёных этот документальный фильм до сих пор остаётся основополагающей работой о климате.",
+  "answers": [
+   "definitive",
+   "seminal"
+  ],
+  "also": [
+   "definitive"
+  ],
+  "note": "the definitive / seminal work (on sth) — основополагающий труд. seminal — задавший направление целой области.",
+  "phrase": "definitive work",
+  "relation": "adj+noun",
+  "headword": "work",
+  "sense": "book/music/art",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2231
+ },
+ {
+  "id": "c_3a7cb574409e2608",
+  "type": "cloze",
+  "text": "My grandmother often talks about the ___ world of her childhood before the internet existed.",
+  "answer": "vanishing",
+  "accept": [
+   "vanishing"
+  ],
+  "hint": "v________",
+  "translation": "Бабушка часто говорит об исчезающем мире её детства, когда интернета ещё не было.",
+  "answers": [
+   "vanishing"
+  ],
+  "also": [],
+  "note": "a vanishing world — уходящий мир. Причастие vanishing — «исчезающий на глазах».",
+  "phrase": "vanishing world",
+  "relation": "adj+noun",
+  "headword": "world",
+  "sense": "life/society",
+  "cefr": "B1",
+  "band": "extended",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2246
+ },
+ {
+  "id": "c_0ffc6517928a0ff7",
+  "type": "cloze",
+  "text": "We finally ___ a home after searching for six months in the city.",
+  "answer": "found",
+  "accept": [
+   "find (sb/sth)",
+   "give sb/sth"
+  ],
+  "hint": "f____",
+  "translation": "Мы наконец нашли жильё после шести месяцев поисков в городе.",
+  "answers": [
+   "find",
+   "give",
+   "found"
+  ],
+  "also": [
+   "give sb/sth"
+  ],
+  "note": "find sb a home — пристроить, найти дом. Часто о животных из приюта.",
+  "phrase": "find sb home",
+  "relation": "verb+obj",
+  "headword": "home",
+  "sense": "place where sb/sth lives",
+  "cefr": null,
+  "band": "rare",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2248
+ },
+ {
+  "id": "c_3ec418b4ec7ad059",
+  "type": "cloze",
+  "text": "The bus arrived twenty minutes ___ time, so we missed our appointment.",
+  "answer": "behind",
+  "accept": [
+   "behind ~"
+  ],
+  "hint": "b_____",
+  "translation": "Автобус приехал с опозданием на двадцать минут, и мы не успели на встречу.",
+  "answers": [
+   "behind"
+  ],
+  "also": [],
+  "note": "behind time — с опозданием. Книжнее, чем late; часто о транспорте и расписании.",
+  "phrase": "behind time",
+  "relation": "prep",
+  "headword": "time",
+  "sense": "time when sth happens/should happen",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2255
+ },
+ {
+  "id": "c_5131d9ec6f580a72",
+  "type": "cloze",
+  "text": "I picked up some groceries ___ way home from work yesterday.",
+  "answer": "on the",
+  "accept": [
+   "on the/your ~"
+  ],
+  "hint": "o_ t__",
+  "translation": "Вчера по дороге с работы я купил продуктов.",
+  "answers": [
+   "on the",
+   "on your"
+  ],
+  "also": [],
+  "note": "on the way, on your way — по дороге. Оборот on my way home — «по пути домой».",
+  "phrase": "on the way",
+  "relation": "prep",
+  "headword": "way",
+  "sense": "method/style",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2269
+ },
+ {
+  "id": "c_0c2f93ce80169ae7",
+  "type": "cloze",
+  "text": "My grandfather could ___ us a thing or two about fishing after fifty years on the river.",
+  "answer": "teach",
+  "accept": [
+   "know/learn/teach sb a thing or two"
+  ],
+  "hint": "t____",
+  "translation": "Дед мог бы кое-чему нас научить в рыбалке после пятидесяти лет на реке.",
+  "answers": [
+   "know",
+   "learn",
+   "teach"
+  ],
+  "also": [],
+  "note": "teach / know a thing or two — знать толк, кое-чему научить. Скромное на вид, но хвалебное выражение.",
+  "phrase": "know sb a thing or two",
+  "relation": "phrase",
+  "headword": "thing",
+  "sense": "fact/event/situation/action",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2277
+ },
+ {
+  "id": "c_79f8657c2606dc53",
+  "type": "cloze",
+  "text": "I need to move my car ___ way so the delivery truck can park here.",
+  "answer": "out of the",
+  "accept": [
+   "out of the/your ~"
+  ],
+  "hint": "o__ o_ t__",
+  "translation": "Мне надо убрать машину с дороги, чтобы здесь припарковался грузовик с доставкой.",
+  "answers": [
+   "out of the",
+   "out of your"
+  ],
+  "also": [],
+  "note": "out of the way — в сторону, не мешая. Глагол get out of the way — «посторониться».",
+  "phrase": "out of the way",
+  "relation": "prep",
+  "headword": "way",
+  "sense": "method/style",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2282
+ },
+ {
+  "id": "c_afaded4c691d6f6e",
+  "type": "cloze",
+  "text": "Scientists from ___ world are working together to find a cure for the disease.",
+  "answer": "throughout the",
+  "accept": [
+   "throughout the ~"
+  ],
+  "hint": "t_________ t__",
+  "translation": "Учёные со всего мира работают сообща, чтобы найти лекарство от болезни.",
+  "answers": [
+   "throughout the"
+  ],
+  "also": [],
+  "note": "throughout the world — по всему миру. Формальнее, чем all over the world.",
+  "phrase": "throughout the world",
+  "relation": "prep",
+  "headword": "world",
+  "sense": "the earth/its people",
+  "cefr": "B1",
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2285
+ },
+ {
+  "id": "c_045c754113c1ea46",
+  "type": "cloze",
+  "text": "It was an ___ thing to do, leaving without saying goodbye to anyone at the party.",
+  "answer": "awful",
+  "accept": [
+   "appalling",
+   "awful",
+   "dreadful",
+   "horrible",
+   "terrible"
+  ],
+  "hint": "a____",
+  "translation": "Это был ужасный поступок — уйти с вечеринки, ни с кем не попрощавшись.",
+  "answers": [
+   "appalling",
+   "awful",
+   "dreadful",
+   "horrible",
+   "terrible"
+  ],
+  "also": [
+   "appalling",
+   "dreadful",
+   "horrible",
+   "terrible"
+  ],
+  "note": "an awful / terrible / dreadful thing — ужасная вещь или поступок. Сильная моральная оценка.",
+  "phrase": "appalling thing",
+  "relation": "adj+noun",
+  "headword": "thing",
+  "sense": "fact/event/situation/action",
+  "cefr": "B1",
+  "band": "extended",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2290
+ },
+ {
+  "id": "c_d5b604b0d1fbbe84",
+  "type": "cloze",
+  "text": "My grandmother has an unusual name ___ Polish origin that nobody can pronounce correctly.",
+  "answer": "of",
+  "accept": [
+   "~ for/of"
+  ],
+  "hint": "o_",
+  "translation": "У бабушки необычное имя польского происхождения, которое никто не может выговорить.",
+  "answers": [
+   "for",
+   "of"
+  ],
+  "also": [],
+  "note": "a name of Polish origin, a name for sth — имя такого-то происхождения. Предлог of перед происхождением.",
+  "phrase": "name for",
+  "relation": "prep",
+  "headword": "name",
+  "sense": "word/words sb/sth is known by",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 2293
+ },
+ {
+  "id": "c_2dafd205205d7855",
+  "type": "cloze",
+  "text": "The time ___ for us to finally open our own restaurant after years of planning.",
+  "answer": "was ripe",
+  "accept": [
+   "be ripe"
+  ],
+  "hint": "w__ r___",
+  "translation": "Настало подходящее время наконец открыть свой ресторан после лет планирования.",
+  "answers": [
+   "be ripe",
+   "was ripe"
+  ],
+  "also": [],
+  "note": "the time is ripe (for sth) — время созрело. Книжная метафора урожая.",
+  "phrase": "time be ripe",
+  "relation": "noun+verb",
+  "headword": "time",
+  "sense": "occasion",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2294
+ },
+ {
+  "id": "c_cfc4c96f7c41421e",
+  "type": "cloze",
+  "text": "She prepared her presentation slides ___ time so she wouldn't feel stressed before the meeting.",
+  "answer": "ahead of",
+  "accept": [
+   "ahead of ~"
+  ],
+  "hint": "a____ o_",
+  "translation": "Она подготовила слайды для презентации заранее, чтобы не нервничать перед встречей.",
+  "answers": [
+   "ahead of"
+  ],
+  "also": [],
+  "note": "ahead of time — заранее, досрочно. Синоним in advance, чуть разговорнее.",
+  "phrase": "ahead of time",
+  "relation": "prep",
+  "headword": "time",
+  "sense": "time when sth happens/should happen",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2307
+ },
+ {
+  "id": "c_f17e66b6117080e2",
+  "type": "cloze",
+  "text": "Police officers spent years doing ___ work to catch the criminal gang.",
+  "answer": "undercover",
+  "accept": [
+   "undercover"
+  ],
+  "hint": "u_________",
+  "translation": "Полицейские годами работали под прикрытием, чтобы поймать преступную группировку.",
+  "answers": [
+   "undercover"
+  ],
+  "also": [],
+  "note": "undercover work — работа под прикрытием. Из полицейской и журналистской лексики.",
+  "phrase": "undercover work",
+  "relation": "adj+noun",
+  "headword": "work",
+  "sense": "effort/product of effort",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2309
+ },
+ {
+  "id": "c_35b445eb9fdacd87",
+  "type": "cloze",
+  "text": "Sarah enjoys painting, playing guitar, and ___, volunteering at the local animal shelter.",
+  "answer": "amongst other things",
+  "accept": [
+   "among/amongst other things"
+  ],
+  "hint": "a______ o____ t_____",
+  "translation": "Сара любит рисовать, играть на гитаре и, помимо прочего, помогает в приюте для животных.",
+  "answers": [
+   "among other things",
+   "amongst other things"
+  ],
+  "also": [],
+  "note": "among other things — помимо прочего. Показывает, что список неполный.",
+  "phrase": "among other things",
+  "relation": "phrase",
+  "headword": "thing",
+  "sense": "fact/event/situation/action",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2315
+ },
+ {
+  "id": "c_4ce6f424a0f19c66",
+  "type": "cloze",
+  "text": "Her travels in Asia gave her a completely different ___.",
+  "answer": "perception of the world",
+  "accept": [
+   "experience/knowledge/perception of the world",
+   "the eyes of the world"
+  ],
+  "hint": "p_________ o_ t__ w____",
+  "translation": "Поездки по Азии полностью изменили её восприятие мира.",
+  "answers": [
+   "experience of the world",
+   "knowledge of the world",
+   "perception of the world",
+   "the eyes of the world"
+  ],
+  "also": [
+   "the eyes of the world"
+  ],
+  "note": "experience / knowledge of the world — жизненный опыт, знание жизни. Не про географию, а про людей.",
+  "phrase": "experience of the world",
+  "relation": "phrase",
+  "headword": "world",
+  "sense": "life/society",
+  "cefr": null,
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [
+   "proper_noun"
+  ],
+  "position": 2323
+ },
+ {
+  "id": "c_1b0692988c08f9bf",
+  "type": "cloze",
+  "text": "She decided to stay in the relationship ___, despite all the problems.",
+  "answer": "until the bitter end",
+  "accept": [
+   "to/until the bitter end"
+  ],
+  "hint": "u____ t__ b_____ e__",
+  "translation": "Она решила оставаться в отношениях до самого горького конца, несмотря на все проблемы.",
+  "answers": [
+   "to the bitter end",
+   "until the bitter end"
+  ],
+  "also": [],
+  "note": "to the bitter end — до самого конца, несмотря ни на что. Всегда с оттенком упрямства или страдания.",
+  "phrase": "to the bitter end end",
+  "relation": "prep",
+  "headword": "end",
+  "sense": "last part of sth",
+  "cefr": "B1",
+  "band": "common",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2340
+ },
+ {
+  "id": "c_dcb42011277e1b7d",
+  "type": "cloze",
+  "text": "His involvement in the scandal seriously ___ the name of the charity organization.",
+  "answer": "damaged",
+  "accept": [
+   "blacken",
+   "damage"
+  ],
+  "hint": "d______",
+  "translation": "Его участие в скандале серьёзно подорвало репутацию благотворительной организации.",
+  "answers": [
+   "blacken",
+   "damage",
+   "damaged"
+  ],
+  "also": [
+   "blacken"
+  ],
+  "note": "blacken / damage sb's name — очернить, подпортить репутацию. Метафора пятна на добром имени.",
+  "phrase": "blacken name",
+  "relation": "verb+obj",
+  "headword": "name",
+  "sense": "reputation",
+  "cefr": "B1",
+  "band": "rare",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2341
+ },
+ {
+  "id": "c_0ad70e482339acf8",
+  "type": "cloze",
+  "text": "My brother works ___ a tech startup in the city center.",
+  "answer": "for",
+  "accept": [
+   "for"
+  ],
+  "hint": "f__",
+  "translation": "Брат работает в технологическом стартапе в центре города.",
+  "answers": [
+   "for"
+  ],
+  "also": [],
+  "note": "for work — для работы, по работе. Оборот leave for work — «уйти на работу».",
+  "phrase": "for work",
+  "relation": "prep",
+  "headword": "work",
+  "sense": "do a job/task",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2354
+ },
+ {
+  "id": "c_149dcc15dd7b49d7",
+  "type": "cloze",
+  "text": "The team has been working ___ local communities to improve the neighborhood park.",
+  "answer": "with",
+  "accept": [
+   "~ with"
+  ],
+  "hint": "w___",
+  "translation": "Команда работает с местными жителями над благоустройством районного парка.",
+  "answers": [
+   "with"
+  ],
+  "also": [],
+  "note": "work with sb/sth — работать с кем-то или чем-то. Предлог with про партнёрство и инструменты.",
+  "phrase": "work with",
+  "relation": "prep",
+  "headword": "work",
+  "sense": "effort/product of effort",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2364
+ },
+ {
+  "id": "c_47be9befe2893825",
+  "type": "cloze",
+  "text": "I discovered my best friend ___ work at the coffee shop downtown.",
+  "answer": "through",
+  "accept": [
+   "through ~"
+  ],
+  "hint": "t______",
+  "translation": "Я познакомился с лучшим другом через работу в кофейне в центре.",
+  "answers": [
+   "through"
+  ],
+  "also": [],
+  "note": "through work — через работу, благодаря ей. О знакомствах и связях: I met him through work.",
+  "phrase": "through work",
+  "relation": "prep",
+  "headword": "work",
+  "sense": "job",
+  "cefr": "B2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2374
+ },
+ {
+  "id": "c_50312ba0bcb29294",
+  "type": "cloze",
+  "text": "My sister is working ___ her science project and needs help this weekend.",
+  "answer": "on",
+  "accept": [
+   "~ on"
+  ],
+  "hint": "o_",
+  "translation": "Сестра делает проект по естествознанию, и в эти выходные ей нужна помощь.",
+  "answers": [
+   "on"
+  ],
+  "also": [],
+  "note": "work on sth — работать над чем-то. Предлог on перед проектом или задачей.",
+  "phrase": "work on",
+  "relation": "prep",
+  "headword": "work",
+  "sense": "effort/product of effort",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2383
+ },
+ {
+  "id": "c_56096300c80f36e2",
+  "type": "cloze",
+  "text": "The team has been working ___ improving customer service at the restaurant.",
+  "answer": "on",
+  "accept": [
+   "on"
+  ],
+  "hint": "o_",
+  "translation": "Команда работает над улучшением обслуживания гостей в ресторане.",
+  "answers": [
+   "on"
+  ],
+  "also": [],
+  "note": "start work on sth — приступить к работе над чем-то. Предлог on обязателен.",
+  "phrase": "on work",
+  "relation": "prep",
+  "headword": "work",
+  "sense": "do a job/task",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2391
+ },
+ {
+  "id": "c_559f83ae3cc392ad",
+  "type": "cloze",
+  "text": "After his injury, he didn't want to ___ at work, so he returned early.",
+  "answer": "let things slide",
+  "accept": [
+   "let things slide/slip"
+  ],
+  "hint": "l__ t_____ s____",
+  "translation": "После травмы он не хотел запускать дела на работе и вышел раньше срока.",
+  "answers": [
+   "let things slide",
+   "let things slip"
+  ],
+  "also": [],
+  "note": "let things slide — запустить дела, пустить на самотёк. Всегда с осуждением.",
+  "phrase": "let things slide",
+  "relation": "phrase",
+  "headword": "thing",
+  "sense": "things: general situation, as it affects sb",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2394
+ },
+ {
+  "id": "c_41a17128f3fe6084",
+  "type": "cloze",
+  "text": "We ___ our time before applying for the job until we had more experience.",
+  "answer": "bided",
+  "accept": [
+   "bide"
+  ],
+  "hint": "b____",
+  "translation": "Мы выжидали подходящего момента и не подавали на эту работу, пока не набрались опыта.",
+  "answers": [
+   "bide",
+   "bided"
+  ],
+  "also": [],
+  "note": "bide your time — выжидать удобного момента. Книжное; глагол bide вне этого оборота не встречается.",
+  "phrase": "bide time",
+  "relation": "verb+obj",
+  "headword": "time",
+  "sense": "occasion",
+  "cefr": "B1",
+  "band": "rare",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2397
+ },
+ {
+  "id": "c_56ab92d09b44b47a",
+  "type": "cloze",
+  "text": "My sister has been ___ work for three months while she looks for a new job.",
+  "answer": "out of",
+  "accept": [
+   "out of ~"
+  ],
+  "hint": "o__ o_",
+  "translation": "Сестра уже три месяца без работы и ищет новую.",
+  "answers": [
+   "out of"
+  ],
+  "also": [],
+  "note": "be out of work — быть безработным. Без артикля; звучит мягче, чем unemployed.",
+  "phrase": "out of work",
+  "relation": "prep",
+  "headword": "work",
+  "sense": "job",
+  "cefr": "B1",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2398
+ },
+ {
+  "id": "c_bb961cdf98dc5ccd",
+  "type": "cloze",
+  "text": "She enjoys exploring the different cultures and traditions that exist in the world ___ her.",
+  "answer": "about",
+  "accept": [
+   "~ about/around"
+  ],
+  "hint": "a____",
+  "translation": "Ей нравится изучать разные культуры и традиции окружающего её мира.",
+  "answers": [
+   "about",
+   "around"
+  ],
+  "also": [],
+  "note": "the world about / around sb — окружающий мир. Книжное, about здесь значит «вокруг».",
+  "phrase": "world about",
+  "relation": "prep",
+  "headword": "world",
+  "sense": "life/society",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2399
+ },
+ {
+  "id": "c_9577db965178bb52",
+  "type": "cloze",
+  "text": "Everything seemed to work out ___ him despite the initial difficulties.",
+  "answer": "for",
+  "accept": [
+   "for"
+  ],
+  "hint": "f__",
+  "translation": "У него всё в итоге сложилось, несмотря на первоначальные трудности.",
+  "answers": [
+   "for"
+  ],
+  "also": [],
+  "note": "leave for work — уехать на работу. Предлог for указывает пункт назначения.",
+  "phrase": "for work",
+  "relation": "prep",
+  "headword": "work",
+  "sense": "function; have a result/effect",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2405
+ },
+ {
+  "id": "c_41fbd169caa4a328",
+  "type": "cloze",
+  "text": "Nobody knows exactly when this tradition started—it's lost in ___.",
+  "answer": "the mists of time",
+  "accept": [
+   "the mists of time"
+  ],
+  "hint": "t__ m____ o_ t___",
+  "translation": "Никто точно не знает, когда зародилась эта традиция, — она теряется во тьме веков.",
+  "answers": [
+   "the mists of time"
+  ],
+  "also": [],
+  "note": "lost in the mists of time — теряется во тьме веков. Книжная метафора о забытом прошлом.",
+  "phrase": "the mists of time",
+  "relation": "phrase",
+  "headword": "time",
+  "sense": "what is measured in minutes, hours, days, etc.",
+  "cefr": null,
+  "band": "rare",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2411
+ },
+ {
+  "id": "c_a0e31fa88aa381a2",
+  "type": "cloze",
+  "text": "My brother is ___ work right now, so he won't be home until six o'clock.",
+  "answer": "at",
+  "accept": [
+   "at ~"
+  ],
+  "hint": "a_",
+  "translation": "Брат сейчас на работе, так что дома будет только к шести.",
+  "answers": [
+   "at"
+  ],
+  "also": [],
+  "note": "be at work — быть на работе. Без артикля; at home — противоположное.",
+  "phrase": "at work",
+  "relation": "prep",
+  "headword": "work",
+  "sense": "job",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2412
+ },
+ {
+  "id": "c_84b30184f4029648",
+  "type": "cloze",
+  "text": "That new smartphone company has become world ___ in just five years.",
+  "answer": "beaters",
+  "accept": [
+   "beaters"
+  ],
+  "hint": "b______",
+  "translation": "Эта новая компания по производству смартфонов за пять лет вырвалась в мировые лидеры.",
+  "answers": [
+   "beaters"
+  ],
+  "also": [],
+  "note": "world beaters — те, кто обходит весь мир, мировые лидеры. Разговорное, из спортивной лексики.",
+  "phrase": "world beaters",
+  "relation": "noun+noun",
+  "headword": "world",
+  "sense": "the earth/its people",
+  "cefr": null,
+  "band": "rare",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2413
+ },
+ {
+  "id": "c_af7aa0c1be1bec69",
+  "type": "cloze",
+  "text": "She worked ___ her computer all morning to finish the project before lunch.",
+  "answer": "at",
+  "accept": [
+   "at"
+  ],
+  "hint": "a_",
+  "translation": "Она всё утро работала за компьютером, чтобы закончить проект до обеда.",
+  "answers": [
+   "at"
+  ],
+  "also": [],
+  "note": "at work — за работой, в процессе. Переносно: forces at work — «действующие силы».",
+  "phrase": "at work",
+  "relation": "prep",
+  "headword": "work",
+  "sense": "do a job/task",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2419
+ },
+ {
+  "id": "c_ea3380dda4685d42",
+  "type": "cloze",
+  "text": "People from ___ world visit this museum every year to see the famous paintings.",
+  "answer": "all over the",
+  "accept": [
+   "all around/over/round the ~"
+  ],
+  "hint": "a__ o___ t__",
+  "translation": "Люди со всего мира каждый год приезжают в этот музей посмотреть на знаменитые картины.",
+  "answers": [
+   "all around the",
+   "all over the",
+   "all round the"
+  ],
+  "also": [],
+  "note": "all over the world, all around the world — по всему свету. Взаимозаменяемы, over чуть чаще.",
+  "phrase": "all around the world",
+  "relation": "prep",
+  "headword": "world",
+  "sense": "the earth/its people",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2420
+ },
+ {
+  "id": "c_1f5e6ac101faf035",
+  "type": "cloze",
+  "text": "I couldn't ___ the old song playing in the cafe.",
+  "answer": "put a name to",
+  "accept": [
+   "put a name to sb/sth"
+  ],
+  "hint": "p__ a n___ t_",
+  "translation": "Я никак не мог вспомнить название старой песни, игравшей в кафе.",
+  "answers": [
+   "put a name to"
+  ],
+  "also": [],
+  "note": "put a name to sb/sth — вспомнить, как это называется. О том, что вертится на языке.",
+  "phrase": "put a name to sb",
+  "relation": "phrase",
+  "headword": "name",
+  "sense": "word/words sb/sth is known by",
+  "cefr": null,
+  "band": "rare",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2424
+ },
+ {
+  "id": "c_c16492adfab86f4b",
+  "type": "cloze",
+  "text": "My father took a week ___ work to help us move to our new house.",
+  "answer": "off",
+  "accept": [
+   "off ~"
+  ],
+  "hint": "o__",
+  "translation": "Отец взял неделю отпуска, чтобы помочь нам с переездом в новый дом.",
+  "answers": [
+   "off"
+  ],
+  "also": [],
+  "note": "be off work — не выйти на работу, быть на больничном. Без артикля.",
+  "phrase": "off work",
+  "relation": "prep",
+  "headword": "work",
+  "sense": "job",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2426
+ },
+ {
+  "id": "c_d58d93969c73c40a",
+  "type": "cloze",
+  "text": "She enjoys working ___ her team to solve difficult problems at the office.",
+  "answer": "with",
+  "accept": [
+   "with"
+  ],
+  "hint": "w___",
+  "translation": "Ей нравится работать с командой над решением сложных задач в офисе.",
+  "answers": [
+   "with"
+  ],
+  "also": [],
+  "note": "help with work — помощь с работой. Предлог with перед тем, в чём помогают.",
+  "phrase": "with work",
+  "relation": "prep",
+  "headword": "work",
+  "sense": "do a job/task",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2433
+ },
+ {
+  "id": "c_68484dd622521791",
+  "type": "cloze",
+  "text": "My grandmother was a teacher ___ time when women rarely had professional jobs.",
+  "answer": "at the",
+  "accept": [
+   "at a/the~"
+  ],
+  "hint": "a_ t__",
+  "translation": "Бабушка была учительницей в те времена, когда женщины редко имели профессию.",
+  "answers": [
+   "at a",
+   "at the"
+  ],
+  "also": [],
+  "note": "at a time — за раз, одновременно. Оборот one at a time — «по одному».",
+  "phrase": "at a time",
+  "relation": "prep",
+  "headword": "time",
+  "sense": "amount of time",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2439
+ },
+ {
+  "id": "c_dc1892948fec79d5",
+  "type": "cloze",
+  "text": "She worked ___ a nurse in the hospital for five years before changing careers.",
+  "answer": "as",
+  "accept": [
+   "as"
+  ],
+  "hint": "a_",
+  "translation": "Она пять лет проработала медсестрой в больнице, прежде чем сменила профессию.",
+  "answers": [
+   "as"
+  ],
+  "also": [],
+  "note": "work as sb — работать кем-то. Предлог as перед должностью: work as a nurse.",
+  "phrase": "as work",
+  "relation": "prep",
+  "headword": "work",
+  "sense": "do a job/task",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "medium",
+  "flags": [],
+  "position": 2440
+ },
+ {
+  "id": "c_095332bbaaf6163c",
+  "type": "cloze",
+  "text": "I think I've ___ things lately because I'm so tired from work.",
+  "answer": "been seeing",
+  "accept": [
+   "be hearing/imagining/seeing"
+  ],
+  "hint": "b___ s_____",
+  "translation": "Мне, кажется, в последнее время мерещится всякое — так я устал от работы.",
+  "answers": [
+   "be hearing",
+   "be imagining",
+   "be seeing",
+   "been seeing"
+  ],
+  "also": [],
+  "note": "be seeing / hearing things — мерещится, слышится. Разговорное о галлюцинациях от усталости.",
+  "phrase": "be hearing thing",
+  "relation": "verb+obj",
+  "headword": "thing",
+  "sense": "fact/event/situation/action",
+  "cefr": null,
+  "band": "extended",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2443
+ },
+ {
+  "id": "c_92e5e60fe8c5b733",
+  "type": "cloze",
+  "text": "He learned to cook better ___ time by practicing different recipes every week.",
+  "answer": "over",
+  "accept": [
+   "over/with ~"
+  ],
+  "hint": "o___",
+  "translation": "Со временем он научился готовить лучше, пробуя каждую неделю новые рецепты.",
+  "answers": [
+   "over",
+   "with"
+  ],
+  "also": [],
+  "note": "over time, with time — со временем. Оба о постепенных изменениях, over чуть чаще.",
+  "phrase": "over time",
+  "relation": "prep",
+  "headword": "time",
+  "sense": "amount of time",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2446
+ },
+ {
+  "id": "c_e007c5842c1d6ea2",
+  "type": "cloze",
+  "text": "She was ___ work when her son called to say he'd lost his keys.",
+  "answer": "at",
+  "accept": [
+   "at ~"
+  ],
+  "hint": "a_",
+  "translation": "Она была на работе, когда сын позвонил сказать, что потерял ключи.",
+  "answers": [
+   "at"
+  ],
+  "also": [],
+  "note": "at work — на рабочем месте. Отвечает на вопрос «где», без артикля.",
+  "phrase": "at work",
+  "relation": "prep",
+  "headword": "work",
+  "sense": "effort/product of effort",
+  "cefr": "A2",
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2447
+ },
+ {
+  "id": "c_f4c51ed3098cfb68",
+  "type": "cloze",
+  "text": "We can only admit ten visitors ___ time to keep the museum uncrowded.",
+  "answer": "at a",
+  "accept": [
+   "at a/the ~"
+  ],
+  "hint": "a_ a",
+  "translation": "Мы пускаем не больше десяти посетителей за раз, чтобы в музее не было толчеи.",
+  "answers": [
+   "at a",
+   "at the"
+  ],
+  "also": [],
+  "note": "at a time — за один приём. Часто с числом: ten visitors at a time.",
+  "phrase": "at a time",
+  "relation": "prep",
+  "headword": "time",
+  "sense": "occasion",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2453
+ },
+ {
+  "id": "c_e290c552bd331d4d",
+  "type": "cloze",
+  "text": "Many people feel stressed when they're not happy ___ their work environment.",
+  "answer": "in",
+  "accept": [
+   "in (your) ~"
+  ],
+  "hint": "i_",
+  "translation": "Многие испытывают стресс, когда им некомфортно в рабочей обстановке.",
+  "answers": [
+   "in your",
+   "in"
+  ],
+  "also": [],
+  "note": "in your work — в своей работе, в профессиональной деятельности. О творчестве и исследованиях.",
+  "phrase": "in your work",
+  "relation": "prep",
+  "headword": "work",
+  "sense": "job",
+  "cefr": null,
+  "band": "core",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2454
+ },
+ {
+  "id": "c_b5c6d759c28c4d41",
+  "type": "cloze",
+  "text": "His teenage son believes the world ___ his smartphone and his friends.",
+  "answer": "revolves around",
+  "accept": [
+   "revolve around sb/sth"
+  ],
+  "hint": "r_______ a_____",
+  "translation": "Его сын-подросток считает, что мир вертится вокруг его смартфона и друзей.",
+  "answers": [
+   "revolve around",
+   "revolves around"
+  ],
+  "also": [],
+  "note": "the world revolves around sb — мир вертится вокруг кого-то. Почти всегда с упрёком в эгоцентризме.",
+  "phrase": "world revolve around sb",
+  "relation": "noun+verb",
+  "headword": "world",
+  "sense": "life/society",
+  "cefr": null,
+  "band": "rare",
+  "ambiguity": "low",
+  "flags": [],
+  "position": 2461
+ }
+]

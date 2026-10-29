@@ -85,7 +85,10 @@ async function rememberedFolder(
   { mayAsk }: { mayAsk: boolean },
 ): Promise<DirectoryHandle | null> {
   const handle = await getSetting<DirectoryHandle | null>(db, FOLDER_KEY, null);
-  if (handle === null) return null;
+  if (typeof handle !== "object" || handle === null || typeof handle.getFileHandle !== "function" || typeof handle.name !== "string") {
+    if (handle !== null) await forgetFolder(db);
+    return null;
+  }
 
   try {
     const state = (await handle.queryPermission?.({ mode: "readwrite" })) ?? "granted";
@@ -135,10 +138,9 @@ export async function saveBackupFile(
           mode: "readwrite",
           startIn: "documents",
         });
-      } catch {
-        // Единственная причина, по которой сюда попадают, — человек закрыл
-        // выбор папки. Это не ошибка и сообщать об ошибке не нужно.
-        return { kind: "cancelled" };
+      } catch (cause) {
+        if (cause instanceof DOMException && cause.name === "AbortError") return { kind: "cancelled" };
+        throw cause;
       }
       await setSetting(db, FOLDER_KEY, folder);
     }

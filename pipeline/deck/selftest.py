@@ -120,6 +120,53 @@ def test_version_hash() -> None:
     check_true("версия: изменение ответа меняет хэш",
                content_version(cards) != content_version(other))
 
+    for field, value in [("hint", "new hint"), ("also", ["take"]), ("answers", ["x", "y"]),
+                         ("position", 2), ("cefr", "B2"), ("flags", ["long"])]:
+        changed = [{**cards[0], field: value}]
+        check_true(f"версия: учитывает {field}", content_version(cards) != content_version(changed))
+    check("версия: порядок ключей не влияет",
+          content_version(cards), content_version([{k: v for k, v in reversed(list(cards[0].items()))}]))
+
+
+def test_note_context() -> None:
+    from ..usage.store import context_key
+    original = context_key(["make", "take"], "We ___ a decision.", "make")
+    check("заметка: порядок партнёров не меняет контекст", original,
+          context_key(["take", "make"], "We ___ a decision.", "make"))
+    for accept, text, answer in [(["make", "take", "reach"], "We ___ a decision.", "make"),
+                                 (["make", "take"], "They ___ a decision.", "make"),
+                                 (["make", "take"], "We ___ a decision.", "take")]:
+        check_true("заметка: изменение контекста требует проверки",
+                   context_key(accept, text, answer) != original)
+
+
+def test_changed_sentence_does_not_reuse_old_explanation() -> None:
+    import io
+    from contextlib import redirect_stdout
+    from types import SimpleNamespace
+    from unittest.mock import patch
+    from . import build
+    from ..sentences.store import key_for
+    from ..usage.store import context_key
+    original = "We need to make a decision by Friday."
+    start = original.index("make")
+    accept = ["make", "take"]
+    candidate = ("c_test", "decision", "verb+obj", None, "make decision",
+                 '["make", "take"]', '["make", "take"]', "before",
+                 original, start, start + 4, "make", None, "core", 1)
+    everything = [("c_test", "decision", "verb+obj", None, accept)]
+    args = SimpleNamespace(band=None, cefr=None, max_ambiguity="medium", limit=0)
+    with patch.object(build, "_load_rows", return_value=(everything, [candidate])), \
+         patch.object(build.translations_store, "load_all", return_value={key_for(original): "старый перевод"}), \
+         patch.object(build.usage_store, "load_all", return_value={"c_test": "старая заметка"}), \
+         patch.object(build.usage_store, "load_contexts", return_value={"c_test": context_key(accept, "We need to ___ a decision by Friday.", "make")}), \
+         patch.object(build.sentence_fixes, "load_all", return_value={key_for(original): ("We should ___ a decision before Friday.", "take")}), \
+         redirect_stdout(io.StringIO()):
+        cards, _ = build.make_cards(None, args)
+    check("новое предложение не использует старый перевод", cards[0]["translation"], None)
+    check("новое предложение не использует старую заметку", cards[0]["note"], None)
+    check("правка пересчитывает подсказку в реальной сборке", cards[0]["hint"], "t___")
+
 
 def test_sentence_fixes() -> None:
     """Правка предложения пересчитывает всё, что зависело от старого ответа.

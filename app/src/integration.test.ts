@@ -156,7 +156,7 @@ describe("обновление колоды поверх выученного", 
 
     // Пересобранная колода: другой перевод у одной карточки, другая версия.
     const edited: DeckFile = {
-      meta: { ...meta, version: `${meta.version}-edited` },
+      meta: { ...meta, version: `${meta.version}-edited`, built_at: new Date(Date.parse(meta.built_at) + 1).toISOString() },
       cards: deck.cards.map((card) =>
         card.id === target.id ? { ...card, translation: "исправленный перевод" } : card,
       ),
