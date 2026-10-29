@@ -13,9 +13,7 @@ class PublicationTest(unittest.TestCase):
         root = build.DECKS_DIR / "en-collocations"
         meta = json.loads((root / "deck.json").read_text(encoding="utf-8"))
         self.cards = json.loads((root / meta["chunks"][0]).read_text(encoding="utf-8"))[:4]
-        data = Path(__file__).resolve().parents[1] / "data"
-        data.mkdir(exist_ok=True)
-        self.temporary = tempfile.TemporaryDirectory(dir=data)
+        self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root_patch = patch.object(build, "DECKS_DIR", Path(self.temporary.name) / "decks")
         self.root_patch.start()

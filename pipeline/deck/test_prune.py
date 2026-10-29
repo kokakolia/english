@@ -15,8 +15,7 @@ class PruneTest(unittest.TestCase):
     def setUp(self):
         _, cards = export.load_deck("en-collocations")
         self.cards = cards[:2]
-        data = Path(__file__).resolve().parents[1] / "data"
-        temporary = tempfile.TemporaryDirectory(dir=data)
+        temporary = tempfile.TemporaryDirectory()
         self.addCleanup(temporary.cleanup)
         self.root = Path(temporary.name)
         self.patches = [patch.object(build, "DECKS_DIR", self.root / "decks"),
