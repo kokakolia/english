@@ -58,8 +58,7 @@ export interface DayQueue {
 }
 
 export type ProgressLookup =
-  | Map<string, CardProgress>
-  | Record<string, CardProgress>;
+  Map<string, CardProgress> | Record<string, CardProgress>;
 
 function lookup(
   progress: ProgressLookup,
@@ -168,7 +167,8 @@ export function spaceOutSiblings(cards: DeckCard[], gap: number): DeckCard[] {
     for (let index = 0; index < pending.length; index += 1) {
       const key = familyKey(pending[index] as DeckCard);
       const seen = lastSeen.get(key);
-      const distance = seen === undefined ? Number.MAX_SAFE_INTEGER : result.length - seen;
+      const distance =
+        seen === undefined ? Number.MAX_SAFE_INTEGER : result.length - seen;
 
       if (distance > gap) {
         const left = remaining.get(key) ?? 0;
@@ -243,7 +243,10 @@ export function buildQueue({
   const reviewBudget = Math.max(0, config.reviewsPerDay - studiedToday.review);
   const dueLimited = shuffle(review, random).slice(0, reviewBudget);
   const backlog = Math.max(0, review.length - reviewBudget);
-  const freshLimited = fresh.slice(0, Math.max(0, config.newPerDay - studiedToday.fresh));
+  const freshLimited = fresh.slice(
+    0,
+    Math.max(0, config.newPerDay - studiedToday.fresh),
+  );
 
   const repeats = spaceOutSiblings(
     [...learning, ...dueLimited],

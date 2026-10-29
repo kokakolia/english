@@ -177,7 +177,14 @@ export function Plankton() {
           aria-hidden="true"
           focusable="false"
         >
-          <use href="#plankton" x="-8" y="-8" width="16" height="16" filter="url(#deep-soft)" />
+          <use
+            href="#plankton"
+            x="-8"
+            y="-8"
+            width="16"
+            height="16"
+            filter="url(#deep-soft)"
+          />
         </svg>
       ))}
     </>

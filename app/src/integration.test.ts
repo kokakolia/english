@@ -14,7 +14,7 @@ import "fake-indexeddb/auto";
 import { readFileSync } from "node:fs";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
-import { buildQueue, checkAnswer, createScheduler, createSession } from "./srs";
+import { buildQueue, createScheduler, createSession } from "./srs";
 import type { DeckCard } from "./srs";
 import {
   AppDatabase,
@@ -88,7 +88,6 @@ describe("неделя занятий", () => {
     const cards = await loadCards(db, meta.id);
 
     let answersGiven = 0;
-    let correctTyped = 0;
 
     for (let day = 0; day < 7; day += 1) {
       const now = new Date(START.getTime() + day * DAY_MS);
@@ -96,7 +95,12 @@ describe("неделя занятий", () => {
       const queue = buildQueue({
         cards,
         progress,
-        settings: { newPerDay: 10, reviewsPerDay: 60, siblingGap: 4, seed: day + 1 },
+        settings: {
+          newPerDay: 10,
+          reviewsPerDay: 60,
+          siblingGap: 4,
+          seed: day + 1,
+        },
         now,
       });
 
@@ -107,32 +111,28 @@ describe("неделя занятий", () => {
         const card = session.current();
         if (card === null) break;
 
-        // «Учащийся» набирает словарную форму партнёра: она должна
-        // засчитываться наравне с формой из предложения.
-        const typed = card.answers[0] ?? card.answer;
-        const check = checkAnswer(typed, card);
-        if (check.verdict === "correct") correctTyped += 1;
-
-        const grade = check.verdict === "correct" ? "good" : "again";
-        session.answer(grade);
+        // Как в интерфейсе: учащийся сам оценивает вспоминание.
+        const grade = "good";
         await recordReview(db, {
           cardId: card.id,
           deckId: meta.id,
           grade,
           now,
-          typed,
-          verdict: check.verdict,
           scheduler,
         });
+        session.answer(grade);
         answersGiven += 1;
       }
       expect(guard).toBeLessThan(500);
     }
 
     expect(answersGiven).toBeGreaterThan(60);
-    expect(correctTyped).toBe(answersGiven);
 
-    const counts = await deckCounts(db, meta.id, new Date(START.getTime() + 7 * DAY_MS));
+    const counts = await deckCounts(
+      db,
+      meta.id,
+      new Date(START.getTime() + 7 * DAY_MS),
+    );
     expect(counts.fresh).toBe(meta.count - 70);
     expect(counts.learning + counts.review).toBe(70);
     expect(await db.reviews.count()).toBe(answersGiven);
@@ -156,9 +156,15 @@ describe("обновление колоды поверх выученного", 
 
     // Пересобранная колода: другой перевод у одной карточки, другая версия.
     const edited: DeckFile = {
-      meta: { ...meta, version: `${meta.version}-edited`, built_at: new Date(Date.parse(meta.built_at) + 1).toISOString() },
+      meta: {
+        ...meta,
+        version: `${meta.version}-edited`,
+        built_at: new Date(Date.parse(meta.built_at) + 1).toISOString(),
+      },
       cards: deck.cards.map((card) =>
-        card.id === target.id ? { ...card, translation: "исправленный перевод" } : card,
+        card.id === target.id
+          ? { ...card, translation: "исправленный перевод" }
+          : card,
       ),
     };
     const result = await importDeck(db, edited, { now: START });
@@ -191,7 +197,9 @@ describe("резервная копия настоящей базы", () => {
       });
     }
 
-    const backup = JSON.parse(JSON.stringify(await exportBackup(db, { now: START })));
+    const backup = JSON.parse(
+      JSON.stringify(await exportBackup(db, { now: START })),
+    );
 
     const fresh = new AppDatabase("integration-restore");
     await fresh.open();

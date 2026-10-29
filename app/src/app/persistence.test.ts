@@ -1,9 +1,20 @@
 import { describe, expect, it } from "vitest";
 
-import { formatBytes, storageAdvice, storageAtRisk, type StorageStatus } from "./persistence";
+import {
+  formatBytes,
+  storageAdvice,
+  storageAtRisk,
+  type StorageStatus,
+} from "./persistence";
 
 function status(patch: Partial<StorageStatus> = {}): StorageStatus {
-  return { supported: true, persisted: true, usage: null, quota: null, ...patch };
+  return {
+    supported: true,
+    persisted: true,
+    usage: null,
+    quota: null,
+    ...patch,
+  };
 }
 
 describe("совет о хранилище", () => {
@@ -27,13 +38,13 @@ describe("совет о хранилище", () => {
   });
 
   it("отдельный ответ там, где браузер вообще не умеет постоянное хранилище", () => {
-    expect(storageAdvice(status({ supported: false, persisted: false }), false)).toBe(
-      "unsupported",
-    );
+    expect(
+      storageAdvice(status({ supported: false, persisted: false }), false),
+    ).toBe("unsupported");
     // Установка ничего не изменит, если возможности нет в принципе.
-    expect(storageAdvice(status({ supported: false, persisted: false }), true)).toBe(
-      "unsupported",
-    );
+    expect(
+      storageAdvice(status({ supported: false, persisted: false }), true),
+    ).toBe("unsupported");
   });
 });
 

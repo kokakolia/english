@@ -1,38 +1,27 @@
 @echo off
-rem ============================================================
-rem  Запуск приложения. Можно открыть двойным щелчком или
-rem  вынести ярлык на рабочий стол.
-rem
-rem  ВНИМАНИЕ: файл сохранён в кодировке CP866 - той, в которой
-rem  cmd.exe читает батники на русской Windows. Не пересохраняйте
-rem  его в UTF-8: консоль прочтёт русские буквы как мусор и
-rem  попробует выполнить обрывки как команды. Команду chcp тут
-rem  ставить тоже нельзя: смена кодировки посреди файла сбивает
-rem  разбор оставшихся строк.
-rem ============================================================
+setlocal
 cd /d "%~dp0app"
-
-if not exist node_modules (
-  echo Первый запуск: устанавливаю зависимости, это займёт минуту...
-  call npm install
+where node >nul 2>&1
+if errorlevel 1 goto missing
+where npm >nul 2>&1
+if errorlevel 1 goto missing
+node -e "const [major,minor]=process.versions.node.split('.').map(Number);process.exit(major>22||(major===22&&minor>=12)?0:1)"
+if errorlevel 1 goto missing
+if not exist node_modules\.package-lock.json (
+  echo Installing dependencies from package-lock.json...
+  call npm ci
   if errorlevel 1 goto error
 )
-
-echo Собираю приложение...
-call npm run build
+echo Building and opening http://localhost:5173...
+call npm start
 if errorlevel 1 goto error
+exit /b 0
 
-echo.
-echo Открываю http://localhost:5173
-echo Чтобы остановить сервер, закройте это окно.
-echo.
-call npm run serve
-if errorlevel 1 goto error
-goto end
+:missing
+echo Node.js 22.12+ and npm are required. Install Node.js and try again.
+goto error
 
 :error
-echo.
-echo Не получилось. Текст ошибки напечатан выше.
+echo Startup failed. See the error above.
 pause
-
-:end
+exit /b 1

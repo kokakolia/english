@@ -20,11 +20,22 @@ export function watchDay(
   }
   function run() {
     if (stopped || running) return;
-    if (visibility.visibilityState === "hidden") { schedule(); return; }
+    if (visibility.visibilityState === "hidden") {
+      schedule();
+      return;
+    }
     running = true;
-    void Promise.resolve().then(() => { if (!stopped) return refresh(); })
-      .catch(cause => { if (!stopped) onError(cause); })
-      .finally(() => { running = false; schedule(); });
+    void Promise.resolve()
+      .then(() => {
+        if (!stopped) return refresh();
+      })
+      .catch((cause) => {
+        if (!stopped) onError(cause);
+      })
+      .finally(() => {
+        running = false;
+        schedule();
+      });
   }
   events.addEventListener("focus", run);
   events.addEventListener("collocations:resume", run);

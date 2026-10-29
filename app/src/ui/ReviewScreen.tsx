@@ -13,10 +13,20 @@
 import { useEffect, useRef } from "react";
 
 import { GRADES, type Grade } from "../srs";
-import { keyAction, type StudyController, type StudyState } from "../study/controller";
+import {
+  keyAction,
+  type StudyController,
+  type StudyState,
+} from "../study/controller";
 import { CardMenu } from "./CardMenu";
 import { plural } from "./format";
-import { GradeIcon, Leaf, MoodPlant, PanelFlourish, UndoArrow } from "./Ornaments";
+import {
+  GradeIcon,
+  Leaf,
+  MoodPlant,
+  PanelFlourish,
+  UndoArrow,
+} from "./Ornaments";
 
 /**
  * Подписи оценок из макета.
@@ -46,7 +56,13 @@ interface Props {
  * Держится скромно и не исчезает, когда отменять нечего, а гаснет: кнопка,
  * появляющаяся и пропадающая, дёргает соседей и сама сдвигается под курсором.
  */
-function UndoButton({ controller, state }: { controller: StudyController; state: StudyState }) {
+function UndoButton({
+  controller,
+  state,
+}: {
+  controller: StudyController;
+  state: StudyState;
+}) {
   return (
     <button
       type="button"
@@ -82,7 +98,10 @@ function ProgressHeader({
         <UndoButton controller={controller} state={state} />
         <div className="dots">
           {Array.from({ length: DOT_COUNT }, (_, index) => (
-            <span key={index} className={index < filled ? "dot" : "dot dot--empty"} />
+            <span
+              key={index}
+              className={index < filled ? "dot" : "dot dot--empty"}
+            />
           ))}
         </div>
         <div className="counter">
@@ -136,8 +155,8 @@ function Summary({
           {!nothingDone && (
             <>
               <p className="summary-sub">
-                {session.completed} {plural(session.completed, "карточка")}, вспомнили{" "}
-                {share}%
+                {session.completed} {plural(session.completed, "карточка")},
+                вспомнили {share}%
               </p>
 
               <dl className="tally">
@@ -154,8 +173,8 @@ function Summary({
 
               {session.repeats > 0 && (
                 <p className="quiet">
-                  Возвратов внутри занятия: {session.repeats}. Это карточки, которые
-                  показались снова после «не знал» или «плохо помню».
+                  Возвратов внутри занятия: {session.repeats}. Это карточки,
+                  которые показались снова после «не знал» или «плохо помню».
                 </p>
               )}
             </>
@@ -204,12 +223,19 @@ export function ReviewScreen({ controller, state, onFinish }: Props) {
 
       const target = event.target instanceof Element ? event.target : null;
       const action = keyAction(current.phase, event.key, {
-        interactive: target !== null && target.closest('button, a[href], input, textarea, select, [contenteditable]:not([contenteditable="false"]), [role="button"], [role="menuitem"], [role="textbox"], [tabindex]:not([tabindex="-1"])') !== null,
+        interactive:
+          target !== null &&
+          target.closest(
+            'button, a[href], input, textarea, select, [contenteditable]:not([contenteditable="false"]), [role="button"], [role="menuitem"], [role="textbox"], [tabindex]:not([tabindex="-1"])',
+          ) !== null,
         menuOpen: document.querySelector('[role="menu"]') !== null,
         defaultPrevented: event.defaultPrevented,
         repeat: event.repeat,
         isComposing: event.isComposing,
-        altKey: event.altKey, ctrlKey: event.ctrlKey, metaKey: event.metaKey, shiftKey: event.shiftKey,
+        altKey: event.altKey,
+        ctrlKey: event.ctrlKey,
+        metaKey: event.metaKey,
+        shiftKey: event.shiftKey,
       });
       if (action === null) return;
 
@@ -230,16 +256,31 @@ export function ReviewScreen({ controller, state, onFinish }: Props) {
         <h1 className="display">Не удалось начать занятие</h1>
         <p className="error">{state.error}</p>
         <p>Прогресс сохранён. Попробуйте ещё раз или вернитесь к началу.</p>
-        <button type="button" className="pill" onClick={() => void controller.restart()}>Повторить попытку</button>
-        <button type="button" className="pill pill--quiet" onClick={onFinish}>К началу</button>
+        <button
+          type="button"
+          className="pill"
+          onClick={() => void controller.restart()}
+        >
+          Повторить попытку
+        </button>
+        <button type="button" className="pill pill--quiet" onClick={onFinish}>
+          К началу
+        </button>
       </section>
     );
   }
 
-  if (state.phase === "loading") return <section className="screen" aria-live="polite">Готовим очередь…</section>;
+  if (state.phase === "loading")
+    return (
+      <section className="screen" aria-live="polite">
+        Готовим очередь…
+      </section>
+    );
 
   if (state.phase === "finished" || state.phase === "empty") {
-    return <Summary controller={controller} state={state} onFinish={onFinish} />;
+    return (
+      <Summary controller={controller} state={state} onFinish={onFinish} />
+    );
   }
 
   const card = state.card;
@@ -260,7 +301,9 @@ export function ReviewScreen({ controller, state, onFinish }: Props) {
           <PanelFlourish position="start" />
           <PanelFlourish position="end" />
 
-          <div className="label">{answered ? "Ответ" : "Заполните пропуск"}</div>
+          <div className="label">
+            {answered ? "Ответ" : "Заполните пропуск"}
+          </div>
 
           <p className="sentence">
             {before}
@@ -272,23 +315,36 @@ export function ReviewScreen({ controller, state, onFinish }: Props) {
             {after}
           </p>
 
-          {card.translation !== null && <p className="translation">{card.translation}</p>}
+          {card.translation !== null && (
+            <p className="translation">{card.translation}</p>
+          )}
 
           {!answered && <p className="hint">{card.hint}</p>}
 
-          {answered && card.note !== null && <p className="note reveal">{card.note}</p>}
+          {answered && card.note !== null && (
+            <p className="note reveal">{card.note}</p>
+          )}
 
           {answered && card.also.length > 0 && (
             // Партнёры словарного кластера могут относиться к другому смыслу
             // и не обязаны подходить в это предложение или иметь ту же форму.
-            <p className="also reveal">другие сочетания с этим словом: {card.also.join(", ")}</p>
+            <p className="also reveal">
+              другие сочетания с этим словом: {card.also.join(", ")}
+            </p>
           )}
 
           {answered && (
             <div className="tailpiece">
               <span className="tailpiece-line" />
-              <svg className="tailpiece-leaf" viewBox="0 0 10 10" aria-hidden="true">
-                <path d="M5 9 C1 7 1 3 5 1 C9 3 9 7 5 9 Z" fill="var(--ornament-accent)" />
+              <svg
+                className="tailpiece-leaf"
+                viewBox="0 0 10 10"
+                aria-hidden="true"
+              >
+                <path
+                  d="M5 9 C1 7 1 3 5 1 C9 3 9 7 5 9 Z"
+                  fill="var(--ornament-accent)"
+                />
               </svg>
               <span className="tailpiece-line" />
             </div>
@@ -298,7 +354,11 @@ export function ReviewScreen({ controller, state, onFinish }: Props) {
 
       <footer className="bottombar">
         {!answered ? (
-          <button type="button" className="pill pill--wide" onClick={() => controller.reveal()}>
+          <button
+            type="button"
+            className="pill pill--wide"
+            onClick={() => controller.reveal()}
+          >
             Показать ответ
           </button>
         ) : (

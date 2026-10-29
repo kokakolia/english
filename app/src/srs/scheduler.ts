@@ -87,7 +87,9 @@ function toFsrsCard(progress: CardProgress): FsrsCard {
     reps: progress.reps,
     lapses: progress.lapses,
     state: NAME_TO_STATE[progress.state],
-    last_review: progress.lastReview ? new Date(progress.lastReview) : undefined,
+    last_review: progress.lastReview
+      ? new Date(progress.lastReview)
+      : undefined,
   };
 }
 
@@ -123,7 +125,11 @@ export function createScheduler(options: SchedulerOptions = {}): Scheduler {
     grade: Grade,
     now: Date,
   ): ReviewOutcome {
-    const { card } = engine.next(toFsrsCard(progress), now, GRADE_TO_RATING[grade]);
+    const { card } = engine.next(
+      toFsrsCard(progress),
+      now,
+      GRADE_TO_RATING[grade],
+    );
     const next = toProgress(progress.cardId, card);
     return {
       progress: next,

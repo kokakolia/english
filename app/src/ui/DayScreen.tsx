@@ -23,7 +23,15 @@ interface Props {
   vault?: ReactNode;
 }
 
-export function DayScreen({ deckName, counts, backlog, offline, onStart, vault, storageBusy = false }: Props) {
+export function DayScreen({
+  deckName,
+  counts,
+  backlog,
+  offline,
+  onStart,
+  vault,
+  storageBusy = false,
+}: Props) {
   const ready = counts.fresh > 0 || counts.due > 0;
 
   return (
@@ -72,7 +80,12 @@ export function DayScreen({ deckName, counts, backlog, offline, onStart, vault, 
         )}
       </div>
 
-      <button type="button" className="pill pill--wide" onClick={onStart} disabled={!ready || storageBusy}>
+      <button
+        type="button"
+        className="pill pill--wide"
+        onClick={onStart}
+        disabled={!ready || storageBusy}
+      >
         {ready ? "Учить" : "На сегодня всё"}
       </button>
 

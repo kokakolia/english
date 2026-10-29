@@ -21,15 +21,69 @@ export function OrnamentDefs() {
             strokeWidth="2.5"
           />
           <g fill="var(--ornament-stem)">
-            <ellipse cx="25" cy="170" rx="14" ry="5" transform="rotate(-35 25 170)" />
-            <ellipse cx="15" cy="150" rx="12" ry="4.5" transform="rotate(35 15 150)" />
-            <ellipse cx="22" cy="130" rx="13" ry="5" transform="rotate(-30 22 130)" />
-            <ellipse cx="18" cy="108" rx="11" ry="4" transform="rotate(30 18 108)" />
-            <ellipse cx="28" cy="88" rx="12" ry="4.5" transform="rotate(-28 28 88)" />
-            <ellipse cx="30" cy="66" rx="10" ry="4" transform="rotate(25 30 66)" />
-            <ellipse cx="45" cy="48" rx="10" ry="4" transform="rotate(-25 45 48)" />
-            <ellipse cx="55" cy="30" rx="8" ry="3.5" transform="rotate(20 55 30)" />
-            <ellipse cx="70" cy="16" rx="7" ry="3" transform="rotate(-15 70 16)" />
+            <ellipse
+              cx="25"
+              cy="170"
+              rx="14"
+              ry="5"
+              transform="rotate(-35 25 170)"
+            />
+            <ellipse
+              cx="15"
+              cy="150"
+              rx="12"
+              ry="4.5"
+              transform="rotate(35 15 150)"
+            />
+            <ellipse
+              cx="22"
+              cy="130"
+              rx="13"
+              ry="5"
+              transform="rotate(-30 22 130)"
+            />
+            <ellipse
+              cx="18"
+              cy="108"
+              rx="11"
+              ry="4"
+              transform="rotate(30 18 108)"
+            />
+            <ellipse
+              cx="28"
+              cy="88"
+              rx="12"
+              ry="4.5"
+              transform="rotate(-28 28 88)"
+            />
+            <ellipse
+              cx="30"
+              cy="66"
+              rx="10"
+              ry="4"
+              transform="rotate(25 30 66)"
+            />
+            <ellipse
+              cx="45"
+              cy="48"
+              rx="10"
+              ry="4"
+              transform="rotate(-25 45 48)"
+            />
+            <ellipse
+              cx="55"
+              cy="30"
+              rx="8"
+              ry="3.5"
+              transform="rotate(20 55 30)"
+            />
+            <ellipse
+              cx="70"
+              cy="16"
+              rx="7"
+              ry="3"
+              transform="rotate(-15 70 16)"
+            />
           </g>
           <circle cx="90" cy="2" r="3" fill="var(--ornament-accent)" />
         </symbol>
@@ -119,18 +173,23 @@ export function SideVine({ side = "right" }: { side?: "left" | "right" }) {
       focusable="false"
     >
       {/* Вьюнок идёт вдоль края: прямая вертикаль с едва заметным дрожанием.
-        *
-        * Путь к этому виду занял три попытки, и каждая промахивалась по своей
-        * причине. Уменьшение размаха ничего не давало: вместе с ним
-        * уменьшалась и длина волны, отношение оставалось прежним. Растягивание
-        * волны сделало положе по числам, но одна волна на всю высоту — это
-        * одна дуга во весь экран, и читается она дугой. Четыре колебания уже
-        * шли вдоль края, но всё ещё гнулись.
-        *
-        * Здесь восемь полуволн по 95 при размахе шесть единиц: отклонение от
-        * прямой — три единицы, меньше половины процента высоты. Это дрожание
-        * линии, а не её изгиб. */}
-      <g fill="none" stroke="var(--ornament-accent)" strokeWidth="1.5" opacity="0.4">
+       *
+       * Путь к этому виду занял три попытки, и каждая промахивалась по своей
+       * причине. Уменьшение размаха ничего не давало: вместе с ним
+       * уменьшалась и длина волны, отношение оставалось прежним. Растягивание
+       * волны сделало положе по числам, но одна волна на всю высоту — это
+       * одна дуга во весь экран, и читается она дугой. Четыре колебания уже
+       * шли вдоль края, но всё ещё гнулись.
+       *
+       * Здесь восемь полуволн по 95 при размахе шесть единиц: отклонение от
+       * прямой — три единицы, меньше половины процента высоты. Это дрожание
+       * линии, а не её изгиб. */}
+      <g
+        fill="none"
+        stroke="var(--ornament-accent)"
+        strokeWidth="1.5"
+        opacity="0.4"
+      >
         <path
           d="M 1428 100
              C 1428 147 1431 147 1431 195
@@ -179,9 +238,14 @@ export function SideFern({ side = "left" }: { side?: "left" | "right" }) {
       focusable="false"
     >
       {/* Стебель толще лозы и заметно извилистее: размах 16 единиц против
-        * шести, кривизна на полуволну 0,168 против 0,063. Лозе прямизна шла,
-        * папоротнику — нет: у него изгиб и есть характер. */}
-      <g fill="none" stroke="var(--ornament-stem)" strokeWidth="3.6" opacity="0.55">
+       * шести, кривизна на полуволну 0,168 против 0,063. Лозе прямизна шла,
+       * папоротнику — нет: у него изгиб и есть характер. */}
+      <g
+        fill="none"
+        stroke="var(--ornament-stem)"
+        strokeWidth="3.6"
+        opacity="0.55"
+      >
         <path
           d="M 1424 100
              C 1424 147.5 1432 147.5 1432 195
@@ -195,21 +259,99 @@ export function SideFern({ side = "left" }: { side?: "left" | "right" }) {
         />
       </g>
       {/* Листочки реже, чем у обычного папоротника: на толстом стебле частая
-        * гребёнка сливается в полосу, и куст перестаёт читаться кустом. */}
+       * гребёнка сливается в полосу, и куст перестаёт читаться кустом. */}
       <g fill="var(--ornament-stem)" opacity="0.55">
-        <ellipse cx="1421.4" cy="136" rx="9.5" ry="3.6" transform="rotate(-30 1421.4 136)" />
-        <ellipse cx="1437.0" cy="192" rx="10.0" ry="3.8" transform="rotate(30 1437.0 192)" />
-        <ellipse cx="1416.9" cy="248" rx="10.6" ry="4.0" transform="rotate(-30 1416.9 248)" />
-        <ellipse cx="1422.1" cy="304" rx="11.1" ry="4.2" transform="rotate(30 1422.1 304)" />
-        <ellipse cx="1424.3" cy="360" rx="11.6" ry="4.4" transform="rotate(-30 1424.3 360)" />
-        <ellipse cx="1434.9" cy="416" rx="12.1" ry="4.6" transform="rotate(30 1434.9 416)" />
-        <ellipse cx="1409.8" cy="472" rx="12.7" ry="4.8" transform="rotate(-30 1409.8 472)" />
-        <ellipse cx="1430.8" cy="528" rx="13.2" ry="5.0" transform="rotate(30 1430.8 528)" />
-        <ellipse cx="1424.9" cy="584" rx="13.7" ry="5.2" transform="rotate(-30 1424.9 584)" />
-        <ellipse cx="1426.0" cy="640" rx="14.2" ry="5.4" transform="rotate(30 1426.0 640)" />
-        <ellipse cx="1410.7" cy="696" rx="14.8" ry="5.5" transform="rotate(-30 1410.7 696)" />
-        <ellipse cx="1439.2" cy="752" rx="15.3" ry="5.7" transform="rotate(30 1439.2 752)" />
-        <ellipse cx="1420.8" cy="808" rx="15.8" ry="5.9" transform="rotate(-30 1420.8 808)" />
+        <ellipse
+          cx="1421.4"
+          cy="136"
+          rx="9.5"
+          ry="3.6"
+          transform="rotate(-30 1421.4 136)"
+        />
+        <ellipse
+          cx="1437.0"
+          cy="192"
+          rx="10.0"
+          ry="3.8"
+          transform="rotate(30 1437.0 192)"
+        />
+        <ellipse
+          cx="1416.9"
+          cy="248"
+          rx="10.6"
+          ry="4.0"
+          transform="rotate(-30 1416.9 248)"
+        />
+        <ellipse
+          cx="1422.1"
+          cy="304"
+          rx="11.1"
+          ry="4.2"
+          transform="rotate(30 1422.1 304)"
+        />
+        <ellipse
+          cx="1424.3"
+          cy="360"
+          rx="11.6"
+          ry="4.4"
+          transform="rotate(-30 1424.3 360)"
+        />
+        <ellipse
+          cx="1434.9"
+          cy="416"
+          rx="12.1"
+          ry="4.6"
+          transform="rotate(30 1434.9 416)"
+        />
+        <ellipse
+          cx="1409.8"
+          cy="472"
+          rx="12.7"
+          ry="4.8"
+          transform="rotate(-30 1409.8 472)"
+        />
+        <ellipse
+          cx="1430.8"
+          cy="528"
+          rx="13.2"
+          ry="5.0"
+          transform="rotate(30 1430.8 528)"
+        />
+        <ellipse
+          cx="1424.9"
+          cy="584"
+          rx="13.7"
+          ry="5.2"
+          transform="rotate(-30 1424.9 584)"
+        />
+        <ellipse
+          cx="1426.0"
+          cy="640"
+          rx="14.2"
+          ry="5.4"
+          transform="rotate(30 1426.0 640)"
+        />
+        <ellipse
+          cx="1410.7"
+          cy="696"
+          rx="14.8"
+          ry="5.5"
+          transform="rotate(-30 1410.7 696)"
+        />
+        <ellipse
+          cx="1439.2"
+          cy="752"
+          rx="15.3"
+          ry="5.7"
+          transform="rotate(30 1439.2 752)"
+        />
+        <ellipse
+          cx="1420.8"
+          cy="808"
+          rx="15.8"
+          ry="5.9"
+          transform="rotate(-30 1420.8 808)"
+        />
       </g>
     </svg>
   );
@@ -224,8 +366,18 @@ export function PanelFlourish({ position }: { position: "start" | "end" }) {
       aria-hidden="true"
       focusable="false"
     >
-      <path d="M2 24 C2 10 10 2 24 2" fill="none" stroke="var(--ornament-accent)" strokeWidth="1.2" />
-      <path d="M2 24 C2 16 6 12 12 12" fill="none" stroke="var(--ornament-accent)" strokeWidth="1" />
+      <path
+        d="M2 24 C2 10 10 2 24 2"
+        fill="none"
+        stroke="var(--ornament-accent)"
+        strokeWidth="1.2"
+      />
+      <path
+        d="M2 24 C2 16 6 12 12 12"
+        fill="none"
+        stroke="var(--ornament-accent)"
+        strokeWidth="1"
+      />
       <circle cx="24" cy="2" r="1.6" fill="var(--ornament-accent)" />
     </svg>
   );
@@ -272,14 +424,26 @@ export function Leaf({ className = "" }: { className?: string }) {
     );
   }
   return (
-    <svg className={className} viewBox="0 0 12 16" aria-hidden="true" focusable="false">
+    <svg
+      className={className}
+      viewBox="0 0 12 16"
+      aria-hidden="true"
+      focusable="false"
+    >
       <path
         d="M6 15 C1 12 1 4 6 1 C11 4 11 12 6 15 Z"
         fill="none"
         stroke="var(--ornament-accent)"
         strokeWidth="1"
       />
-      <line x1="6" y1="2" x2="6" y2="14" stroke="var(--ornament-accent)" strokeWidth="0.8" />
+      <line
+        x1="6"
+        y1="2"
+        x2="6"
+        y2="14"
+        stroke="var(--ornament-accent)"
+        strokeWidth="0.8"
+      />
     </svg>
   );
 }
@@ -287,7 +451,12 @@ export function Leaf({ className = "" }: { className?: string }) {
 /** Стрелка отмены: дуга против часовой стрелки. */
 export function UndoArrow() {
   return (
-    <svg className="undo-icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false">
+    <svg
+      className="undo-icon"
+      viewBox="0 0 18 18"
+      aria-hidden="true"
+      focusable="false"
+    >
       <path
         d="M4 8 A 5.5 5.5 0 1 1 5.6 12.6"
         fill="none"
@@ -295,7 +464,14 @@ export function UndoArrow() {
         strokeWidth="1.6"
         strokeLinecap="round"
       />
-      <path d="M1.5 4.5 L4 8.4 L7.8 6.6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M1.5 4.5 L4 8.4 L7.8 6.6"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
@@ -303,7 +479,12 @@ export function UndoArrow() {
 /** Три точки: меню действий над карточкой. */
 export function DotsIcon() {
   return (
-    <svg className="dots-icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false">
+    <svg
+      className="dots-icon"
+      viewBox="0 0 18 18"
+      aria-hidden="true"
+      focusable="false"
+    >
       <circle cx="9" cy="3.5" r="1.6" fill="currentColor" />
       <circle cx="9" cy="9" r="1.6" fill="currentColor" />
       <circle cx="9" cy="14.5" r="1.6" fill="currentColor" />
@@ -321,7 +502,11 @@ type Grade = "again" | "hard" | "good" | "easy";
  * дне не читается, а огонёк в саду ничего не значит.
  */
 export function GradeIcon({ grade }: { grade: Grade }) {
-  return useDark() ? <DeepGradeIcon grade={grade} /> : <GardenGradeIcon grade={grade} />;
+  return useDark() ? (
+    <DeepGradeIcon grade={grade} />
+  ) : (
+    <GardenGradeIcon grade={grade} />
+  );
 }
 
 /**
@@ -335,7 +520,12 @@ export function GradeIcon({ grade }: { grade: Grade }) {
 function DeepGradeIcon({ grade }: { grade: Grade }) {
   if (grade === "again") {
     return (
-      <svg className="grade-icon" viewBox="0 0 22 22" aria-hidden="true" focusable="false">
+      <svg
+        className="grade-icon"
+        viewBox="0 0 22 22"
+        aria-hidden="true"
+        focusable="false"
+      >
         <circle
           cx="11"
           cy="11"
@@ -351,23 +541,53 @@ function DeepGradeIcon({ grade }: { grade: Grade }) {
   }
   if (grade === "hard") {
     return (
-      <svg className="grade-icon" viewBox="0 0 22 22" aria-hidden="true" focusable="false">
-        <circle cx="11" cy="11" r="7.5" fill="none" stroke="currentColor" strokeWidth="1.2" opacity="0.65" />
+      <svg
+        className="grade-icon"
+        viewBox="0 0 22 22"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <circle
+          cx="11"
+          cy="11"
+          r="7.5"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.2"
+          opacity="0.65"
+        />
         <circle cx="11" cy="11" r="2.6" fill="currentColor" opacity="0.55" />
       </svg>
     );
   }
   if (grade === "good") {
     return (
-      <svg className="grade-icon" viewBox="0 0 22 22" aria-hidden="true" focusable="false">
+      <svg
+        className="grade-icon"
+        viewBox="0 0 22 22"
+        aria-hidden="true"
+        focusable="false"
+      >
         <circle cx="11" cy="11" r="8.5" fill="currentColor" opacity="0.16" />
-        <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" strokeWidth="1.2" />
+        <circle
+          cx="11"
+          cy="11"
+          r="7"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.2"
+        />
         <circle cx="11" cy="11" r="3.6" fill="currentColor" />
       </svg>
     );
   }
   return (
-    <svg className="grade-icon" viewBox="0 0 22 22" aria-hidden="true" focusable="false">
+    <svg
+      className="grade-icon"
+      viewBox="0 0 22 22"
+      aria-hidden="true"
+      focusable="false"
+    >
       <circle cx="11" cy="11" r="10" fill="currentColor" opacity="0.18" />
       <circle cx="11" cy="11" r="7.2" fill="currentColor" opacity="0.4" />
       <circle cx="11" cy="11" r="4.6" fill="currentColor" />
@@ -387,8 +607,18 @@ function DeepGradeIcon({ grade }: { grade: Grade }) {
 function GardenGradeIcon({ grade }: { grade: Grade }) {
   if (grade === "again") {
     return (
-      <svg className="grade-icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false">
-        <path d="M4 4 C9 6 10 10 8 15" fill="none" stroke="var(--again-text)" strokeWidth="1.6" />
+      <svg
+        className="grade-icon"
+        viewBox="0 0 18 18"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path
+          d="M4 4 C9 6 10 10 8 15"
+          fill="none"
+          stroke="var(--again-text)"
+          strokeWidth="1.6"
+        />
         <ellipse
           cx="6.5"
           cy="7.5"
@@ -403,7 +633,12 @@ function GardenGradeIcon({ grade }: { grade: Grade }) {
   }
   if (grade === "hard") {
     return (
-      <svg className="grade-icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false">
+      <svg
+        className="grade-icon"
+        viewBox="0 0 18 18"
+        aria-hidden="true"
+        focusable="false"
+      >
         <ellipse cx="9" cy="10" rx="3.2" ry="4.6" fill="var(--hard-text)" />
         <path d="M9 14 L9 17" stroke="var(--hard-text)" strokeWidth="1.4" />
       </svg>
@@ -411,8 +646,18 @@ function GardenGradeIcon({ grade }: { grade: Grade }) {
   }
   if (grade === "good") {
     return (
-      <svg className="grade-icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false">
-        <path d="M9 17 C9 10 9 7 9 2" stroke="var(--good-text)" strokeWidth="1.4" fill="none" />
+      <svg
+        className="grade-icon"
+        viewBox="0 0 18 18"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path
+          d="M9 17 C9 10 9 7 9 2"
+          stroke="var(--good-text)"
+          strokeWidth="1.4"
+          fill="none"
+        />
         <path d="M9 9 C4 7 3 3 3 3 C3 3 8 3 9 9 Z" fill="var(--good-text)" />
       </svg>
     );
@@ -438,7 +683,12 @@ export function MoodPlant({ mood }: { mood: "weak" | "strong" }) {
 function DeepMood({ mood }: { mood: "weak" | "strong" }) {
   if (mood === "weak") {
     return (
-      <svg className="mood-plant" viewBox="0 0 110 110" aria-hidden="true" focusable="false">
+      <svg
+        className="mood-plant"
+        viewBox="0 0 110 110"
+        aria-hidden="true"
+        focusable="false"
+      >
         <circle
           cx="55"
           cy="55"
@@ -448,7 +698,14 @@ function DeepMood({ mood }: { mood: "weak" | "strong" }) {
           strokeWidth="1"
           strokeDasharray="2 5"
         />
-        <circle cx="55" cy="55" r="7" fill="none" stroke="var(--again-text)" strokeWidth="1.4" />
+        <circle
+          cx="55"
+          cy="55"
+          r="7"
+          fill="none"
+          stroke="var(--again-text)"
+          strokeWidth="1.4"
+        />
         <g stroke="var(--again-line)" strokeWidth="1.4">
           <path d="M55 20 L55 30" />
           <path d="M55 80 L55 90" />
@@ -459,7 +716,12 @@ function DeepMood({ mood }: { mood: "weak" | "strong" }) {
     );
   }
   return (
-    <svg className="mood-plant" viewBox="0 0 110 110" aria-hidden="true" focusable="false">
+    <svg
+      className="mood-plant"
+      viewBox="0 0 110 110"
+      aria-hidden="true"
+      focusable="false"
+    >
       <g stroke="var(--accent)" strokeWidth="1.8" fill="none" opacity="0.85">
         <path d="M55 55 C 40 46 34 30 40 16" />
         <path d="M55 55 C 68 44 76 28 70 14" />
@@ -476,18 +738,51 @@ function DeepMood({ mood }: { mood: "weak" | "strong" }) {
 function GardenMood({ mood }: { mood: "weak" | "strong" }) {
   if (mood === "weak") {
     return (
-      <svg className="mood-plant" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
-        <path d="M60 108 C 58 78 62 58 48 40" fill="none" stroke="var(--text-soft)" strokeWidth="3" />
-        <path d="M48 40 C 34 42 26 34 24 24 C 36 24 46 30 48 40 Z" fill="var(--text-soft)" />
-        <path d="M60 60 C 72 56 78 46 78 36 C 66 38 58 46 58 58 Z" fill="var(--text-soft)" opacity="0.85" />
+      <svg
+        className="mood-plant"
+        viewBox="0 0 120 120"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path
+          d="M60 108 C 58 78 62 58 48 40"
+          fill="none"
+          stroke="var(--text-soft)"
+          strokeWidth="3"
+        />
+        <path
+          d="M48 40 C 34 42 26 34 24 24 C 36 24 46 30 48 40 Z"
+          fill="var(--text-soft)"
+        />
+        <path
+          d="M60 60 C 72 56 78 46 78 36 C 66 38 58 46 58 58 Z"
+          fill="var(--text-soft)"
+          opacity="0.85"
+        />
       </svg>
     );
   }
   return (
-    <svg className="mood-plant" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
-      <path d="M60 110 C 60 80 60 60 60 46" stroke="var(--good-text)" strokeWidth="3" fill="none" />
-      <path d="M60 78 C 44 74 40 62 40 62 C 40 62 54 60 60 78 Z" fill="var(--good-text)" />
-      <path d="M60 88 C 76 84 80 72 80 72 C 80 72 66 70 60 88 Z" fill="var(--good-text)" />
+    <svg
+      className="mood-plant"
+      viewBox="0 0 120 120"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        d="M60 110 C 60 80 60 60 60 46"
+        stroke="var(--good-text)"
+        strokeWidth="3"
+        fill="none"
+      />
+      <path
+        d="M60 78 C 44 74 40 62 40 62 C 40 62 54 60 60 78 Z"
+        fill="var(--good-text)"
+      />
+      <path
+        d="M60 88 C 76 84 80 72 80 72 C 80 72 66 70 60 88 Z"
+        fill="var(--good-text)"
+      />
       <g transform="translate(60,38)" color="var(--ornament-accent)">
         <use href="#flower" width="56" height="56" x="-28" y="-28" />
       </g>

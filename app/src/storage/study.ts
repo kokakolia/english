@@ -1,4 +1,3 @@
-import { updateSafety } from "../app/update-safety";
 /**
  * Чтение прогресса и запись результата повторения.
  *
@@ -12,6 +11,7 @@ import { updateSafety } from "../app/update-safety";
  * а не после.
  */
 
+import { updateSafety } from "../app/update-safety";
 import {
   defaultScheduler,
   isHidden,
@@ -80,40 +80,53 @@ export async function recordReview(
     let reviewId = 0;
     let before: StoredProgress | null = null;
 
-    await db.transaction("rw", [db.progress, db.reviews, db.changes, db.cards], async () => {
-      await assertAvailableOwners(db, [{ cardId: input.cardId, deckId: input.deckId }]);
-      before = (await db.progress.get(input.cardId)) ?? null;
-      const previous =
-        before ??
-        ({ ...scheduler.create(input.cardId, now), deckId: input.deckId } as StoredProgress);
+    await db.transaction(
+      "rw",
+      [db.progress, db.reviews, db.changes, db.cards],
+      async () => {
+        await assertAvailableOwners(db, [
+          { cardId: input.cardId, deckId: input.deckId },
+        ]);
+        before = (await db.progress.get(input.cardId)) ?? null;
+        const previous =
+          before ??
+          ({
+            ...scheduler.create(input.cardId, now),
+            deckId: input.deckId,
+          } as StoredProgress);
 
-      const outcome = scheduler.review(previous, input.grade, now);
-      stored = { ...outcome.progress, deckId: input.deckId };
-      intervalDays = outcome.intervalDays;
+        const outcome = scheduler.review(previous, input.grade, now);
+        stored = { ...outcome.progress, deckId: input.deckId };
+        intervalDays = outcome.intervalDays;
 
-      const entry: StoredReview = {
-        eventId: crypto.randomUUID(),
-        cardId: input.cardId,
-        reviewedAt: now.toISOString(),
-        grade: input.grade,
-        stateBefore: previous.state,
-        elapsedDays: outcome.progress.elapsedDays,
-        scheduledDays: previous.scheduledDays,
-        ...(input.typed !== undefined ? { typed: input.typed } : {}),
-        ...(input.verdict !== undefined ? { verdict: input.verdict } : {}),
-        ...(input.durationMs !== undefined ? { durationMs: input.durationMs } : {}),
-      };
+        const entry: StoredReview = {
+          eventId: crypto.randomUUID(),
+          cardId: input.cardId,
+          reviewedAt: now.toISOString(),
+          grade: input.grade,
+          stateBefore: previous.state,
+          elapsedDays: outcome.progress.elapsedDays,
+          scheduledDays: previous.scheduledDays,
+          ...(input.typed !== undefined ? { typed: input.typed } : {}),
+          ...(input.verdict !== undefined ? { verdict: input.verdict } : {}),
+          ...(input.durationMs !== undefined
+            ? { durationMs: input.durationMs }
+            : {}),
+        };
 
-      await db.progress.put(stored);
-      await markChanged(db, input.cardId, input.deckId, now);
-      reviewId = await db.reviews.add(entry);
-    });
+        await db.progress.put(stored);
+        await markChanged(db, input.cardId, input.deckId, now);
+        reviewId = await db.reviews.add(entry);
+      },
+    );
 
     if (stored === undefined) {
       throw new Error("не удалось записать повторение");
     }
     return { progress: stored, intervalDays, reviewId, previous: before };
-  } finally { release(); }
+  } finally {
+    release();
+  }
 }
 
 export interface UndoInput {
@@ -142,21 +155,29 @@ export async function undoReview(
 ): Promise<void> {
   const release = updateSafety.begin();
   try {
-    await db.transaction("rw", [db.progress, db.reviews, db.changes, db.cards], async () => {
-      const current = await db.progress.get(input.cardId);
-      const change = await db.changes.get(input.cardId);
-      const deckId = input.previous?.deckId ?? current?.deckId ?? change?.deckId;
-      if (deckId === undefined) throw new Error("колода отменяемой карточки неизвестна");
-      await assertAvailableOwners(db, [{ cardId: input.cardId, deckId }]);
-      await markChanged(db, input.cardId, deckId, input.now ?? new Date());
-      if (input.previous === null) {
-        await db.progress.delete(input.cardId);
-      } else {
-        await db.progress.put(input.previous);
-      }
-      await db.reviews.update(input.reviewId, { undone: true });
-    });
-  } finally { release(); }
+    await db.transaction(
+      "rw",
+      [db.progress, db.reviews, db.changes, db.cards],
+      async () => {
+        const current = await db.progress.get(input.cardId);
+        const change = await db.changes.get(input.cardId);
+        const deckId =
+          input.previous?.deckId ?? current?.deckId ?? change?.deckId;
+        if (deckId === undefined)
+          throw new Error("колода отменяемой карточки неизвестна");
+        await assertAvailableOwners(db, [{ cardId: input.cardId, deckId }]);
+        await markChanged(db, input.cardId, deckId, input.now ?? new Date());
+        if (input.previous === null) {
+          await db.progress.delete(input.cardId);
+        } else {
+          await db.progress.put(input.previous);
+        }
+        await db.reviews.update(input.reviewId, { undone: true });
+      },
+    );
+  } finally {
+    release();
+  }
 }
 
 export interface DeckCounts {
@@ -179,11 +200,20 @@ export interface DeckCounts {
 }
 
 /** Сколько уникальных карточек уже израсходовало лимит местного дня. */
-export async function studiedToday(db: AppDatabase, deckId: string, now: Date): Promise<{ fresh: number; review: number }> {
+export async function studiedToday(
+  db: AppDatabase,
+  deckId: string,
+  now: Date,
+): Promise<{ fresh: number; review: number }> {
   const start = new Date(now);
   start.setHours(0, 0, 0, 0);
-  const rows = await db.reviews.where("reviewedAt").between(start.toISOString(), now.toISOString(), true, true).toArray();
-  const ids = new Set((await db.cards.where("deckId").equals(deckId).primaryKeys()) as string[]);
+  const rows = await db.reviews
+    .where("reviewedAt")
+    .between(start.toISOString(), now.toISOString(), true, true)
+    .toArray();
+  const ids = new Set(
+    (await db.cards.where("deckId").equals(deckId).primaryKeys()) as string[],
+  );
   const fresh = new Set<string>();
   const review = new Set<string>();
   for (const row of rows) {
@@ -203,13 +233,22 @@ export async function deckCounts(
   newPerDay?: number,
 ): Promise<DeckCounts> {
   const [cards, progress, used, settings] = await Promise.all([
-    loadCards(db, deckId), loadProgress(db, deckId), studiedToday(db, deckId, now), getStudySettings(db),
+    loadCards(db, deckId),
+    loadProgress(db, deckId),
+    studiedToday(db, deckId, now),
+    getStudySettings(db),
   ]);
-  const queue = buildQueue({ cards, progress, now, studiedToday: used, settings: {
-    ...settings,
-    newPerDay: newPerDay ?? cards.length + used.fresh,
-    reviewsPerDay: reviewsPerDay ?? cards.length + used.review,
-  } });
+  const queue = buildQueue({
+    cards,
+    progress,
+    now,
+    studiedToday: used,
+    settings: {
+      ...settings,
+      newPerDay: newPerDay ?? cards.length + used.fresh,
+      reviewsPerDay: reviewsPerDay ?? cards.length + used.review,
+    },
+  });
   let learning = 0;
   let review = 0;
   for (const card of cards) {
@@ -218,8 +257,14 @@ export async function deckCounts(
     if (row.state === "learning" || row.state === "relearning") learning++;
     if (row.state === "review") review++;
   }
-  return { total: cards.length, fresh: queue.counts.fresh, due: queue.counts.learning + queue.counts.review,
-    learning, review, backlog: reviewsPerDay === undefined ? 0 : queue.backlog };
+  return {
+    total: cards.length,
+    fresh: queue.counts.fresh,
+    due: queue.counts.learning + queue.counts.review,
+    learning,
+    review,
+    backlog: reviewsPerDay === undefined ? 0 : queue.backlog,
+  };
 }
 
 /** Журнал повторений по карточке, от старых к новым. */
@@ -253,14 +298,19 @@ export async function resetCard(
     let before: PreviousProgress = null;
     await db.transaction("rw", db.progress, db.changes, db.cards, async () => {
       before = (await db.progress.get(cardId)) ?? null;
-      const deckId = before?.deckId ?? (await db.cards.get(cardId))?.deckId ?? (await db.changes.get(cardId))?.deckId;
+      const deckId =
+        before?.deckId ??
+        (await db.cards.get(cardId))?.deckId ??
+        (await db.changes.get(cardId))?.deckId;
       if (deckId === undefined) throw new Error("карточка не найдена");
       await assertAvailableOwners(db, [{ cardId, deckId }]);
       await markChanged(db, cardId, deckId, now);
       await db.progress.delete(cardId);
     });
     return before;
-  } finally { release(); }
+  } finally {
+    release();
+  }
 }
 
 export interface HideInput {
@@ -312,18 +362,29 @@ async function writeFlag(
     const scheduler = input.scheduler ?? defaultScheduler;
     let before: PreviousProgress = null;
 
-    await db.transaction("rw", [db.progress, db.changes, db.cards], async () => {
-      await assertAvailableOwners(db, [{ cardId: input.cardId, deckId: input.deckId }]);
-      before = (await db.progress.get(input.cardId)) ?? null;
-      await markChanged(db, input.cardId, input.deckId, now);
-      const base: StoredProgress =
-        before ??
-        ({ ...scheduler.create(input.cardId, now), deckId: input.deckId } as StoredProgress);
-      await db.progress.put(change(base));
-    });
+    await db.transaction(
+      "rw",
+      [db.progress, db.changes, db.cards],
+      async () => {
+        await assertAvailableOwners(db, [
+          { cardId: input.cardId, deckId: input.deckId },
+        ]);
+        before = (await db.progress.get(input.cardId)) ?? null;
+        await markChanged(db, input.cardId, input.deckId, now);
+        const base: StoredProgress =
+          before ??
+          ({
+            ...scheduler.create(input.cardId, now),
+            deckId: input.deckId,
+          } as StoredProgress);
+        await db.progress.put(change(base));
+      },
+    );
 
     return before;
-  } finally { release(); }
+  } finally {
+    release();
+  }
 }
 
 /**
@@ -341,14 +402,20 @@ export async function restoreProgress(
   const release = updateSafety.begin();
   try {
     await db.transaction("rw", db.progress, db.changes, db.cards, async () => {
-      const deckId = previous?.deckId ?? (await db.progress.get(cardId))?.deckId ?? (await db.cards.get(cardId))?.deckId ?? (await db.changes.get(cardId))?.deckId;
+      const deckId =
+        previous?.deckId ??
+        (await db.progress.get(cardId))?.deckId ??
+        (await db.cards.get(cardId))?.deckId ??
+        (await db.changes.get(cardId))?.deckId;
       if (deckId === undefined) throw new Error("карточка не найдена");
       await assertAvailableOwners(db, [{ cardId, deckId }]);
       await markChanged(db, cardId, deckId, now);
       if (previous === null) await db.progress.delete(cardId);
       else await db.progress.put(previous);
     });
-  } finally { release(); }
+  } finally {
+    release();
+  }
 }
 
 /** Сколько карточек колоды убрано из оборота. */

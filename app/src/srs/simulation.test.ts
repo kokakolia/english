@@ -251,7 +251,10 @@ describe("год повторений", () => {
   });
 
   it("доля успешных вспоминаний близка к заданной", () => {
-    const answers = result.days.reduce((sum, day) => sum + day.reviewAnswers, 0);
+    const answers = result.days.reduce(
+      (sum, day) => sum + day.reviewAnswers,
+      0,
+    );
     const failures = result.days.reduce((sum, day) => sum + day.again, 0);
     const retention = 1 - failures / answers;
 
@@ -264,7 +267,8 @@ describe("год повторений", () => {
 
   it("интервалы растут", () => {
     const intervals = [...result.progress.values()].map((p) => p.scheduledDays);
-    const average = intervals.reduce((sum, value) => sum + value, 0) / intervals.length;
+    const average =
+      intervals.reduce((sum, value) => sum + value, 0) / intervals.length;
     expect(average).toBeGreaterThan(20);
   });
 
@@ -277,7 +281,9 @@ describe("год повторений", () => {
 
 describe("пропуск занятий", () => {
   const cards = makeDeck(200, 10);
-  const skipDays = new Set(Array.from({ length: 30 }, (_, index) => 60 + index));
+  const skipDays = new Set(
+    Array.from({ length: 30 }, (_, index) => 60 + index),
+  );
   const result = simulate(cards, {
     days: 200,
     newPerDay: 10,
@@ -290,7 +296,9 @@ describe("пропуск занятий", () => {
     // Молчаливое отбрасывание просроченных карточек скрыло бы от учащегося
     // настоящий объём долга, поэтому очередь сообщает о нём отдельно.
     const duringBreak = result.days.slice(60, 90);
-    expect(Math.max(...duringBreak.map((day) => day.backlog))).toBeGreaterThan(0);
+    expect(Math.max(...duringBreak.map((day) => day.backlog))).toBeGreaterThan(
+      0,
+    );
   });
 
   it("завал рассасывается после возвращения", () => {

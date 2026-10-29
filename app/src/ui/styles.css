@@ -13,7 +13,7 @@
  * другой — меняется одна строка: --font-display.
  */
 
-@import url("/fonts/fonts.css");
+@import url("../assets/fonts/fonts.css");
 
 :root {
   --paper: #f3eedc;
@@ -130,8 +130,7 @@
     --panel-bg: rgba(80, 150, 220, 0.05);
     --panel-border: rgba(110, 201, 255, 0.22);
     --panel-shadow:
-      0 0 46px rgba(79, 168, 255, 0.12),
-      0 24px 50px rgba(0, 0, 0, 0.6);
+      0 0 46px rgba(79, 168, 255, 0.12), 0 24px 50px rgba(0, 0, 0, 0.6);
     --panel-inset: none;
     --panel-blur: 20px;
 
@@ -147,7 +146,7 @@
     --note-border: #6ec9ff;
     --tally-bg: rgba(110, 201, 255, 0.05);
     --glow: rgba(110, 201, 255, 0.35);
-  --warn-colour: #ff9a7a;
+    --warn-colour: #ff9a7a;
 
     /* В светлой теме оценки различаются цветом — от ржавого к золотому.
        На тёмном цвет читается хуже, а яркость лучше, поэтому здесь работает
@@ -185,8 +184,7 @@
   --panel-bg: rgba(80, 150, 220, 0.05);
   --panel-border: rgba(110, 201, 255, 0.22);
   --panel-shadow:
-    0 0 46px rgba(79, 168, 255, 0.12),
-    0 24px 50px rgba(0, 0, 0, 0.6);
+    0 0 46px rgba(79, 168, 255, 0.12), 0 24px 50px rgba(0, 0, 0, 0.6);
   --panel-inset: none;
   --panel-blur: 20px;
 
@@ -791,9 +789,7 @@ body {
   border: 1px solid var(--panel-border);
   border-radius: clamp(18px, 2vw, 24px);
   padding: var(--panel-pad-y) var(--panel-pad-x);
-  box-shadow:
-    var(--panel-shadow),
-    var(--panel-inset);
+  box-shadow: var(--panel-shadow), var(--panel-inset);
   /* Отступ под тень: иначе она обрезается краем прокручиваемой середины. */
   margin: 0 0 6px;
 }

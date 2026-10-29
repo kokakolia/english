@@ -1,7 +1,12 @@
 import { describe, expect, it } from "vitest";
 
 import { makeCard } from "../srs/testing";
-import { DeckLoadError, loadDeckFile, loadDeckIndex, type FetchLike } from "./loader";
+import {
+  DeckLoadError,
+  loadDeckFile,
+  loadDeckIndex,
+  type FetchLike,
+} from "./loader";
 
 /** Заглушка сети: отдаёт заранее подготовленные ответы по адресу. */
 function stubFetch(files: Record<string, unknown>): FetchLike {
@@ -13,7 +18,11 @@ function stubFetch(files: Record<string, unknown>): FetchLike {
   };
 }
 
-const cards = [makeCard({ id: "c_1" }), makeCard({ id: "c_2" }), makeCard({ id: "c_3" })];
+const cards = [
+  makeCard({ id: "c_1" }),
+  makeCard({ id: "c_2" }),
+  makeCard({ id: "c_3" }),
+];
 
 const meta = {
   id: "en-collocations",
@@ -48,28 +57,38 @@ describe("загрузка колоды", () => {
       "/decks/en-collocations/cards-001.json": [],
     });
 
-    await expect(loadDeckFile("/decks/en-collocations", fetchImpl)).rejects.toBeInstanceOf(
-      DeckLoadError,
-    );
+    await expect(
+      loadDeckFile("/decks/en-collocations", fetchImpl),
+    ).rejects.toBeInstanceOf(DeckLoadError);
   });
 
   it("сообщает о недоступном файле", async () => {
     const fetchImpl = stubFetch({});
-    await expect(loadDeckFile("/decks/missing", fetchImpl)).rejects.toThrow(/404|код/);
+    await expect(loadDeckFile("/decks/missing", fetchImpl)).rejects.toThrow(
+      /404|код/,
+    );
   });
 
   it("сообщает об отказе сети, а не падает", async () => {
     const broken: FetchLike = async () => {
       throw new Error("сеть недоступна");
     };
-    await expect(loadDeckFile("/decks/any", broken)).rejects.toBeInstanceOf(DeckLoadError);
+    await expect(loadDeckFile("/decks/any", broken)).rejects.toBeInstanceOf(
+      DeckLoadError,
+    );
   });
 
   it("читает перечень колод", async () => {
     const fetchImpl = stubFetch({
       "/decks/index.json": {
         decks: [
-          { id: "en-collocations", name: "Английские коллокации", version: "abc123", count: 3, path: "en-collocations/deck.json" },
+          {
+            id: "en-collocations",
+            name: "Английские коллокации",
+            version: "abc123",
+            count: 3,
+            path: "en-collocations/deck.json",
+          },
         ],
       },
     });
@@ -81,12 +100,18 @@ describe("загрузка колоды", () => {
 
   it("не принимает перечень без списка колод", async () => {
     const fetchImpl = stubFetch({ "/decks/index.json": {} });
-    await expect(loadDeckIndex("/decks", fetchImpl)).rejects.toBeInstanceOf(DeckLoadError);
+    await expect(loadDeckIndex("/decks", fetchImpl)).rejects.toBeInstanceOf(
+      DeckLoadError,
+    );
   });
 
   it("работает и с адресом со слэшем на конце", async () => {
     const fetchImpl = stubFetch({
-      "/decks/en-collocations/deck.json": { ...meta, chunks: ["cards-000.json"], count: 3 },
+      "/decks/en-collocations/deck.json": {
+        ...meta,
+        chunks: ["cards-000.json"],
+        count: 3,
+      },
       "/decks/en-collocations/cards-000.json": cards,
     });
     const file = await loadDeckFile("/decks/en-collocations/", fetchImpl);

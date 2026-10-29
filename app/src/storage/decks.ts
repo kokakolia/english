@@ -1,4 +1,3 @@
-import { updateSafety } from "../app/update-safety";
 /**
  * Импорт и обновление колод.
  *
@@ -10,6 +9,7 @@ import { updateSafety } from "../app/update-safety";
  * от перевода.
  */
 
+import { updateSafety } from "../app/update-safety";
 import { validCard, validDeckMeta, uniqueIds } from "./validation";
 import { assertAvailableOwners } from "./ownership";
 import type { DeckCard } from "../srs";
@@ -25,7 +25,10 @@ export interface DeckMeta {
   built_at: string;
   count: number;
   chunks: string[];
-  integrity?: { algorithm: "sha256-canonical-json-v1"; chunks: Record<string, string> };
+  integrity?: {
+    algorithm: "sha256-canonical-json-v1";
+    chunks: Record<string, string>;
+  };
   source?: Record<string, unknown>;
 }
 
@@ -69,9 +72,15 @@ function sameContent(left: StoredCard, right: DeckCard): boolean {
     left.note === right.note &&
     left.hint === right.hint &&
     left.position === right.position &&
-    left.type === right.type && left.phrase === right.phrase && left.relation === right.relation &&
-    left.headword === right.headword && left.sense === right.sense && left.cefr === right.cefr &&
-    left.band === right.band && left.ambiguity === right.ambiguity && sameList(left.flags, right.flags) &&
+    left.type === right.type &&
+    left.phrase === right.phrase &&
+    left.relation === right.relation &&
+    left.headword === right.headword &&
+    left.sense === right.sense &&
+    left.cefr === right.cefr &&
+    left.band === right.band &&
+    left.ambiguity === right.ambiguity &&
+    sameList(left.flags, right.flags) &&
     sameList(left.answers, right.answers) &&
     sameList(left.accept, right.accept) &&
     sameList(left.also, right.also)
@@ -95,10 +104,14 @@ export async function importDeck(
   try {
     const { meta, cards } = file;
     const now = options.now ?? new Date();
-    if (!validDeckMeta(meta) || !cards.every(validCard) || !uniqueIds(cards, "id") || cards.length !== meta.count) {
+    if (
+      !validDeckMeta(meta) ||
+      !cards.every(validCard) ||
+      !uniqueIds(cards, "id") ||
+      cards.length !== meta.count
+    ) {
       throw new Error("неверный формат колоды");
     }
-
 
     const incoming = new Map(cards.map((card) => [card.id, card]));
     const result: ImportResult = {
@@ -114,71 +127,104 @@ export async function importDeck(
 
     // Одна транзакция на всё: оборванный импорт не должен оставить колоду
     // наполовину обновлённой.
-    await db.transaction("rw", [db.decks, db.cards, db.progress, db.changes], async () => {
-      await assertAvailableOwners(db, cards.map(card => ({ cardId: card.id, deckId: meta.id })));
-      const existingDeck = await db.decks.get(meta.id);
-      const older = existingDeck !== undefined && existingDeck.version !== meta.version &&
-        Date.parse(existingDeck.builtAt) >= Date.parse(meta.built_at);
-      const same = existingDeck?.version === meta.version &&
-        await db.cards.where("deckId").equals(meta.id).count() === meta.count;
-      if ((older && !options.allowDowngrade) || (same && !options.force)) {
-        result.skipped = true;
-        result.version = existingDeck!.version;
-        result.reason = older ? (Date.parse(existingDeck!.builtAt) === Date.parse(meta.built_at) ? "version-conflict" : "older-version") : "same-version";
-        result.unchanged = existingDeck!.count;
-        return;
-      }
-      const stored = await db.cards.where("deckId").equals(meta.id).toArray();
-      const existing = new Map(stored.map((card) => [card.id, card]));
-
-      const toWrite: StoredCard[] = [];
-      for (const [id, card] of incoming) {
-        const previous = existing.get(id);
-        if (previous === undefined) {
-          result.added += 1;
-          toWrite.push({ ...card, deckId: meta.id });
-        } else if (sameContent(previous, card)) {
-          result.unchanged += 1;
-        } else {
-          result.updated += 1;
-          toWrite.push({ ...card, deckId: meta.id });
+    await db.transaction(
+      "rw",
+      [db.decks, db.cards, db.progress, db.changes],
+      async () => {
+        await assertAvailableOwners(
+          db,
+          cards.map((card) => ({ cardId: card.id, deckId: meta.id })),
+        );
+        const existingDeck = await db.decks.get(meta.id);
+        const older =
+          existingDeck !== undefined &&
+          existingDeck.version !== meta.version &&
+          Date.parse(existingDeck.builtAt) >= Date.parse(meta.built_at);
+        const same =
+          existingDeck?.version === meta.version &&
+          (await db.cards.where("deckId").equals(meta.id).count()) ===
+            meta.count;
+        if ((older && !options.allowDowngrade) || (same && !options.force)) {
+          result.skipped = true;
+          result.version = existingDeck!.version;
+          result.reason = older
+            ? Date.parse(existingDeck!.builtAt) === Date.parse(meta.built_at)
+              ? "version-conflict"
+              : "older-version"
+            : "same-version";
+          result.unchanged = existingDeck!.count;
+          return;
         }
-      }
+        const stored = await db.cards.where("deckId").equals(meta.id).toArray();
+        const existing = new Map(stored.map((card) => [card.id, card]));
 
-      const removedIds = [...existing.keys()].filter((id) => !incoming.has(id));
-      result.removed = removedIds.length;
+        const toWrite: StoredCard[] = [];
+        for (const [id, card] of incoming) {
+          const previous = existing.get(id);
+          if (previous === undefined) {
+            result.added += 1;
+            toWrite.push({ ...card, deckId: meta.id });
+          } else if (sameContent(previous, card)) {
+            result.unchanged += 1;
+          } else {
+            result.updated += 1;
+            toWrite.push({ ...card, deckId: meta.id });
+          }
+        }
 
-      if (removedIds.length > 0) await db.cards.bulkDelete(removedIds);
-      if (toWrite.length > 0) await db.cards.bulkPut(toWrite);
+        const removedIds = [...existing.keys()].filter(
+          (id) => !incoming.has(id),
+        );
+        result.removed = removedIds.length;
 
-      // Прогресс по исчезнувшим карточкам остаётся лежать: если карточка
-      // вернётся, вернётся и выученное по ней.
-      if (removedIds.length > 0) {
-        const orphaned = await db.progress.where("cardId").anyOf(removedIds).count();
-        result.orphanedProgress = orphaned;
-      }
+        if (removedIds.length > 0) await db.cards.bulkDelete(removedIds);
+        if (toWrite.length > 0) await db.cards.bulkPut(toWrite);
 
-      const deck: StoredDeck = {
-        id: meta.id,
-        name: meta.name,
-        version: meta.version,
-        language: meta.language,
-        cardType: meta.card_type,
-        count: cards.length,
-        builtAt: meta.built_at,
-        importedAt: now.toISOString(),
-        ...(meta.source ? { source: meta.source } : {}),
-      };
-      await db.decks.put(deck);
-    });
+        // Прогресс по исчезнувшим карточкам остаётся лежать: если карточка
+        // вернётся, вернётся и выученное по ней.
+        if (removedIds.length > 0) {
+          const orphaned = await db.progress
+            .where("cardId")
+            .anyOf(removedIds)
+            .count();
+          result.orphanedProgress = orphaned;
+        }
+
+        const deck: StoredDeck = {
+          id: meta.id,
+          name: meta.name,
+          version: meta.version,
+          language: meta.language,
+          cardType: meta.card_type,
+          count: cards.length,
+          builtAt: meta.built_at,
+          importedAt: now.toISOString(),
+          ...(meta.source ? { source: meta.source } : {}),
+        };
+        await db.decks.put(deck);
+      },
+    );
 
     return result;
-  } finally { release(); }
+  } finally {
+    release();
+  }
 }
 
 /** Все импортированные колоды. */
 export async function listDecks(db: AppDatabase): Promise<StoredDeck[]> {
   return db.decks.orderBy("importedAt").toArray();
+}
+
+/** Готовые к занятию колоды; метаданные и количество карточек читаются одним снимком. */
+export async function listUsableDecks(db: AppDatabase): Promise<StoredDeck[]> {
+  return db.transaction("r", [db.decks, db.cards], async () => {
+    const decks = await listDecks(db);
+    const counts = await Promise.all(
+      decks.map((deck) => db.cards.where("deckId").equals(deck.id).count()),
+    );
+    return decks.filter((deck, index) => counts[index] === deck.count);
+  });
 }
 
 /** Карточки колоды в порядке изучения. */
@@ -197,21 +243,29 @@ export async function loadCards(
  * В отличие от обновления, это осознанное расставание с выученным, поэтому
  * чистится всё — иначе в базе копились бы сироты, которых никогда не увидеть.
  */
-export async function removeDeck(db: AppDatabase, deckId: string): Promise<void> {
+export async function removeDeck(
+  db: AppDatabase,
+  deckId: string,
+): Promise<void> {
   const release = updateSafety.begin();
   try {
     await db.transaction(
       "rw",
       [db.decks, db.cards, db.progress, db.reviews, db.changes],
       async () => {
-        const ids = [...new Set([
-          ...await db.cards.where("deckId").equals(deckId).primaryKeys(),
-          ...await db.progress.where("deckId").equals(deckId).primaryKeys(),
-          ...await db.changes.where("deckId").equals(deckId).primaryKeys(),
-        ])] as string[];
+        const ids = [
+          ...new Set([
+            ...(await db.cards.where("deckId").equals(deckId).primaryKeys()),
+            ...(await db.progress.where("deckId").equals(deckId).primaryKeys()),
+            ...(await db.changes.where("deckId").equals(deckId).primaryKeys()),
+          ]),
+        ] as string[];
         // Проверяем и старые повреждённые базы: удаление не должно стереть
         // журнал карточки, чей прогресс относится к другой колоде.
-        await assertAvailableOwners(db, ids.map(cardId => ({ cardId, deckId })));
+        await assertAvailableOwners(
+          db,
+          ids.map((cardId) => ({ cardId, deckId })),
+        );
         await db.changes.where("deckId").equals(deckId).delete();
         await db.cards.where("deckId").equals(deckId).delete();
         await db.progress.where("deckId").equals(deckId).delete();
@@ -221,5 +275,7 @@ export async function removeDeck(db: AppDatabase, deckId: string): Promise<void>
         await db.decks.delete(deckId);
       },
     );
-  } finally { release(); }
+  } finally {
+    release();
+  }
 }

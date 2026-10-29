@@ -5,12 +5,19 @@ function exclusiveLocks() {
   let held = false;
   const completed: Promise<unknown>[] = [];
   const locks = {
-    request(_name: string, options: LockOptions, callback: LockGrantedCallback<unknown>) {
+    request(
+      _name: string,
+      options: LockOptions,
+      callback: LockGrantedCallback<unknown>,
+    ) {
       expect(options.ifAvailable).toBe(true);
       const acquired = !held;
       if (acquired) held = true;
-      const done = Promise.resolve().then(() => callback(acquired ? {} as Lock : null))
-        .finally(() => { if (acquired) held = false; });
+      const done = Promise.resolve()
+        .then(() => callback(acquired ? ({} as Lock) : null))
+        .finally(() => {
+          if (acquired) held = false;
+        });
       completed.push(done);
       return done;
     },
@@ -21,8 +28,11 @@ function exclusiveLocks() {
 describe("единственный активный экземпляр", () => {
   it("два одновременных запуска получают только одного владельца", async () => {
     const { locks, completed } = exclusiveLocks();
-    const claims = await Promise.all([claimInstance(locks), claimInstance(locks)]);
-    expect(claims.map(value => value.kind)).toEqual(["acquired", "busy"]);
+    const claims = await Promise.all([
+      claimInstance(locks),
+      claimInstance(locks),
+    ]);
+    expect(claims.map((value) => value.kind)).toEqual(["acquired", "busy"]);
     for (const claim of claims) if (claim.kind === "acquired") claim.release();
     await Promise.all(completed);
   });
@@ -44,12 +54,21 @@ describe("единственный активный экземпляр", () => {
   });
 
   it("ошибка API становится сообщением, а не вечным ожиданием", async () => {
-    const locks = { request: () => Promise.reject(new Error("denied")) } as unknown as LockManager;
-    expect(await claimInstance(locks)).toMatchObject({ kind: "error", message: "Error: denied" });
+    const locks = {
+      request: () => Promise.reject(new Error("denied")),
+    } as unknown as LockManager;
+    expect(await claimInstance(locks)).toMatchObject({
+      kind: "error",
+      message: "Error: denied",
+    });
   });
 
   it("синхронный отказ API тоже обрабатывается", async () => {
-    const locks = { request: () => { throw new Error("denied"); } } as unknown as LockManager;
+    const locks = {
+      request: () => {
+        throw new Error("denied");
+      },
+    } as unknown as LockManager;
     expect((await claimInstance(locks)).kind).toBe("error");
   });
 });

@@ -25,7 +25,7 @@ export interface DeckCard {
   answer: string;
   /** Словарные записи партнёров как есть — для показа: `see sb home`. */
   accept: string[];
-  /** Развёрнутые формы для проверки ввода: `see`, `saw`. */
+  /** Словоформы из пайплайна; сохраняются для совместимости и экспорта. */
   answers: string[];
   /** Первая буква и длина: `d__________`. */
   hint: string;
@@ -111,15 +111,5 @@ export interface ReviewEntry {
   undone?: boolean;
 }
 
-/** Итог проверки введённого ответа. */
+/** Старые журналы могут содержать итог проверки введённого ответа. */
 export type AnswerVerdict = "correct" | "almost" | "wrong";
-
-/** Почему ответ признан правильным или почти правильным. */
-export type AnswerReason = "exact" | "article" | "form" | "typo";
-
-export interface AnswerCheck {
-  verdict: AnswerVerdict;
-  /** Форма из `answers`, с которой совпал ввод. */
-  matched: string | null;
-  reason: AnswerReason | null;
-}

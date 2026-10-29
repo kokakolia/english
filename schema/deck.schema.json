@@ -4,7 +4,16 @@
   "title": "Колода карточек",
   "description": "Формат, который отдаёт пайплайн и читает приложение. Содержимое колоды иммутабельно: прогресс хранится отдельно и связывается по card.id.",
   "type": "object",
-  "required": ["id", "name", "version", "language", "card_type", "built_at", "count", "chunks"],
+  "required": [
+    "id",
+    "name",
+    "version",
+    "language",
+    "card_type",
+    "built_at",
+    "count",
+    "chunks"
+  ],
   "additionalProperties": false,
   "properties": {
     "id": {
@@ -34,13 +43,24 @@
     "chunks": {
       "type": "array",
       "description": "Файлы с карточками, по порядку изучения. Разбиты на части ради ленивой загрузки в приложении.",
-      "items": { "type": "string", "pattern": "^cards-[0-9]{3}(-[0-9a-f]{16})?\\.json$" }
+      "items": {
+        "type": "string",
+        "pattern": "^cards-[0-9]{3}(-[0-9a-f]{16})?\\.json$"
+      }
     },
     "integrity": {
-      "type": "object", "required": ["algorithm", "chunks"], "additionalProperties": false,
+      "type": "object",
+      "required": ["algorithm", "chunks"],
+      "additionalProperties": false,
       "properties": {
         "algorithm": { "const": "sha256-canonical-json-v1" },
-        "chunks": { "type": "object", "additionalProperties": { "type": "string", "pattern": "^[0-9a-f]{64}$" } }
+        "chunks": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
       }
     },
     "stats": { "type": "object", "additionalProperties": true }
@@ -48,7 +68,19 @@
   "$defs": {
     "card": {
       "type": "object",
-      "required": ["id", "type", "text", "answer", "accept", "answers", "hint", "phrase", "relation", "headword", "position"],
+      "required": [
+        "id",
+        "type",
+        "text",
+        "answer",
+        "accept",
+        "answers",
+        "hint",
+        "phrase",
+        "relation",
+        "headword",
+        "position"
+      ],
       "additionalProperties": false,
       "properties": {
         "id": {
@@ -99,12 +131,31 @@
         "phrase": { "type": "string" },
         "relation": {
           "type": "string",
-          "enum": ["adj+noun", "verb+obj", "noun+verb", "noun+noun", "adv+verb", "adv+adj", "verb+adj", "quant+noun", "adv+other", "prep", "phrase", "other"]
+          "enum": [
+            "adj+noun",
+            "verb+obj",
+            "noun+verb",
+            "noun+noun",
+            "adv+verb",
+            "adv+adj",
+            "verb+adj",
+            "quant+noun",
+            "adv+other",
+            "prep",
+            "phrase",
+            "other"
+          ]
         },
         "headword": { "type": "string" },
         "sense": { "type": ["string", "null"] },
-        "cefr": { "type": ["string", "null"], "enum": ["A1", "A2", "B1", "B2", "C1", "C2", null] },
-        "band": { "type": "string", "enum": ["core", "common", "extended", "rare"] },
+        "cefr": {
+          "type": ["string", "null"],
+          "enum": ["A1", "A2", "B1", "B2", "C1", "C2", null]
+        },
+        "band": {
+          "type": "string",
+          "enum": ["core", "common", "extended", "rare"]
+        },
         "ambiguity": {
           "type": "string",
           "enum": ["low", "medium", "high"],

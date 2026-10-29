@@ -82,12 +82,14 @@ export class AppDatabase extends Dexie {
       settings: "key",
     });
     this.version(2).stores({ changes: "cardId, deckId" });
-    this.version(3).stores({
-      reviews: "++id, &eventId, cardId, reviewedAt, [cardId+reviewedAt]",
-    }).upgrade(async transaction => {
-      const reviews = transaction.table("reviews");
-      await reviews.bulkPut(withReviewIds(await reviews.toArray()));
-    });
+    this.version(3)
+      .stores({
+        reviews: "++id, &eventId, cardId, reviewedAt, [cardId+reviewedAt]",
+      })
+      .upgrade(async (transaction) => {
+        const reviews = transaction.table("reviews");
+        await reviews.bulkPut(withReviewIds(await reviews.toArray()));
+      });
   }
 }
 

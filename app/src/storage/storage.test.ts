@@ -5,7 +5,13 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { createScheduler } from "../srs";
 import { makeCard } from "../srs/testing";
 import { AppDatabase } from "./db";
-import { importDeck, listDecks, loadCards, removeDeck, type DeckFile } from "./decks";
+import {
+  importDeck,
+  listDecks,
+  loadCards,
+  removeDeck,
+  type DeckFile,
+} from "./decks";
 import {
   cardHistory,
   deckCounts,
@@ -13,7 +19,11 @@ import {
   recordReview,
   resetCard,
 } from "./study";
-import { DEFAULT_STUDY_SETTINGS, getStudySettings, updateStudySettings } from "./settings";
+import {
+  DEFAULT_STUDY_SETTINGS,
+  getStudySettings,
+  updateStudySettings,
+} from "./settings";
 import { exportBackup, restoreBackup, BackupFormatError } from "./backup";
 
 const scheduler = createScheduler({ enableFuzz: false });
@@ -31,7 +41,8 @@ function deckFile(
       version,
       language: "en",
       card_type: "cloze",
-      built_at: version === "v1" ? "2026-04-01T00:00:00Z" : "2026-04-01T00:00:00.001Z",
+      built_at:
+        version === "v1" ? "2026-04-01T00:00:00Z" : "2026-04-01T00:00:00.001Z",
       count: cards.length,
       chunks: ["cards-000.json"],
     },
@@ -58,11 +69,20 @@ describe("импорт колоды", () => {
     const cards = [makeCard(), makeCard(), makeCard()];
     const result = await importDeck(db, deckFile(cards), { now: NOW });
 
-    expect(result).toMatchObject({ added: 3, updated: 0, removed: 0, skipped: false });
+    expect(result).toMatchObject({
+      added: 3,
+      updated: 0,
+      removed: 0,
+      skipped: false,
+    });
     expect(await loadCards(db, "test-deck")).toHaveLength(3);
 
     const decks = await listDecks(db);
-    expect(decks[0]).toMatchObject({ id: "test-deck", version: "v1", count: 3 });
+    expect(decks[0]).toMatchObject({
+      id: "test-deck",
+      version: "v1",
+      count: 3,
+    });
   });
 
   it("повторный импорт той же версии ничего не делает", async () => {
@@ -117,7 +137,11 @@ describe("обновление колоды", () => {
     });
 
     const stored = await loadCards(db, "test-deck");
-    expect(stored.map((card) => card.id).sort()).toEqual(["c_edit", "c_keep", "c_new"]);
+    expect(stored.map((card) => card.id).sort()).toEqual([
+      "c_edit",
+      "c_keep",
+      "c_new",
+    ]);
     expect(stored.find((card) => card.id === "c_edit")?.translation).toBe(
       "новый перевод",
     );
@@ -154,7 +178,9 @@ describe("обновление колоды", () => {
       scheduler,
     });
 
-    const result = await importDeck(db, deckFile([original[0]!], "v2"), { now: NOW });
+    const result = await importDeck(db, deckFile([original[0]!], "v2"), {
+      now: NOW,
+    });
     expect(result.removed).toBe(2);
     expect(result.orphanedProgress).toBe(1);
 
@@ -220,8 +246,20 @@ describe("запись повторения", () => {
 
   it("журнал только дополняется", async () => {
     const later = new Date(NOW.getTime() + 60_000);
-    await recordReview(db, { cardId: "c_1", deckId: "test-deck", grade: "again", now: NOW, scheduler });
-    await recordReview(db, { cardId: "c_1", deckId: "test-deck", grade: "good", now: later, scheduler });
+    await recordReview(db, {
+      cardId: "c_1",
+      deckId: "test-deck",
+      grade: "again",
+      now: NOW,
+      scheduler,
+    });
+    await recordReview(db, {
+      cardId: "c_1",
+      deckId: "test-deck",
+      grade: "good",
+      now: later,
+      scheduler,
+    });
 
     const history = await cardHistory(db, "c_1");
     expect(history.map((entry) => entry.grade)).toEqual(["again", "good"]);
@@ -230,7 +268,13 @@ describe("запись повторения", () => {
   it("сброс карточки не стирает историю", async () => {
     // Журнал описывает то, что действительно происходило; переписывать его
     // задним числом нельзя даже по просьбе пользователя.
-    await recordReview(db, { cardId: "c_1", deckId: "test-deck", grade: "good", now: NOW, scheduler });
+    await recordReview(db, {
+      cardId: "c_1",
+      deckId: "test-deck",
+      grade: "good",
+      now: NOW,
+      scheduler,
+    });
     await resetCard(db, "c_1");
 
     expect(await db.progress.count()).toBe(0);
@@ -240,15 +284,34 @@ describe("запись повторения", () => {
 
 describe("сводка по колоде", () => {
   it("считает новые, ждущие повторения и начатые", async () => {
-    const cards = [makeCard({ id: "c_1" }), makeCard({ id: "c_2" }), makeCard({ id: "c_3" })];
+    const cards = [
+      makeCard({ id: "c_1" }),
+      makeCard({ id: "c_2" }),
+      makeCard({ id: "c_3" }),
+    ];
     await importDeck(db, deckFile(cards), { now: NOW });
 
-    await recordReview(db, { cardId: "c_1", deckId: "test-deck", grade: "good", now: NOW, scheduler });
+    await recordReview(db, {
+      cardId: "c_1",
+      deckId: "test-deck",
+      grade: "good",
+      now: NOW,
+      scheduler,
+    });
 
     const sameDay = await deckCounts(db, "test-deck", NOW);
-    expect(sameDay).toMatchObject({ total: 3, fresh: 2, learning: 1, review: 0 });
+    expect(sameDay).toMatchObject({
+      total: 3,
+      fresh: 2,
+      learning: 1,
+      review: 0,
+    });
 
-    const laterOn = await deckCounts(db, "test-deck", new Date(NOW.getTime() + 86_400_000));
+    const laterOn = await deckCounts(
+      db,
+      "test-deck",
+      new Date(NOW.getTime() + 86_400_000),
+    );
     expect(laterOn.due).toBe(1);
   });
 });
@@ -271,10 +334,20 @@ describe("настройки", () => {
 
 describe("резервная копия", () => {
   async function seed(): Promise<void> {
-    await importDeck(db, deckFile([makeCard({ id: "c_1" }), makeCard({ id: "c_2" })]), {
+    await importDeck(
+      db,
+      deckFile([makeCard({ id: "c_1" }), makeCard({ id: "c_2" })]),
+      {
+        now: NOW,
+      },
+    );
+    await recordReview(db, {
+      cardId: "c_1",
+      deckId: "test-deck",
+      grade: "good",
       now: NOW,
+      scheduler,
     });
-    await recordReview(db, { cardId: "c_1", deckId: "test-deck", grade: "good", now: NOW, scheduler });
     await updateStudySettings(db, { newPerDay: 7 });
   }
 
@@ -288,7 +361,10 @@ describe("резервная копия", () => {
     const fresh = new AppDatabase("test-restore");
     await fresh.open();
     try {
-      const result = await restoreBackup(fresh, JSON.parse(JSON.stringify(backup)));
+      const result = await restoreBackup(
+        fresh,
+        JSON.parse(JSON.stringify(backup)),
+      );
       expect(result.mode).toBe("replace");
       expect(await loadCards(fresh, "test-deck")).toHaveLength(2);
       expect((await loadProgress(fresh, "test-deck")).get("c_1")?.reps).toBe(1);
@@ -309,11 +385,19 @@ describe("резервная копия", () => {
 
   it("слияние берёт более свежий прогресс и не двоит журнал", async () => {
     await seed();
-    const backup = JSON.parse(JSON.stringify(await exportBackup(db, { now: NOW })));
+    const backup = JSON.parse(
+      JSON.stringify(await exportBackup(db, { now: NOW })),
+    );
 
     // На «другом устройстве» ту же карточку повторили позже.
     const later = new Date(NOW.getTime() + 2 * 86_400_000);
-    await recordReview(db, { cardId: "c_1", deckId: "test-deck", grade: "good", now: later, scheduler });
+    await recordReview(db, {
+      cardId: "c_1",
+      deckId: "test-deck",
+      grade: "good",
+      now: later,
+      scheduler,
+    });
 
     const result = await restoreBackup(db, backup, { mode: "merge" });
 
@@ -339,6 +423,8 @@ describe("резервная копия", () => {
         settings: [],
       }),
     ).rejects.toBeInstanceOf(BackupFormatError);
-    await expect(restoreBackup(db, null)).rejects.toBeInstanceOf(BackupFormatError);
+    await expect(restoreBackup(db, null)).rejects.toBeInstanceOf(
+      BackupFormatError,
+    );
   });
 });

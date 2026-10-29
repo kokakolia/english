@@ -24,8 +24,6 @@ export interface StudySettings {
   repeatHard: boolean;
   /** Через сколько карточек возвращать «плохо помню». */
   hardGap: number;
-  /** Засчитывать ли ответ с опечаткой без переспроса. */
-  acceptTypos: boolean;
 }
 
 export const DEFAULT_STUDY_SETTINGS: StudySettings = {
@@ -36,7 +34,6 @@ export const DEFAULT_STUDY_SETTINGS: StudySettings = {
   againGap: 3,
   repeatHard: true,
   hardGap: 6,
-  acceptTypos: false,
 };
 
 const STUDY_KEY = "study";
@@ -58,11 +55,16 @@ export async function setSetting(
   await db.settings.put({ key, value });
 }
 
-export async function getStudySettings(db: AppDatabase): Promise<StudySettings> {
+export async function getStudySettings(
+  db: AppDatabase,
+): Promise<StudySettings> {
   const stored = await getSetting<Partial<StudySettings>>(db, STUDY_KEY, {});
   // Слияние с умолчаниями, а не замена: добавленная в новой версии настройка
   // не должна оказаться неопределённой у того, кто уже что-то менял.
-  return { ...DEFAULT_STUDY_SETTINGS, ...(validStudySettings(stored) ? stored : {}) };
+  return {
+    ...DEFAULT_STUDY_SETTINGS,
+    ...(validStudySettings(stored) ? stored : {}),
+  };
 }
 
 export async function updateStudySettings(
@@ -70,7 +72,8 @@ export async function updateStudySettings(
   changes: Partial<StudySettings>,
 ): Promise<StudySettings> {
   const merged = { ...(await getStudySettings(db)), ...changes };
-  if (!validStudySettings(merged)) throw new Error("неверные настройки занятия");
+  if (!validStudySettings(merged))
+    throw new Error("неверные настройки занятия");
   await setSetting(db, STUDY_KEY, merged);
   return merged;
 }

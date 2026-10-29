@@ -11,18 +11,31 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { bootstrap } from "../app/bootstrap";
 import { watchDay } from "../app/day-refresh";
 import { updateSafety } from "../app/update-safety";
-import { applyTheme, isDarkNow, readTheme, saveTheme, type ThemeChoice } from "../app/theme";
-import { ensurePersistentStorage, type StorageStatus } from "../app/persistence";
+import {
+  applyTheme,
+  isDarkNow,
+  readTheme,
+  saveTheme,
+  type ThemeChoice,
+} from "../app/theme";
+import {
+  ensurePersistentStorage,
+  type StorageStatus,
+} from "../app/persistence";
 import {
   deckCounts,
   getStudySettings,
   getDatabase,
-  listDecks,
+  listUsableDecks,
   type AppDatabase,
   type DeckCounts,
   type StoredDeck,
 } from "../storage";
-import { createStudyController, type StudyController, type StudyState } from "../study/controller";
+import {
+  createStudyController,
+  type StudyController,
+  type StudyState,
+} from "../study/controller";
 import { DayScreen } from "./DayScreen";
 import {
   DeepBackground,
@@ -31,7 +44,13 @@ import {
   KelpCorner,
   Plankton,
 } from "./DeepOrnaments";
-import { Background, CornerFern, OrnamentDefs, SideFern, SideVine } from "./Ornaments";
+import {
+  Background,
+  CornerFern,
+  OrnamentDefs,
+  SideFern,
+  SideVine,
+} from "./Ornaments";
 import { ReviewScreen } from "./ReviewScreen";
 import { DarkProvider } from "./ThemeContext";
 import { Vault } from "./Vault";
@@ -60,12 +79,18 @@ export function App() {
   currentStage.current = stage.kind;
 
   useEffect(() => {
-    updateSafety.setSafe(stage.kind === "day" && controller === null && !storageBusy);
+    updateSafety.setSafe(
+      stage.kind === "day" && controller === null && !storageBusy,
+    );
     return () => updateSafety.setSafe(false);
   }, [stage.kind, controller, storageBusy]);
 
   const beginStorageOperation: BeginStorageOperation = useCallback(() => {
-    if (operationBusy.current || (currentStage.current !== "day" && currentStage.current !== "error")) return null;
+    if (
+      operationBusy.current ||
+      (currentStage.current !== "day" && currentStage.current !== "error")
+    )
+      return null;
     operationBusy.current = true;
     updateSafety.setSafe(false);
     const releaseUpdate = updateSafety.begin();
@@ -100,7 +125,11 @@ export function App() {
   }, []);
 
   const showDay = useCallback(
-    async (database: AppDatabase, deckId: string, isCurrent: () => boolean = () => true) => {
+    async (
+      database: AppDatabase,
+      deckId: string,
+      isCurrent: () => boolean = () => true,
+    ) => {
       const settings = await getStudySettings(database);
       const counts = await deckCounts(
         database,
@@ -115,14 +144,25 @@ export function App() {
   );
 
   useEffect(() => {
-    if (stage.kind !== "day" || db === null || deck === null || storageBusy) return;
+    if (stage.kind !== "day" || db === null || deck === null || storageBusy)
+      return;
     let current = true;
-    const isCurrent = () => current && currentStage.current === "day" && !operationBusy.current;
+    const isCurrent = () =>
+      current && currentStage.current === "day" && !operationBusy.current;
     const stop = watchDay(
       () => showDay(db, deck.id, isCurrent),
-      cause => { if (isCurrent()) setStage({ kind: "error", message: `Не удалось обновить состояние колоды: ${String(cause)}` }); },
+      (cause) => {
+        if (isCurrent())
+          setStage({
+            kind: "error",
+            message: `Не удалось обновить состояние колоды: ${String(cause)}`,
+          });
+      },
     );
-    return () => { current = false; stop(); };
+    return () => {
+      current = false;
+      stop();
+    };
   }, [stage.kind, db, deck, showDay, storageBusy]);
 
   useEffect(() => {
@@ -142,14 +182,21 @@ export function App() {
 
         const first = result.decks[0];
         if (first === undefined) {
-          setStage({ kind: "error", message: result.error ?? "колода не найдена" });
+          setStage({
+            kind: "error",
+            message: result.error ?? "колода не найдена",
+          });
           return;
         }
         setDeck(first);
         setOffline(result.offline);
         await showDay(result.db, first.id, () => !cancelled);
       } catch (cause) {
-        if (!cancelled) setStage({ kind: "error", message: `Не удалось загрузить приложение: ${String(cause)}` });
+        if (!cancelled)
+          setStage({
+            kind: "error",
+            message: `Не удалось загрузить приложение: ${String(cause)}`,
+          });
       }
     })();
     return () => {
@@ -165,14 +212,24 @@ export function App() {
   }, [controller]);
 
   async function startStudy() {
-    if (db === null || deck === null || stage.kind !== "day" || operationBusy.current || currentStage.current !== "day") return;
+    if (
+      db === null ||
+      deck === null ||
+      stage.kind !== "day" ||
+      operationBusy.current ||
+      currentStage.current !== "day"
+    )
+      return;
     updateSafety.setSafe(false);
     currentStage.current = "study";
     setStage({ kind: "study" });
     try {
       setController(await createStudyController({ db, deckId: deck.id }));
     } catch (cause) {
-      setStage({ kind: "error", message: `Не удалось начать занятие: ${String(cause)}` });
+      setStage({
+        kind: "error",
+        message: `Не удалось начать занятие: ${String(cause)}`,
+      });
     }
   }
 
@@ -182,51 +239,59 @@ export function App() {
     try {
       if (db !== null && deck !== null) await showDay(db, deck.id);
     } catch (cause) {
-      setStage({ kind: "error", message: `Не удалось прочитать состояние колоды: ${String(cause)}` });
+      setStage({
+        kind: "error",
+        message: `Не удалось прочитать состояние колоды: ${String(cause)}`,
+      });
     }
   }
 
   async function afterRestore() {
     const database = db ?? getDatabase();
-    const known = await listDecks(database);
-    const complete = await Promise.all(known.map(async item =>
-      await database.cards.where("deckId").equals(item.id).count() === item.count ? item : null));
-    const available = complete.filter((item): item is StoredDeck => item !== null);
-    const selected = available.find(item => item.id === deck?.id) ?? available[0];
-    setController(null); setState(null);
+    const available = await listUsableDecks(database);
+    const selected =
+      available.find((item) => item.id === deck?.id) ?? available[0];
+    setController(null);
+    setState(null);
     if (!selected) {
       setDeck(null);
-      setStage({ kind: "error", message: "В копии нет полного набора карточек. Выберите полную резервную копию или повторите загрузку колоды." });
+      setStage({
+        kind: "error",
+        message:
+          "В копии нет полного набора карточек. Выберите полную резервную копию или повторите загрузку колоды.",
+      });
       return;
     }
     await showDay(database, selected.id);
-    setDb(database); setDeck(selected); setOffline(false);
+    setDb(database);
+    setDeck(selected);
+    setOffline(false);
   }
 
   return (
     <DarkProvider dark={dark}>
       <main className="app">
-      {dark ? (
-        <>
-          <DeepDefs />
-          <DeepBackground />
-          <KelpCorner side="left" />
-          <KelpCorner side="right" />
-          <GlowTendrils />
-          <Plankton />
-        </>
-      ) : (
-        <>
-          <OrnamentDefs />
-          <Background />
-          {/* Слева — папоротник вдоль края: тот же куст, но формой
+        {dark ? (
+          <>
+            <DeepDefs />
+            <DeepBackground />
+            <KelpCorner side="left" />
+            <KelpCorner side="right" />
+            <GlowTendrils />
+            <Plankton />
+          </>
+        ) : (
+          <>
+            <OrnamentDefs />
+            <Background />
+            {/* Слева — папоротник вдоль края: тот же куст, но формой
               повторяющий лозу. Папоротники в углах остались справа. */}
-          <CornerFern corner="tr" />
-          <CornerFern corner="br" />
-          <SideFern side="left" />
-          <SideVine side="right" />
-        </>
-      )}
+            <CornerFern corner="tr" />
+            <CornerFern corner="br" />
+            <SideFern side="left" />
+            <SideVine side="right" />
+          </>
+        )}
         {renderStage()}
       </main>
     </DarkProvider>
@@ -242,14 +307,25 @@ export function App() {
         <section className="screen" role="alert">
           <h1 className="display">Не удалось начать</h1>
           <p className="error">{stage.message}</p>
-          <button type="button" className="pill" disabled={storageBusy} onClick={() => {
-            if (operationBusy.current) return;
-            currentStage.current = "loading";
-            setStage({ kind: "loading" });
-            setLoadAttempt(value => value + 1);
-          }}>Повторить попытку</button>
-          <BackupRestore db={db ?? getDatabase()} beginOperation={beginStorageOperation}
-            onRestored={afterRestore} disabled={storageBusy} />
+          <button
+            type="button"
+            className="pill"
+            disabled={storageBusy}
+            onClick={() => {
+              if (operationBusy.current) return;
+              currentStage.current = "loading";
+              setStage({ kind: "loading" });
+              setLoadAttempt((value) => value + 1);
+            }}
+          >
+            Повторить попытку
+          </button>
+          <BackupRestore
+            db={db ?? getDatabase()}
+            beginOperation={beginStorageOperation}
+            onRestored={afterRestore}
+            disabled={storageBusy}
+          />
         </section>
       );
     }

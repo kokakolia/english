@@ -21,7 +21,11 @@ function progressMap(entries: CardProgress[]): Map<string, CardProgress> {
 /** Карточка, срок которой наступил: изучена и отложена в прошлое. */
 function dueProgress(cardId: string, daysAgo: number): CardProgress {
   const start = new Date(DAY.getTime() - daysAgo * 86_400_000);
-  const first = scheduler.review(scheduler.create(cardId, start), "good", start);
+  const first = scheduler.review(
+    scheduler.create(cardId, start),
+    "good",
+    start,
+  );
   return { ...first.progress, due: start.toISOString(), state: "review" };
 }
 
@@ -109,9 +113,7 @@ describe("очередь дня", () => {
 
   it("соблюдает лимит повторений и показывает остаток как завал", () => {
     const cards = makeDeck(40, 8);
-    const progress = progressMap(
-      cards.map((card) => dueProgress(card.id, 3)),
-    );
+    const progress = progressMap(cards.map((card) => dueProgress(card.id, 3)));
 
     const queue = buildQueue({
       cards,
@@ -175,13 +177,19 @@ describe("очередь дня", () => {
       settings: { ...settings, seed: 7 },
       now: DAY,
     });
-    expect(other.cards.map((c) => c.id)).not.toEqual(first.cards.map((c) => c.id));
+    expect(other.cards.map((c) => c.id)).not.toEqual(
+      first.cards.map((c) => c.id),
+    );
   });
 
   it("смешивает новые с повторениями", () => {
     const reviewCards = makeDeck(20, 10);
     const freshCards = Array.from({ length: 4 }, (_, index) =>
-      makeCard({ id: `fresh-${index}`, headword: `fresh${index}`, position: 900 + index }),
+      makeCard({
+        id: `fresh-${index}`,
+        headword: `fresh${index}`,
+        position: 900 + index,
+      }),
     );
     const progress = progressMap(
       reviewCards.map((card) => dueProgress(card.id, 2)),
@@ -200,7 +208,9 @@ describe("очередь дня", () => {
 
     expect(freshPositions).toHaveLength(4);
     // Не пачкой в начале и не пачкой в конце.
-    expect(Math.max(...freshPositions) - Math.min(...freshPositions)).toBeGreaterThan(8);
+    expect(
+      Math.max(...freshPositions) - Math.min(...freshPositions),
+    ).toBeGreaterThan(8);
   });
 
   it("принимает прогресс и объектом, и картой", () => {

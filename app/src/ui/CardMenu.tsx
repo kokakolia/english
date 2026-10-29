@@ -20,9 +20,17 @@ import type { CardAction } from "../study/controller";
 import { Dropdown } from "./Dropdown";
 
 const ITEMS: { action: CardAction; label: string; hint: string }[] = [
-  { action: "bury", label: "Отложить до завтра", hint: "карточка нормальная, но не сейчас" },
+  {
+    action: "bury",
+    label: "Отложить до завтра",
+    hint: "карточка нормальная, но не сейчас",
+  },
   { action: "suspend", label: "Убрать из оборота", hint: "карточка негодная" },
-  { action: "reset", label: "Учить заново", hint: "сбросить расписание в «новая»" },
+  {
+    action: "reset",
+    label: "Учить заново",
+    hint: "сбросить расписание в «новая»",
+  },
 ];
 
 interface Props {
@@ -52,7 +60,9 @@ export function CardMenu({ disabled, onPick, onExit }: Props) {
               <span className="menu-item-hint">{item.hint}</span>
             </button>
           ))}
-          <p className="menu-foot">Любое из этих действий отменяется кнопкой «Назад».</p>
+          <p className="menu-foot">
+            Любое из этих действий отменяется кнопкой «Назад».
+          </p>
 
           {/* Выход отделён чертой: он не про карточку, а про занятие целиком,
               и соседство без разделителя путало бы одно с другим. */}

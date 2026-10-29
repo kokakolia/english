@@ -8,10 +8,13 @@ __pycache__/
 venv/
 .env
 
-# Node (появится на этапе 3)
+# Node и результаты проверок
 node_modules/
 dist/
 .vite/
+coverage/
+*.tsbuildinfo
+*.log
 
 # IDE / OS
 .idea/

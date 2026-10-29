@@ -1,8 +1,8 @@
 /**
  * Ядро интервального повторения.
  *
- * Здесь сосредоточена вся корректность приложения: расписание повторений и
- * проверка ответа. Ошибка в них не видна глазом — карточки будут показываться,
+ * Здесь сосредоточено расписание повторений и построение очереди.
+ * Ошибка в них не видна глазом — карточки будут показываться,
  * просто не в те дни, и обнаружится это через месяцы. Поэтому ядро отделено от
  * интерфейса и хранилища: оно принимает данные и возвращает данные, ничего не
  * знает ни про React, ни про базу, и проверяется тестами, которые прогоняют
@@ -10,8 +10,6 @@
  */
 
 export type {
-  AnswerCheck,
-  AnswerReason,
   AnswerVerdict,
   CardProgress,
   CardState,
@@ -31,9 +29,6 @@ export {
   type Scheduler,
   type SchedulerOptions,
 } from "./scheduler";
-
-export { checkAnswer, normalizeInput, type GradableCard } from "./grade";
-export { comparableForm, editDistance, sameWord } from "./lemma";
 
 export {
   buildQueue,

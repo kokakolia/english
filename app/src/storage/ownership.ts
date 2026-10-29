@@ -10,22 +10,31 @@ export function assertOwners(rows: OwnedCard[]): void {
   for (const row of rows) {
     const owner = owners.get(row.cardId);
     if (owner !== undefined && owner !== row.deckId) {
-      throw new DeckOwnershipError(`Колоды «${owner}» и «${row.deckId}» содержат одинаковые карточки. Их нельзя хранить одновременно. Данные не изменены.`);
+      throw new DeckOwnershipError(
+        `Колоды «${owner}» и «${row.deckId}» содержат одинаковые карточки. Их нельзя хранить одновременно. Данные не изменены.`,
+      );
     }
     owners.set(row.cardId, row.deckId);
   }
 }
 
 /** Вызывать внутри транзакции с cards, progress и changes. */
-export async function assertAvailableOwners(db: AppDatabase, incoming: OwnedCard[]): Promise<void> {
-  const ids = [...new Set(incoming.map(row => row.cardId))];
+export async function assertAvailableOwners(
+  db: AppDatabase,
+  incoming: OwnedCard[],
+): Promise<void> {
+  const ids = [...new Set(incoming.map((row) => row.cardId))];
   const [cards, progress, changes] = await Promise.all([
-    db.cards.bulkGet(ids), db.progress.bulkGet(ids), db.changes.bulkGet(ids),
+    db.cards.bulkGet(ids),
+    db.progress.bulkGet(ids),
+    db.changes.bulkGet(ids),
   ]);
   assertOwners([
     ...incoming,
-    ...cards.flatMap(row => row ? [{ cardId: row.id, deckId: row.deckId }] : []),
-    ...progress.flatMap(row => row ? [row] : []),
-    ...changes.flatMap(row => row ? [row] : []),
+    ...cards.flatMap((row) =>
+      row ? [{ cardId: row.id, deckId: row.deckId }] : [],
+    ),
+    ...progress.flatMap((row) => (row ? [row] : [])),
+    ...changes.flatMap((row) => (row ? [row] : [])),
   ]);
 }

@@ -116,7 +116,12 @@ export interface StudyOptions {
   seed?: number;
 }
 
-const EMPTY_COUNTS: QueueCounts = { fresh: 0, learning: 0, review: 0, total: 0 };
+const EMPTY_COUNTS: QueueCounts = {
+  fresh: 0,
+  learning: 0,
+  review: 0,
+  total: 0,
+};
 const EMPTY_SESSION: SessionProgress = {
   remaining: 0,
   answered: 0,
@@ -124,7 +129,12 @@ const EMPTY_SESSION: SessionProgress = {
   repeats: 0,
 };
 
-const EMPTY_TALLY: Record<Grade, number> = { again: 0, hard: 0, good: 0, easy: 0 };
+const EMPTY_TALLY: Record<Grade, number> = {
+  again: 0,
+  hard: 0,
+  good: 0,
+  easy: 0,
+};
 
 /** Что должно произойти по нажатию клавиши. */
 export type KeyAction =
@@ -201,7 +211,11 @@ export interface KeyContext {
   shiftKey?: boolean;
 }
 
-export function keyAction(phase: StudyPhase, key: string, context: KeyContext = {}): KeyAction {
+export function keyAction(
+  phase: StudyPhase,
+  key: string,
+  context: KeyContext = {},
+): KeyAction {
   if (Object.values(context).some(Boolean)) return null;
   if (phase === "error") return key === "Escape" ? { kind: "exit" } : null;
   if (phase === "loading" || phase === "empty") return null;
@@ -282,7 +296,9 @@ export async function createStudyController(
     publish({ phase: "loading", card: null, error: null, saving: false });
     try {
       settings = await getStudySettings(db);
-      scheduler = options.scheduler ?? createScheduler({ requestRetention: settings.requestRetention });
+      scheduler =
+        options.scheduler ??
+        createScheduler({ requestRetention: settings.requestRetention });
       cards = await loadCards(db, deckId);
       const progress = await loadProgress(db, deckId);
 
@@ -320,7 +336,11 @@ export async function createStudyController(
       }
       advance();
     } catch (cause) {
-      publish({ phase: "error", card: null, error: `Не удалось подготовить занятие: ${String(cause)}` });
+      publish({
+        phase: "error",
+        card: null,
+        error: `Не удалось подготовить занятие: ${String(cause)}`,
+      });
     }
   }
 
@@ -375,7 +395,10 @@ export async function createStudyController(
           });
         }
       } catch (cause) {
-        publish({ saving: false, error: `не удалось сохранить ответ: ${String(cause)}` });
+        publish({
+          saving: false,
+          error: `не удалось сохранить ответ: ${String(cause)}`,
+        });
         return;
       }
 
@@ -410,7 +433,10 @@ export async function createStudyController(
           await restoreProgress(db, step.card.id, step.previous, clock());
         }
       } catch (cause) {
-        publish({ saving: false, error: `не удалось отменить: ${String(cause)}` });
+        publish({
+          saving: false,
+          error: `не удалось отменить: ${String(cause)}`,
+        });
         return;
       }
 
@@ -445,14 +471,27 @@ export async function createStudyController(
       try {
         const now = clock();
         if (action === "suspend") {
-          previous = await suspendCard(db, { cardId: card.id, deckId, now, scheduler });
+          previous = await suspendCard(db, {
+            cardId: card.id,
+            deckId,
+            now,
+            scheduler,
+          });
         } else if (action === "bury") {
-          previous = await buryCard(db, { cardId: card.id, deckId, now, scheduler });
+          previous = await buryCard(db, {
+            cardId: card.id,
+            deckId,
+            now,
+            scheduler,
+          });
         } else {
           previous = await resetCard(db, card.id, now);
         }
       } catch (cause) {
-        publish({ saving: false, error: `не удалось применить действие: ${String(cause)}` });
+        publish({
+          saving: false,
+          error: `не удалось применить действие: ${String(cause)}`,
+        });
         return;
       }
 

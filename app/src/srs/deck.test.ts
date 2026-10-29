@@ -10,7 +10,6 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
-import { checkAnswer } from "./grade";
 import { buildQueue, familyKey } from "./queue";
 import type { DeckCard } from "./types";
 
@@ -55,39 +54,13 @@ describe("колода из пайплайна", () => {
   });
 });
 
-describe("проверка ответа на настоящих карточках", () => {
-  it("форма из предложения засчитывается всегда", () => {
-    const failures = cards.filter(
-      (card) => checkAnswer(card.answer, card).verdict !== "correct",
-    );
-    expect(failures.map((card) => `${card.id}: ${card.answer}`)).toEqual([]);
-  });
-
-  it("все развёрнутые формы засчитываются", () => {
-    const failures: string[] = [];
-    for (const card of cards) {
-      for (const form of card.answers) {
-        if (checkAnswer(form, card).verdict !== "correct") {
-          failures.push(`${card.id}: ${form}`);
-        }
-      }
-    }
-    expect(failures).toEqual([]);
-  });
-
-  it("заведомо чужое слово не засчитывается", () => {
-    // Слово выбрано так, чтобы не совпасть ни с одним партнёром в колоде.
-    const wrong = cards.filter(
-      (card) => checkAnswer("zxcvbnm", card).verdict !== "wrong",
-    );
-    expect(wrong).toEqual([]);
-  });
-
-  it("пустой ввод не засчитывается ни на одной карточке", () => {
-    const accepted = cards.filter(
-      (card) => checkAnswer("", card).verdict !== "wrong",
-    );
-    expect(accepted).toEqual([]);
+describe("формы ответа для экспорта", () => {
+  it("содержат точную форму из предложения", () => {
+    expect(
+      cards
+        .filter((card) => !card.answers.includes(card.answer))
+        .map((card) => card.id),
+    ).toEqual([]);
   });
 });
 

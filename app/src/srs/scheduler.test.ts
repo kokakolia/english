@@ -13,7 +13,12 @@ function daysLater(from: Date, days: number): Date {
 describe("создание прогресса", () => {
   it("новая карточка не изучена и должна быть показана сразу", () => {
     const progress = scheduler.create("c_1", START);
-    expect(progress).toMatchObject({ cardId: "c_1", state: "new", reps: 0, lapses: 0 });
+    expect(progress).toMatchObject({
+      cardId: "c_1",
+      state: "new",
+      reps: 0,
+      lapses: 0,
+    });
     expect(isDue(progress, START)).toBe(true);
   });
 
@@ -29,7 +34,11 @@ describe("создание прогресса", () => {
 
 describe("применение оценки", () => {
   it("переводит новую карточку в изучение", () => {
-    const { progress } = scheduler.review(scheduler.create("c_1", START), "good", START);
+    const { progress } = scheduler.review(
+      scheduler.create("c_1", START),
+      "good",
+      START,
+    );
     expect(progress.state).toBe("learning");
     expect(progress.reps).toBe(1);
     expect(progress.lastReview).toBe(START.toISOString());
@@ -39,8 +48,12 @@ describe("применение оценки", () => {
     const base = scheduler.create("c_1", START);
     const preview = scheduler.preview(base, START);
 
-    expect(preview.again.intervalDays).toBeLessThanOrEqual(preview.hard.intervalDays);
-    expect(preview.hard.intervalDays).toBeLessThanOrEqual(preview.good.intervalDays);
+    expect(preview.again.intervalDays).toBeLessThanOrEqual(
+      preview.hard.intervalDays,
+    );
+    expect(preview.hard.intervalDays).toBeLessThanOrEqual(
+      preview.good.intervalDays,
+    );
     expect(preview.good.intervalDays).toBeLessThan(preview.easy.intervalDays);
   });
 
@@ -87,8 +100,14 @@ describe("применение оценки", () => {
 
 describe("настройки планировщика", () => {
   it("более высокое требование к запоминанию укорачивает интервалы", () => {
-    const relaxed = createScheduler({ enableFuzz: false, requestRetention: 0.8 });
-    const strict = createScheduler({ enableFuzz: false, requestRetention: 0.97 });
+    const relaxed = createScheduler({
+      enableFuzz: false,
+      requestRetention: 0.8,
+    });
+    const strict = createScheduler({
+      enableFuzz: false,
+      requestRetention: 0.97,
+    });
 
     const grow = (engine: ReturnType<typeof createScheduler>) => {
       let progress = engine.create("c_1", START);
@@ -121,7 +140,9 @@ describe("настройки планировщика", () => {
       return progress.scheduledDays;
     };
 
-    const capped = grow(createScheduler({ enableFuzz: false, maximumInterval: 30 }));
+    const capped = grow(
+      createScheduler({ enableFuzz: false, maximumInterval: 30 }),
+    );
     const uncapped = grow(createScheduler({ enableFuzz: false }));
 
     expect(capped).toBeLessThan(40);

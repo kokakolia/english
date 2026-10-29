@@ -10,11 +10,21 @@ export function createUpdateSafety(reload: () => void) {
     reload();
   }
   return {
-    setSafe(value: boolean) { safe = value; check(); },
-    request() { pending = true; check(); },
+    setSafe(value: boolean) {
+      safe = value;
+      check();
+    },
+    request() {
+      pending = true;
+      check();
+    },
     begin() {
-      const token = Symbol(); activities.add(token);
-      return () => { activities.delete(token); check(); };
+      const token = Symbol();
+      activities.add(token);
+      return () => {
+        activities.delete(token);
+        check();
+      };
     },
   };
 }

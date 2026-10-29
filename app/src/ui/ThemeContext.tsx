@@ -15,7 +15,13 @@ import { createContext, useContext, type ReactNode } from "react";
 
 const DarkContext = createContext(false);
 
-export function DarkProvider({ dark, children }: { dark: boolean; children: ReactNode }) {
+export function DarkProvider({
+  dark,
+  children,
+}: {
+  dark: boolean;
+  children: ReactNode;
+}) {
   return <DarkContext.Provider value={dark}>{children}</DarkContext.Provider>;
 }
 

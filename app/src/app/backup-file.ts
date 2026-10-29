@@ -41,9 +41,15 @@ interface DirectoryHandle {
   getFileHandle(
     name: string,
     options?: { create?: boolean },
-  ): Promise<{ createWritable(): Promise<WritableStream<BufferSource | Blob>> }>;
-  queryPermission?(descriptor?: FileSystemPermissionDescriptor): Promise<PermissionState>;
-  requestPermission?(descriptor?: FileSystemPermissionDescriptor): Promise<PermissionState>;
+  ): Promise<{
+    createWritable(): Promise<WritableStream<BufferSource | Blob>>;
+  }>;
+  queryPermission?(
+    descriptor?: FileSystemPermissionDescriptor,
+  ): Promise<PermissionState>;
+  requestPermission?(
+    descriptor?: FileSystemPermissionDescriptor,
+  ): Promise<PermissionState>;
 }
 
 type PickerWindow = Window & {
@@ -61,7 +67,9 @@ export function canSaveSilently(): boolean {
 
 /** Сжимает текст в gzip. Копия из одного прогресса ужимается примерно втрое. */
 export async function gzip(text: string): Promise<Blob> {
-  const stream = new Blob([text]).stream().pipeThrough(new CompressionStream("gzip"));
+  const stream = new Blob([text])
+    .stream()
+    .pipeThrough(new CompressionStream("gzip"));
   return new Response(stream).blob();
 }
 
@@ -85,19 +93,26 @@ async function rememberedFolder(
   { mayAsk }: { mayAsk: boolean },
 ): Promise<DirectoryHandle | null> {
   const handle = await getSetting<DirectoryHandle | null>(db, FOLDER_KEY, null);
-  if (typeof handle !== "object" || handle === null || typeof handle.getFileHandle !== "function" || typeof handle.name !== "string") {
+  if (
+    typeof handle !== "object" ||
+    handle === null ||
+    typeof handle.getFileHandle !== "function" ||
+    typeof handle.name !== "string"
+  ) {
     if (handle !== null) await forgetFolder(db);
     return null;
   }
 
   try {
-    const state = (await handle.queryPermission?.({ mode: "readwrite" })) ?? "granted";
+    const state =
+      (await handle.queryPermission?.({ mode: "readwrite" })) ?? "granted";
     if (state === "granted") return handle;
     if (!mayAsk) return null;
 
     // Спрашивать можно только внутри жеста пользователя, и мы в нём: сюда
     // приходят по нажатию кнопки.
-    const asked = (await handle.requestPermission?.({ mode: "readwrite" })) ?? "denied";
+    const asked =
+      (await handle.requestPermission?.({ mode: "readwrite" })) ?? "denied";
     return asked === "granted" ? handle : null;
   } catch {
     return null;
@@ -139,7 +154,8 @@ export async function saveBackupFile(
           startIn: "documents",
         });
       } catch (cause) {
-        if (cause instanceof DOMException && cause.name === "AbortError") return { kind: "cancelled" };
+        if (cause instanceof DOMException && cause.name === "AbortError")
+          return { kind: "cancelled" };
         throw cause;
       }
       await setSetting(db, FOLDER_KEY, folder);

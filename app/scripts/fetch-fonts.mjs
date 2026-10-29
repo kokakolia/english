@@ -14,11 +14,12 @@
  */
 
 import { mkdir, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = dirname(fileURLToPath(import.meta.url));
-const outDir = join(here, "..", "public", "fonts");
+const outDir = join(here, "..", "src", "assets", "fonts");
 
 // Современный User-Agent обязателен: иначе Google Fonts отдаёт ttf вместо woff2.
 const UA =
@@ -28,10 +29,18 @@ const UA =
 const FAMILIES = [
   { name: "Marcellus", query: "family=Marcellus" },
   { name: "Lora", query: "family=Lora:ital,wght@0,400;0,500;1,400" },
-  { name: "CormorantGaramond", query: "family=Cormorant+Garamond:wght@400;500" },
+  {
+    name: "CormorantGaramond",
+    query: "family=Cormorant+Garamond:wght@400;500",
+  },
 ];
 
-const KEEP_SUBSETS = new Set(["latin", "latin-ext", "cyrillic", "cyrillic-ext"]);
+const KEEP_SUBSETS = new Set([
+  "latin",
+  "latin-ext",
+  "cyrillic",
+  "cyrillic-ext",
+]);
 
 /** Разбирает ответ Google Fonts на отдельные правила @font-face. */
 function parseFaces(css) {
@@ -59,20 +68,38 @@ function parseFaces(css) {
 await mkdir(outDir, { recursive: true });
 
 const rules = [];
+const filesByHash = new Map();
+const downloads = new Map();
 let downloaded = 0;
 
 for (const family of FAMILIES) {
-  const css = await (
-    await fetch(`https://fonts.googleapis.com/css2?${family.query}&display=swap`, {
+  const response = await fetch(
+    `https://fonts.googleapis.com/css2?${family.query}&display=swap`,
+    {
       headers: { "User-Agent": UA },
-    })
-  ).text();
+    },
+  );
+  if (!response.ok)
+    throw new Error(`Font stylesheet failed: ${response.status}`);
+  const css = await response.text();
 
   for (const face of parseFaces(css)) {
-    const file = `${family.name}-${face.weight}${face.style === "italic" ? "i" : ""}-${face.subset}.woff2`;
-    const body = Buffer.from(await (await fetch(face.url)).arrayBuffer());
-    await writeFile(join(outDir, file), body);
-    downloaded += 1;
+    let body = downloads.get(face.url);
+    if (body === undefined) {
+      const response = await fetch(face.url);
+      if (!response.ok)
+        throw new Error(`Font download failed: ${response.status}`);
+      body = Buffer.from(await response.arrayBuffer());
+      downloads.set(face.url, body);
+    }
+    const hash = createHash("sha256").update(body).digest("hex");
+    let file = filesByHash.get(hash);
+    if (file === undefined) {
+      file = `${family.name}-${face.weight}${face.style === "italic" ? "i" : ""}-${face.subset}.woff2`;
+      await writeFile(join(outDir, file), body);
+      filesByHash.set(hash, file);
+      downloaded += 1;
+    }
 
     rules.push(
       `@font-face {\n` +

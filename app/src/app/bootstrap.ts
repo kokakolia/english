@@ -13,18 +13,13 @@
 import {
   getDatabase,
   importDeck,
-  listDecks,
+  listUsableDecks,
   loadDeckFile,
   loadDeckIndex,
   type AppDatabase,
   type ImportResult,
   type StoredDeck,
 } from "../storage";
-
-async function usableDecks(db: AppDatabase, decks: StoredDeck[]): Promise<StoredDeck[]> {
-  const counts = await Promise.all(decks.map(deck => db.cards.where("deckId").equals(deck.id).count()));
-  return decks.filter((deck, index) => counts[index] === deck.count);
-}
 
 const DECKS_URL = "/decks";
 
@@ -43,44 +38,53 @@ export async function bootstrap(
   baseUrl: string = DECKS_URL,
 ): Promise<BootstrapResult> {
   const db = getDatabase();
-  let known: StoredDeck[];
   try {
     await db.open();
-    known = await listDecks(db);
   } catch (cause) {
-    return { db, decks: [], imported: null, offline: false,
-      error: `Не удалось открыть локальное хранилище. Проверьте, разрешено ли браузеру хранить данные сайта, и повторите попытку. ${String(cause)}` };
+    return {
+      db,
+      decks: [],
+      imported: null,
+      offline: false,
+      error: `Не удалось открыть локальное хранилище. Проверьте, разрешено ли браузеру хранить данные сайта, и повторите попытку. ${String(cause)}`,
+    };
   }
 
   try {
     const index = await loadDeckIndex(baseUrl, (url) => fetch(url));
     const entry = index[0];
     if (entry === undefined) {
-      const cached = await usableDecks(db, known);
+      const cached = await listUsableDecks(db);
       return {
         db,
         decks: cached,
         imported: null,
         offline: false,
-        error: cached.length > 0 ? null : "В каталоге нет колод, а в локальной базе нет полного набора карточек. Восстановите полную резервную копию.",
+        error:
+          cached.length > 0
+            ? null
+            : "В каталоге нет колод, а в локальной базе нет полного набора карточек. Восстановите полную резервную копию.",
       };
     }
 
     const deckUrl = `${baseUrl}/${entry.id}`;
     const file = await loadDeckFile(deckUrl, (url) => fetch(url));
     const imported = await importDeck(db, file);
-    const decks = await usableDecks(db, await listDecks(db));
+    const decks = await listUsableDecks(db);
 
     return {
       db,
       decks,
       imported,
       offline: false,
-      error: decks.length > 0 ? null : "В копии есть данные колоды, но нет подходящей версии карточек. Обновите приложение или восстановите полную резервную копию.",
+      error:
+        decks.length > 0
+          ? null
+          : "В копии есть данные колоды, но нет подходящей версии карточек. Обновите приложение или восстановите полную резервную копию.",
     };
   } catch (cause) {
     // Сети нет. Если колода уже импортирована, это штатный офлайн.
-    const cached = await usableDecks(db, known);
+    const cached = await listUsableDecks(db);
     if (cached.length > 0) {
       return { db, decks: cached, imported: null, offline: true, error: null };
     }

@@ -25,7 +25,13 @@ interface Props {
   children: (close: () => void) => ReactNode;
 }
 
-export function Dropdown({ title, disabled = false, marked = false, keepMounted = false, children }: Props) {
+export function Dropdown({
+  title,
+  disabled = false,
+  marked = false,
+  keepMounted = false,
+  children,
+}: Props) {
   const [open, setOpen] = useState(false);
   const root = useRef<HTMLDivElement>(null);
 
@@ -33,7 +39,10 @@ export function Dropdown({ title, disabled = false, marked = false, keepMounted 
     if (!open) return;
 
     function onDown(event: MouseEvent) {
-      if (root.current !== null && !root.current.contains(event.target as Node)) {
+      if (
+        root.current !== null &&
+        !root.current.contains(event.target as Node)
+      ) {
         setOpen(false);
       }
     }
@@ -70,7 +79,12 @@ export function Dropdown({ title, disabled = false, marked = false, keepMounted 
       </button>
 
       {(open || keepMounted) && (
-        <div className="menu-list" role={open ? "menu" : undefined} hidden={!open} style={open ? undefined : { display: "none" }}>
+        <div
+          className="menu-list"
+          role={open ? "menu" : undefined}
+          hidden={!open}
+          style={open ? undefined : { display: "none" }}
+        >
           {children(() => setOpen(false))}
         </div>
       )}

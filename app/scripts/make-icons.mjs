@@ -178,8 +178,7 @@ for (const [name, data] of files) {
 }
 
 // Фавиконка отдельно: вектор, чтобы не мылилась на вкладке.
-const leafPath =
-  "M32 56 C 14 46 14 18 32 8 C 50 18 50 46 32 56 Z";
+const leafPath = "M32 56 C 14 46 14 18 32 8 C 50 18 50 46 32 56 Z";
 writeFileSync(
   join(outDir, "favicon.svg"),
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">\n` +

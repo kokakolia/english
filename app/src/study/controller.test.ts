@@ -11,7 +11,11 @@ import {
   updateStudySettings,
   type DeckFile,
 } from "../storage";
-import { createStudyController, keyAction, type StudyController } from "./controller";
+import {
+  createStudyController,
+  keyAction,
+  type StudyController,
+} from "./controller";
 
 const scheduler = createScheduler({ enableFuzz: false });
 const NOW = new Date("2026-07-01T09:00:00Z");
@@ -98,20 +102,29 @@ beforeEach(async () => {
   await importDeck(db, deckFile(sampleCards()), { now: NOW });
 });
 
-it.each(["suspend", "bury", "reset"] as const)("%s завершается без дополнительного чтения после записи", async action => {
-  const controller = await makeController();
-  const cardId = controller.state().card!.id;
-  const before = await db.progress.get(cardId);
-  const get = vi.spyOn(db.progress, "get").mockResolvedValueOnce(before)
-    .mockRejectedValueOnce(new Error("read after commit failed"));
-  await controller.apply(action);
-  expect(get).toHaveBeenCalledTimes(1);
-  expect(controller.state()).toMatchObject({ saving: false, error: null, canUndo: true });
-  get.mockRestore();
-  await controller.undo();
-  expect(controller.state().card?.id).toBe(cardId);
-  expect(await db.progress.get(cardId)).toEqual(before);
-});
+it.each(["suspend", "bury", "reset"] as const)(
+  "%s завершается без дополнительного чтения после записи",
+  async (action) => {
+    const controller = await makeController();
+    const cardId = controller.state().card!.id;
+    const before = await db.progress.get(cardId);
+    const get = vi
+      .spyOn(db.progress, "get")
+      .mockResolvedValueOnce(before)
+      .mockRejectedValueOnce(new Error("read after commit failed"));
+    await controller.apply(action);
+    expect(get).toHaveBeenCalledTimes(1);
+    expect(controller.state()).toMatchObject({
+      saving: false,
+      error: null,
+      canUndo: true,
+    });
+    get.mockRestore();
+    await controller.undo();
+    expect(controller.state().card?.id).toBe(cardId);
+    expect(await db.progress.get(cardId)).toEqual(before);
+  },
+);
 
 afterEach(async () => {
   vi.restoreAllMocks();
@@ -121,16 +134,23 @@ afterEach(async () => {
 
 describe("ошибка подготовки занятия", () => {
   it("отказ чтения настроек возвращает ошибку с возможностью повторить", async () => {
-    vi.spyOn(db.settings, "get").mockRejectedValueOnce(new Error("settings unavailable"));
+    vi.spyOn(db.settings, "get").mockRejectedValueOnce(
+      new Error("settings unavailable"),
+    );
     const controller = await makeController();
     expect(controller.state()).toMatchObject({ phase: "error", card: null });
     expect(controller.state().error).toContain("settings unavailable");
     await controller.restart();
-    expect(controller.state()).toMatchObject({ phase: "question", error: null });
+    expect(controller.state()).toMatchObject({
+      phase: "question",
+      error: null,
+    });
   });
 
   it("отказ чтения карточек не притворяется пустой очередью", async () => {
-    vi.spyOn(db.cards, "where").mockImplementationOnce(() => { throw new Error("cards unavailable"); });
+    vi.spyOn(db.cards, "where").mockImplementationOnce(() => {
+      throw new Error("cards unavailable");
+    });
     const controller = await makeController();
     expect(controller.state().phase).toBe("error");
     expect(controller.state().error).toContain("cards unavailable");
@@ -140,7 +160,17 @@ describe("ошибка подготовки занятия", () => {
 });
 
 describe("сокращения не перехватывают клавиатуру у интерфейса", () => {
-  it.each(["interactive", "menuOpen", "defaultPrevented", "repeat", "isComposing", "altKey", "ctrlKey", "metaKey", "shiftKey"])("не срабатывают при %s", flag => {
+  it.each([
+    "interactive",
+    "menuOpen",
+    "defaultPrevented",
+    "repeat",
+    "isComposing",
+    "altKey",
+    "ctrlKey",
+    "metaKey",
+    "shiftKey",
+  ])("не срабатывают при %s", (flag) => {
     expect(keyAction("answered", "Enter", { [flag]: true })).toBeNull();
     expect(keyAction("question", " ", { [flag]: true })).toBeNull();
   });
@@ -220,13 +250,25 @@ describe("разбор нажатий", () => {
   });
 
   it("на раскрытом ответе цифры ставят оценку", () => {
-    expect(keyAction("answered", "1")).toEqual({ kind: "grade", grade: "again" });
-    expect(keyAction("answered", "4")).toEqual({ kind: "grade", grade: "easy" });
+    expect(keyAction("answered", "1")).toEqual({
+      kind: "grade",
+      grade: "again",
+    });
+    expect(keyAction("answered", "4")).toEqual({
+      kind: "grade",
+      grade: "easy",
+    });
   });
 
   it("на раскрытом ответе пробел и Enter ставят «хорошо»", () => {
-    expect(keyAction("answered", " ")).toEqual({ kind: "grade", grade: "good" });
-    expect(keyAction("answered", "Enter")).toEqual({ kind: "grade", grade: "good" });
+    expect(keyAction("answered", " ")).toEqual({
+      kind: "grade",
+      grade: "good",
+    });
+    expect(keyAction("answered", "Enter")).toEqual({
+      kind: "grade",
+      grade: "good",
+    });
   });
 
   it("Backspace отменяет в любом рабочем состоянии", () => {
@@ -294,7 +336,12 @@ describe("оценка и запись", () => {
 
     // Счёт идёт по ответам, а не по карточкам: карточка после «не знал»
     // вернётся и будет оценена снова.
-    expect(controller.state().tally).toMatchObject({ easy: 1, again: 1, good: 0, hard: 0 });
+    expect(controller.state().tally).toMatchObject({
+      easy: 1,
+      again: 1,
+      good: 0,
+      hard: 0,
+    });
   });
 
   it("новое занятие начинает счёт заново", async () => {
@@ -304,7 +351,12 @@ describe("оценка и запись", () => {
     expect(controller.state().tally.good).toBe(1);
 
     await controller.restart();
-    expect(controller.state().tally).toEqual({ again: 0, hard: 0, good: 0, easy: 0 });
+    expect(controller.state().tally).toEqual({
+      again: 0,
+      hard: 0,
+      good: 0,
+      easy: 0,
+    });
   });
 
   it("оценка до раскрытия ответа игнорируется", async () => {
@@ -461,7 +513,12 @@ describe("отмена оценки", () => {
     await controller.grade("easy");
     await controller.undo();
 
-    expect(controller.state().tally).toEqual({ again: 0, hard: 0, good: 0, easy: 0 });
+    expect(controller.state().tally).toEqual({
+      again: 0,
+      hard: 0,
+      good: 0,
+      easy: 0,
+    });
   });
 
   it("отменяет несколько оценок подряд", async () => {
@@ -578,7 +635,11 @@ describe("действия над карточкой", () => {
       clock: () => new Date(NOW.getTime() + 30 * 86_400_000),
     });
     let guard = 0;
-    while (second.state().card?.id !== first && second.state().phase === "question" && guard < 20) {
+    while (
+      second.state().card?.id !== first &&
+      second.state().phase === "question" &&
+      guard < 20
+    ) {
       guard += 1;
       second.reveal();
       await second.grade("good");

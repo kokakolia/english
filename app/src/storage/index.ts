@@ -25,6 +25,7 @@ export {
 export {
   importDeck,
   listDecks,
+  listUsableDecks,
   loadCards,
   removeDeck,
   type DeckFile,

@@ -37,11 +37,7 @@ import {
   storageAtRisk,
   type StorageStatus,
 } from "../app/persistence";
-import {
-  backupFileName,
-  exportBackupJson,
-  type AppDatabase,
-} from "../storage";
+import { backupFileName, exportBackupJson, type AppDatabase } from "../storage";
 import type { ThemeChoice } from "../app/theme";
 import { Dropdown } from "./Dropdown";
 import { BackupRestore, type BeginStorageOperation } from "./BackupRestore";
@@ -75,7 +71,15 @@ type Note =
   | { kind: "saved"; where: string; size: string }
   | { kind: "error"; message: string };
 
-export function Vault({ db, storage, theme, onTheme, onRestored, beginOperation, storageBusy }: Props) {
+export function Vault({
+  db,
+  storage,
+  theme,
+  onTheme,
+  onRestored,
+  beginOperation,
+  storageBusy,
+}: Props) {
   const [busy, setBusy] = useState(false);
   const [note, setNote] = useState<Note>({ kind: "none" });
   const [folder, setFolder] = useState<string | null>(null);
@@ -107,7 +111,10 @@ export function Vault({ db, storage, theme, onTheme, onRestored, beginOperation,
       });
       setFolder(await savedFolderName(db));
     } catch (cause) {
-      setNote({ kind: "error", message: `не удалось сохранить копию: ${String(cause)}` });
+      setNote({
+        kind: "error",
+        message: `не удалось сохранить копию: ${String(cause)}`,
+      });
     } finally {
       setBusy(false);
       release();
@@ -115,7 +122,11 @@ export function Vault({ db, storage, theme, onTheme, onRestored, beginOperation,
   }
 
   return (
-    <Dropdown title="Копия и хранилище" marked={storageAtRisk(storage)} keepMounted>
+    <Dropdown
+      title="Копия и хранилище"
+      marked={storageAtRisk(storage)}
+      keepMounted
+    >
       {() => (
         <>
           <button
@@ -135,8 +146,13 @@ export function Vault({ db, storage, theme, onTheme, onRestored, beginOperation,
             </span>
           </button>
 
-          <BackupRestore db={db} beginOperation={beginOperation} onRestored={onRestored}
-            disabled={busy || storageBusy} menuItem />
+          <BackupRestore
+            db={db}
+            beginOperation={beginOperation}
+            onRestored={onRestored}
+            disabled={busy || storageBusy}
+            menuItem
+          />
 
           {folder !== null && (
             <button
@@ -150,7 +166,9 @@ export function Vault({ db, storage, theme, onTheme, onRestored, beginOperation,
               }}
             >
               <span className="menu-item-label">Выбрать другую папку</span>
-              <span className="menu-item-hint">сейчас копии идут в «{folder}»</span>
+              <span className="menu-item-hint">
+                сейчас копии идут в «{folder}»
+              </span>
             </button>
           )}
 
@@ -202,8 +220,8 @@ function StorageNote({ storage }: { storage: StorageStatus | null }) {
   const size = storage?.usage == null ? null : formatBytes(storage.usage);
   return (
     <p className="menu-foot">
-      Прогресс хранится постоянно{size === null ? "" : `, занято ${size}`}. Браузер
-      не сотрёт его сам.
+      Прогресс хранится постоянно{size === null ? "" : `, занято ${size}`}.
+      Браузер не сотрёт его сам.
     </p>
   );
 }
@@ -217,7 +235,8 @@ function BuildStamp() {
 
 function NoteLine({ note }: { note: Note }) {
   if (note.kind === "none") return null;
-  if (note.kind === "error") return <p className="menu-foot menu-foot--warn">{note.message}</p>;
+  if (note.kind === "error")
+    return <p className="menu-foot menu-foot--warn">{note.message}</p>;
   if (note.kind === "saved") {
     return (
       <p className="menu-foot">
