@@ -11,6 +11,7 @@ import { updateSafety } from "../app/update-safety";
  */
 
 import { validCard, validDeckMeta, uniqueIds } from "./validation";
+import { assertAvailableOwners } from "./ownership";
 import type { DeckCard } from "../srs";
 import type { AppDatabase, StoredCard, StoredDeck } from "./db";
 
@@ -113,7 +114,8 @@ export async function importDeck(
 
     // Одна транзакция на всё: оборванный импорт не должен оставить колоду
     // наполовину обновлённой.
-    await db.transaction("rw", db.decks, db.cards, db.progress, async () => {
+    await db.transaction("rw", [db.decks, db.cards, db.progress, db.changes], async () => {
+      await assertAvailableOwners(db, cards.map(card => ({ cardId: card.id, deckId: meta.id })));
       const existingDeck = await db.decks.get(meta.id);
       const older = existingDeck !== undefined && existingDeck.version !== meta.version &&
         Date.parse(existingDeck.builtAt) >= Date.parse(meta.built_at);
@@ -207,6 +209,9 @@ export async function removeDeck(db: AppDatabase, deckId: string): Promise<void>
           ...await db.progress.where("deckId").equals(deckId).primaryKeys(),
           ...await db.changes.where("deckId").equals(deckId).primaryKeys(),
         ])] as string[];
+        // Проверяем и старые повреждённые базы: удаление не должно стереть
+        // журнал карточки, чей прогресс относится к другой колоде.
+        await assertAvailableOwners(db, ids.map(cardId => ({ cardId, deckId })));
         await db.changes.where("deckId").equals(deckId).delete();
         await db.cards.where("deckId").equals(deckId).delete();
         await db.progress.where("deckId").equals(deckId).delete();

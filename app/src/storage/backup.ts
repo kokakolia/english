@@ -16,6 +16,7 @@ import { updateSafety } from "../app/update-safety";
 import type { AppDatabase, StoredCard, StoredDeck, StoredProgress, StoredReview } from "./db";
 import type { SettingRow, ProgressChange } from "./db";
 import { withReviewIds } from "./review-id";
+import { assertAvailableOwners, assertOwners } from "./ownership";
 import { object, text, date, validCard, validProgress, validReview, validStoredDeck, validStudySettings, uniqueIds } from "./validation";
 
 export const BACKUP_FORMAT = "collocation-srs-backup";
@@ -31,6 +32,15 @@ export interface BackupFile {
   reviews: StoredReview[];
   settings: SettingRow[];
   changes?: ProgressChange[];
+}
+
+function backupClaims(data: BackupFile) {
+  const rows = [...data.cards.map(row => ({ cardId: row.id, deckId: row.deckId })),
+    ...data.progress, ...(data.changes ?? [])];
+  // В старой облегчённой копии после сброса может остаться только журнал.
+  // При единственной колоде его владелец всё равно известен.
+  if (data.decks.length === 1) rows.push(...data.reviews.map(row => ({ cardId: row.cardId, deckId: data.decks[0]!.id })));
+  return rows;
 }
 
 export interface ExportOptions {
@@ -124,10 +134,9 @@ function assertBackup(data: unknown): asserts data is BackupFile {
     const count = file.cards!.filter(card => card.deckId === deck.id).length;
     if (count !== 0 && count !== deck.count) throw new BackupFormatError("в копии неполная колода");
   }
-  const progressDecks = new Map(file.progress!.map(row => [row.cardId, row.deckId]));
-  if ((file.changes ?? []).some(row => progressDecks.has(row.cardId) && progressDecks.get(row.cardId) !== row.deckId)) {
-    throw new BackupFormatError("история изменений ссылается на другую колоду");
-  }
+  try {
+    assertOwners(backupClaims(file as BackupFile));
+  } catch (cause) { throw new BackupFormatError(String(cause)); }
 }
 
 export type RestoreMode = "replace" | "merge";
@@ -176,6 +185,7 @@ export async function restoreBackup(
       "rw",
       [db.decks, db.cards, db.progress, db.reviews, db.settings, db.changes],
       async () => {
+        if (mode === "merge") await assertAvailableOwners(db, backupClaims(data));
         if (mode === "replace") {
           await Promise.all([
             db.decks.clear(),

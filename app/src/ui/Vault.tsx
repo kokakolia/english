@@ -20,12 +20,11 @@
  * теперь о нём говорит тихая метка на кнопке меню, а подробности внутри.
  */
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   canSaveSilently,
   forgetFolder,
-  gunzipIfNeeded,
   gzip,
   savedFolderName,
   saveBackupFile,
@@ -41,13 +40,11 @@ import {
 import {
   backupFileName,
   exportBackupJson,
-  restoreBackup,
   type AppDatabase,
-  type RestoreResult,
 } from "../storage";
 import type { ThemeChoice } from "../app/theme";
-import { updateSafety } from "../app/update-safety";
 import { Dropdown } from "./Dropdown";
+import { BackupRestore, type BeginStorageOperation } from "./BackupRestore";
 
 interface Props {
   db: AppDatabase;
@@ -55,7 +52,9 @@ interface Props {
   theme: ThemeChoice;
   onTheme: (choice: ThemeChoice) => void;
   /** Перечитать экран дня: после восстановления счётчики другие. */
-  onRestored: () => void;
+  onRestored: () => Promise<void>;
+  beginOperation: BeginStorageOperation;
+  storageBusy: boolean;
 }
 
 const THEME_LABELS: Record<ThemeChoice, string> = {
@@ -74,21 +73,20 @@ const NEXT_THEME: Record<ThemeChoice, ThemeChoice> = {
 type Note =
   | { kind: "none" }
   | { kind: "saved"; where: string; size: string }
-  | { kind: "restored"; result: RestoreResult }
   | { kind: "error"; message: string };
 
-export function Vault({ db, storage, theme, onTheme, onRestored }: Props) {
+export function Vault({ db, storage, theme, onTheme, onRestored, beginOperation, storageBusy }: Props) {
   const [busy, setBusy] = useState(false);
   const [note, setNote] = useState<Note>({ kind: "none" });
   const [folder, setFolder] = useState<string | null>(null);
-  const fileInput = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     void savedFolderName(db).then(setFolder);
   }, [db]);
 
   async function save() {
-    const release = updateSafety.begin();
+    const release = beginOperation();
+    if (release === null) return;
     setBusy(true);
     setNote({ kind: "none" });
     try {
@@ -116,30 +114,8 @@ export function Vault({ db, storage, theme, onTheme, onRestored }: Props) {
     }
   }
 
-  async function restore(file: File) {
-    const release = updateSafety.begin();
-    setBusy(true);
-    setNote({ kind: "none" });
-    try {
-      // Копия может быть и сжатой, и обычной: старые файлы должны читаться.
-      const data: unknown = JSON.parse(await gunzipIfNeeded(file));
-      // `merge`, а не `replace`: по каждой карточке берётся более свежий
-      // прогресс. Восстановление из старой копии не должно стирать то, что
-      // выучено после неё, — а именно так поступил бы `replace`.
-      const result = await restoreBackup(db, data, { mode: "merge" });
-      setNote({ kind: "restored", result });
-      onRestored();
-    } catch (cause) {
-      setNote({ kind: "error", message: `не удалось прочитать копию: ${String(cause)}` });
-    } finally {
-      setBusy(false);
-      if (fileInput.current !== null) fileInput.current.value = "";
-      release();
-    }
-  }
-
   return (
-    <Dropdown title="Копия и хранилище" marked={storageAtRisk(storage)}>
+    <Dropdown title="Копия и хранилище" marked={storageAtRisk(storage)} keepMounted>
       {() => (
         <>
           <button
@@ -147,7 +123,7 @@ export function Vault({ db, storage, theme, onTheme, onRestored }: Props) {
             role="menuitem"
             className="menu-item"
             onClick={() => void save()}
-            disabled={busy}
+            disabled={busy || storageBusy}
           >
             <span className="menu-item-label">Сохранить копию</span>
             <span className="menu-item-hint">
@@ -159,33 +135,15 @@ export function Vault({ db, storage, theme, onTheme, onRestored }: Props) {
             </span>
           </button>
 
-          <button
-            type="button"
-            role="menuitem"
-            className="menu-item"
-            onClick={() => fileInput.current?.click()}
-            disabled={busy}
-          >
-            <span className="menu-item-label">Восстановить из копии</span>
-            <span className="menu-item-hint">берётся более свежее, выученное не пропадёт</span>
-          </button>
-
-          <input
-            ref={fileInput}
-            type="file"
-            accept="application/json,.json,.gz"
-            className="vault-file"
-            onChange={(event) => {
-              const file = event.target.files?.[0];
-              if (file !== undefined) void restore(file);
-            }}
-          />
+          <BackupRestore db={db} beginOperation={beginOperation} onRestored={onRestored}
+            disabled={busy || storageBusy} menuItem />
 
           {folder !== null && (
             <button
               type="button"
               role="menuitem"
               className="menu-item"
+              disabled={busy || storageBusy}
               onClick={() => {
                 void forgetFolder(db).then(() => setFolder(null));
                 setNote({ kind: "none" });
@@ -268,12 +226,5 @@ function NoteLine({ note }: { note: Note }) {
     );
   }
 
-  const { result } = note;
-  return (
-    <p className="menu-foot">
-      Восстановлено: карточек {result.cards}, прогресса {result.progress}, записей
-      журнала {result.reviews}
-      {result.duplicateReviews > 0 && ` (${result.duplicateReviews} уже были)`}.
-    </p>
-  );
+  return null;
 }

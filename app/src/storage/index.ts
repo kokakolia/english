@@ -86,3 +86,5 @@ export {
   type DeckIndexEntry,
   type FetchLike,
 } from "./loader";
+
+export { DeckOwnershipError } from "./ownership";

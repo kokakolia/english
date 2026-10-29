@@ -25,7 +25,7 @@ import argparse
 import sys
 from pathlib import Path
 
-from ..deck.export import load_deck
+from ..deck.export import load_deck, all_published_cards
 from . import store
 
 DEFAULT_DECK = "en-collocations"
@@ -105,7 +105,8 @@ def cmd_stats(args: argparse.Namespace) -> int:
     print(f"предложений в колоде: {len(sentences)}")
     print(f"переведено:           {covered} ({covered / len(sentences):.0%})")
     print(f"осталось:             {len(sentences) - covered}")
-    stale = len(set(known) - live)
+    all_live = {store.key_for(card["text"].replace("___", card["answer"])) for card in all_published_cards()}
+    stale = len(set(known) - all_live)
     if stale:
         print(f"переводов от исчезнувших предложений: {stale} "
               f"(убрать: `prune`)")
@@ -113,7 +114,8 @@ def cmd_stats(args: argparse.Namespace) -> int:
 
 
 def cmd_prune(args: argparse.Namespace) -> int:
-    live = {store.key_for(s) for s in sentences_of(args.deck_id)}
+    sentences_of(args.deck_id)
+    live = {store.key_for(card["text"].replace("___", card["answer"])) for card in all_published_cards()}
     removed = store.forget_unused(live)
     print(f"убрано переводов: {removed}")
     return 0

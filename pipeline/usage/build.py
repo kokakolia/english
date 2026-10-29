@@ -20,7 +20,7 @@ import argparse
 import sys
 from pathlib import Path
 
-from ..deck.export import load_deck
+from ..deck.export import load_deck, all_published_cards
 from . import store
 
 DEFAULT_DECK = "en-collocations"
@@ -99,14 +99,16 @@ def cmd_stats(args: argparse.Namespace) -> int:
     print(f"коллокаций в колоде: {len(cards)}")
     print(f"с заметкой:          {covered} ({covered / len(cards):.0%})")
     print(f"осталось:            {len(cards) - covered}")
-    stale = len(set(known) - live)
+    all_live = {card["id"] for card in all_published_cards()}
+    stale = len(set(store.load_all()) - all_live)
     if stale:
         print(f"заметок от исчезнувших коллокаций: {stale} (убрать: `prune`)")
     return 0
 
 
 def cmd_prune(args: argparse.Namespace) -> int:
-    live = {card["id"] for card in cards_of(args.deck_id)}
+    cards_of(args.deck_id)  # Ошибка в выбранном ID не должна запускать очистку.
+    live = {card["id"] for card in all_published_cards()}
     removed = store.forget_unused(live)
     print(f"убрано заметок: {removed}")
     return 0

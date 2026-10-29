@@ -16,6 +16,8 @@ import { ensurePersistentStorage, type StorageStatus } from "../app/persistence"
 import {
   deckCounts,
   getStudySettings,
+  getDatabase,
+  listDecks,
   type AppDatabase,
   type DeckCounts,
   type StoredDeck,
@@ -33,6 +35,7 @@ import { Background, CornerFern, OrnamentDefs, SideFern, SideVine } from "./Orna
 import { ReviewScreen } from "./ReviewScreen";
 import { DarkProvider } from "./ThemeContext";
 import { Vault } from "./Vault";
+import { BackupRestore, type BeginStorageOperation } from "./BackupRestore";
 
 type Stage =
   | { kind: "loading" }
@@ -51,13 +54,32 @@ export function App() {
   const [theme, setThemeState] = useState<ThemeChoice>(() => readTheme());
   const [dark, setDark] = useState(() => isDarkNow(readTheme()));
   const [loadAttempt, setLoadAttempt] = useState(0);
+  const [storageBusy, setStorageBusy] = useState(false);
+  const operationBusy = useRef(false);
   const currentStage = useRef(stage.kind);
   currentStage.current = stage.kind;
 
   useEffect(() => {
-    updateSafety.setSafe(stage.kind === "day" && controller === null);
+    updateSafety.setSafe(stage.kind === "day" && controller === null && !storageBusy);
     return () => updateSafety.setSafe(false);
-  }, [stage.kind, controller]);
+  }, [stage.kind, controller, storageBusy]);
+
+  const beginStorageOperation: BeginStorageOperation = useCallback(() => {
+    if (operationBusy.current || (currentStage.current !== "day" && currentStage.current !== "error")) return null;
+    operationBusy.current = true;
+    updateSafety.setSafe(false);
+    const releaseUpdate = updateSafety.begin();
+    setStorageBusy(true);
+    let finished = false;
+    return () => {
+      if (finished) return;
+      finished = true;
+      operationBusy.current = false;
+      setStorageBusy(false);
+      updateSafety.setSafe(currentStage.current === "day");
+      releaseUpdate();
+    };
+  }, []);
 
   // Слежение за системной настройкой: пока выбрано «как в системе», вечернее
   // переключение должно доходить до открытого приложения, а не ждать перезапуска.
@@ -93,15 +115,15 @@ export function App() {
   );
 
   useEffect(() => {
-    if (stage.kind !== "day" || db === null || deck === null) return;
+    if (stage.kind !== "day" || db === null || deck === null || storageBusy) return;
     let current = true;
-    const isCurrent = () => current && currentStage.current === "day";
+    const isCurrent = () => current && currentStage.current === "day" && !operationBusy.current;
     const stop = watchDay(
       () => showDay(db, deck.id, isCurrent),
       cause => { if (isCurrent()) setStage({ kind: "error", message: `Не удалось обновить состояние колоды: ${String(cause)}` }); },
     );
     return () => { current = false; stop(); };
-  }, [stage.kind, db, deck, showDay]);
+  }, [stage.kind, db, deck, showDay, storageBusy]);
 
   useEffect(() => {
     let cancelled = false;
@@ -116,13 +138,13 @@ export function App() {
         const result = await bootstrap();
         if (cancelled) return;
         setStorage(status);
+        setDb(result.db);
 
         const first = result.decks[0];
         if (first === undefined) {
           setStage({ kind: "error", message: result.error ?? "колода не найдена" });
           return;
         }
-        setDb(result.db);
         setDeck(first);
         setOffline(result.offline);
         await showDay(result.db, first.id, () => !cancelled);
@@ -143,7 +165,7 @@ export function App() {
   }, [controller]);
 
   async function startStudy() {
-    if (db === null || deck === null || stage.kind !== "day") return;
+    if (db === null || deck === null || stage.kind !== "day" || operationBusy.current || currentStage.current !== "day") return;
     updateSafety.setSafe(false);
     currentStage.current = "study";
     setStage({ kind: "study" });
@@ -162,6 +184,23 @@ export function App() {
     } catch (cause) {
       setStage({ kind: "error", message: `Не удалось прочитать состояние колоды: ${String(cause)}` });
     }
+  }
+
+  async function afterRestore() {
+    const database = db ?? getDatabase();
+    const known = await listDecks(database);
+    const complete = await Promise.all(known.map(async item =>
+      await database.cards.where("deckId").equals(item.id).count() === item.count ? item : null));
+    const available = complete.filter((item): item is StoredDeck => item !== null);
+    const selected = available.find(item => item.id === deck?.id) ?? available[0];
+    setController(null); setState(null);
+    if (!selected) {
+      setDeck(null);
+      setStage({ kind: "error", message: "В копии нет полного набора карточек. Выберите полную резервную копию или повторите загрузку колоды." });
+      return;
+    }
+    await showDay(database, selected.id);
+    setDb(database); setDeck(selected); setOffline(false);
   }
 
   return (
@@ -203,7 +242,14 @@ export function App() {
         <section className="screen" role="alert">
           <h1 className="display">Не удалось начать</h1>
           <p className="error">{stage.message}</p>
-          <button type="button" className="pill" onClick={() => setLoadAttempt(value => value + 1)}>Повторить попытку</button>
+          <button type="button" className="pill" disabled={storageBusy} onClick={() => {
+            if (operationBusy.current) return;
+            currentStage.current = "loading";
+            setStage({ kind: "loading" });
+            setLoadAttempt(value => value + 1);
+          }}>Повторить попытку</button>
+          <BackupRestore db={db ?? getDatabase()} beginOperation={beginStorageOperation}
+            onRestored={afterRestore} disabled={storageBusy} />
         </section>
       );
     }
@@ -216,6 +262,7 @@ export function App() {
           backlog={stage.counts.backlog}
           offline={offline}
           onStart={() => void startStudy()}
+          storageBusy={storageBusy}
           vault={
             db === null ? null : (
               <Vault
@@ -223,9 +270,9 @@ export function App() {
                 storage={storage}
                 theme={theme}
                 onTheme={setTheme}
-                onRestored={() => {
-                  if (db !== null && deck !== null) void finishStudy();
-                }}
+                onRestored={afterRestore}
+                beginOperation={beginStorageOperation}
+                storageBusy={storageBusy}
               />
             )
           }

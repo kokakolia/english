@@ -98,6 +98,21 @@ beforeEach(async () => {
   await importDeck(db, deckFile(sampleCards()), { now: NOW });
 });
 
+it.each(["suspend", "bury", "reset"] as const)("%s завершается без дополнительного чтения после записи", async action => {
+  const controller = await makeController();
+  const cardId = controller.state().card!.id;
+  const before = await db.progress.get(cardId);
+  const get = vi.spyOn(db.progress, "get").mockResolvedValueOnce(before)
+    .mockRejectedValueOnce(new Error("read after commit failed"));
+  await controller.apply(action);
+  expect(get).toHaveBeenCalledTimes(1);
+  expect(controller.state()).toMatchObject({ saving: false, error: null, canUndo: true });
+  get.mockRestore();
+  await controller.undo();
+  expect(controller.state().card?.id).toBe(cardId);
+  expect(await db.progress.get(cardId)).toEqual(before);
+});
+
 afterEach(async () => {
   vi.restoreAllMocks();
   db.close();

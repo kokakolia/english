@@ -6,6 +6,7 @@ python -m pipeline.deck.build run --band core --deck-id core-collocations
 python -m pipeline.deck.build preview -n 10
 python -m pipeline.deck.selftest
 python -m unittest pipeline.deck.test_publication
+python -m unittest pipeline.deck.test_prune
 ```
 
 Выход — каталог `decks/`, который читает приложение. Формат описан в

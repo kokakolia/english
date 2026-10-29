@@ -48,7 +48,6 @@ import {
   undoReview,
   type AppDatabase,
   type PreviousProgress,
-  type StoredProgress,
   type StudySettings,
 } from "../storage";
 
@@ -251,7 +250,6 @@ export async function createStudyController(
 
   const listeners = new Set<(state: StudyState) => void>();
   let cards: DeckCard[] = [];
-  let progress = new Map<string, StoredProgress>();
   let settings: StudySettings = { ...DEFAULT_STUDY_SETTINGS };
   let session: Session | null = null;
   const undoStack: UndoStep[] = [];
@@ -286,7 +284,7 @@ export async function createStudyController(
       settings = await getStudySettings(db);
       scheduler = options.scheduler ?? createScheduler({ requestRetention: settings.requestRetention });
       cards = await loadCards(db, deckId);
-      progress = await loadProgress(db, deckId);
+      const progress = await loadProgress(db, deckId);
 
       const now = clock();
       const queue = buildQueue({
@@ -364,7 +362,6 @@ export async function createStudyController(
           now: clock(),
           scheduler,
         });
-        progress.set(card.id, result.progress);
         // Снимок снимается до `session.answer`, иначе он опишет уже
         // изменённую очередь и возврат приведёт не туда.
         if (session !== null) {
@@ -420,8 +417,6 @@ export async function createStudyController(
       // Со шага снимаем только после успешной записи: иначе неудачная отмена
       // потеряет возможность попробовать ещё раз.
       undoStack.pop();
-      if (step.previous === null) progress.delete(step.card.id);
-      else progress.set(step.card.id, step.previous);
       session?.restore(step.session);
 
       const tally = { ...state.tally };
@@ -472,11 +467,8 @@ export async function createStudyController(
         });
       }
 
-      // Карта прогресса в памяти должна совпасть с базой, иначе следующая
-      // сборка очереди увидит не то, что записано.
-      const updated = await db.progress.get(card.id);
-      if (updated === undefined) progress.delete(card.id);
-      else progress.set(card.id, updated);
+      // После коммита больше не читаем базу: очередь хранит карточки,
+      // а при следующем построении прогресс загружается заново.
 
       // Карточка уходит из захода, но ответом это не считается: счётчики
       // занятия описывают вспоминание, а не уборку.

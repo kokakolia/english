@@ -19,11 +19,12 @@ import hashlib
 import html
 import json
 import random
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-from .build import DECKS_DIR
+from .build import DECKS_DIR, content_hash, content_version
 
 EXPORT_DIR = Path(__file__).resolve().parents[1] / "data" / "export"
 
@@ -94,6 +95,41 @@ def load_deck(deck_id: str) -> tuple[dict, list[dict]]:
     for chunk_name in meta["chunks"]:
         cards.extend(json.loads((deck_dir / chunk_name).read_text(encoding="utf-8")))
     return meta, cards
+
+
+def all_published_cards() -> list[dict]:
+    """Общий контент очищается только по полному, проверенному набору колод."""
+    manifests = sorted(DECKS_DIR.glob("*/deck.json"))
+    if not manifests:
+        raise ValueError("нет опубликованных колод: очистка отменена")
+    index = json.loads((DECKS_DIR / "index.json").read_text(encoding="utf-8"))
+    if not isinstance(index, dict):
+        raise ValueError("неверный каталог колод: очистка отменена")
+    available = {manifest.parent.name for manifest in manifests}
+    declared = index.get("decks")
+    if not isinstance(declared, list) or any(
+        not isinstance(entry, dict) or not isinstance(entry.get("id"), str) or
+        not re.fullmatch(r"[a-z0-9-]+", entry["id"]) or entry["id"] not in available or
+        entry.get("path") != f"{entry['id']}/deck.json" for entry in declared
+    ):
+        raise ValueError("каталог колод неполон: очистка отменена")
+    result = []
+    for manifest in manifests:
+        meta, cards = load_deck(manifest.parent.name)
+        if len(cards) != meta["count"] or len({card["id"] for card in cards}) != len(cards):
+            raise ValueError(f"неполная колода {manifest.parent.name}: очистка отменена")
+        integrity = meta.get("integrity")
+        if integrity:
+            if integrity.get("algorithm") != "sha256-canonical-json-v1":
+                raise ValueError("неизвестная проверка целостности: очистка отменена")
+            for name in meta["chunks"]:
+                part = json.loads((manifest.parent / name).read_text(encoding="utf-8"))
+                if content_hash(part) != integrity["chunks"].get(name):
+                    raise ValueError(f"повреждена часть {name}: очистка отменена")
+            if content_version(cards) != meta["version"]:
+                raise ValueError("неверная версия колоды: очистка отменена")
+        result.extend(cards)
+    return result
 
 
 def _card_fields(card: dict) -> list[str]:

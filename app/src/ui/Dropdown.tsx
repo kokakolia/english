@@ -19,11 +19,13 @@ interface Props {
    * Тихая точка вместо предупреждения на пол-экрана.
    */
   marked?: boolean;
+  /** Сохраняет состояние долгой операции при закрытии меню. */
+  keepMounted?: boolean;
   /** Содержимое. Получает функцию закрытия: пункт закрывает меню за собой. */
   children: (close: () => void) => ReactNode;
 }
 
-export function Dropdown({ title, disabled = false, marked = false, children }: Props) {
+export function Dropdown({ title, disabled = false, marked = false, keepMounted = false, children }: Props) {
   const [open, setOpen] = useState(false);
   const root = useRef<HTMLDivElement>(null);
 
@@ -67,8 +69,8 @@ export function Dropdown({ title, disabled = false, marked = false, children }: 
         <DotsIcon />
       </button>
 
-      {open && (
-        <div className="menu-list" role="menu">
+      {(open || keepMounted) && (
+        <div className="menu-list" role={open ? "menu" : undefined} hidden={!open} style={open ? undefined : { display: "none" }}>
           {children(() => setOpen(false))}
         </div>
       )}
