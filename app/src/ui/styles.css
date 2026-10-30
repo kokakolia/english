@@ -1262,6 +1262,59 @@ body {
   font-size: clamp(13px, 1.4vw, 16px);
 }
 
+.screen--suspended {
+  width: min(100%, 760px);
+}
+
+.screen--suspended .display {
+  font-size: clamp(22px, 4vw, 32px);
+}
+
+.suspended-search {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  background: var(--panel-bg);
+  color: var(--text);
+  font: inherit;
+}
+
+.suspended-list {
+  flex: 0 1 auto;
+  min-height: 0;
+  width: 100%;
+  max-height: 48dvh;
+  overflow-y: auto;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.suspended-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid var(--panel-border);
+  overflow-wrap: anywhere;
+}
+
+.suspended-list li > div {
+  flex: 1 1 240px;
+}
+
+.suspended-list p {
+  margin: 6px 0 0;
+}
+
+.screen--suspended > .pill {
+  flex-shrink: 0;
+}
+
 /* Уважение к системной настройке «меньше движения». Это не любезность:
    у части людей анимация вызывает тошноту и головокружение, а приложение
    открывают каждый день. */

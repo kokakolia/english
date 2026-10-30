@@ -136,11 +136,19 @@ export async function importDeck(
           cards.map((card) => ({ cardId: card.id, deckId: meta.id })),
         );
         const existingDeck = await db.decks.get(meta.id);
+        // Восстановленные метаданные без полного набора ещё не являются
+        // установленной версией: доступная колода должна заполнить пробел.
+        const installed =
+          existingDeck !== undefined &&
+          (await db.cards.where("deckId").equals(meta.id).count()) ===
+            existingDeck.count;
         const older =
+          installed &&
           existingDeck !== undefined &&
           existingDeck.version !== meta.version &&
           Date.parse(existingDeck.builtAt) >= Date.parse(meta.built_at);
         const same =
+          installed &&
           existingDeck?.version === meta.version &&
           (await db.cards.where("deckId").equals(meta.id).count()) ===
             meta.count;

@@ -24,3 +24,8 @@ desktop.ini
 
 # Колоды копируются сюда скриптом, в репозитории они лежат в decks/
 app/public/decks/
+
+# Незавершённая атомарная запись ручных TSV после остановки процесса
+translations/.*.tmp
+notes/.*.tmp
+sentences/.*.tmp

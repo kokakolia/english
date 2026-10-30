@@ -8,6 +8,7 @@ import {
   importDeck,
   exportBackup,
   restoreBackup,
+  listUsableDecks,
   recordReview,
   undoReview,
   setDatabase,
@@ -104,7 +105,7 @@ it("старая сборка приложения не отменяет вос�
 });
 
 it.each(["older-bundle", "empty-index"])(
-  "облегчённая новая копия без карточек не выдаётся за готовую: %s",
+  "после облегчённой копии старый набор восстанавливается только при наличии карточек: %s",
   async (source) => {
     const original = await database();
     await importDeck(
@@ -150,13 +151,59 @@ it.each(["older-bundle", "empty-index"])(
       })),
     );
     const result = await bootstrap();
-    expect(result.decks).toEqual([]);
-    expect(result.error).toContain("полную резервную копию");
-    expect(await target.cards.count()).toBe(0);
-    expect((await target.decks.get("audit"))?.version).toBe("v2");
+    if (source === "empty-index") {
+      expect(result.decks).toEqual([]);
+      expect(result.error).toContain("полную резервную копию");
+      expect(await target.cards.count()).toBe(0);
+      expect((await target.decks.get("audit"))?.version).toBe("v2");
+    } else {
+      expect(result.error).toBeNull();
+      expect(result.decks).toHaveLength(1);
+      expect(await target.cards.count()).toBe(1);
+      expect((await target.decks.get("audit"))?.version).toBe("v1");
+    }
     expect(await target.progress.get(card.id)).toBeDefined();
   },
 );
+
+it("полная старая копия разблокирует новую облегчённую, сохраняя свежий прогресс", async () => {
+  const original = await database();
+  await importDeck(original, file());
+  const full = await exportBackup(original);
+  await importDeck(original, file("v2", [card], new Date(NOW.getTime() + DAY)));
+  await recordReview(original, {
+    cardId: card.id,
+    deckId: "audit",
+    grade: "easy",
+    now: NOW,
+    scheduler,
+  });
+  const light = await exportBackup(original, { includeCards: false });
+  const target = await database();
+  await restoreBackup(target, light, { mode: "merge" });
+  const progress = await target.progress.get(card.id);
+  expect(await listUsableDecks(target)).toEqual([]);
+  const result = await restoreBackup(target, full, { mode: "merge" });
+  expect(result.cards).toBe(1);
+  expect(await listUsableDecks(target)).toHaveLength(1);
+  expect(await target.cards.get(card.id)).toBeDefined();
+  expect(await target.progress.get(card.id)).toEqual(progress);
+  expect(await target.reviews.count()).toBe(1);
+});
+
+it("полная старая копия не заменяет реально установленную новую колоду", async () => {
+  const db = await database();
+  await importDeck(db, file());
+  const old = await exportBackup(db);
+  const added = makeCard();
+  await importDeck(
+    db,
+    file("v2", [card, added], new Date(NOW.getTime() + DAY)),
+  );
+  expect((await restoreBackup(db, old, { mode: "merge" })).cards).toBe(0);
+  expect((await db.decks.get("audit"))?.version).toBe("v2");
+  expect(await db.cards.count()).toBe(2);
+});
 
 it("понижение версии требует явного параметра даже с force", async () => {
   const db = await database();

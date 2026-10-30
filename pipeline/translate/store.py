@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import hashlib
 from pathlib import Path
+from ..files import atomic_write_text, read_tsv
 
 # Репозиторий, а не pipeline/data: data в git не попадает.
 TRANSLATIONS_DIR = Path(__file__).resolve().parents[2] / "translations"
@@ -37,15 +38,8 @@ def _normalize(text: str) -> str:
 
 def load_pairs() -> dict[str, tuple[str, str]]:
     """ключ → (английское предложение, перевод)."""
-    if not TSV_PATH.exists():
-        return {}
     pairs: dict[str, tuple[str, str]] = {}
-    for line in TSV_PATH.read_text(encoding="utf-8").splitlines():
-        if not line.strip() or line.startswith("#"):
-            continue
-        parts = line.split("\t")
-        if len(parts) != 3:
-            continue
+    for parts in read_tsv(TSV_PATH, (3,)):
         key, english, russian = parts
         pairs[key] = (english, russian)
     return pairs
@@ -62,7 +56,7 @@ def _write(pairs: dict[str, tuple[str, str]]) -> None:
     # Сортируем по английскому: так diff читается по-человечески.
     for key, (english, russian) in sorted(pairs.items(), key=lambda item: item[1][0]):
         lines.append(f"{key}\t{english}\t{russian}")
-    TSV_PATH.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    atomic_write_text(TSV_PATH, "\n".join(lines) + "\n")
 
 
 def save_many(items: list[tuple[str, str]]) -> tuple[int, int]:

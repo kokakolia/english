@@ -16,6 +16,7 @@ import {
   suspendCard,
   undoReview,
   unsuspendCard,
+  loadSuspendedCards,
 } from "./study";
 import { updateStudySettings } from "./settings";
 import { loadDeckFile, DeckLoadError, type FetchLike } from "./loader";
@@ -70,6 +71,29 @@ beforeEach(async () => {
 afterEach(async () => {
   db.close();
   await db.delete();
+});
+
+it("список убранных позволяет вернуть карточку после нового занятия без потери расписания", async () => {
+  await review();
+  await suspendCard(db, { cardId: card.id, deckId: "audit", now: NOW });
+  await buryCard(db, { cardId: card2.id, deckId: "audit", now: NOW });
+  const before = await db.progress.get(card.id);
+  await controller();
+  expect((await loadSuspendedCards(db, "audit")).map((row) => row.id)).toEqual([
+    card.id,
+  ]);
+  expect(await loadSuspendedCards(db, "another")).toEqual([]);
+  await unsuspendCard(db, {
+    cardId: card.id,
+    deckId: "audit",
+    now: new Date(NOW.getTime() + DAY),
+  });
+  expect(await loadSuspendedCards(db, "audit")).toEqual([]);
+  expect(await db.progress.get(card.id)).toEqual({
+    ...before,
+    suspended: false,
+  });
+  expect(await db.reviews.count()).toBe(1);
 });
 
 describe("восстановление учитывает действия, а не только последнее повторение", () => {

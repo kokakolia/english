@@ -191,7 +191,7 @@ def test_sentence_fixes() -> None:
 
 
 def test_fix_store_rejects_bad_gaps() -> None:
-    """Правка с числом пропусков не равным одному не применяется.
+    """Правка с числом пропусков не равным одному останавливает загрузку.
 
     Без пропуска карточка показала бы готовый ответ, с двумя — приложение
     разбирает текст на «до» и «после» и молча теряет хвост.
@@ -205,16 +205,16 @@ def test_fix_store_rejects_bad_gaps() -> None:
         fixes.TSV_PATH = Path(tmp) / "fixes.tsv"
         fixes.SENTENCES_DIR = Path(tmp)
         try:
-            rows = [
-                fixes.HEADER,
-                "\t".join(["k1", "src", "no gap here", "x"]),
-                "\t".join(["k2", "src", "two ___ gaps ___ here", "x"]),
-                "\t".join(["k3", "src", "one ___ gap", "x"]),
-            ]
-            fixes.TSV_PATH.write_text("\n".join(rows) + "\n", encoding="utf-8")
+            for cloze in ("no gap here", "two ___ gaps ___ here"):
+                fixes.TSV_PATH.write_text(f"k1\tsrc\t{cloze}\tx\n", encoding="utf-8")
+                raised = False
+                try:
+                    fixes.load_all()
+                except ValueError:
+                    raised = True
+                check(f"правка: ошибочный пропуск останавливает чтение ({cloze})", raised, True)
+            fixes.TSV_PATH.write_text("k3\tsrc\tone ___ gap\tx\n", encoding="utf-8")
             loaded = fixes.load_all()
-            check("правка: без пропуска отброшена", "k1" in loaded, False)
-            check("правка: с двумя пропусками отброшена", "k2" in loaded, False)
             check("правка: с одним пропуском принята", "k3" in loaded, True)
 
             raised = False

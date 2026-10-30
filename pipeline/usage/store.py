@@ -19,6 +19,7 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+from ..files import atomic_write_text, read_tsv
 
 NOTES_DIR = Path(__file__).resolve().parents[2] / "notes"
 TSV_PATH = NOTES_DIR / "usage-ru.tsv"
@@ -32,15 +33,8 @@ def _normalize(text: str) -> str:
 
 def load_rows() -> dict[str, tuple[str, str]]:
     """id → (подпись, заметка)."""
-    if not TSV_PATH.exists():
-        return {}
     rows: dict[str, tuple[str, str]] = {}
-    for line in TSV_PATH.read_text(encoding="utf-8").splitlines():
-        if not line.strip() or line.startswith("#"):
-            continue
-        parts = line.split("\t")
-        if len(parts) not in (3, 4):
-            continue
+    for parts in read_tsv(TSV_PATH, (3, 4)):
         card_id, phrase, note = parts[:3]
         rows[card_id] = (phrase, note)
     return rows
@@ -57,10 +51,7 @@ def context_key(accept: list[str], text: str, answer: str) -> str:
 
 
 def load_contexts() -> dict[str, str]:
-    if not TSV_PATH.exists():
-        return {}
-    return {parts[0]: parts[3] for line in TSV_PATH.read_text(encoding="utf-8").splitlines()
-            if not line.startswith("#") and len(parts := line.split("\t")) == 4}
+    return {parts[0]: parts[3] for parts in read_tsv(TSV_PATH, (3, 4)) if len(parts) == 4}
 
 
 def notes_for(cards: list[dict]) -> dict[str, str]:
@@ -76,7 +67,7 @@ def _write(rows: dict[str, tuple[str, str]], contexts: dict[str, str] | None = N
     # Сортируем по подписи: так соседние строки описывают похожие коллокации.
     for card_id, (phrase, note) in sorted(rows.items(), key=lambda item: item[1][0]):
         lines.append(f"{card_id}\t{phrase}\t{note}\t{contexts.get(card_id, '')}")
-    TSV_PATH.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    atomic_write_text(TSV_PATH, "\n".join(lines) + "\n")
 
 
 def save_many(items: list[tuple[str, str, str]], contexts: dict[str, str] | None = None) -> tuple[int, int]:
@@ -87,8 +78,12 @@ def save_many(items: list[tuple[str, str, str]], contexts: dict[str, str] | None
     added = updated = 0
     for card_id, phrase, note in items:
         card_id, phrase, note = card_id.strip(), _normalize(phrase), _normalize(note)
-        if not card_id or not note:
+        if not card_id or not phrase or not note:
             continue
+        if any(character.isspace() for character in card_id):
+            raise ValueError(f"неверный ID карточки: {card_id!r}")
+        if contexts and card_id in contexts and any(character.isspace() for character in contexts[card_id]):
+            raise ValueError(f"неверный контекст карточки {card_id}")
         if contexts and card_id in contexts and saved_contexts.get(card_id) != contexts[card_id]:
             saved_contexts[card_id] = contexts[card_id]
             context_changed = True

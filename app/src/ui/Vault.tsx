@@ -51,6 +51,7 @@ interface Props {
   onRestored: () => Promise<void>;
   beginOperation: BeginStorageOperation;
   storageBusy: boolean;
+  onSuspended: () => void;
 }
 
 const THEME_LABELS: Record<ThemeChoice, string> = {
@@ -79,6 +80,7 @@ export function Vault({
   onRestored,
   beginOperation,
   storageBusy,
+  onSuspended,
 }: Props) {
   const [busy, setBusy] = useState(false);
   const [note, setNote] = useState<Note>({ kind: "none" });
@@ -127,7 +129,7 @@ export function Vault({
       marked={storageAtRisk(storage)}
       keepMounted
     >
-      {() => (
+      {(close) => (
         <>
           <button
             type="button"
@@ -153,6 +155,22 @@ export function Vault({
             disabled={busy || storageBusy}
             menuItem
           />
+
+          <button
+            type="button"
+            role="menuitem"
+            className="menu-item"
+            disabled={busy || storageBusy}
+            onClick={() => {
+              close();
+              onSuspended();
+            }}
+          >
+            <span className="menu-item-label">Убранные карточки</span>
+            <span className="menu-item-hint">
+              посмотреть и вернуть в обучение
+            </span>
+          </button>
 
           {folder !== null && (
             <button

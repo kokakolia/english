@@ -73,12 +73,46 @@ export async function gzip(text: string): Promise<Blob> {
   return new Response(stream).blob();
 }
 
-/** Разжимает, если это gzip. Понимается по двум первым байтам. */
-export async function gunzipIfNeeded(file: Blob): Promise<string> {
+/** Ограничиваем и вход, и распакованный JSON до выделения большой строки. */
+export const BACKUP_LIMITS = {
+  fileBytes: 32 * 1024 * 1024,
+  unpackedBytes: 64 * 1024 * 1024,
+};
+
+/** Разжимает, если это gzip. Прерывает чтение при превышении лимита. */
+export async function gunzipIfNeeded(
+  file: Blob,
+  limits = BACKUP_LIMITS,
+): Promise<string> {
+  if (file.size > limits.fileBytes)
+    throw new Error("Файл копии слишком большой (максимум 32 МиБ).");
   const head = new Uint8Array(await file.slice(0, 2).arrayBuffer());
-  if (head[0] !== 0x1f || head[1] !== 0x8b) return file.text();
-  const stream = file.stream().pipeThrough(new DecompressionStream("gzip"));
-  return new Response(stream).text();
+  const stream =
+    head[0] === 0x1f && head[1] === 0x8b
+      ? file.stream().pipeThrough(new DecompressionStream("gzip"))
+      : file.stream();
+  const reader = stream.getReader();
+  const decoder = new TextDecoder();
+  const parts: string[] = [];
+  let bytes = 0;
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      bytes += value.byteLength;
+      if (bytes > limits.unpackedBytes) {
+        await reader.cancel();
+        throw new Error(
+          "Распакованная копия слишком большая (максимум 64 МиБ).",
+        );
+      }
+      parts.push(decoder.decode(value, { stream: true }));
+    }
+    parts.push(decoder.decode());
+    return parts.join("");
+  } finally {
+    reader.releaseLock();
+  }
 }
 
 /**

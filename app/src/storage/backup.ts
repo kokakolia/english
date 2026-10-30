@@ -222,6 +222,7 @@ export type RestoreMode = "replace" | "merge";
 export interface RestoreResult {
   mode: RestoreMode;
   decks: number;
+  /** Число реально записанных карточек; пропущенная старая колода сюда не входит. */
   cards: number;
   progress: number;
   reviews: number;
@@ -252,7 +253,7 @@ export async function restoreBackup(
     const result: RestoreResult = {
       mode,
       decks: data.decks.length,
-      cards: data.cards?.length ?? 0,
+      cards: 0,
       progress: data.progress.length,
       reviews: data.reviews.length,
       settings: data.settings.length,
@@ -276,21 +277,27 @@ export async function restoreBackup(
           ]);
         }
 
-        // Старая копия не понижает версию установленной колоды. Облегчённая
-        // копия не объявляет отсутствующие карточки уже загруженными.
+        // От понижения защищён только реально установленный полный набор.
+        // Метаданные облегчённой копии не препятствуют восстановлению карточек.
         for (const deck of data.decks) {
           const existing = await db.decks.get(deck.id);
           const cards = data.cards.filter((card) => card.deckId === deck.id);
           const complete = cards.length === deck.count;
+          const installed =
+            existing !== undefined &&
+            (await db.cards.where("deckId").equals(deck.id).count()) ===
+              existing.count;
           if (
             !existing ||
             (complete &&
-              Date.parse(deck.builtAt) > Date.parse(existing.builtAt))
+              (!installed ||
+                Date.parse(deck.builtAt) > Date.parse(existing.builtAt)))
           ) {
             await db.decks.put(deck);
             if (complete) {
               await db.cards.where("deckId").equals(deck.id).delete();
               await db.cards.bulkPut(cards);
+              result.cards += cards.length;
             }
           } else if (
             existing.version === deck.version &&
@@ -300,6 +307,7 @@ export async function restoreBackup(
           ) {
             await db.cards.where("deckId").equals(deck.id).delete();
             await db.cards.bulkPut(cards);
+            result.cards += cards.length;
           }
         }
         await db.settings.bulkPut(

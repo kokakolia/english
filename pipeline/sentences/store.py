@@ -33,6 +33,7 @@ from __future__ import annotations
 
 import hashlib
 from pathlib import Path
+from ..files import atomic_write_text, read_tsv
 
 # Репозиторий, а не pipeline/data: data в git не попадает.
 SENTENCES_DIR = Path(__file__).resolve().parents[2] / "sentences"
@@ -49,23 +50,15 @@ def key_for(sentence: str) -> str:
 
 def load_all() -> dict[str, tuple[str, str]]:
     """ключ исходного предложения → (исправленный клоуз, ответ)."""
-    if not TSV_PATH.exists():
-        return {}
-
     fixes: dict[str, tuple[str, str]] = {}
-    for line in TSV_PATH.read_text(encoding="utf-8").splitlines():
-        if not line.strip() or line.startswith("#"):
-            continue
-        parts = line.split("\t")
-        if len(parts) != 4:
-            continue
+    for parts in read_tsv(TSV_PATH, (4,)):
         key, _original, cloze, answer = parts
         # Пропуск обязан быть ровно один. Без него карточка показала бы
         # готовый ответ вместо задания, а с двумя — приложение разбирает текст
         # на «до» и «после» и молча теряет хвост. И то и другое ломается тихо,
-        # поэтому такая правка не применяется вовсе.
+        # поэтому повреждённый файл останавливает сборку до перезаписи.
         if cloze.count("___") != 1:
-            continue
+            raise ValueError(f"{TSV_PATH}: в правке {key} должен быть ровно один пропуск")
         fixes[key] = (cloze, answer)
     return fixes
 
@@ -73,16 +66,15 @@ def load_all() -> dict[str, tuple[str, str]]:
 def save(original: str, cloze: str, answer: str) -> None:
     """Добавляет или заменяет правку, сохраняя файл отсортированным."""
     rows: dict[str, tuple[str, str, str]] = {}
-    if TSV_PATH.exists():
-        for line in TSV_PATH.read_text(encoding="utf-8").splitlines():
-            if not line.strip() or line.startswith("#"):
-                continue
-            parts = line.split("\t")
-            if len(parts) == 4:
-                rows[parts[0]] = (parts[1], parts[2], parts[3])
+    load_all()  # Проверяем и смысл старых правок до любой перезаписи.
+    for parts in read_tsv(TSV_PATH, (4,)):
+        rows[parts[0]] = (parts[1], parts[2], parts[3])
 
     normalized = " ".join(original.split())
     fixed = " ".join(cloze.split())
+    answer = " ".join(answer.split())
+    if not normalized or not answer:
+        raise ValueError("исходное предложение и ответ не могут быть пустыми")
     if fixed.count("___") != 1:
         raise ValueError(f"в правке должен быть ровно один пропуск: {fixed!r}")
     rows[key_for(normalized)] = (normalized, fixed, answer.strip())
@@ -92,4 +84,4 @@ def save(original: str, cloze: str, answer: str) -> None:
     # Сортировка по исходному предложению: правки видно в diff построчно.
     for key, (source, fixed, ans) in sorted(rows.items(), key=lambda item: item[1][0]):
         lines.append(f"{key}\t{source}\t{fixed}\t{ans}")
-    TSV_PATH.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    atomic_write_text(TSV_PATH, "\n".join(lines) + "\n")

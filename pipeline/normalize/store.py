@@ -86,14 +86,38 @@ def replace_slug(conn: sqlite3.Connection, slug: str, source_dict: str,
     Именно заменяет, а не дописывает: если правила изменились и часть записей
     исчезла, в базе не должно остаться сирот.
     """
-    conn.execute("DELETE FROM collocations WHERE source_slug = ?", (slug,))
-    if records:
-        placeholders = ", ".join(f":{name}" for name in _COLUMNS)
-        conn.executemany(
-            f"INSERT OR REPLACE INTO collocations ({', '.join(_COLUMNS)}) "
-            f"VALUES ({placeholders})",
-            [record.to_row() for record in records],
-        )
+    ids = [record.id for record in records]
+    if len(set(ids)) != len(ids):
+        raise ValueError(f"разделение кластера {slug}: повторный ID; проверьте card-identities.json")
+    if any(record.source_slug != slug or record.source_dict != source_dict for record in records):
+        raise ValueError(f"записи не принадлежат статье {slug}")
+    for record_id in ids:
+        owner = conn.execute("SELECT source_slug FROM collocations WHERE id = ?", (record_id,)).fetchone()
+        if owner is not None and owner[0] != slug:
+            raise ValueError(f"ID {record_id} уже принадлежит статье {owner[0]}")
+    # Savepoint не фиксирует весь пакет вызывающего кода и откатывает статью
+    # целиком даже при ошибке в середине executemany.
+    if not conn.in_transaction:
+        conn.execute("BEGIN")
+    conn.execute("SAVEPOINT replace_slug")
+    try:
+        conn.execute("DELETE FROM collocations WHERE source_slug = ?", (slug,))
+        if records:
+            placeholders = ", ".join(f":{name}" for name in _COLUMNS)
+            conn.executemany(
+                f"INSERT INTO collocations ({', '.join(_COLUMNS)}) VALUES ({placeholders})",
+                [record.to_row() for record in records],
+            )
+        _write_state(conn, slug, source_dict, fetched_at, version, len(records))
+    except BaseException:
+        conn.execute("ROLLBACK TO SAVEPOINT replace_slug")
+        raise
+    finally:
+        conn.execute("RELEASE SAVEPOINT replace_slug")
+
+
+def _write_state(conn: sqlite3.Connection, slug: str, source_dict: str,
+                 fetched_at: str, version: str, count: int) -> None:
     conn.execute(
         """
         INSERT INTO state (slug, source_dict, fetched_at, version, n_records,
@@ -109,7 +133,7 @@ def replace_slug(conn: sqlite3.Connection, slug: str, source_dict: str,
             source_dict,
             fetched_at,
             version,
-            len(records),
+            count,
             datetime.now(timezone.utc).isoformat(timespec="seconds"),
         ),
     )

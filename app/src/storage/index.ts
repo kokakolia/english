@@ -40,6 +40,7 @@ export {
   deckCounts,
   getProgress,
   loadProgress,
+  loadSuspendedCards,
   buryCard,
   hiddenCount,
   recordReview,

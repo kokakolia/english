@@ -54,12 +54,14 @@ import {
 import { ReviewScreen } from "./ReviewScreen";
 import { DarkProvider } from "./ThemeContext";
 import { Vault } from "./Vault";
+import { SuspendedCards } from "./SuspendedCards";
 import { BackupRestore, type BeginStorageOperation } from "./BackupRestore";
 
 type Stage =
   | { kind: "loading" }
   | { kind: "error"; message: string }
   | { kind: "day"; counts: DeckCounts }
+  | { kind: "suspended" }
   | { kind: "study" };
 
 export function App() {
@@ -88,7 +90,7 @@ export function App() {
   const beginStorageOperation: BeginStorageOperation = useCallback(() => {
     if (
       operationBusy.current ||
-      (currentStage.current !== "day" && currentStage.current !== "error")
+      !["day", "error", "suspended"].includes(currentStage.current)
     )
       return null;
     operationBusy.current = true;
@@ -349,9 +351,26 @@ export function App() {
                 onRestored={afterRestore}
                 beginOperation={beginStorageOperation}
                 storageBusy={storageBusy}
+                onSuspended={() => {
+                  if (operationBusy.current) return;
+                  currentStage.current = "suspended";
+                  updateSafety.setSafe(false);
+                  setStage({ kind: "suspended" });
+                }}
               />
             )
           }
+        />
+      );
+    }
+
+    if (stage.kind === "suspended" && db !== null && deck !== null) {
+      return (
+        <SuspendedCards
+          db={db}
+          deckId={deck.id}
+          beginOperation={beginStorageOperation}
+          onClose={() => void finishStudy()}
         />
       );
     }

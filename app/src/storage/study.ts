@@ -342,6 +342,18 @@ export async function unsuspendCard(
   return writeFlag(db, input, (row) => ({ ...row, suspended: false }));
 }
 
+/** Только приостановленные карточки текущего набора; отложенные до завтра сюда не входят. */
+export async function loadSuspendedCards(
+  db: AppDatabase,
+  deckId: string,
+): Promise<Awaited<ReturnType<typeof loadCards>>> {
+  return db.transaction("r", db.cards, db.progress, async () => {
+    const cards = await loadCards(db, deckId);
+    const progress = await loadProgress(db, deckId);
+    return cards.filter((card) => progress.get(card.id)?.suspended === true);
+  });
+}
+
 /** Прячет карточку до начала следующих суток. */
 export async function buryCard(
   db: AppDatabase,

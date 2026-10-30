@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import { gunzipIfNeeded, gzip } from "./backup-file";
 
@@ -37,5 +37,56 @@ describe("сжатие копии", () => {
 
   it("пустой файл не притворяется сжатым", async () => {
     expect(await gunzipIfNeeded(new Blob([]))).toBe("");
+  });
+
+  it("слишком большой файл отклоняется до чтения", async () => {
+    const file = new Blob(["12345"]);
+    const read = vi.spyOn(file, "slice");
+    await expect(
+      gunzipIfNeeded(file, { fileBytes: 4, unpackedBytes: 100 }),
+    ).rejects.toThrow("Файл копии слишком большой");
+    expect(read).not.toHaveBeenCalled();
+  });
+
+  it.each([false, true])(
+    "лимит распакованных байтов действует и для gzip: %s",
+    async (packed) => {
+      const text = "Я".repeat(5000);
+      const file = packed ? await gzip(text) : new Blob([text]);
+      await expect(
+        gunzipIfNeeded(file, { fileBytes: 20000, unpackedBytes: 9999 }),
+      ).rejects.toThrow("Распакованная копия слишком большая");
+      expect(
+        await gunzipIfNeeded(file, { fileBytes: 20000, unpackedBytes: 10000 }),
+      ).toBe(text);
+    },
+  );
+
+  it("чтение прекращается сразу при превышении лимита", async () => {
+    let reads = 0;
+    const cancel = vi.fn();
+    const stream = new ReadableStream<Uint8Array<ArrayBuffer>>(
+      {
+        pull(controller) {
+          reads++;
+          controller.enqueue(new Uint8Array(64));
+        },
+        cancel,
+      },
+      { highWaterMark: 0 },
+    );
+    const file = new Blob(["plain"]);
+    vi.spyOn(file, "stream").mockReturnValue(stream);
+    await expect(
+      gunzipIfNeeded(file, { fileBytes: 100, unpackedBytes: 100 }),
+    ).rejects.toThrow("Распакованная копия слишком большая");
+    expect(reads).toBe(2);
+    expect(cancel).toHaveBeenCalledOnce();
+  });
+
+  it("повреждённый gzip отклоняется", async () => {
+    await expect(
+      gunzipIfNeeded(new Blob([new Uint8Array([0x1f, 0x8b, 0, 0])])),
+    ).rejects.toThrow();
   });
 });
