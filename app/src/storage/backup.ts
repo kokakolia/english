@@ -21,8 +21,8 @@ import type {
   StoredReview,
 } from "./db";
 import type { SettingRow, ProgressChange } from "./db";
-import { withReviewIds, sameReviewEvent } from "./review-id";
-import { withReviewOwners } from "./review-ownership";
+import { withReviewIds, sameReviewContent } from "./review-id";
+import { withReviewOwners, provesReviewOwner } from "./review-ownership";
 import { utcDeck, utcProgress, utcReview, utcChange } from "./dates";
 import { assertAvailableOwners, assertOwners } from "./ownership";
 import { deckContentHash, legacyDeckVersion } from "./integrity";
@@ -454,12 +454,32 @@ export async function restoreBackup(
             .equals(entry.eventId)
             .first();
           if (existing !== undefined) {
-            if (!sameReviewEvent(existing, entry))
+            const localOwner = existing.deckId ?? null;
+            const incomingOwner = entry.deckId;
+            if (
+              !sameReviewContent(existing, entry) ||
+              (localOwner !== null &&
+                incomingOwner !== null &&
+                localOwner !== incomingOwner)
+            )
               throw new BackupFormatError(
                 "В копии изменены данные существующего повторения; восстановление отменено.",
               );
-            if (entry.undone && existing.id !== undefined)
-              await db.reviews.update(existing.id, { undone: true });
+            const refinedOwner =
+              localOwner === null &&
+              incomingOwner !== null &&
+              provesReviewOwner(entry, data, input.formatVersion < 4)
+                ? incomingOwner
+                : localOwner;
+            if (existing.id !== undefined)
+              await db.reviews.update(existing.id, {
+                deckId: refinedOwner,
+                ...(entry.undone ? { undone: true } : {}),
+              });
+            if (incomingOwner === null && refinedOwner !== null)
+              result.unassignedReviews--;
+            if (incomingOwner !== null && refinedOwner === null)
+              result.unassignedReviews++;
             result.duplicateReviews += 1;
             continue;
           }
@@ -491,6 +511,6 @@ export function backupFileName(
   now: Date = new Date(),
   extension = "json",
 ): string {
-  const stamp = now.toISOString().slice(0, 19).replace(/[:T]/g, "-");
-  return `collocations-backup-${stamp}.${extension}`;
+  const stamp = now.toISOString().slice(0, 23).replace(/[:T.]/g, "-");
+  return `collocations-backup-${stamp}-${crypto.randomUUID()}.${extension}`;
 }

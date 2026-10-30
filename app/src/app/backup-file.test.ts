@@ -1,6 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { gunzipIfNeeded, gzip } from "./backup-file";
+import { gunzipIfNeeded, gzip, saveBackupFile } from "./backup-file";
+import { AppDatabase } from "../storage/db";
+import { backupFileName } from "../storage/backup";
 
 describe("сжатие копии", () => {
   it("сжатое читается обратно без потерь", async () => {
@@ -101,4 +103,50 @@ describe("сжатие копии", () => {
       gzip("small", { fileBytes: 1, unpackedBytes: 100 }),
     ).rejects.toThrow("Файл копии слишком большой");
   });
+});
+
+it("снимки одной секунды и одного мгновения имеют разные имена", () => {
+  const now = new Date("2026-10-30T10:00:00.100Z");
+  const names = Array.from({ length: 100 }, () =>
+    backupFileName(now, "json.gz"),
+  );
+  names.push(backupFileName(new Date("2026-10-30T10:00:00.900Z"), "json.gz"));
+  expect(new Set(names).size).toBe(101);
+  expect(names[0]).toMatch(
+    /^collocations-backup-2026-10-30-10-00-00-100-[0-9a-f-]{36}\.json\.gz$/,
+  );
+});
+
+it("выбранная папка сохраняет обе копии одной секунды", async () => {
+  const db = new AppDatabase("backup-filename-test");
+  const files = new Map<string, Blob>();
+  const folder = {
+    name: "copies",
+    getFileHandle: async (name: string) => ({
+      createWritable: async () =>
+        new WritableStream<Blob>({
+          write(value) {
+            files.set(name, value);
+          },
+        }),
+    }),
+  };
+  vi.spyOn(db.settings, "get").mockResolvedValue({
+    key: "backupFolder",
+    value: folder,
+  });
+  vi.stubGlobal("window", { showDirectoryPicker: vi.fn() });
+  try {
+    const first = backupFileName(new Date("2026-10-30T10:00:00.100Z"));
+    const second = backupFileName(new Date("2026-10-30T10:00:00.900Z"));
+    await saveBackupFile(db, first, new Blob(["first"]));
+    await saveBackupFile(db, second, new Blob(["second"]));
+    expect(files.size).toBe(2);
+    expect(await files.get(first)!.text()).toBe("first");
+    expect(await files.get(second)!.text()).toBe("second");
+  } finally {
+    vi.unstubAllGlobals();
+    vi.restoreAllMocks();
+    db.close();
+  }
 });

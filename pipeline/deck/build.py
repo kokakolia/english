@@ -23,6 +23,7 @@ import tempfile
 import sys
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
+from ..locking import exclusive_file_lock
 
 from ..normalize import store
 from ..normalize.build import _sequence_for
@@ -293,6 +294,12 @@ def validate(deck: dict, chunks: list[list[dict]]) -> list[str]:
 
 def write_deck(deck_id: str, name: str, cards: list[dict], chunk_size: int,
                source_note: str) -> Path:
+    with exclusive_file_lock(DECKS_DIR / ".publication.lock"):
+        return _write_deck_locked(deck_id, name, cards, chunk_size, source_note)
+
+
+def _write_deck_locked(deck_id: str, name: str, cards: list[dict], chunk_size: int,
+                       source_note: str) -> Path:
     deck_dir = DECKS_DIR / deck_id
     deck_dir.mkdir(parents=True, exist_ok=True)
 
@@ -342,12 +349,17 @@ def write_deck(deck_id: str, name: str, cards: list[dict], chunk_size: int,
         write_json_atomic(deck_dir / file_name, chunk)
     write_json_atomic(deck_dir / "deck.json", deck)
 
-    _refresh_index()
+    _refresh_index_locked()
     return deck_dir
 
 
 def _refresh_index() -> None:
     """Перечень колод — точка входа для приложения."""
+    with exclusive_file_lock(DECKS_DIR / ".publication.lock"):
+        _refresh_index_locked()
+
+
+def _refresh_index_locked() -> None:
     decks = []
     for deck_file in sorted(DECKS_DIR.glob("*/deck.json")):
         meta = json.loads(deck_file.read_text(encoding="utf-8"))

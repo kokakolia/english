@@ -1,13 +1,12 @@
 import type { ReviewEntry } from "../srs/types";
 
-/** Только неизменяемые поля события; локальный id и пометка отмены сюда не входят. */
-export function sameReviewEvent(
+/** Неизменяемое содержимое события, без уточняемого владельца. */
+export function sameReviewContent(
   left: ReviewEntry,
   right: ReviewEntry,
 ): boolean {
   const key = (row: ReviewEntry) =>
     JSON.stringify([
-      row.deckId ?? null,
       row.cardId,
       Date.parse(row.reviewedAt),
       row.grade,

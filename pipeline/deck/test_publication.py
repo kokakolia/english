@@ -1,11 +1,20 @@
 """Проверки публикации: python -m unittest pipeline.deck.test_publication."""
 import json
+import multiprocessing
 import tempfile
+import threading
 import unittest
+from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeout
 from pathlib import Path
 from unittest.mock import patch
 
 from . import build
+
+
+def publish_in_process(folder, deck_id, cards):
+    build.DECKS_DIR = Path(folder)
+    for _ in range(3):
+        build.write_deck(deck_id, deck_id, cards, 2, "test")
 
 
 class PublicationTest(unittest.TestCase):
@@ -68,6 +77,60 @@ class PublicationTest(unittest.TestCase):
         for name in current["chunks"]:
             part = json.loads((self.folder / name).read_text(encoding="utf-8"))
             self.assertEqual(build.content_hash(part), current["integrity"]["chunks"][name])
+
+    def test_stale_index_writer_cannot_overwrite_another_publication(self):
+        entered, release, beta_started = threading.Event(), threading.Event(), threading.Event()
+        original = build.write_json_atomic
+
+        def pause_index(path, value):
+            if path.name == "index.json" and "alpha" in {deck["id"] for deck in value["decks"]} and "beta" not in {deck["id"] for deck in value["decks"]}:
+                entered.set()
+                if not release.wait(5):
+                    raise TimeoutError("test did not release publication")
+            return original(path, value)
+
+        def second():
+            beta_started.set()
+            return build.write_deck("beta", "Beta", self.cards, 2, "test")
+
+        with patch.object(build, "write_json_atomic", pause_index), ThreadPoolExecutor(max_workers=2) as pool:
+            alpha = pool.submit(build.write_deck, "alpha", "Alpha", self.cards, 2, "test")
+            try:
+                self.assertTrue(entered.wait(5))
+                beta = pool.submit(second)
+                self.assertTrue(beta_started.wait(5))
+                with self.assertRaises(FutureTimeout):
+                    beta.result(timeout=0.2)
+            finally:
+                release.set()
+            alpha.result(timeout=5)
+            beta.result(timeout=5)
+        index = json.loads((build.DECKS_DIR / "index.json").read_text(encoding="utf-8"))
+        self.assertEqual({deck["id"] for deck in index["decks"]}, {"audit", "alpha", "beta"})
+
+    def test_separate_processes_keep_both_decks_and_monotonic_publications(self):
+        context = multiprocessing.get_context("spawn")
+        processes = [context.Process(target=publish_in_process, args=(str(build.DECKS_DIR), name, self.cards))
+                     for name in ("alpha", "beta")]
+        try:
+            for process in processes:
+                process.start()
+            for process in processes:
+                process.join(15)
+                self.assertFalse(process.is_alive())
+                self.assertEqual(process.exitcode, 0)
+        finally:
+            for process in processes:
+                if process.is_alive():
+                    process.terminate()
+                    process.join(5)
+                if process.pid is not None:
+                    process.close()
+        index = json.loads((build.DECKS_DIR / "index.json").read_text(encoding="utf-8"))
+        self.assertEqual({deck["id"] for deck in index["decks"]}, {"audit", "alpha", "beta"})
+        for entry in index["decks"]:
+            manifest = json.loads((build.DECKS_DIR / entry["path"]).read_text(encoding="utf-8"))
+            self.assertEqual(entry["version"], manifest["version"])
 
 
 if __name__ == "__main__":

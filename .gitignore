@@ -29,3 +29,6 @@ app/public/decks/
 translations/.*.tmp
 notes/.*.tmp
 sentences/.*.tmp
+
+# Стабильный файл межпроцессной блокировки публикации
+decks/.publication.lock

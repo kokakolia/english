@@ -12,8 +12,8 @@
     python -m pipeline.translate.build load батч-готово.tsv
     python -m pipeline.translate.build stats
 
-`todo` выдаёт строки вида `<ключ> <TAB> <предложение>`, где ключ — восемь первых
-знаков хэша предложения. Обратно достаточно прислать `<ключ> <TAB> <перевод>`:
+`todo` выдаёт строки вида `<ключ> <TAB> <предложение>`, где ключ — полный
+хэш предложения. Обратно достаточно прислать `<ключ> <TAB> <перевод>`:
 переписывать английский текст второй раз не нужно, а сопоставление
 восстанавливается из самой колоды и потому не требует никакого состояния между
 запусками. Пара `<английское предложение> <TAB> <перевод>` тоже принимается.
@@ -49,7 +49,7 @@ def cmd_todo(args: argparse.Namespace) -> int:
         return 0
 
     batch = pending[: args.batch] if args.batch else pending
-    lines = "\n".join(f"{store.key_for(item)[:8]}\t{item}" for item in batch)
+    lines = "\n".join(f"{store.key_for(item)}\t{item}" for item in batch)
     if args.out:
         Path(args.out).write_text(lines + "\n", encoding="utf-8")
         print(f"непереведённых всего: {len(pending)}")
@@ -65,14 +65,23 @@ def cmd_load(args: argparse.Namespace) -> int:
         print(f"нет файла {path}", file=sys.stderr)
         return 1
 
-    # Короткий ключ → предложение: восстанавливается из колоды, состояния между
-    # запусками не нужно.
-    by_short = {store.key_for(s)[:8]: s for s in sentences_of(args.deck_id)}
+    by_full: dict[str, str] = {}
+    by_short: dict[str, set[str]] = {}
+    by_sentence: dict[str, str] = {}
+    for sentence in sentences_of(args.deck_id):
+        key = store.key_for(sentence)
+        normalized = " ".join(sentence.split())
+        if key in by_full and " ".join(by_full[key].split()) != normalized:
+            print(f"коллизия полного ключа {key}; импорт отменён", file=sys.stderr)
+            return 1
+        by_full[key] = sentence
+        by_sentence[normalized] = sentence
+        by_short.setdefault(key[:8], set()).add(key)
 
     items: list[tuple[str, str]] = []
     bad = 0
     for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
-        if not line.strip():
+        if not line.strip() or line.startswith("#"):
             continue
         parts = line.split("\t")
         if len(parts) != 2 or not parts[1].strip():
@@ -81,15 +90,24 @@ def cmd_load(args: argparse.Namespace) -> int:
             continue
 
         left, russian = parts[0].strip(), parts[1]
-        if left in by_short:
-            items.append((by_short[left], russian))
-        elif " " in left:
-            items.append((left, russian))   # прислали само предложение
+        token = left.lower()
+        if token in by_full:
+            items.append((by_full[token], russian))
+        elif token in by_short and len(by_short[token]) == 1:
+            items.append((by_full[next(iter(by_short[token]))], russian))
+        elif token in by_short:
+            bad += 1
+            print(f"  строка {number}: неоднозначный короткий ключ {left}; используйте полный ключ", file=sys.stderr)
+        elif " ".join(left.split()) in by_sentence:
+            items.append((by_sentence[" ".join(left.split())], russian))
         else:
             bad += 1
             print(f"  строка {number}: ключ {left} не найден в колоде",
                   file=sys.stderr)
 
+    if bad:
+        print("импорт отменён: переводы не изменены", file=sys.stderr)
+        return 1
     added, updated = store.save_many(items)
     print(f"добавлено: {added}, обновлено: {updated}, пропущено строк: {bad}")
     print(f"файл: {store.TSV_PATH}")

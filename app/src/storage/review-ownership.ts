@@ -7,6 +7,26 @@ export interface ReviewOwnerSnapshot {
   changes?: readonly { cardId: string; deckId: string }[];
 }
 
+/** Подтверждение из переносимого снимка, без догадок по локальным карточкам. */
+export function provesReviewOwner(
+  row: StoredReview,
+  snapshot: ReviewOwnerSnapshot,
+  allowSingleDeck: boolean,
+): boolean {
+  if (typeof row.deckId !== "string") return false;
+  return (
+    snapshot.cards.some(
+      (card) => card.id === row.cardId && card.deckId === row.deckId,
+    ) ||
+    [...snapshot.progress, ...(snapshot.changes ?? [])].some(
+      (claim) => claim.cardId === row.cardId && claim.deckId === row.deckId,
+    ) ||
+    (allowSingleDeck &&
+      snapshot.decks.length === 1 &&
+      snapshot.decks[0]!.id === row.deckId)
+  );
+}
+
 export async function unassignedReviewCount(db: AppDatabase): Promise<number> {
   return db.transaction(
     "r",

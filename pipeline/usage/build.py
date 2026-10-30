@@ -11,7 +11,8 @@ low`) показывается объяснение: когда так гово�
     python -m pipeline.usage.build show -n 5
 
 `todo` печатает всё, что нужно для написания заметки: подпись коллокации, весь
-набор партнёров, тип отношения и пример. Обратно ждём `<id> <TAB> <заметка>`.
+набор партнёров, тип отношения и пример. Обратно ждём
+`<id> <TAB> <хэш контекста> <TAB> <заметка>`.
 """
 
 from __future__ import annotations
@@ -44,7 +45,7 @@ def cmd_todo(args: argparse.Namespace) -> int:
     for card in batch:
         accept = ", ".join(card["accept"])
         lines.append(
-            f"{card['id']}\t{card['phrase']}\t[{card['relation']}]\t"
+            f"{card['id']}\t{store.context_key(card['accept'], card['text'], card['answer'])}\t{card['phrase']}\t[{card['relation']}]\t"
             f"варианты: {accept}\t{card['text'].replace('___', card['answer'])}"
         )
     text = "\n".join(lines)
@@ -66,25 +67,36 @@ def cmd_load(args: argparse.Namespace) -> int:
         return 1
 
     cards = cards_of(args.deck_id)
-    phrases = {card["id"]: card["phrase"] for card in cards}
+    by_id = {card["id"]: card for card in cards}
     items: list[tuple[str, str, str]] = []
+    contexts: dict[str, str] = {}
     bad = 0
     for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
         if not line.strip() or line.startswith("#"):
             continue
         parts = line.split("\t")
-        if len(parts) != 2 or not parts[1].strip():
+        if len(parts) != 3 or not parts[2].strip():
             bad += 1
-            print(f"  строка {number}: нет двух колонок", file=sys.stderr)
+            print(f"  строка {number}: нужны ID, хэш контекста и заметка; выгрузите новое todo", file=sys.stderr)
             continue
         card_id = parts[0].strip()
-        if card_id not in phrases:
+        if card_id not in by_id:
             bad += 1
             print(f"  строка {number}: {card_id} нет в колоде", file=sys.stderr)
             continue
-        items.append((card_id, phrases[card_id], parts[1]))
+        card = by_id[card_id]
+        context = parts[1].strip().lower()
+        if context != store.context_key(card["accept"], card["text"], card["answer"]) or card_id in contexts:
+            bad += 1
+            print(f"  строка {number}: устаревший контекст или повторный ID {card_id}; заметка не принята", file=sys.stderr)
+            continue
+        items.append((card_id, card["phrase"], parts[2]))
+        contexts[card_id] = context
 
-    added, updated = store.save_many(items, {c["id"]: store.context_key(c["accept"], c["text"], c["answer"]) for c in cards})
+    if bad:
+        print("импорт отменён: заметки не изменены", file=sys.stderr)
+        return 1
+    added, updated = store.save_many(items, contexts)
     print(f"добавлено: {added}, обновлено: {updated}, пропущено строк: {bad}")
     print(f"файл: {store.TSV_PATH}")
     return 1 if bad else 0

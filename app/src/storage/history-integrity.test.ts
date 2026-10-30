@@ -226,3 +226,78 @@ it("миграция v4 → v5 назначает только однознач�
   });
   expect((await snapshot(upgraded)).reviews).toHaveLength(2);
 });
+
+it("подлинная полная копия v3 уточняет владельца после миграции и восстанавливает прогресс", async () => {
+  const source = await database();
+  await importDeck(source, file("alpha", [x, y]));
+  await importDeck(source, file("beta", [other]));
+  await review(source);
+  const copy = await snapshot(source);
+  copy.formatVersion = 3;
+  copy.reviews = copy.reviews.map(({ deckId: _deckId, ...row }) => row);
+  const legacy = new Dexie("history-refinement");
+  legacy.version(4).stores({
+    decks: "id, importedAt",
+    cards: "id, deckId, position, headword, relation, band, cefr",
+    progress: "cardId, deckId, due, state, [deckId+due]",
+    reviews: "++id, &eventId, cardId, reviewedAt, [cardId+reviewedAt]",
+    settings: "key",
+    changes: "cardId, deckId",
+  });
+  await legacy.open();
+  await legacy.table("decks").bulkPut(copy.decks);
+  await legacy.table("cards").bulkPut(copy.cards);
+  await legacy.table("reviews").bulkPut(copy.reviews);
+  legacy.close();
+  const target = await database("history-refinement");
+  expect((await target.reviews.toArray())[0]!.deckId).toBeNull();
+  expect(await target.progress.count()).toBe(0);
+  await restoreBackup(target, copy, { mode: "merge" });
+  expect((await target.reviews.toArray())[0]!.deckId).toBe("alpha");
+  expect(await target.progress.get(x.id)).toEqual(copy.progress[0]);
+  await restoreBackup(target, copy, { mode: "merge" });
+  expect(await target.reviews.count()).toBe(1);
+});
+
+it("уточнение владельца не разрешает менять содержимое события", async () => {
+  const db = await database();
+  await importDeck(db, file("alpha"));
+  await review(db);
+  const copy = await snapshot(db);
+  await db.reviews.update(copy.reviews[0]!.id!, { deckId: null });
+  const before = await snapshot(db);
+  copy.reviews[0]!.cardId = y.id;
+  copy.reviews[0]!.undone = true;
+  await expect(restoreBackup(db, copy, { mode: "merge" })).rejects.toThrow(
+    "изменены данные",
+  );
+  expect(await snapshot(db)).toEqual(before);
+});
+
+it("одного заявления владельца без доказательств недостаточно для уточнения", async () => {
+  const db = await database();
+  await importDeck(db, file("alpha"));
+  await importDeck(db, file("beta", [other]));
+  await review(db);
+  const copy = await snapshot(db);
+  await db.reviews.update(copy.reviews[0]!.id!, { deckId: null });
+  await db.progress.clear();
+  await db.changes.clear();
+  copy.cards = [];
+  copy.progress = [];
+  copy.changes = [];
+  const result = await restoreBackup(db, copy, { mode: "merge" });
+  expect((await db.reviews.toArray())[0]!.deckId).toBeNull();
+  expect(result.unassignedReviews).toBe(1);
+});
+
+it("неизвестный владелец в копии не стирает уже известного локального владельца", async () => {
+  const db = await database();
+  await importDeck(db, file("alpha"));
+  await review(db);
+  const copy = await snapshot(db);
+  copy.reviews[0]!.deckId = null;
+  const result = await restoreBackup(db, copy, { mode: "merge" });
+  expect((await db.reviews.toArray())[0]!.deckId).toBe("alpha");
+  expect(result.unassignedReviews).toBe(0);
+});
