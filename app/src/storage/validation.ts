@@ -1,3 +1,5 @@
+import { validSchedule } from "../srs/validation";
+
 /** Проверки на границе JSON: TS-типы не проверяют файлы пользователя. */
 export function object(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -65,23 +67,9 @@ export function validCard(value: unknown): boolean {
 }
 
 export function validProgress(value: unknown): boolean {
-  if (!object(value)) return false;
+  if (!object(value) || !validSchedule(value)) return false;
   return (
-    text(value.cardId) &&
     text(value.deckId) &&
-    state(value.state) &&
-    date(value.due) &&
-    number(value.stability) &&
-    number(value.difficulty) &&
-    value.difficulty <= 10 &&
-    number(value.elapsedDays) &&
-    number(value.scheduledDays) &&
-    integer(value.reps) &&
-    integer(value.lapses) &&
-    value.lapses <= value.reps &&
-    (value.state === "new"
-      ? value.lastReview === null && value.reps === 0
-      : date(value.lastReview)) &&
     (value.suspended === undefined || typeof value.suspended === "boolean") &&
     (value.buriedUntil == null || date(value.buriedUntil))
   );
@@ -133,6 +121,9 @@ export function validStoredDeck(value: unknown): boolean {
     text(value.id) &&
     text(value.name) &&
     text(value.version) &&
+    (value.contentHash === undefined ||
+      (typeof value.contentHash === "string" &&
+        /^[0-9a-f]{64}$/.test(value.contentHash))) &&
     value.language === "en" &&
     value.cardType === "cloze" &&
     integer(value.count) &&

@@ -89,4 +89,16 @@ describe("сжатие копии", () => {
       gunzipIfNeeded(new Blob([new Uint8Array([0x1f, 0x8b, 0, 0])])),
     ).rejects.toThrow();
   });
+
+  it("сжатие не создаёт файл, который нельзя распаковать из-за лимита JSON", async () => {
+    await expect(
+      gzip("Я".repeat(500), { fileBytes: 10000, unpackedBytes: 999 }),
+    ).rejects.toThrow("Распакованная копия слишком большая");
+  });
+
+  it("сжатие учитывает предел размера самого файла", async () => {
+    await expect(
+      gzip("small", { fileBytes: 1, unpackedBytes: 100 }),
+    ).rejects.toThrow("Файл копии слишком большой");
+  });
 });

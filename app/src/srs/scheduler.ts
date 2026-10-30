@@ -23,6 +23,7 @@ import {
 } from "ts-fsrs";
 
 import type { CardProgress, CardState, Grade } from "./types";
+import { validSchedule } from "./validation";
 
 export interface SchedulerOptions {
   /**
@@ -125,15 +126,26 @@ export function createScheduler(options: SchedulerOptions = {}): Scheduler {
     grade: Grade,
     now: Date,
   ): ReviewOutcome {
+    if (!validSchedule(progress))
+      throw new Error("Некорректное состояние расписания карточки.");
     const { card } = engine.next(
       toFsrsCard(progress),
       now,
       GRADE_TO_RATING[grade],
     );
     const next = toProgress(progress.cardId, card);
+    const intervalDays = (card.due.getTime() - now.getTime()) / 86_400_000;
+    if (
+      !validSchedule(next) ||
+      !Number.isFinite(intervalDays) ||
+      intervalDays < 0
+    )
+      throw new Error(
+        "Планировщик вернул некорректное расписание; оценка не записана.",
+      );
     return {
       progress: next,
-      intervalDays: (card.due.getTime() - now.getTime()) / 86_400_000,
+      intervalDays,
     };
   }
 

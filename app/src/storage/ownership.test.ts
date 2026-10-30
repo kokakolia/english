@@ -133,11 +133,20 @@ it("удаление повреждённой старой колоды не с�
   // Воспроизводим результат старой ошибки без нового защищённого импортёра.
   await db.decks.put({ ...(await db.decks.get("full"))!, id: "subset" });
   await db.cards.update(shared.id, { deckId: "subset" });
-  const before = await copy(db);
+  const snapshot = () =>
+    Promise.all([
+      db.decks.toArray(),
+      db.cards.toArray(),
+      db.progress.toArray(),
+      db.reviews.toArray(),
+      db.changes.toArray(),
+    ]);
+  const before = await snapshot();
+  await expect(exportBackup(db)).rejects.toBeInstanceOf(BackupFormatError);
   await expect(removeDeck(db, "subset")).rejects.toBeInstanceOf(
     DeckOwnershipError,
   );
-  expect(await copy(db)).toEqual(before);
+  expect(await snapshot()).toEqual(before);
 });
 
 it("непересекающиеся колоды импортируются и удаляются независимо", async () => {

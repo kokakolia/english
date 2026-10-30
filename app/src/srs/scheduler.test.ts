@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { createScheduler, isDue } from "./scheduler";
 import type { CardProgress } from "./types";
+import { validSchedule } from "./validation";
 
 const scheduler = createScheduler({ enableFuzz: false });
 const START = new Date("2026-01-01T08:00:00Z");
@@ -33,6 +34,21 @@ describe("создание прогресса", () => {
 });
 
 describe("применение оценки", () => {
+  it("состояние review с нулевыми параметрами не попадает в FSRS", () => {
+    const invalid: CardProgress = {
+      ...scheduler.create("c_1", START),
+      state: "review",
+      reps: 1,
+      lastReview: START.toISOString(),
+    };
+    expect(validSchedule(invalid)).toBe(false);
+    expect(() => scheduler.review(invalid, "again", START)).toThrow(
+      "Некорректное состояние",
+    );
+    expect(() => scheduler.preview(invalid, START)).toThrow(
+      "Некорректное состояние",
+    );
+  });
   it("переводит новую карточку в изучение", () => {
     const { progress } = scheduler.review(
       scheduler.create("c_1", START),

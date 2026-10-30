@@ -23,6 +23,12 @@ import type {
 import type { SettingRow, ProgressChange } from "./db";
 import { withReviewIds } from "./review-id";
 import { assertAvailableOwners, assertOwners } from "./ownership";
+import { deckContentHash, legacyDeckVersion } from "./integrity";
+import {
+  BACKUP_LIMITS,
+  checkBackupJsonSize,
+  type BackupLimits,
+} from "./backup-limits";
 import {
   object,
   text,
@@ -100,7 +106,7 @@ export async function exportBackup(
           ]),
       );
 
-    return {
+    const backup: BackupFile = {
       format: BACKUP_FORMAT,
       formatVersion: BACKUP_FORMAT_VERSION,
       createdAt: (options.now ?? new Date()).toISOString(),
@@ -111,12 +117,43 @@ export async function exportBackup(
       settings: settings.filter((row) => row.key !== "backupFolder"),
       changes,
     };
+    // Проверяем исходную базу до JSON.stringify: NaN иначе превратится в null.
+    assertBackup(backup);
+    const hashes = await verifyDeckContents(backup);
+    backup.decks = backup.decks.map((deck) =>
+      hashes.has(deck.id)
+        ? { ...deck, contentHash: hashes.get(deck.id)! }
+        : deck,
+    );
+    return backup;
   } finally {
     release();
   }
 }
 
 export class BackupFormatError extends Error {}
+
+async function verifyDeckContents(
+  data: BackupFile,
+): Promise<Map<string, string>> {
+  const hashes = new Map<string, string>();
+  for (const deck of data.decks) {
+    const cards = data.cards.filter((card) => card.deckId === deck.id);
+    if (cards.length !== deck.count) continue; // Облегчённая копия без содержимого.
+    const hash = await deckContentHash(cards);
+    if (
+      (deck.contentHash !== undefined && deck.contentHash !== hash) ||
+      (/^[0-9a-f]{12}$/.test(deck.version) &&
+        hash.slice(0, 12) !== deck.version &&
+        (await legacyDeckVersion(cards)) !== deck.version)
+    )
+      throw new BackupFormatError(
+        `содержимое колоды «${deck.name}» не соответствует контрольной сумме`,
+      );
+    hashes.set(deck.id, hash);
+  }
+  return hashes;
+}
 
 function assertBackup(data: unknown): asserts data is BackupFile {
   if (typeof data !== "object" || data === null) {
@@ -248,6 +285,7 @@ export async function restoreBackup(
   const release = updateSafety.begin();
   try {
     assertBackup(data);
+    const hashes = await verifyDeckContents(data);
     const incomingReviews = withReviewIds(data.reviews);
     const mode = options.mode ?? "replace";
     const result: RestoreResult = {
@@ -293,20 +331,23 @@ export async function restoreBackup(
               (!installed ||
                 Date.parse(deck.builtAt) > Date.parse(existing.builtAt)))
           ) {
-            await db.decks.put(deck);
+            await db.decks.put(
+              hashes.has(deck.id)
+                ? { ...deck, contentHash: hashes.get(deck.id)! }
+                : deck,
+            );
             if (complete) {
               await db.cards.where("deckId").equals(deck.id).delete();
               await db.cards.bulkPut(cards);
               result.cards += cards.length;
             }
-          } else if (
-            existing.version === deck.version &&
-            complete &&
-            (await db.cards.where("deckId").equals(deck.id).count()) !==
-              deck.count
-          ) {
+          } else if (existing.version === deck.version && complete) {
             await db.cards.where("deckId").equals(deck.id).delete();
             await db.cards.bulkPut(cards);
+            await db.decks.put({
+              ...existing,
+              contentHash: hashes.get(deck.id)!,
+            });
             result.cards += cards.length;
           }
         }
@@ -381,8 +422,11 @@ export async function restoreBackup(
 export async function exportBackupJson(
   db: AppDatabase,
   options: ExportOptions = {},
+  limits: BackupLimits = BACKUP_LIMITS,
 ): Promise<string> {
-  return JSON.stringify(await exportBackup(db, options));
+  const json = JSON.stringify(await exportBackup(db, options));
+  checkBackupJsonSize(new Blob([json]).size, limits);
+  return json;
 }
 
 /** Имя файла с датой: копии складываются в папку и не перетирают друг друга. */

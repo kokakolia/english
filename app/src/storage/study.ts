@@ -26,6 +26,7 @@ import { buildQueue } from "../srs";
 import { loadCards } from "./decks";
 import { getStudySettings } from "./settings";
 import { assertAvailableOwners } from "./ownership";
+import { validProgress, validReview } from "./validation";
 
 /** Прогресс по карточкам колоды, готовый к передаче в очередь дня. */
 export async function loadProgress(
@@ -95,9 +96,22 @@ export async function recordReview(
             deckId: input.deckId,
           } as StoredProgress);
 
+        if (!validProgress(previous))
+          throw new Error(
+            "Некорректный прогресс карточки; оценка не записана.",
+          );
         const outcome = scheduler.review(previous, input.grade, now);
         stored = { ...outcome.progress, deckId: input.deckId };
         intervalDays = outcome.intervalDays;
+        if (
+          !validProgress(stored) ||
+          stored.cardId !== input.cardId ||
+          !Number.isFinite(intervalDays) ||
+          intervalDays < 0
+        )
+          throw new Error(
+            "Планировщик вернул некорректный прогресс; оценка не записана.",
+          );
 
         const entry: StoredReview = {
           eventId: crypto.randomUUID(),
@@ -114,6 +128,10 @@ export async function recordReview(
             : {}),
         };
 
+        if (!validReview(entry))
+          throw new Error(
+            "Некорректная запись повторения; оценка не записана.",
+          );
         await db.progress.put(stored);
         await markChanged(db, input.cardId, input.deckId, now);
         reviewId = await db.reviews.add(entry);

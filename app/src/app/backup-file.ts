@@ -17,6 +17,12 @@
  */
 
 import { getSetting, setSetting, type AppDatabase } from "../storage";
+import {
+  BACKUP_LIMITS,
+  checkBackupFileSize,
+  checkBackupJsonSize,
+  type BackupLimits,
+} from "../storage/backup-limits";
 
 const FOLDER_KEY = "backupFolder";
 
@@ -66,26 +72,27 @@ export function canSaveSilently(): boolean {
 }
 
 /** Сжимает текст в gzip. Копия из одного прогресса ужимается примерно втрое. */
-export async function gzip(text: string): Promise<Blob> {
-  const stream = new Blob([text])
-    .stream()
-    .pipeThrough(new CompressionStream("gzip"));
-  return new Response(stream).blob();
+export async function gzip(
+  text: string,
+  limits: BackupLimits = BACKUP_LIMITS,
+): Promise<Blob> {
+  const source = new Blob([text]);
+  checkBackupJsonSize(source.size, limits);
+  const stream = source.stream().pipeThrough(new CompressionStream("gzip"));
+  const packed = await new Response(stream).blob();
+  checkBackupFileSize(packed.size, limits);
+  return packed;
 }
 
 /** Ограничиваем и вход, и распакованный JSON до выделения большой строки. */
-export const BACKUP_LIMITS = {
-  fileBytes: 32 * 1024 * 1024,
-  unpackedBytes: 64 * 1024 * 1024,
-};
+export { BACKUP_LIMITS } from "../storage/backup-limits";
 
 /** Разжимает, если это gzip. Прерывает чтение при превышении лимита. */
 export async function gunzipIfNeeded(
   file: Blob,
   limits = BACKUP_LIMITS,
 ): Promise<string> {
-  if (file.size > limits.fileBytes)
-    throw new Error("Файл копии слишком большой (максимум 32 МиБ).");
+  checkBackupFileSize(file.size, limits);
   const head = new Uint8Array(await file.slice(0, 2).arrayBuffer());
   const stream =
     head[0] === 0x1f && head[1] === 0x8b
@@ -102,9 +109,7 @@ export async function gunzipIfNeeded(
       bytes += value.byteLength;
       if (bytes > limits.unpackedBytes) {
         await reader.cancel();
-        throw new Error(
-          "Распакованная копия слишком большая (максимум 64 МиБ).",
-        );
+        checkBackupJsonSize(bytes, limits);
       }
       parts.push(decoder.decode(value, { stream: true }));
     }
@@ -175,6 +180,7 @@ export async function saveBackupFile(
   name: string,
   data: Blob,
 ): Promise<SaveOutcome> {
+  checkBackupFileSize(data.size);
   const picker = (window as PickerWindow).showDirectoryPicker;
 
   if (picker !== undefined) {

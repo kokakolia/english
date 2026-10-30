@@ -26,6 +26,8 @@ export interface StoredDeck {
   name: string;
   /** Хэш содержимого из файла колоды: по нему видно, что она изменилась. */
   version: string;
+  /** SHA-256 содержимого; в старых базах и копиях поле отсутствует. */
+  contentHash?: string;
   language: string;
   cardType: string;
   count: number;

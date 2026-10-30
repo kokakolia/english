@@ -9,10 +9,50 @@
 from __future__ import annotations
 
 import requests
+from urllib.parse import unquote, urljoin, urlsplit
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
 BASE_URL = "https://ozdic.com"
+
+
+class SourceUrlError(ValueError):
+    """URL вне разрешённого HTTPS-источника или небезопасный redirect."""
+
+
+def validate_source_url(url: str) -> str:
+    try:
+        parsed = urlsplit(url)
+        allowed = (parsed.scheme == "https" and parsed.hostname == "ozdic.com"
+                   and parsed.port in (None, 443) and parsed.username is None
+                   and parsed.password is None and not parsed.fragment
+                   and not any(character.isspace() or ord(character) < 32 for character in url)
+                   and "\\" not in url and is_allowed(unquote(parsed.path)))
+    except (ValueError, TypeError) as exc:
+        raise SourceUrlError("неверный URL источника") from exc
+    if not allowed:
+        raise SourceUrlError(f"URL вне разрешённого источника: {url}")
+    return url
+
+
+def source_get(session: requests.Session, url: str, timeout: int = 60,
+               *, sitemap: bool = False) -> requests.Response:
+    """Проверяет каждый адрес ДО запроса, включая все перенаправления."""
+    for _ in range(6):
+        validate_source_url(url)
+        if sitemap:
+            path = urlsplit(url).path
+            if not path.startswith("/sitemap") or not path.endswith(".xml") or "%" in path or ".." in path:
+                raise SourceUrlError(f"ожидался sitemap XML: {url}")
+        response = session.get(url, timeout=timeout, allow_redirects=False)
+        if response.status_code not in (301, 302, 303, 307, 308):
+            return response
+        location = response.headers.get("Location")
+        response.close()
+        if not location:
+            raise SourceUrlError("redirect без адреса назначения")
+        url = urljoin(url, location)
+    raise SourceUrlError("слишком много перенаправлений источника")
 
 # Пути, закрытые в robots.txt — краулер в них не ходит.
 DISALLOWED_PREFIXES = ("/api/", "/preview", "/me", "/saved", "/search")

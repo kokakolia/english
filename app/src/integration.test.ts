@@ -16,6 +16,7 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import { buildQueue, createScheduler, createSession } from "./srs";
 import type { DeckCard } from "./srs";
+import { contentHash } from "./storage/integrity";
 import {
   AppDatabase,
   deckCounts,
@@ -166,6 +167,13 @@ describe("обновление колоды поверх выученного", 
           ? { ...card, translation: "исправленный перевод" }
           : card,
       ),
+    };
+    const hash = await contentHash(edited.cards);
+    edited.meta.version = hash.slice(0, 12);
+    edited.meta.chunks = ["cards-000.json"];
+    edited.meta.integrity = {
+      algorithm: "sha256-canonical-json-v1",
+      chunks: { "cards-000.json": hash },
     };
     const result = await importDeck(db, edited, { now: START });
 

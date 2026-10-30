@@ -12,6 +12,7 @@
 import { updateSafety } from "../app/update-safety";
 import { validCard, validDeckMeta, uniqueIds } from "./validation";
 import { assertAvailableOwners } from "./ownership";
+import { deckContentHash } from "./integrity";
 import type { DeckCard } from "../srs";
 import type { AppDatabase, StoredCard, StoredDeck } from "./db";
 
@@ -114,6 +115,9 @@ export async function importDeck(
     }
 
     const incoming = new Map(cards.map((card) => [card.id, card]));
+    const hash = await deckContentHash(cards);
+    if (meta.integrity && hash.slice(0, 12) !== meta.version)
+      throw new Error("содержимое колоды не соответствует её версии");
     const result: ImportResult = {
       deckId: meta.id,
       version: meta.version,
@@ -136,12 +140,12 @@ export async function importDeck(
           cards.map((card) => ({ cardId: card.id, deckId: meta.id })),
         );
         const existingDeck = await db.decks.get(meta.id);
+        const stored = await db.cards.where("deckId").equals(meta.id).toArray();
+        const existing = new Map(stored.map((card) => [card.id, card]));
         // Восстановленные метаданные без полного набора ещё не являются
         // установленной версией: доступная колода должна заполнить пробел.
         const installed =
-          existingDeck !== undefined &&
-          (await db.cards.where("deckId").equals(meta.id).count()) ===
-            existingDeck.count;
+          existingDeck !== undefined && stored.length === existingDeck.count;
         const older =
           installed &&
           existingDeck !== undefined &&
@@ -150,8 +154,15 @@ export async function importDeck(
         const same =
           installed &&
           existingDeck?.version === meta.version &&
-          (await db.cards.where("deckId").equals(meta.id).count()) ===
-            meta.count;
+          stored.length === meta.count &&
+          cards.every((card) => {
+            const previous = existing.get(card.id);
+            return (
+              previous !== undefined &&
+              validCard(previous) &&
+              sameContent(previous, card)
+            );
+          });
         if ((older && !options.allowDowngrade) || (same && !options.force)) {
           result.skipped = true;
           result.version = existingDeck!.version;
@@ -161,10 +172,10 @@ export async function importDeck(
               : "older-version"
             : "same-version";
           result.unchanged = existingDeck!.count;
+          if (same && existingDeck!.contentHash !== hash)
+            await db.decks.put({ ...existingDeck!, contentHash: hash });
           return;
         }
-        const stored = await db.cards.where("deckId").equals(meta.id).toArray();
-        const existing = new Map(stored.map((card) => [card.id, card]));
 
         const toWrite: StoredCard[] = [];
         for (const [id, card] of incoming) {
@@ -172,7 +183,7 @@ export async function importDeck(
           if (previous === undefined) {
             result.added += 1;
             toWrite.push({ ...card, deckId: meta.id });
-          } else if (sameContent(previous, card)) {
+          } else if (validCard(previous) && sameContent(previous, card)) {
             result.unchanged += 1;
           } else {
             result.updated += 1;
@@ -202,6 +213,7 @@ export async function importDeck(
           id: meta.id,
           name: meta.name,
           version: meta.version,
+          contentHash: hash,
           language: meta.language,
           cardType: meta.card_type,
           count: cards.length,

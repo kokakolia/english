@@ -7,6 +7,7 @@ import json
 import re
 from pathlib import Path
 from typing import Any
+from .payload import validate_expanded_payload
 
 # pipeline/data/ — всё сырьё лежит здесь и не коммитится (см. .gitignore).
 DATA_DIR = Path(__file__).resolve().parents[2] / "data"
@@ -51,6 +52,7 @@ def entry_path(slug: str) -> Path:
 
 def write_entry(slug: str, payload: dict[str, Any]) -> int:
     """Пишет распарсенную статью в gzip-JSON. Возвращает размер файла."""
+    validate_expanded_payload(payload)
     path = entry_path(slug)
     path.parent.mkdir(parents=True, exist_ok=True)
     blob = json.dumps(payload, ensure_ascii=False, separators=(",", ":")).encode("utf-8")

@@ -34,10 +34,67 @@ _WRAPPERS = frozenset(
 )
 
 _MAX_DEPTH = 100
+MAX_PAYLOAD_BYTES = 8 * 1024 * 1024
+MAX_EXPANDED_BYTES = 16 * 1024 * 1024
+MAX_EXPANDED_NODES = 200_000
 
 
 class PayloadError(RuntimeError):
     """Payload отсутствует или не разбирается."""
+
+
+def validate_expanded_payload(value: Any, *, max_bytes: int = MAX_EXPANDED_BYTES,
+                              max_nodes: int = MAX_EXPANDED_NODES) -> None:
+    """Считает будущий JSON без разворачивания общих поддеревьев.
+
+    Результат для общего объекта кешируется, но его вес учитывается при
+    КАЖДОМ вхождении: маленький DAG не должен стать экспоненциальным JSON.
+    """
+    memo: dict[int, tuple[int, int, int]] = {}
+    visiting: set[int] = set()
+
+    def check(size: int, nodes: int, depth: int) -> tuple[int, int, int]:
+        if size > max_bytes or nodes > max_nodes or depth > _MAX_DEPTH:
+            raise PayloadError("превышен лимит развёрнутого payload")
+        return size, nodes, depth
+
+    def literal(item: Any) -> int:
+        if item is not None and not isinstance(item, (str, int, float, bool)):
+            raise PayloadError("payload содержит невалидный тип JSON")
+        try:
+            return len(json.dumps(item, ensure_ascii=False, allow_nan=False).encode("utf-8"))
+        except (TypeError, ValueError, UnicodeError) as exc:
+            raise PayloadError("payload содержит невалидное значение JSON") from exc
+
+    def measure(item: Any, depth: int) -> tuple[int, int, int]:
+        if depth > _MAX_DEPTH:
+            raise PayloadError("слишком глубокий payload")
+        if not isinstance(item, (list, dict)):
+            return check(literal(item), 1, 0)
+        identity = id(item)
+        if identity in visiting:
+            raise PayloadError("циклический payload нельзя записать в JSON")
+        if identity in memo:
+            return memo[identity]
+        visiting.add(identity)
+        size, nodes, height = 2, 1, 1
+        children = item.items() if isinstance(item, dict) else enumerate(item)
+        for index, (key, child) in enumerate(children):
+            child_size, child_nodes, child_height = measure(child, depth + 1)
+            if isinstance(item, dict):
+                if not isinstance(key, str):
+                    raise PayloadError("ключ payload не является строкой")
+                size += literal(key) + 1
+                nodes += 1
+            size += child_size + (1 if index else 0)
+            nodes += child_nodes
+            height = max(height, child_height + 1)
+            check(size, nodes, height)
+        visiting.remove(identity)
+        memo[identity] = check(size, nodes, height)
+        return memo[identity]
+
+    measure(value, 0)
 
 
 def extract_flat_array(html: str) -> list[Any]:
@@ -45,6 +102,8 @@ def extract_flat_array(html: str) -> list[Any]:
     match = _PAYLOAD_RE.search(html)
     if match is None:
         raise PayloadError("на странице нет <script id=__NUXT_DATA__>")
+    if len(match.group(1).encode("utf-8")) > MAX_PAYLOAD_BYTES:
+        raise PayloadError("слишком большой исходный payload")
     try:
         arr = json.loads(match.group(1))
     except json.JSONDecodeError as exc:
@@ -107,7 +166,11 @@ def _resolve(arr: list[Any], idx: Any, cache: dict[int, Any],
 
 def resolve_payload(arr: list[Any]) -> Any:
     """Разворачивает плоский devalue-массив в обычную структуру."""
-    return _resolve(arr, 0, {}, frozenset(), 0)
+    if len(arr) > MAX_EXPANDED_NODES:
+        raise PayloadError("слишком много узлов исходного payload")
+    resolved = _resolve(arr, 0, {}, frozenset(), 0)
+    validate_expanded_payload(resolved)
+    return resolved
 
 
 def parse_page(html: str, slug: str) -> dict[str, Any]:

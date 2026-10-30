@@ -32,7 +32,7 @@ from urllib.parse import quote
 import requests
 
 from . import sitemap, storage
-from .http import BASE_URL, is_allowed, make_session
+from .http import BASE_URL, is_allowed, make_session, source_get, SourceUrlError
 from .payload import PayloadError, parse_page, summarize_entry
 
 # Средний вес страницы на проводе (brotli) — для оценки трафика перед запуском.
@@ -144,8 +144,8 @@ def fetch_one(
 
     limiter.wait()
     try:
-        response = session.get(f"{BASE_URL}{path}", timeout=timeout)
-    except requests.RequestException as exc:
+        response = source_get(session, f"{BASE_URL}{path}", timeout=timeout)
+    except (requests.RequestException, SourceUrlError) as exc:
         return Result(slug, "network_error", error=f"{type(exc).__name__}: {exc}"[:300])
 
     if response.status_code != 200:
@@ -162,15 +162,18 @@ def fetch_one(
         # Страница отдаётся для любого слова из сайтмапа, но статьи может не быть.
         return Result(slug, "no_entry", http_code=200, summary=summary)
 
-    stored = storage.write_entry(
-        slug,
-        {
-            "slug": slug,
-            "fetched_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-            "entry": entry,
-            "study_banks": parsed["study_banks"],
-        },
-    )
+    try:
+        stored = storage.write_entry(
+            slug,
+            {
+                "slug": slug,
+                "fetched_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                "entry": entry,
+                "study_banks": parsed["study_banks"],
+            },
+        )
+    except PayloadError as exc:
+        return Result(slug, "parse_error", http_code=200, error=str(exc)[:300])
     return Result(slug, "ok", http_code=200, summary=summary, bytes_stored=stored)
 
 

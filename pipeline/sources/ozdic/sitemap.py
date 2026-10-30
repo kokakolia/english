@@ -14,7 +14,7 @@ from urllib.parse import unquote, urlparse
 import requests
 
 from . import storage
-from .http import BASE_URL, make_session
+from .http import BASE_URL, make_session, source_get, validate_source_url
 
 SITEMAP_INDEX = f"{BASE_URL}/sitemap_index.xml"
 
@@ -23,9 +23,12 @@ _WORD_PATH_RE = re.compile(r"^/word/(.+)$")
 
 
 def _fetch_text(session: requests.Session, url: str, timeout: int = 60) -> str:
-    response = session.get(url, timeout=timeout)
-    response.raise_for_status()
-    return response.text
+    response = source_get(session, url, timeout, sitemap=True)
+    try:
+        response.raise_for_status()
+        return response.text
+    finally:
+        response.close()
 
 
 def fetch_word_slugs(
@@ -45,6 +48,7 @@ def fetch_word_slugs(
             shard_xml = _fetch_text(session, shard_url)
             found = 0
             for url in _LOC_RE.findall(shard_xml):
+                validate_source_url(url)
                 match = _WORD_PATH_RE.match(urlparse(url).path)
                 if match:
                     slug = unquote(match.group(1)).strip().strip("/")
