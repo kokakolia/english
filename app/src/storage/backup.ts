@@ -21,7 +21,8 @@ import type {
   StoredReview,
 } from "./db";
 import type { SettingRow, ProgressChange } from "./db";
-import { withReviewIds } from "./review-id";
+import { withReviewIds, sameReviewEvent } from "./review-id";
+import { withReviewOwners } from "./review-ownership";
 import { utcDeck, utcProgress, utcReview, utcChange } from "./dates";
 import { assertAvailableOwners, assertOwners } from "./ownership";
 import { deckContentHash, legacyDeckVersion } from "./integrity";
@@ -43,7 +44,7 @@ import {
 } from "./validation";
 
 export const BACKUP_FORMAT = "collocation-srs-backup";
-export const BACKUP_FORMAT_VERSION = 3;
+export const BACKUP_FORMAT_VERSION = 4;
 
 export interface BackupFile {
   format: typeof BACKUP_FORMAT;
@@ -63,15 +64,11 @@ function backupClaims(data: BackupFile) {
     ...data.progress,
     ...(data.changes ?? []),
   ];
-  // В старой облегчённой копии после сброса может остаться только журнал.
-  // При единственной колоде его владелец всё равно известен.
-  if (data.decks.length === 1)
-    rows.push(
-      ...data.reviews.map((row) => ({
-        cardId: row.cardId,
-        deckId: data.decks[0]!.id,
-      })),
-    );
+  rows.push(
+    ...withReviewOwners(data.reviews, data).flatMap((row) =>
+      row.deckId === null ? [] : [{ cardId: row.cardId, deckId: row.deckId }],
+    ),
+  );
   return rows;
 }
 
@@ -114,7 +111,12 @@ export async function exportBackup(
       decks,
       cards,
       progress,
-      reviews: withReviewIds(reviews),
+      reviews: withReviewOwners(withReviewIds(reviews), {
+        decks,
+        cards,
+        progress,
+        changes,
+      }),
       settings: settings.filter((row) => row.key !== "backupFolder"),
       changes,
     };
@@ -198,7 +200,15 @@ function assertBackup(data: unknown): asserts data is BackupFile {
       "id",
     ],
     ["progress", file.progress!, validProgress, "cardId"],
-    ["reviews", file.reviews!, validReview, null],
+    [
+      "reviews",
+      file.reviews!,
+      (row) =>
+        validReview(row) &&
+        (file.formatVersion! < 4 ||
+          (object(row) && (row.deckId === null || text(row.deckId)))),
+      null,
+    ],
     [
       "settings",
       file.settings!,
@@ -232,7 +242,7 @@ function assertBackup(data: unknown): asserts data is BackupFile {
   const identified = file.reviews!.filter((row) => row.eventId !== undefined);
   if (
     !uniqueIds(identified, "eventId") ||
-    (file.formatVersion === 3 && identified.length !== file.reviews!.length)
+    (file.formatVersion! >= 3 && identified.length !== file.reviews!.length)
   ) {
     throw new BackupFormatError("неверные идентификаторы событий журнала");
   }
@@ -243,6 +253,12 @@ function assertBackup(data: unknown): asserts data is BackupFile {
   ) {
     throw new BackupFormatError("запись ссылается на неизвестную колоду");
   }
+  if (
+    file.reviews!.some(
+      (row) => typeof row.deckId === "string" && !deckIds.has(row.deckId),
+    )
+  )
+    throw new BackupFormatError("повторение ссылается на неизвестную колоду");
   for (const deck of file.decks!) {
     const count = file.cards!.filter((card) => card.deckId === deck.id).length;
     if (count !== 0 && count !== deck.count)
@@ -267,6 +283,8 @@ export interface RestoreResult {
   settings: number;
   /** Записей журнала, уже бывших в базе и потому пропущенных. */
   duplicateReviews: number;
+  /** Сохранены отдельно и не расходуют лимиты какой-либо колоды. */
+  unassignedReviews: number;
 }
 
 export interface RestoreOptions {
@@ -295,7 +313,11 @@ export async function restoreBackup(
     };
     const hashes = await verifyDeckContents(data);
     // Старые ID вычисляются по исходным полям, как в миграции v3; сами даты канонизируются.
-    const incomingReviews = withReviewIds(input.reviews).map(utcReview);
+    const incomingReviews = withReviewOwners(
+      withReviewIds(input.reviews).map(utcReview),
+      data,
+    );
+    data.reviews = incomingReviews;
     const mode = options.mode ?? "replace";
     const result: RestoreResult = {
       mode,
@@ -305,6 +327,8 @@ export async function restoreBackup(
       reviews: data.reviews.length,
       settings: data.settings.length,
       duplicateReviews: 0,
+      unassignedReviews: incomingReviews.filter((row) => row.deckId === null)
+        .length,
     };
 
     await db.transaction(
@@ -430,6 +454,10 @@ export async function restoreBackup(
             .equals(entry.eventId)
             .first();
           if (existing !== undefined) {
+            if (!sameReviewEvent(existing, entry))
+              throw new BackupFormatError(
+                "В копии изменены данные существующего повторения; восстановление отменено.",
+              );
             if (entry.undone && existing.id !== undefined)
               await db.reviews.update(existing.id, { undone: true });
             result.duplicateReviews += 1;

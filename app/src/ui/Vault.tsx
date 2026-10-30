@@ -37,7 +37,12 @@ import {
   storageAtRisk,
   type StorageStatus,
 } from "../app/persistence";
-import { backupFileName, exportBackupJson, type AppDatabase } from "../storage";
+import {
+  backupFileName,
+  exportBackupJson,
+  unassignedReviewCount,
+  type AppDatabase,
+} from "../storage";
 import type { ThemeChoice } from "../app/theme";
 import { Dropdown } from "./Dropdown";
 import { BackupRestore, type BeginStorageOperation } from "./BackupRestore";
@@ -85,10 +90,29 @@ export function Vault({
   const [busy, setBusy] = useState(false);
   const [note, setNote] = useState<Note>({ kind: "none" });
   const [folder, setFolder] = useState<string | null>(null);
+  const [unassigned, setUnassigned] = useState(0);
 
   useEffect(() => {
-    void savedFolderName(db).then(setFolder);
-  }, [db]);
+    if (storageBusy) return;
+    let current = true;
+    void Promise.all([savedFolderName(db), unassignedReviewCount(db)])
+      .then(([name, count]) => {
+        if (current) {
+          setFolder(name);
+          setUnassigned(count);
+        }
+      })
+      .catch((cause) => {
+        if (current)
+          setNote({
+            kind: "error",
+            message: `не удалось прочитать хранилище: ${String(cause)}`,
+          });
+      });
+    return () => {
+      current = false;
+    };
+  }, [db, storageBusy]);
 
   async function save() {
     const release = beginOperation();
@@ -203,6 +227,12 @@ export function Vault({
           </button>
 
           <StorageNote storage={storage} />
+          {unassigned > 0 && (
+            <p className="menu-foot" role="status">
+              Старых записей без определённой колоды: {unassigned}. Они
+              сохранены в копиях и не расходуют дневные лимиты.
+            </p>
+          )}
           <NoteLine note={note} />
           <BuildStamp />
         </>

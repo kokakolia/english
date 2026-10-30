@@ -19,6 +19,7 @@ import Dexie, { type Table } from "dexie";
 
 import type { CardProgress, DeckCard, ReviewEntry } from "../srs";
 import { withReviewIds } from "./review-id";
+import { withReviewOwners } from "./review-ownership";
 import { utcDeck, utcProgress, utcReview, utcChange } from "./dates";
 
 /** Метаданные импортированной колоды. */
@@ -107,6 +108,23 @@ export class AppDatabase extends Dexie {
             Object.assign(row, normalize(row));
           });
         }
+      });
+    this.version(5)
+      .stores({
+        reviews:
+          "++id, &eventId, deckId, cardId, reviewedAt, [cardId+reviewedAt]",
+      })
+      .upgrade(async (transaction) => {
+        const [decks, progress, changes, reviews] = await Promise.all([
+          transaction.table("decks").toArray(),
+          transaction.table("progress").toArray(),
+          transaction.table("changes").toArray(),
+          transaction.table("reviews").toArray(),
+        ]);
+        await transaction.table("reviews").bulkPut(
+          // Одна современная карточка не доказывает владельца старого журнала.
+          withReviewOwners(reviews, { decks, cards: [], progress, changes }),
+        );
       });
   }
 }

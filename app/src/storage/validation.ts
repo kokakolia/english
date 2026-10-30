@@ -80,6 +80,9 @@ export function validReview(value: unknown): boolean {
   return (
     text(value.cardId) &&
     date(value.reviewedAt) &&
+    (value.deckId === undefined ||
+      value.deckId === null ||
+      text(value.deckId)) &&
     member(value.grade, ["again", "hard", "good", "easy"]) &&
     state(value.stateBefore) &&
     number(value.elapsedDays) &&

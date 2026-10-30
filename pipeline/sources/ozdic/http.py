@@ -9,11 +9,35 @@
 from __future__ import annotations
 
 import requests
+import math
+import time
+from email.utils import parsedate_to_datetime
 from urllib.parse import unquote, urljoin, urlsplit
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
 BASE_URL = "https://ozdic.com"
+MAX_RESPONSE_BYTES = 16 * 1024 * 1024
+
+
+class ResponseLimitError(ValueError):
+    """Ответ целиком превышает разрешённый распакованный объём."""
+
+
+def read_source_text(response: requests.Response, max_bytes: int = MAX_RESPONSE_BYTES) -> str:
+    """iter_content отдаёт распакованные байты; .text/.content до лимита не читаем."""
+    body = bytearray()
+    try:
+        for chunk in response.iter_content(chunk_size=64 * 1024, decode_unicode=False):
+            if len(body) + len(chunk) > max_bytes:
+                raise ResponseLimitError("превышен размер HTTP-ответа источника")
+            body.extend(chunk)
+        try:
+            return body.decode(response.encoding or "utf-8", errors="replace")
+        except LookupError as exc:
+            raise ResponseLimitError("неизвестная кодировка HTTP-ответа") from exc
+    finally:
+        response.close()
 
 
 class SourceUrlError(ValueError):
@@ -44,7 +68,25 @@ def source_get(session: requests.Session, url: str, timeout: int = 60,
             path = urlsplit(url).path
             if not path.startswith("/sitemap") or not path.endswith(".xml") or "%" in path or ".." in path:
                 raise SourceUrlError(f"ожидался sitemap XML: {url}")
-        response = session.get(url, timeout=timeout, allow_redirects=False)
+        retries = getattr(session, "_source_status_retries", 0)
+        retries = retries if isinstance(retries, int) else 0
+        for attempt in range(retries + 1):
+            response = session.get(url, timeout=timeout, allow_redirects=False, stream=True)
+            if response.status_code not in (429, 500, 502, 503, 504) or attempt == retries:
+                break
+            # urllib3 автоматически дочитывает тело перед повтором. Закрываем
+            # поток сами, чтобы большой ответ 503 тоже не попал в память.
+            retry_after = response.headers.get("Retry-After")
+            response.close()
+            delay = float(getattr(session, "_source_backoff", 1.5)) * (2 ** attempt)
+            if retry_after:
+                try:
+                    seconds = float(retry_after) if retry_after.isdigit() else parsedate_to_datetime(retry_after).timestamp() - time.time()
+                    if math.isfinite(seconds):
+                        delay = max(delay, seconds)
+                except (ValueError, TypeError, OverflowError):
+                    pass
+            time.sleep(min(60, max(0, delay)))
         if response.status_code not in (301, 302, 303, 307, 308):
             return response
         location = response.headers.get("Location")
@@ -88,7 +130,7 @@ def make_session(total_retries: int = 3, backoff: float = 1.5) -> requests.Sessi
         total=total_retries,
         connect=total_retries,
         read=total_retries,
-        status=total_retries,
+        status=0,
         backoff_factor=backoff,
         status_forcelist=(429, 500, 502, 503, 504),
         allowed_methods=frozenset({"GET"}),
@@ -98,6 +140,8 @@ def make_session(total_retries: int = 3, backoff: float = 1.5) -> requests.Sessi
     adapter = HTTPAdapter(max_retries=retry, pool_connections=8, pool_maxsize=8)
 
     session = requests.Session()
+    session._source_status_retries = total_retries
+    session._source_backoff = backoff
     session.mount("https://", adapter)
     session.mount("http://", adapter)
     session.headers.update(

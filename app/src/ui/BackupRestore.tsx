@@ -98,6 +98,8 @@ export function BackupRestore({
           {result.duplicateReviews > 0 &&
             ` (${result.duplicateReviews} уже были)`}
           .
+          {result.unassignedReviews > 0 &&
+            ` Старых записей без определённой колоды: ${result.unassignedReviews}. Они сохранены, но не учитываются в дневных лимитах.`}
         </p>
       )}
     </>

@@ -115,6 +115,7 @@ export async function recordReview(
 
         const entry: StoredReview = {
           eventId: crypto.randomUUID(),
+          deckId: input.deckId,
           cardId: input.cardId,
           reviewedAt: now.toISOString(),
           grade: input.grade,
@@ -183,6 +184,11 @@ export async function undoReview(
           input.previous?.deckId ?? current?.deckId ?? change?.deckId;
         if (deckId === undefined)
           throw new Error("колода отменяемой карточки неизвестна");
+        const entry = await db.reviews.get(input.reviewId);
+        if (!entry || entry.cardId !== input.cardId || entry.deckId !== deckId)
+          throw new Error(
+            "запись повторения не принадлежит отменяемой карточке",
+          );
         await assertAvailableOwners(db, [{ cardId: input.cardId, deckId }]);
         await markChanged(db, input.cardId, deckId, input.now ?? new Date());
         if (input.previous === null) {
@@ -235,7 +241,7 @@ export async function studiedToday(
   const fresh = new Set<string>();
   const review = new Set<string>();
   for (const row of rows) {
-    if (row.undone || !ids.has(row.cardId)) continue;
+    if (row.undone || row.deckId !== deckId || !ids.has(row.cardId)) continue;
     if (row.stateBefore === "new") fresh.add(row.cardId);
     if (row.stateBefore === "review") review.add(row.cardId);
   }
@@ -290,7 +296,9 @@ export async function cardHistory(
   db: AppDatabase,
   cardId: string,
 ): Promise<StoredReview[]> {
-  const rows = await db.reviews.where("cardId").equals(cardId).toArray();
+  const rows = (
+    await db.reviews.where("cardId").equals(cardId).toArray()
+  ).filter((row) => typeof row.deckId === "string");
   rows.sort((left, right) => left.reviewedAt.localeCompare(right.reviewedAt));
   return rows;
 }
@@ -314,17 +322,24 @@ export async function resetCard(
   const release = updateSafety.begin();
   try {
     let before: PreviousProgress = null;
-    await db.transaction("rw", db.progress, db.changes, db.cards, async () => {
-      before = (await db.progress.get(cardId)) ?? null;
-      const deckId =
-        before?.deckId ??
-        (await db.cards.get(cardId))?.deckId ??
-        (await db.changes.get(cardId))?.deckId;
-      if (deckId === undefined) throw new Error("карточка не найдена");
-      await assertAvailableOwners(db, [{ cardId, deckId }]);
-      await markChanged(db, cardId, deckId, now);
-      await db.progress.delete(cardId);
-    });
+    await db.transaction(
+      "rw",
+      db.progress,
+      db.changes,
+      db.cards,
+      db.reviews,
+      async () => {
+        before = (await db.progress.get(cardId)) ?? null;
+        const deckId =
+          before?.deckId ??
+          (await db.cards.get(cardId))?.deckId ??
+          (await db.changes.get(cardId))?.deckId;
+        if (deckId === undefined) throw new Error("карточка не найдена");
+        await assertAvailableOwners(db, [{ cardId, deckId }]);
+        await markChanged(db, cardId, deckId, now);
+        await db.progress.delete(cardId);
+      },
+    );
     return before;
   } finally {
     release();
@@ -394,7 +409,7 @@ async function writeFlag(
 
     await db.transaction(
       "rw",
-      [db.progress, db.changes, db.cards],
+      [db.progress, db.changes, db.cards, db.reviews],
       async () => {
         await assertAvailableOwners(db, [
           { cardId: input.cardId, deckId: input.deckId },
@@ -431,18 +446,25 @@ export async function restoreProgress(
 ): Promise<void> {
   const release = updateSafety.begin();
   try {
-    await db.transaction("rw", db.progress, db.changes, db.cards, async () => {
-      const deckId =
-        previous?.deckId ??
-        (await db.progress.get(cardId))?.deckId ??
-        (await db.cards.get(cardId))?.deckId ??
-        (await db.changes.get(cardId))?.deckId;
-      if (deckId === undefined) throw new Error("карточка не найдена");
-      await assertAvailableOwners(db, [{ cardId, deckId }]);
-      await markChanged(db, cardId, deckId, now);
-      if (previous === null) await db.progress.delete(cardId);
-      else await db.progress.put(previous);
-    });
+    await db.transaction(
+      "rw",
+      db.progress,
+      db.changes,
+      db.cards,
+      db.reviews,
+      async () => {
+        const deckId =
+          previous?.deckId ??
+          (await db.progress.get(cardId))?.deckId ??
+          (await db.cards.get(cardId))?.deckId ??
+          (await db.changes.get(cardId))?.deckId;
+        if (deckId === undefined) throw new Error("карточка не найдена");
+        await assertAvailableOwners(db, [{ cardId, deckId }]);
+        await markChanged(db, cardId, deckId, now);
+        if (previous === null) await db.progress.delete(cardId);
+        else await db.progress.put(previous);
+      },
+    );
   } finally {
     release();
   }

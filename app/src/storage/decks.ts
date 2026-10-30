@@ -134,7 +134,7 @@ export async function importDeck(
     // наполовину обновлённой.
     await db.transaction(
       "rw",
-      [db.decks, db.cards, db.progress, db.changes],
+      [db.decks, db.cards, db.progress, db.changes, db.reviews],
       async () => {
         await assertAvailableOwners(
           db,
@@ -274,11 +274,16 @@ export async function removeDeck(
       "rw",
       [db.decks, db.cards, db.progress, db.reviews, db.changes],
       async () => {
+        const history = await db.reviews
+          .where("deckId")
+          .equals(deckId)
+          .toArray();
         const ids = [
           ...new Set([
             ...(await db.cards.where("deckId").equals(deckId).primaryKeys()),
             ...(await db.progress.where("deckId").equals(deckId).primaryKeys()),
             ...(await db.changes.where("deckId").equals(deckId).primaryKeys()),
+            ...history.map((row) => row.cardId),
           ]),
         ] as string[];
         // Проверяем и старые повреждённые базы: удаление не должно стереть
@@ -290,9 +295,7 @@ export async function removeDeck(
         await db.changes.where("deckId").equals(deckId).delete();
         await db.cards.where("deckId").equals(deckId).delete();
         await db.progress.where("deckId").equals(deckId).delete();
-        if (ids.length > 0) {
-          await db.reviews.where("cardId").anyOf(ids).delete();
-        }
+        await db.reviews.where("deckId").equals(deckId).delete();
         await db.decks.delete(deckId);
       },
     );

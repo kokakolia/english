@@ -32,7 +32,7 @@ from urllib.parse import quote
 import requests
 
 from . import sitemap, storage
-from .http import BASE_URL, is_allowed, make_session, source_get, SourceUrlError
+from .http import BASE_URL, is_allowed, make_session, source_get, SourceUrlError, ResponseLimitError, read_source_text
 from .payload import PayloadError, parse_page, summarize_entry
 
 # Средний вес страницы на проводе (brotli) — для оценки трафика перед запуском.
@@ -116,8 +116,8 @@ def open_db() -> sqlite3.Connection:
                        n_clusters=?, n_examples=?, freq_pct=?, sources=?, bytes_stored=? WHERE slug=?""",
                     (cached.get("fetched_at"), 1, int(summary["has_collocations"]),
                      summary["n_clusters"], summary["n_examples"], summary["freq_pct"],
-                     summary["sources"], storage.entry_path(slug).stat().st_size, slug))
-            except (OSError, ValueError, UnicodeError):
+                     summary["sources"], storage.existing_entry_path(slug).stat().st_size, slug))
+            except (OSError, ValueError, UnicodeError, PayloadError):
                 continue
     conn.commit()
     return conn
@@ -178,15 +178,20 @@ def fetch_one(
         return Result(slug, "network_error", error=f"{type(exc).__name__}: {exc}"[:300])
 
     if response.status_code != 200:
+        response.close()
         return Result(slug, "http_error", http_code=response.status_code)
 
     try:
-        parsed = parse_page(response.text, slug)
-    except PayloadError as exc:
+        text = read_source_text(response)
+    except (requests.RequestException, ResponseLimitError) as exc:
+        return Result(slug, "network_error", http_code=200, error=str(exc)[:300])
+    try:
+        parsed = parse_page(text, slug)
+        entry = parsed["entry"]
+        summary = summarize_entry(entry)
+    except (PayloadError, ValueError, TypeError, IndexError, RecursionError, OverflowError) as exc:
         return Result(slug, "parse_error", http_code=200, error=str(exc)[:300])
 
-    entry = parsed["entry"]
-    summary = summarize_entry(entry)
     if entry is None:
         # Страница отдаётся для любого слова из сайтмапа, но статьи может не быть.
         return Result(slug, "no_entry", http_code=200, summary=summary)

@@ -12,6 +12,7 @@
 from __future__ import annotations
 
 import json
+import math
 import re
 from typing import Any
 
@@ -188,8 +189,8 @@ def parse_page(html: str, slug: str) -> dict[str, Any]:
         raise PayloadError("в payload нет объекта data")
 
     entry = data.get(f"word-{slug}")
-    if not isinstance(entry, dict):
-        entry = None
+    if entry is not None and not isinstance(entry, dict):
+        raise PayloadError("словарная статья не является объектом")
 
     study_banks = {
         key: value
@@ -199,8 +200,50 @@ def parse_page(html: str, slug: str) -> dict[str, Any]:
     return {"entry": entry, "study_banks": study_banks}
 
 
+def validate_entry(entry: dict[str, Any] | None) -> None:
+    if entry is None:
+        return
+    if not isinstance(entry, dict):
+        raise PayloadError("словарная статья не является объектом")
+
+    def optional_text(row: dict, key: str, path: str) -> None:
+        if row.get(key) is not None and not isinstance(row[key], str):
+            raise PayloadError(f"{path}.{key} должен быть строкой")
+
+    def objects(row: dict, key: str, path: str) -> list[dict]:
+        value = row.get(key)
+        if value is None:
+            return []
+        if not isinstance(value, list) or any(not isinstance(item, dict) for item in value):
+            raise PayloadError(f"{path}.{key} должен быть списком объектов")
+        return value
+
+    optional_text(entry, "word", "entry")
+    freq = entry.get("freq")
+    if freq is not None:
+        if not isinstance(freq, dict):
+            raise PayloadError("entry.freq должен быть объектом")
+        pct = freq.get("pct")
+        if pct is not None and (isinstance(pct, bool) or not isinstance(pct, (int, float))
+                                or not math.isfinite(pct) or not 0 <= pct <= 100):
+            raise PayloadError("entry.freq.pct должен быть числом от 0 до 100")
+    sources = entry.get("sources")
+    if sources is not None and (not isinstance(sources, list) or any(not isinstance(source, str) for source in sources)):
+        raise PayloadError("entry.sources должен быть списком строк")
+    for block in objects(entry, "collocations", "entry"):
+        optional_text(block, "gloss", "collocations")
+        for group in objects(block, "groups", "collocations"):
+            optional_text(group, "cat", "groups")
+            for cluster in objects(group, "clusters", "groups"):
+                optional_text(cluster, "example", "clusters")
+                words = cluster.get("words")
+                if words is not None and (not isinstance(words, list) or any(not isinstance(word, str) for word in words)):
+                    raise PayloadError("clusters.words должен быть списком строк")
+
+
 def summarize_entry(entry: dict[str, Any] | None) -> dict[str, Any]:
     """Короткая сводка по статье — для таблицы состояния краулера."""
+    validate_entry(entry)
     summary = {
         "has_entry": entry is not None,
         "has_collocations": False,

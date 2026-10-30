@@ -1,5 +1,26 @@
 import type { ReviewEntry } from "../srs/types";
 
+/** Только неизменяемые поля события; локальный id и пометка отмены сюда не входят. */
+export function sameReviewEvent(
+  left: ReviewEntry,
+  right: ReviewEntry,
+): boolean {
+  const key = (row: ReviewEntry) =>
+    JSON.stringify([
+      row.deckId ?? null,
+      row.cardId,
+      Date.parse(row.reviewedAt),
+      row.grade,
+      row.stateBefore,
+      row.elapsedDays,
+      row.scheduledDays,
+      row.typed ?? null,
+      row.verdict ?? null,
+      row.durationMs ?? null,
+    ]);
+  return key(left) === key(right);
+}
+
 /** Старые копии получают воспроизводимые ID без локального номера строки.
  * Пометка отмены не меняет идентичность события. Полностью одинаковые
  * старые события различаются порядковым номером внутри группы.

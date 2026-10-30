@@ -11,6 +11,7 @@ from . import crawl, http, payload, sitemap, storage
 
 def response(text="", status=200, location=None):
     return SimpleNamespace(text=text, status_code=status,
+                           iter_content=Mock(side_effect=lambda **kwargs: iter([text.encode("utf-8")])), encoding="utf-8",
                            headers={"Location": location} if location else {},
                            raise_for_status=Mock(), close=Mock())
 
@@ -39,7 +40,7 @@ class SourceRequestsTest(unittest.TestCase):
         session.get.return_value = response('<loc>http://127.0.0.1:8080/private</loc>')
         with self.assertRaises(http.SourceUrlError):
             sitemap.fetch_word_slugs(session, delay=0)
-        session.get.assert_called_once_with(sitemap.SITEMAP_INDEX, timeout=60, allow_redirects=False)
+        session.get.assert_called_once_with(sitemap.SITEMAP_INDEX, timeout=60, allow_redirects=False, stream=True)
 
     def test_redirects_are_checked_before_following(self):
         for destination in ("http://127.0.0.1:8080/private", "https://evil.test/sitemap.xml",
@@ -120,7 +121,7 @@ class PayloadBudgetTest(unittest.TestCase):
 
     def test_storage_guard_preserves_existing_entry_and_prevents_serialization(self):
         with tempfile.TemporaryDirectory() as directory, patch.object(storage, "ENTRIES_DIR", Path(directory)):
-            original = {"entry": {"word": "test"}}
+            original = {"slug": "test", "entry": {"word": "test"}}
             storage.write_entry("test", original)
             path = storage.entry_path("test")
             before = path.read_bytes()

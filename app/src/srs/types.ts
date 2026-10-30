@@ -88,6 +88,8 @@ export interface CardProgress {
 export interface ReviewEntry {
   /** Постоянный идентификатор события; у старых копий назначается при импорте. */
   eventId?: string;
+  /** Владелец события. null — старый журнал без однозначной принадлежности. */
+  deckId?: string | null;
   cardId: string;
   reviewedAt: string;
   grade: Grade;

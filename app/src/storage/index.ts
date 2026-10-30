@@ -90,3 +90,4 @@ export {
 } from "./loader";
 
 export { DeckOwnershipError } from "./ownership";
+export { unassignedReviewCount } from "./review-ownership";

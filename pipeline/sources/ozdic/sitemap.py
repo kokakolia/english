@@ -14,7 +14,7 @@ from urllib.parse import unquote, urlparse
 import requests
 
 from . import storage
-from .http import BASE_URL, make_session, source_get, validate_source_url
+from .http import BASE_URL, make_session, source_get, validate_source_url, read_source_text
 
 SITEMAP_INDEX = f"{BASE_URL}/sitemap_index.xml"
 
@@ -26,7 +26,7 @@ def _fetch_text(session: requests.Session, url: str, timeout: int = 60) -> str:
     response = source_get(session, url, timeout, sitemap=True)
     try:
         response.raise_for_status()
-        return response.text
+        return read_source_text(response)
     finally:
         response.close()
 

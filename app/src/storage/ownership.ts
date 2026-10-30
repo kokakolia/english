@@ -18,7 +18,7 @@ export function assertOwners(rows: OwnedCard[]): void {
   }
 }
 
-/** Вызывать внутри транзакции с cards, progress и changes. */
+/** Вызывать внутри транзакции с cards, progress, changes и reviews. */
 export async function assertAvailableOwners(
   db: AppDatabase,
   incoming: OwnedCard[],
@@ -29,6 +29,15 @@ export async function assertAvailableOwners(
     db.progress.bulkGet(ids),
     db.changes.bulkGet(ids),
   ]);
+  // Обычно владелец уже закреплён карточкой/прогрессом/действием. У старой
+  // сироты может оставаться только журнал — он тоже сохраняет владельца.
+  const orphans = ids.filter(
+    (_, index) => !cards[index] && !progress[index] && !changes[index],
+  );
+  const history =
+    orphans.length > 0
+      ? await db.reviews.where("cardId").anyOf(orphans).toArray()
+      : [];
   assertOwners([
     ...incoming,
     ...cards.flatMap((row) =>
@@ -36,5 +45,10 @@ export async function assertAvailableOwners(
     ),
     ...progress.flatMap((row) => (row ? [row] : [])),
     ...changes.flatMap((row) => (row ? [row] : [])),
+    ...history.flatMap((row) =>
+      typeof row.deckId === "string"
+        ? [{ cardId: row.cardId, deckId: row.deckId }]
+        : [],
+    ),
   ]);
 }
