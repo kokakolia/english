@@ -26,6 +26,8 @@ import {
   deckCounts,
   getStudySettings,
   getDatabase,
+  getSetting,
+  setSetting,
   listUsableDecks,
   type AppDatabase,
   type DeckCounts,
@@ -68,6 +70,7 @@ export function App() {
   const [stage, setStage] = useState<Stage>({ kind: "loading" });
   const [db, setDb] = useState<AppDatabase | null>(null);
   const [deck, setDeck] = useState<StoredDeck | null>(null);
+  const [decks, setDecks] = useState<StoredDeck[]>([]);
   const [offline, setOffline] = useState(false);
   const [controller, setController] = useState<StudyController | null>(null);
   const [state, setState] = useState<StudyState | null>(null);
@@ -77,6 +80,7 @@ export function App() {
   const [loadAttempt, setLoadAttempt] = useState(0);
   const [storageBusy, setStorageBusy] = useState(false);
   const operationBusy = useRef(false);
+  const dayGeneration = useRef(0);
   const currentStage = useRef(stage.kind);
   currentStage.current = stage.kind;
 
@@ -94,6 +98,7 @@ export function App() {
     )
       return null;
     operationBusy.current = true;
+    dayGeneration.current++;
     updateSafety.setSafe(false);
     const releaseUpdate = updateSafety.begin();
     setStorageBusy(true);
@@ -149,8 +154,12 @@ export function App() {
     if (stage.kind !== "day" || db === null || deck === null || storageBusy)
       return;
     let current = true;
+    const generation = dayGeneration.current;
     const isCurrent = () =>
-      current && currentStage.current === "day" && !operationBusy.current;
+      current &&
+      generation === dayGeneration.current &&
+      currentStage.current === "day" &&
+      !operationBusy.current;
     const stop = watchDay(
       () => showDay(db, deck.id, isCurrent),
       (cause) => {
@@ -169,6 +178,7 @@ export function App() {
 
   useEffect(() => {
     let cancelled = false;
+    const startup = new AbortController();
     setStage({ kind: "loading" });
     setController(null);
     setState(null);
@@ -177,12 +187,20 @@ export function App() {
         // Разрешение спрашивается до открытия колоды: если браузер откажет,
         // человек увидит это на первом же экране, а не после месяца занятий.
         const status = await ensurePersistentStorage();
-        const result = await bootstrap();
+        const result = await bootstrap(undefined, { signal: startup.signal });
         if (cancelled) return;
         setStorage(status);
         setDb(result.db);
 
-        const first = result.decks[0];
+        const preferred = await getSetting<string | null>(
+          result.db,
+          "selectedDeck",
+          null,
+        );
+        if (cancelled) return;
+        setDecks(result.decks);
+        const first =
+          result.decks.find((item) => item.id === preferred) ?? result.decks[0];
         if (first === undefined) {
           setStage({
             kind: "error",
@@ -203,6 +221,7 @@ export function App() {
     })();
     return () => {
       cancelled = true;
+      startup.abort();
     };
   }, [showDay, loadAttempt]);
 
@@ -223,6 +242,7 @@ export function App() {
     )
       return;
     updateSafety.setSafe(false);
+    dayGeneration.current++;
     currentStage.current = "study";
     setStage({ kind: "study" });
     try {
@@ -248,9 +268,30 @@ export function App() {
     }
   }
 
+  async function selectDeck(deckId: string) {
+    if (db === null || stage.kind !== "day") return;
+    const selected = decks.find((item) => item.id === deckId);
+    if (!selected || selected.id === deck?.id) return;
+    const release = beginStorageOperation();
+    if (release === null) return;
+    try {
+      await setSetting(db, "selectedDeck", selected.id);
+      await showDay(db, selected.id);
+      setDeck(selected);
+    } catch (cause) {
+      setStage({
+        kind: "error",
+        message: `Не удалось открыть колоду: ${String(cause)}`,
+      });
+    } finally {
+      release();
+    }
+  }
+
   async function afterRestore() {
     const database = db ?? getDatabase();
     const available = await listUsableDecks(database);
+    setDecks(available);
     const selected =
       available.find((item) => item.id === deck?.id) ?? available[0];
     setController(null);
@@ -341,6 +382,9 @@ export function App() {
           offline={offline}
           onStart={() => void startStudy()}
           storageBusy={storageBusy}
+          decks={decks}
+          deckId={deck?.id}
+          onDeckChange={(id) => void selectDeck(id)}
           vault={
             db === null ? null : (
               <Vault

@@ -8,7 +8,7 @@
 
 import type { ReactNode } from "react";
 
-import type { DeckCounts } from "../storage";
+import type { DeckCounts, StoredDeck } from "../storage";
 import { plural } from "./format";
 import { Leaf, PanelFlourish } from "./Ornaments";
 
@@ -21,6 +21,9 @@ interface Props {
   storageBusy?: boolean;
   /** Меню сохранности прогресса. Живёт отдельным компонентом. */
   vault?: ReactNode;
+  decks?: readonly StoredDeck[];
+  deckId?: string;
+  onDeckChange?: (id: string) => void;
 }
 
 export function DayScreen({
@@ -31,6 +34,9 @@ export function DayScreen({
   onStart,
   vault,
   storageBusy = false,
+  decks = [],
+  deckId,
+  onDeckChange,
 }: Props) {
   const ready = counts.fresh > 0 || counts.due > 0;
 
@@ -39,6 +45,24 @@ export function DayScreen({
       {/* Меню прижато к правому верхнему углу — там же, где меню карточки
           на экране повторения, чтобы не искать его в двух местах. */}
       <div className="day-top">{vault}</div>
+
+      {decks.length > 1 && (
+        <label className="deck-picker">
+          <span>Колода</span>
+          <select
+            aria-label="Выбрать колоду"
+            value={deckId}
+            disabled={storageBusy}
+            onChange={(event) => onDeckChange?.(event.target.value)}
+          >
+            {decks.map((deck) => (
+              <option key={deck.id} value={deck.id}>
+                {deck.name}
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
 
       <div className="day-head">
         <Leaf className="counter-leaf" />
@@ -91,7 +115,7 @@ export function DayScreen({
 
       {offline && (
         <p className="quiet">
-          Свежую колоду достать не удалось — занимаемся тем, что уже загружено.
+          Часть обновлений недоступна — можно заниматься загруженными колодами.
         </p>
       )}
     </section>

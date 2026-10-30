@@ -19,9 +19,58 @@ import {
   type AppDatabase,
   type ImportResult,
   type StoredDeck,
+  type FetchLike,
 } from "../storage";
 
 const DECKS_URL = "/decks";
+export const STARTUP_NETWORK_TIMEOUT_MS = 3000;
+
+export interface BootstrapOptions {
+  timeoutMs?: number;
+  signal?: AbortSignal;
+}
+
+/** Общий срок для каталога, манифестов и тел ответов, даже если fetch игнорирует abort. */
+function networkScope(options: BootstrapOptions) {
+  const controller = new AbortController();
+  let reject: (reason: unknown) => void = () => {};
+  const cancelled = new Promise<never>((_, fail) => {
+    reject = fail;
+  });
+  void cancelled.catch(() => {});
+  const stop = (reason: unknown) => {
+    if (controller.signal.aborted) return;
+    controller.abort(reason);
+    reject(reason);
+  };
+  const abort = () =>
+    stop(options.signal?.reason ?? new Error("Загрузка отменена."));
+  options.signal?.addEventListener("abort", abort, { once: true });
+  if (options.signal?.aborted) abort();
+  const timer = setTimeout(
+    () => stop(new Error("Истекло время ожидания обновления колод.")),
+    options.timeoutMs ?? STARTUP_NETWORK_TIMEOUT_MS,
+  );
+  const within = <T>(promise: Promise<T>): Promise<T> =>
+    Promise.race([promise, cancelled]);
+  const fetcher: FetchLike = async (url) => {
+    if (controller.signal.aborted) throw controller.signal.reason;
+    const response = await within(fetch(url, { signal: controller.signal }));
+    return {
+      ok: response.ok,
+      status: response.status,
+      json: () => within(response.json()),
+    };
+  };
+  return {
+    fetcher,
+    dispose() {
+      clearTimeout(timer);
+      options.signal?.removeEventListener("abort", abort);
+      stop(new Error("Загрузка завершена."));
+    },
+  };
+}
 
 export interface BootstrapResult {
   db: AppDatabase;
@@ -36,6 +85,7 @@ export interface BootstrapResult {
 
 export async function bootstrap(
   baseUrl: string = DECKS_URL,
+  options: BootstrapOptions = {},
 ): Promise<BootstrapResult> {
   const db = getDatabase();
   try {
@@ -50,50 +100,46 @@ export async function bootstrap(
     };
   }
 
+  const network = networkScope(options);
+  let imported: ImportResult | null = null;
+  let offline = false;
+  let error =
+    "В копии есть данные колоды, но нет полного набора карточек. Восстановите полную резервную копию.";
   try {
-    const index = await loadDeckIndex(baseUrl, (url) => fetch(url));
-    const entry = index[0];
-    if (entry === undefined) {
-      const cached = await listUsableDecks(db);
-      return {
-        db,
-        decks: cached,
-        imported: null,
-        offline: false,
-        error:
-          cached.length > 0
-            ? null
-            : "В каталоге нет колод, а в локальной базе нет полного набора карточек. Восстановите полную резервную копию.",
-      };
+    const index = await loadDeckIndex(baseUrl, network.fetcher);
+    if (index.length === 0)
+      error =
+        "В каталоге нет колод, а в локальной базе нет полного набора карточек. Восстановите полную резервную копию.";
+    const outcomes = await Promise.allSettled(
+      index.map(async (entry) => {
+        const file = await loadDeckFile(
+          `${baseUrl}/${entry.id}`,
+          network.fetcher,
+        );
+        if (file.meta.id !== entry.id)
+          throw new Error("Идентификатор колоды не совпадает с каталогом.");
+        return importDeck(db, file);
+      }),
+    );
+    for (const outcome of outcomes) {
+      if (outcome.status === "fulfilled") imported ??= outcome.value;
+      else {
+        offline = true;
+        error = `колода недоступна: ${String(outcome.reason)}`;
+      }
     }
-
-    const deckUrl = `${baseUrl}/${entry.id}`;
-    const file = await loadDeckFile(deckUrl, (url) => fetch(url));
-    const imported = await importDeck(db, file);
-    const decks = await listUsableDecks(db);
-
-    return {
-      db,
-      decks,
-      imported,
-      offline: false,
-      error:
-        decks.length > 0
-          ? null
-          : "В копии есть данные колоды, но нет подходящей версии карточек. Обновите приложение или восстановите полную резервную копию.",
-    };
   } catch (cause) {
-    // Сети нет. Если колода уже импортирована, это штатный офлайн.
-    const cached = await listUsableDecks(db);
-    if (cached.length > 0) {
-      return { db, decks: cached, imported: null, offline: true, error: null };
-    }
-    return {
-      db,
-      decks: [],
-      imported: null,
-      offline: true,
-      error: `колода недоступна, а в базе её ещё нет: ${String(cause)}`,
-    };
+    offline = true;
+    error = `колода недоступна, а в базе её ещё нет: ${String(cause)}`;
+  } finally {
+    network.dispose();
   }
+  const decks = await listUsableDecks(db);
+  return {
+    db,
+    decks,
+    imported,
+    offline,
+    error: decks.length > 0 ? null : error,
+  };
 }

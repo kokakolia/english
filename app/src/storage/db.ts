@@ -19,6 +19,7 @@ import Dexie, { type Table } from "dexie";
 
 import type { CardProgress, DeckCard, ReviewEntry } from "../srs";
 import { withReviewIds } from "./review-id";
+import { utcDeck, utcProgress, utcReview, utcChange } from "./dates";
 
 /** Метаданные импортированной колоды. */
 export interface StoredDeck {
@@ -91,6 +92,21 @@ export class AppDatabase extends Dexie {
       .upgrade(async (transaction) => {
         const reviews = transaction.table("reviews");
         await reviews.bulkPut(withReviewIds(await reviews.toArray()));
+      });
+    this.version(4)
+      .stores({})
+      .upgrade(async (transaction) => {
+        for (const [name, normalize] of [
+          ["decks", utcDeck],
+          ["progress", utcProgress],
+          ["reviews", utcReview],
+          ["changes", utcChange],
+        ] as const) {
+          const table = transaction.table(name);
+          await table.toCollection().modify((row) => {
+            Object.assign(row, normalize(row));
+          });
+        }
       });
   }
 }

@@ -13,6 +13,7 @@ import { updateSafety } from "../app/update-safety";
 import { validCard, validDeckMeta, uniqueIds } from "./validation";
 import { assertAvailableOwners } from "./ownership";
 import { deckContentHash } from "./integrity";
+import { utcDate } from "./dates";
 import type { DeckCard } from "../srs";
 import type { AppDatabase, StoredCard, StoredDeck } from "./db";
 
@@ -217,7 +218,7 @@ export async function importDeck(
           language: meta.language,
           cardType: meta.card_type,
           count: cards.length,
-          builtAt: meta.built_at,
+          builtAt: utcDate(meta.built_at),
           importedAt: now.toISOString(),
           ...(meta.source ? { source: meta.source } : {}),
         };

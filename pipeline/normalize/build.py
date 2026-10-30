@@ -16,6 +16,7 @@ VERSION, вы автоматически заставите пересобрат
 from __future__ import annotations
 
 import argparse
+from contextlib import closing
 import json
 import sqlite3
 import sys
@@ -229,12 +230,19 @@ def cmd_run(args: argparse.Namespace) -> int:
         return 1
 
     rows = _crawled_slugs(args.all_sources)
-    if not rows:
+    with closing(sqlite3.connect(ozdic_storage.STATE_DB)) as catalog:
+        retired = {row[0] for row in catalog.execute(
+            "SELECT slug FROM pages WHERE status IN ('ok', 'no_entry') "
+            "AND has_collocations = 0 AND fetched_at IS NOT NULL")}
+    if not rows and not retired:
         print("нет скачанных статей, подходящих под фильтр", file=sys.stderr)
         return 1
 
     conn = store.connect()
-    removed = store.forget_missing(conn, {slug for slug, _ in rows})
+    # Отсутствие в выборке может означать ошибку скачивания или другой фильтр.
+    # Удалять материал разрешено только после успешного подтверждения пустоты.
+    existing = {row[0] for row in conn.execute("SELECT slug FROM state")}
+    removed = store.forget_missing(conn, (existing - retired) | {slug for slug, _ in rows})
     if removed:
         print(f"убрано статей, пропавших из сырья: {removed}")
 
@@ -275,6 +283,7 @@ def cmd_stats(args: argparse.Namespace) -> int:
     total = conn.execute("SELECT COUNT(*) FROM collocations").fetchone()[0]
     if not total:
         print("база пуста — сначала `run`")
+        conn.close()
         return 0
 
     words = conn.execute("SELECT COUNT(DISTINCT headword) FROM collocations").fetchone()[0]

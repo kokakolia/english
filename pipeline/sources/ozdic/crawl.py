@@ -45,6 +45,7 @@ CREATE TABLE IF NOT EXISTS pages (
     status          TEXT NOT NULL,
     http_code       INTEGER,
     fetched_at      TEXT,
+    attempted_at    TEXT,
     has_entry       INTEGER DEFAULT 0,
     has_collocations INTEGER DEFAULT 0,
     n_clusters      INTEGER DEFAULT 0,
@@ -98,31 +99,59 @@ def open_db() -> sqlite3.Connection:
     conn.executescript(SCHEMA)
     conn.execute("PRAGMA journal_mode=WAL")
     conn.execute("PRAGMA synchronous=NORMAL")
+    columns = {row[1] for row in conn.execute("PRAGMA table_info(pages)")}
+    if "attempted_at" not in columns:
+        conn.execute("ALTER TABLE pages ADD COLUMN attempted_at TEXT")
+        conn.execute("UPDATE pages SET attempted_at = fetched_at")
+        # Старая версия стирала успешную сводку при ошибке. Восстанавливаем
+        # её из сохранившегося сырья, не меняя статус последней попытки.
+        for (slug,) in conn.execute("SELECT slug FROM pages WHERE status NOT IN ('ok', 'no_entry')").fetchall():
+            try:
+                cached = storage.read_entry(slug)
+                if not cached or not isinstance(cached.get("entry"), dict):
+                    continue
+                summary = summarize_entry(cached["entry"])
+                conn.execute(
+                    """UPDATE pages SET fetched_at=?, has_entry=?, has_collocations=?,
+                       n_clusters=?, n_examples=?, freq_pct=?, sources=?, bytes_stored=? WHERE slug=?""",
+                    (cached.get("fetched_at"), 1, int(summary["has_collocations"]),
+                     summary["n_clusters"], summary["n_examples"], summary["freq_pct"],
+                     summary["sources"], storage.entry_path(slug).stat().st_size, slug))
+            except (OSError, ValueError, UnicodeError):
+                continue
     conn.commit()
     return conn
 
 
 def record(conn: sqlite3.Connection, result: Result) -> None:
     summary = result.summary or {}
+    now = datetime.now(timezone.utc).isoformat(timespec="microseconds")
+    successful = result.status in DONE_STATUSES and result.summary is not None
     conn.execute(
         """
-        INSERT INTO pages (slug, status, http_code, fetched_at, has_entry,
+        INSERT INTO pages (slug, status, http_code, fetched_at, attempted_at, has_entry,
                            has_collocations, n_clusters, n_examples, freq_pct,
                            sources, bytes_stored, error)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ON CONFLICT(slug) DO UPDATE SET
             status=excluded.status, http_code=excluded.http_code,
-            fetched_at=excluded.fetched_at, has_entry=excluded.has_entry,
-            has_collocations=excluded.has_collocations,
-            n_clusters=excluded.n_clusters, n_examples=excluded.n_examples,
-            freq_pct=excluded.freq_pct, sources=excluded.sources,
-            bytes_stored=excluded.bytes_stored, error=excluded.error
+            attempted_at=excluded.attempted_at,
+            fetched_at=COALESCE(excluded.fetched_at, pages.fetched_at),
+            has_entry=CASE WHEN excluded.fetched_at IS NOT NULL THEN excluded.has_entry ELSE pages.has_entry END,
+            has_collocations=CASE WHEN excluded.fetched_at IS NOT NULL THEN excluded.has_collocations ELSE pages.has_collocations END,
+            n_clusters=CASE WHEN excluded.fetched_at IS NOT NULL THEN excluded.n_clusters ELSE pages.n_clusters END,
+            n_examples=CASE WHEN excluded.fetched_at IS NOT NULL THEN excluded.n_examples ELSE pages.n_examples END,
+            freq_pct=CASE WHEN excluded.fetched_at IS NOT NULL THEN excluded.freq_pct ELSE pages.freq_pct END,
+            sources=CASE WHEN excluded.fetched_at IS NOT NULL THEN excluded.sources ELSE pages.sources END,
+            bytes_stored=CASE WHEN excluded.fetched_at IS NOT NULL THEN excluded.bytes_stored ELSE pages.bytes_stored END,
+            error=excluded.error
         """,
         (
             result.slug,
             result.status,
             result.http_code,
-            datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            now if successful else None,
+            now,
             int(bool(summary.get("has_entry"))),
             int(bool(summary.get("has_collocations"))),
             summary.get("n_clusters") or 0,

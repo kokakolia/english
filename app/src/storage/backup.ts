@@ -22,6 +22,7 @@ import type {
 } from "./db";
 import type { SettingRow, ProgressChange } from "./db";
 import { withReviewIds } from "./review-id";
+import { utcDeck, utcProgress, utcReview, utcChange } from "./dates";
 import { assertAvailableOwners, assertOwners } from "./ownership";
 import { deckContentHash, legacyDeckVersion } from "./integrity";
 import {
@@ -279,14 +280,22 @@ export interface RestoreOptions {
 
 export async function restoreBackup(
   db: AppDatabase,
-  data: unknown,
+  input: unknown,
   options: RestoreOptions = {},
 ): Promise<RestoreResult> {
   const release = updateSafety.begin();
   try {
-    assertBackup(data);
+    assertBackup(input);
+    const data: BackupFile = {
+      ...input,
+      decks: input.decks.map(utcDeck),
+      progress: input.progress.map(utcProgress),
+      changes: input.changes?.map(utcChange),
+      reviews: input.reviews.map(utcReview),
+    };
     const hashes = await verifyDeckContents(data);
-    const incomingReviews = withReviewIds(data.reviews);
+    // Старые ID вычисляются по исходным полям, как в миграции v3; сами даты канонизируются.
+    const incomingReviews = withReviewIds(input.reviews).map(utcReview);
     const mode = options.mode ?? "replace";
     const result: RestoreResult = {
       mode,
@@ -302,6 +311,14 @@ export async function restoreBackup(
       "rw",
       [db.decks, db.cards, db.progress, db.reviews, db.settings, db.changes],
       async () => {
+        // Уже используемые умолчания тоже являются местной настройкой, даже
+        // если пользователь ещё не создавал строку study в базе.
+        const hadLocalData =
+          mode === "merge" &&
+          ((await db.decks.count()) > 0 ||
+            (await db.progress.count()) > 0 ||
+            (await db.reviews.count()) > 0 ||
+            (await db.changes.count()) > 0);
         if (mode === "merge")
           await assertAvailableOwners(db, backupClaims(data));
         if (mode === "replace") {
@@ -351,9 +368,21 @@ export async function restoreBackup(
             result.cards += cards.length;
           }
         }
-        await db.settings.bulkPut(
-          data.settings.filter((row) => row.key !== "backupFolder"),
+        const settings = data.settings.filter(
+          (row) => row.key !== "backupFolder",
         );
+        const existingSettings =
+          mode === "merge"
+            ? await db.settings.bulkGet(settings.map((row) => row.key))
+            : [];
+        const toWrite = settings.filter(
+          (_, index) =>
+            mode === "replace" ||
+            (existingSettings[index] === undefined &&
+              !(hadLocalData && settings[index]!.key === "study")),
+        );
+        await db.settings.bulkPut(toWrite);
+        result.settings = toWrite.length;
 
         if (mode === "replace") {
           await db.progress.bulkPut(data.progress);
