@@ -241,11 +241,18 @@ export function buildQueue({
   // значит потерять тот самый короткий интервал, ради которого они в этом
   // состоянии находятся.
   const reviewBudget = Math.max(0, config.reviewsPerDay - studiedToday.review);
-  const dueLimited = shuffle(review, random).slice(0, reviewBudget);
+  // Старейшие сроки выбираются первыми; зерно влияет только на равные сроки.
+  const dueLimited = shuffle(review, random)
+    .sort(
+      (a, b) =>
+        Date.parse(lookup(progress, a.id)!.due) -
+        Date.parse(lookup(progress, b.id)!.due),
+    )
+    .slice(0, reviewBudget);
   const backlog = Math.max(0, review.length - reviewBudget);
   const freshLimited = fresh.slice(
     0,
-    Math.max(0, config.newPerDay - studiedToday.fresh),
+    backlog > 0 ? 0 : Math.max(0, config.newPerDay - studiedToday.fresh),
   );
 
   const repeats = spaceOutSiblings(

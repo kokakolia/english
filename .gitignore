@@ -32,3 +32,10 @@ sentences/.*.tmp
 
 # Стабильный файл межпроцессной блокировки публикации
 decks/.publication.lock
+
+# Блокировки операций с ручным материалом и реестром ID
+translations/*.tsv.lock
+notes/*.tsv.lock
+sentences/*.tsv.lock
+schema/card-identities.json.lock
+schema/.card-identities.json.*.tmp

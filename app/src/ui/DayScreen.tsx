@@ -99,7 +99,8 @@ export function DayScreen({
           <p className="note">
             Просрочено сверх дневного лимита: {backlog}{" "}
             {plural(backlog, "карточка")}. Они не потеряются, но разбирать их
-            придётся несколько дней.
+            придётся несколько дней. Новые карточки пока отложены, чтобы не
+            увеличивать нагрузку.
           </p>
         )}
       </div>
@@ -110,8 +111,25 @@ export function DayScreen({
         onClick={onStart}
         disabled={!ready || storageBusy}
       >
-        {ready ? "Учить" : "На сегодня всё"}
+        {ready
+          ? "Учить"
+          : counts.nextReviewAt
+            ? "Сейчас карточек нет"
+            : "На сегодня всё"}
       </button>
+
+      {!ready && counts.nextReviewAt && (
+        <p className="quiet">
+          Ближайшее повторение:{" "}
+          {new Date(counts.nextReviewAt).toLocaleString("ru-RU", {
+            day: "numeric",
+            month: "long",
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
+          . Можно закрыть приложение и вернуться позже.
+        </p>
+      )}
 
       {offline && (
         <p className="quiet">

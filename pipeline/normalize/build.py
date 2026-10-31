@@ -16,6 +16,7 @@ VERSION, вы автоматически заставите пересобрат
 from __future__ import annotations
 
 import argparse
+import hashlib
 from contextlib import closing
 import json
 import sqlite3
@@ -25,12 +26,13 @@ from ..sources.ozdic import storage as ozdic_storage
 from . import store
 from .inflect import sequence_regex
 from .models import Collocation
+from .limits import MAX_CLUSTER_VARIANTS, SearchBudget, require_budget
 from .patterns import AFTER, PHRASE, TEMPLATE, build_phrase, parse_cat, parse_gloss
 from .variants import PLACEHOLDERS, expand
 
 # Версия правил разбора. Поднять при любом изменении логики нормализации —
 # тогда следующий `run` пересоберёт базу целиком.
-VERSION = "0.4.0"
+VERSION = "0.5.0"
 
 SOURCE_DICT = "ozdic"
 
@@ -110,6 +112,7 @@ def _locate(example: str, headword: str, position: str, candidates: list[str]
     if not example:
         return None
     best: tuple[int, int, str] | None = None
+    budget = SearchBudget()
     for variant in candidates:
         sequence = _sequence_for(position, headword, variant)
         if sequence is None:
@@ -120,7 +123,7 @@ def _locate(example: str, headword: str, position: str, candidates: list[str]
         pattern = sequence_regex(tokens, gap)
         if pattern is None:
             continue
-        match = pattern.search(example)
+        match = pattern.search(example, budget=budget)
         if match is None:
             continue
         start, end = match.span(1)
@@ -168,6 +171,8 @@ def normalize_entry(entry: dict, slug: str, freq_pct: int | None) -> list[Colloc
                 needs_review = False
                 for word in accept:
                     expanded, review = expand(word)
+                    require_budget(len(variants) + len(expanded), MAX_CLUSTER_VARIANTS,
+                                   f"варианты кластера {slug}")
                     variants.extend(expanded)
                     needs_review = needs_review or review
                 # Дубликаты между вариантами разных партнёров не нужны.
@@ -238,7 +243,19 @@ def cmd_run(args: argparse.Namespace) -> int:
         print("нет скачанных статей, подходящих под фильтр", file=sys.stderr)
         return 1
 
-    conn = store.connect()
+    with closing(store.connect()) as conn:
+        _run_normalization(conn, rows, retired, args)
+    return cmd_stats(args)
+
+
+def source_fingerprint(entry: dict, freq_pct: int | None) -> str:
+    """Все входы нормализации, кроме служебного времени скачивания."""
+    serialized = json.dumps([SOURCE_DICT, entry, freq_pct], ensure_ascii=False,
+                            sort_keys=True, separators=(",", ":"), allow_nan=False)
+    return hashlib.sha256(serialized.encode("utf-8")).hexdigest()
+
+
+def _run_normalization(conn, rows, retired, args) -> None:
     # Отсутствие в выборке может означать ошибку скачивания или другой фильтр.
     # Удалять материал разрешено только после успешного подтверждения пустоты.
     existing = {row[0] for row in conn.execute("SELECT slug FROM state")}
@@ -252,13 +269,15 @@ def cmd_run(args: argparse.Namespace) -> int:
         if not payload or not payload.get("entry"):
             continue
         fetched_at = payload.get("fetched_at") or ""
+        source_hash = source_fingerprint(payload["entry"], freq_pct)
 
-        if not args.force and store.is_current(conn, slug, fetched_at, VERSION):
+        if not args.force and store.is_current(conn, slug, source_hash, VERSION):
             skipped += 1
             continue
 
         records = normalize_entry(payload["entry"], slug, freq_pct)
-        store.replace_slug(conn, slug, SOURCE_DICT, fetched_at, VERSION, records)
+        store.replace_slug(conn, slug, SOURCE_DICT, fetched_at, VERSION, records,
+                           source_hash=source_hash)
         processed += 1
         total_records += len(records)
         if processed % 200 == 0:
@@ -274,8 +293,6 @@ def cmd_run(args: argparse.Namespace) -> int:
         f"статей разобрано: {processed}, пропущено как актуальные: {skipped}\n"
         f"записей добавлено: {total_records}"
     )
-    conn.close()
-    return cmd_stats(args)
 
 
 def cmd_stats(args: argparse.Namespace) -> int:

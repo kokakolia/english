@@ -367,43 +367,63 @@ describe("оценка и запись", () => {
     expect(await db.reviews.count()).toBe(0);
   });
 
-  it("«снова» возвращает карточку в этом же заходе", async () => {
-    const controller = await makeController();
-    const first = controller.state().card!.id;
-
-    controller.reveal();
-    await controller.grade("again");
-
-    expect(controller.state().card?.id).not.toBe(first);
-
-    const seen: string[] = [];
-    while (controller.state().phase === "question" && seen.length < 12) {
-      seen.push(controller.state().card!.id);
+  it.each([
+    ["again", 1],
+    ["hard", 5],
+    ["good", 10],
+  ] as const)(
+    "%s ждёт назначенного времени (%s минут), включая единственную карточку",
+    async (grade, minutes) => {
+      await importDeck(db, deckFile(sampleCards().slice(0, 1)), {
+        force: true,
+      });
+      await updateStudySettings(db, { againGap: 0, repeatHard: false });
+      let now = NOW;
+      const controller = await makeController({ clock: () => now });
+      const first = controller.state().card!.id;
       controller.reveal();
-      await controller.grade("good");
-    }
-    expect(seen).toContain(first);
+      await controller.grade(grade);
+      expect(controller.state().phase).toBe("waiting");
+      expect(controller.state().session.repeats).toBe(0);
+      const due = new Date(NOW.getTime() + minutes * 60_000);
+      expect(controller.state().nextReviewAt).toBe(due.toISOString());
+      now = new Date(due.getTime() - 1);
+      controller.refresh();
+      expect(controller.state().phase).toBe("waiting");
+      now = due;
+      controller.refresh();
+      expect(controller.state().card!.id).toBe(first);
+      controller.reveal();
+      await controller.grade("easy");
+      expect(controller.state().phase).toBe("finished");
+      expect(controller.state().session).toMatchObject({
+        firstAnswered: 1,
+        firstRecalled: grade === "again" ? 0 : 1,
+        answered: 2,
+        repeats: 1,
+        completed: 1,
+      });
+      expect(await db.reviews.count()).toBe(2);
+      await controller.undo();
+      expect(controller.state().session.repeats).toBe(0);
+      expect(controller.state().session.firstAnswered).toBe(1);
+    },
+  );
+
+  it("повторное открытие сохраняет ожидание без новых записей в журнале", async () => {
+    await importDeck(db, deckFile(sampleCards().slice(0, 1)), { force: true });
+    const first = await makeController();
+    first.reveal();
+    await first.grade("good");
+    const progress = await db.progress.toArray();
+    const reopened = await makeController();
+    expect(reopened.state().phase).toBe("waiting");
+    expect(reopened.state().nextReviewAt).toBe(first.state().nextReviewAt);
+    expect(await db.progress.toArray()).toEqual(progress);
+    expect(await db.reviews.count()).toBe(1);
   });
 
-  it("«плохо помню» тоже возвращает карточку в этом же заходе", async () => {
-    const controller = await makeController();
-    const first = controller.state().card!.id;
-
-    controller.reveal();
-    await controller.grade("hard");
-    expect(controller.state().card?.id).not.toBe(first);
-    expect(controller.state().session.repeats).toBe(1);
-
-    const seen: string[] = [];
-    while (controller.state().phase === "question" && seen.length < 12) {
-      seen.push(controller.state().card!.id);
-      controller.reveal();
-      await controller.grade("good");
-    }
-    expect(seen).toContain(first);
-  });
-
-  it("доходит до конца очереди", async () => {
+  it("после новых карточек предлагает дождаться короткого повтора", async () => {
     const controller = await makeController();
     let guard = 0;
     while (controller.state().phase === "question" && guard < 20) {
@@ -412,8 +432,8 @@ describe("оценка и запись", () => {
       await controller.grade("good");
     }
 
-    expect(controller.state().phase).toBe("finished");
-    expect(controller.state().session.completed).toBe(3);
+    expect(controller.state().phase).toBe("waiting");
+    expect(controller.state().session.completed).toBe(0);
     expect(await db.reviews.count()).toBe(3);
   });
 });
@@ -499,7 +519,7 @@ describe("отмена оценки", () => {
     // «Не знал» ставит карточку обратно в очередь — отмена должна убрать и это.
     controller.reveal();
     await controller.grade("again");
-    expect(controller.state().session.repeats).toBe(1);
+    expect(controller.state().session.repeats).toBe(0);
 
     await controller.undo();
     expect(controller.state().session).toEqual(before);
@@ -563,7 +583,7 @@ describe("отмена оценки", () => {
     while (controller.state().phase === "question" && guard < 20) {
       guard += 1;
       controller.reveal();
-      await controller.grade("good");
+      await controller.grade("easy");
     }
     expect(controller.state().phase).toBe("finished");
 

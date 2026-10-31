@@ -28,6 +28,7 @@ from ..locking import exclusive_file_lock
 from ..normalize import store
 from ..normalize.build import _sequence_for
 from ..normalize.inflect import phrase_regex
+from ..normalize.limits import MAX_CLUSTER_VARIANTS, SearchBudget, require_budget
 from ..normalize.variants import expand
 from ..sentences import store as sentence_fixes
 from ..translate import store as translations_store
@@ -189,6 +190,7 @@ def answer_forms(variants: list[str], pattern_position: str, headword: str,
     которая уже написана и покрыта тестами здесь. Поэтому разворачиваем при
     сборке: берём у каждого варианта ровно ту часть, что попадает в пропуск.
     """
+    require_budget(len(variants), MAX_CLUSTER_VARIANTS, "варианты ответов")
     forms: list[str] = []
     for variant in variants:
         sequence = _sequence_for(pattern_position, headword, variant)
@@ -220,14 +222,18 @@ def other_cluster_members(accept: list[str], matched: str | None, answer: str
     было сказать то же самое.
     """
     others = []
+    budget = SearchBudget()
+    expanded_count = 0
     for entry in accept:
         forms, _ = expand(entry)
+        expanded_count += len(forms)
+        require_budget(expanded_count, MAX_CLUSTER_VARIANTS, "варианты кластера")
         if matched and matched in forms:
             continue
         # Если matched не сохранён, опознаём использованный вариант по тому,
         # что он совпадает с ответом целиком.
         pattern = phrase_regex(entry)
-        if pattern is not None and pattern.fullmatch(answer.strip()):
+        if pattern is not None and pattern.fullmatch(answer.strip(), budget=budget):
             continue
         others.append(entry)
     return others

@@ -85,6 +85,46 @@ class RefreshTest(unittest.TestCase):
         self.assertEqual(build.cmd_run(self.args), 0)
         self.assertEqual(self.normalized(), [])
 
+    def test_new_content_with_identical_timestamp_is_not_skipped(self):
+        entry = self.seed()
+        self.assertEqual(build.cmd_run(self.args), 0)
+        before = self.normalized()
+        entry["collocations"][0]["groups"][0]["clusters"][0]["words"] = ["take"]
+        storage.write_entry("decision", {"fetched_at": "2026-10-30T10:00:00Z", "entry": entry})
+        self.assertEqual(build.cmd_run(self.args), 0)
+        self.assertNotEqual(self.normalized(), before)
+        self.assertEqual(self.normalized()[0][2], '["take"]')
+
+    def test_identical_content_with_new_timestamp_is_skipped(self):
+        entry = self.seed()
+        self.assertEqual(build.cmd_run(self.args), 0)
+        storage.write_entry("decision", {"fetched_at": "2026-10-31T10:00:00Z", "entry": entry})
+        with patch.object(build, "normalize_entry", side_effect=AssertionError("cache miss")):
+            self.assertEqual(build.cmd_run(self.args), 0)
+
+    def test_changed_frequency_is_an_input_even_when_article_is_unchanged(self):
+        self.seed()
+        self.assertEqual(build.cmd_run(self.args), 0)
+        with closing(crawl.open_db()) as conn:
+            conn.execute("UPDATE pages SET freq_pct=25")
+            conn.commit()
+        self.assertEqual(build.cmd_run(self.args), 0)
+        with closing(store.connect()) as conn:
+            self.assertEqual(conn.execute("SELECT freq_pct FROM collocations").fetchone()[0], 25)
+
+    def test_legacy_state_without_hash_is_migrated_and_rebuilt_once(self):
+        self.seed()
+        with closing(sqlite3.connect(store.DB_PATH)) as conn:
+            conn.executescript(store.SCHEMA.replace("    source_hash   TEXT,\n", ""))
+            conn.execute("INSERT INTO state(slug,fetched_at,version) VALUES(?,?,?)",
+                         ("decision", "2026-10-30T10:00:00Z", build.VERSION))
+            conn.commit()
+        self.assertEqual(build.cmd_run(self.args), 0)
+        with closing(store.connect()) as conn:
+            self.assertEqual(len(conn.execute("SELECT source_hash FROM state").fetchone()[0]), 64)
+        with patch.object(build, "normalize_entry", side_effect=AssertionError("cache miss")):
+            self.assertEqual(build.cmd_run(self.args), 0)
+
     def test_old_failed_catalog_is_repaired_from_cached_success(self):
         entry = {"word": "decision", "sources": ["oxford-collocations"],
                  "collocations": [{"groups": [{"clusters": [{"example": "example"}]}]}]}

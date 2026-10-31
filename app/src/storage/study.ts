@@ -211,6 +211,8 @@ export interface DeckCounts {
    * Считается только если лимит передан: без него понятия «сверх лимита» нет.
    */
   backlog: number;
+  /** Ближайшее будущее повторение видимой карточки. */
+  nextReviewAt: string | null;
   /** Карточек в колоде всего. */
   total: number;
   /** Ни разу не показанных. */
@@ -275,9 +277,16 @@ export async function deckCounts(
   });
   let learning = 0;
   let review = 0;
+  let nextReviewAt: string | null = null;
   for (const card of cards) {
     const row = progress.get(card.id);
     if (!row || isHidden(row, now)) continue;
+    if (
+      row.state !== "new" &&
+      Date.parse(row.due) > now.getTime() &&
+      (nextReviewAt === null || Date.parse(row.due) < Date.parse(nextReviewAt))
+    )
+      nextReviewAt = row.due;
     if (row.state === "learning" || row.state === "relearning") learning++;
     if (row.state === "review") review++;
   }
@@ -288,6 +297,7 @@ export async function deckCounts(
     learning,
     review,
     backlog: reviewsPerDay === undefined ? 0 : queue.backlog,
+    nextReviewAt,
   };
 }
 

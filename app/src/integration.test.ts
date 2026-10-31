@@ -105,7 +105,7 @@ describe("неделя занятий", () => {
         now,
       });
 
-      const session = createSession(queue.cards, { againGap: 3 });
+      const session = createSession(queue.cards);
       let guard = 0;
       while (!session.isFinished() && guard < 500) {
         guard += 1;

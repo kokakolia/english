@@ -6,6 +6,7 @@ import os
 import time
 from contextlib import contextmanager
 from pathlib import Path
+from functools import wraps
 
 
 @contextmanager
@@ -32,7 +33,7 @@ def exclusive_file_lock(path: Path, timeout: float = 60):
                 if exc.errno not in (errno.EACCES, errno.EAGAIN, errno.EDEADLK):
                     raise
                 if time.monotonic() >= deadline:
-                    raise TimeoutError(f"публикация занята другим процессом: {path}") from exc
+                    raise TimeoutError(f"файл занят другим процессом: {path}") from exc
                 time.sleep(0.02)
         try:
             yield
@@ -44,3 +45,18 @@ def exclusive_file_lock(path: Path, timeout: float = 60):
             else:
                 import fcntl
                 fcntl.flock(stream.fileno(), fcntl.LOCK_UN)
+
+
+def serialized_file_update(path):
+    """Блокирует всю операцию чтение–изменение–запись, а не только замену файла.
+
+    Путь вычисляется при вызове: настройки хранилища могут меняться в тестах.
+    """
+    def decorate(operation):
+        @wraps(operation)
+        def locked(*args, **kwargs):
+            target = path()
+            with exclusive_file_lock(target.with_name(target.name + ".lock")):
+                return operation(*args, **kwargs)
+        return locked
+    return decorate

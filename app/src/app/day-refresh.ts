@@ -10,13 +10,26 @@ export function watchDay(
   onError: (cause: unknown) => void,
   events: EventTarget = window,
   visibility: EventTarget & { visibilityState: string } = document,
+  nextReviewAt: string | null = null,
 ) {
   let stopped = false;
   let running = false;
   let timer: ReturnType<typeof setTimeout>;
   function schedule() {
     clearTimeout(timer);
-    if (!stopped) timer = setTimeout(run, dayRefreshDelay(new Date()));
+    if (!stopped) {
+      const now = new Date();
+      const untilReview = nextReviewAt
+        ? Date.parse(nextReviewAt) - now.getTime()
+        : Infinity;
+      timer = setTimeout(
+        run,
+        Math.min(
+          dayRefreshDelay(now),
+          untilReview > 0 ? untilReview : Infinity,
+        ),
+      );
+    }
   }
   function run() {
     if (stopped || running) return;

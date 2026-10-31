@@ -19,7 +19,6 @@ import {
   type StudyState,
 } from "../study/controller";
 import { CardMenu } from "./CardMenu";
-import { plural } from "./format";
 import {
   GradeIcon,
   Leaf,
@@ -36,7 +35,7 @@ import {
  */
 const GRADE_LABELS: Record<Grade, string> = {
   again: "Не знал",
-  hard: "Плохо помню",
+  hard: "Вспомнил с трудом",
   good: "Помню",
   easy: "Отлично помню",
 };
@@ -137,9 +136,11 @@ function Summary({
   onFinish: () => void;
 }) {
   const { tally, session } = state;
-  const strong = tally.good + tally.easy;
   const answers = session.answered;
-  const share = answers > 0 ? Math.round((strong / answers) * 100) : 0;
+  const share =
+    session.firstAnswered > 0
+      ? Math.round((session.firstRecalled / session.firstAnswered) * 100)
+      : 0;
   const nothingDone = answers === 0;
 
   return (
@@ -149,14 +150,18 @@ function Summary({
           {!nothingDone && <div className="feedback-glow" />}
           <MoodPlant mood={nothingDone ? "weak" : "strong"} />
           <h1 className="display summary-title">
-            {nothingDone ? "На сегодня всё" : "Круг пройден"}
+            {state.phase === "waiting"
+              ? "Время для перерыва"
+              : nothingDone
+                ? "Сейчас карточек нет"
+                : "Занятие завершено"}
           </h1>
 
           {!nothingDone && (
             <>
               <p className="summary-sub">
-                {session.completed} {plural(session.completed, "карточка")},
-                вспомнили {share}%
+                В этом занятии с первой попытки вспомнили{" "}
+                {session.firstRecalled} из {session.firstAnswered} ({share}%).
               </p>
 
               <dl className="tally">
@@ -170,14 +175,28 @@ function Summary({
                   </div>
                 ))}
               </dl>
+              <p className="quiet">
+                Оценки выше включают все {answers} попыток.
+              </p>
 
               {session.repeats > 0 && (
                 <p className="quiet">
-                  Возвратов внутри занятия: {session.repeats}. Это карточки,
-                  которые показались снова после «не знал» или «плохо помню».
+                  Дополнительных попыток: {session.repeats}. Они не меняют
+                  результат первой попытки.
                 </p>
               )}
             </>
+          )}
+          {state.phase === "waiting" && state.nextReviewAt && (
+            <p className="note" role="status">
+              Ожидают повторения: {session.remaining}. Ближайшее — в{" "}
+              {new Date(state.nextReviewAt).toLocaleTimeString("ru-RU", {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+              . Занятие продолжится, когда наступит срок. Можно вернуться к
+              началу и закрыть приложение — расписание сохранено.
+            </p>
           )}
         </div>
       </div>
@@ -204,6 +223,24 @@ function Summary({
 }
 
 export function ReviewScreen({ controller, state, onFinish }: Props) {
+  useEffect(() => {
+    if (state.phase !== "waiting" || !state.nextReviewAt) return;
+    const timer = window.setTimeout(
+      () => controller.refresh(),
+      Math.min(
+        60_000,
+        Math.max(1_000, Date.parse(state.nextReviewAt) - Date.now()),
+      ),
+    );
+    const refresh = () => controller.refresh();
+    window.addEventListener("focus", refresh);
+    document.addEventListener("visibilitychange", refresh);
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("focus", refresh);
+      document.removeEventListener("visibilitychange", refresh);
+    };
+  }, [controller, state]);
   // Обработчик клавиш вешается один раз за занятие и потому видит только
   // первый `onFinish`. Ссылка держит его свежим, не перевешивая обработчик:
   // перевешивание — та самая ошибка, из-за которой одно нажатие делало два
@@ -277,7 +314,11 @@ export function ReviewScreen({ controller, state, onFinish }: Props) {
       </section>
     );
 
-  if (state.phase === "finished" || state.phase === "empty") {
+  if (
+    state.phase === "finished" ||
+    state.phase === "empty" ||
+    state.phase === "waiting"
+  ) {
     return (
       <Summary controller={controller} state={state} onFinish={onFinish} />
     );

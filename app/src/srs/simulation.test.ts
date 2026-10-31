@@ -166,7 +166,7 @@ function simulate(
       continue;
     }
 
-    const session = createSession(queue.cards, { againGap: 3 });
+    const session = createSession(queue.cards);
     let guard = 0;
     while (!session.isFinished() && guard < 5000) {
       guard += 1;

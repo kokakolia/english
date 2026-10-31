@@ -150,6 +150,7 @@ export function App() {
     [],
   );
 
+  const nextReviewAt = stage.kind === "day" ? stage.counts.nextReviewAt : null;
   useEffect(() => {
     if (stage.kind !== "day" || db === null || deck === null || storageBusy)
       return;
@@ -169,12 +170,15 @@ export function App() {
             message: `Не удалось обновить состояние колоды: ${String(cause)}`,
           });
       },
+      window,
+      document,
+      nextReviewAt,
     );
     return () => {
       current = false;
       stop();
     };
-  }, [stage.kind, db, deck, showDay, storageBusy]);
+  }, [stage.kind, db, deck, showDay, storageBusy, nextReviewAt]);
 
   useEffect(() => {
     let cancelled = false;

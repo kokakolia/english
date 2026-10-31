@@ -34,6 +34,7 @@ from __future__ import annotations
 import hashlib
 from pathlib import Path
 from ..files import atomic_write_text, read_tsv
+from ..locking import serialized_file_update
 
 # Репозиторий, а не pipeline/data: data в git не попадает.
 SENTENCES_DIR = Path(__file__).resolve().parents[2] / "sentences"
@@ -63,6 +64,7 @@ def load_all() -> dict[str, tuple[str, str]]:
     return fixes
 
 
+@serialized_file_update(lambda: TSV_PATH)
 def save(original: str, cloze: str, answer: str) -> None:
     """Добавляет или заменяет правку, сохраняя файл отсортированным."""
     rows: dict[str, tuple[str, str, str]] = {}

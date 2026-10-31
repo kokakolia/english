@@ -20,6 +20,7 @@ import hashlib
 import json
 from pathlib import Path
 from ..files import atomic_write_text, read_tsv
+from ..locking import serialized_file_update
 
 NOTES_DIR = Path(__file__).resolve().parents[2] / "notes"
 TSV_PATH = NOTES_DIR / "usage-ru.tsv"
@@ -33,11 +34,19 @@ def _normalize(text: str) -> str:
 
 def load_rows() -> dict[str, tuple[str, str]]:
     """id → (подпись, заметка)."""
+    return _snapshot()[0]
+
+
+def _snapshot() -> tuple[dict[str, tuple[str, str]], dict[str, str]]:
+    """Текст и контекст читаются из одной версии файла."""
     rows: dict[str, tuple[str, str]] = {}
+    contexts: dict[str, str] = {}
     for parts in read_tsv(TSV_PATH, (3, 4)):
         card_id, phrase, note = parts[:3]
         rows[card_id] = (phrase, note)
-    return rows
+        if len(parts) == 4:
+            contexts[card_id] = parts[3]
+    return rows, contexts
 
 
 def load_all() -> dict[str, str]:
@@ -51,12 +60,12 @@ def context_key(accept: list[str], text: str, answer: str) -> str:
 
 
 def load_contexts() -> dict[str, str]:
-    return {parts[0]: parts[3] for parts in read_tsv(TSV_PATH, (3, 4)) if len(parts) == 4}
+    return _snapshot()[1]
 
 
 def notes_for(cards: list[dict]) -> dict[str, str]:
-    notes, contexts = load_all(), load_contexts()
-    return {c["id"]: notes[c["id"]] for c in cards if c["id"] in notes and
+    rows, contexts = _snapshot()
+    return {c["id"]: rows[c["id"]][1] for c in cards if c["id"] in rows and
             contexts.get(c["id"]) == context_key(c["accept"], c["text"], c["answer"])}
 
 
@@ -70,10 +79,10 @@ def _write(rows: dict[str, tuple[str, str]], contexts: dict[str, str] | None = N
     atomic_write_text(TSV_PATH, "\n".join(lines) + "\n")
 
 
+@serialized_file_update(lambda: TSV_PATH)
 def save_many(items: list[tuple[str, str, str]], contexts: dict[str, str] | None = None) -> tuple[int, int]:
     """Сохраняет тройки (id, подпись, заметка). Возвращает (добавлено, обновлено)."""
-    rows = load_rows()
-    saved_contexts = load_contexts()
+    rows, saved_contexts = _snapshot()
     context_changed = False
     added = updated = 0
     for card_id, phrase, note in items:
@@ -100,12 +109,13 @@ def save_many(items: list[tuple[str, str, str]], contexts: dict[str, str] | None
     return added, updated
 
 
+@serialized_file_update(lambda: TSV_PATH)
 def forget_unused(live_ids: set[str]) -> int:
     """Убирает заметки коллокаций, которых больше нет в колоде."""
-    rows = load_rows()
+    rows, contexts = _snapshot()
     stale = [card_id for card_id in rows if card_id not in live_ids]
     for card_id in stale:
         del rows[card_id]
     if stale:
-        _write(rows)
+        _write(rows, contexts)
     return len(stale)

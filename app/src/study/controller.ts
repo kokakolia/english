@@ -26,6 +26,7 @@ import {
   createSession,
   createScheduler,
   GRADES,
+  isHidden,
   type DeckCard,
   type Grade,
   type QueueCounts,
@@ -54,7 +55,7 @@ import {
 export type StudyPhase =
   /** Очередь ещё строится. */
   | "loading"
-  /** На сегодня всё: очередь пуста с самого начала. */
+  /** Сейчас доступных карточек нет. */
   | "empty"
   /** Ошибка подготовки занятия; это не отсутствие заданий. */
   | "error"
@@ -62,6 +63,8 @@ export type StudyPhase =
   | "question"
   /** Ответ раскрыт, ждём оценки. */
   | "answered"
+  /** Короткие повторы ещё не наступили. */
+  | "waiting"
   /** Очередь пройдена, показаны итоги. */
   | "finished";
 
@@ -79,6 +82,7 @@ export interface StudyState {
   counts: QueueCounts;
   backlog: number;
   session: SessionProgress;
+  nextReviewAt: string | null;
   /** Есть ли что отменять: хотя бы одна оценка за это занятие. */
   canUndo: boolean;
   /** Идёт запись в базу: кнопки оценки на это время блокируются. */
@@ -103,6 +107,8 @@ export interface StudyController {
   apply(action: CardAction): Promise<void>;
   /** Построить очередь заново — например, после смены настроек. */
   restart(): Promise<void>;
+  /** Проверить часы после таймера или возвращения во вкладку. */
+  refresh(): void;
   settings(): StudySettings;
 }
 
@@ -127,6 +133,8 @@ const EMPTY_SESSION: SessionProgress = {
   answered: 0,
   completed: 0,
   repeats: 0,
+  firstAnswered: 0,
+  firstRecalled: 0,
 };
 
 const EMPTY_TALLY: Record<Grade, number> = {
@@ -257,6 +265,7 @@ export async function createStudyController(
     counts: EMPTY_COUNTS,
     backlog: 0,
     session: EMPTY_SESSION,
+    nextReviewAt: null,
     canUndo: false,
     saving: false,
     error: null,
@@ -277,15 +286,17 @@ export async function createStudyController(
     const card = session?.current() ?? null;
     if (card === null) {
       publish({
-        phase: "finished",
+        phase: session?.isFinished() ? "finished" : "waiting",
         card: null,
         hintVisible: false,
         session: session?.progress() ?? EMPTY_SESSION,
+        nextReviewAt: session?.nextDue() ?? null,
       });
       return;
     }
     publish({
       phase: "question",
+      nextReviewAt: null,
       card,
       hintVisible: false,
       session: session?.progress() ?? EMPTY_SESSION,
@@ -316,11 +327,16 @@ export async function createStudyController(
         studiedToday: await studiedToday(db, deckId, now),
       });
 
-      session = createSession(queue.cards, {
-        againGap: settings.againGap,
-        repeatHard: settings.repeatHard,
-        hardGap: settings.hardGap,
+      const pending = cards.flatMap((card) => {
+        const row = progress.get(card.id);
+        return row &&
+          (row.state === "learning" || row.state === "relearning") &&
+          !isHidden(row, now) &&
+          Date.parse(row.due) > now.getTime()
+          ? [{ card, due: row.due }]
+          : [];
       });
+      session = createSession(queue.cards, { clock, pending });
       undoStack.length = 0;
       publish({
         tally: { ...EMPTY_TALLY },
@@ -330,8 +346,8 @@ export async function createStudyController(
         canUndo: false,
       });
 
-      if (queue.cards.length === 0) {
-        publish({ phase: "empty", card: null });
+      if (session.isFinished()) {
+        publish({ phase: "empty", card: null, nextReviewAt: null });
         return;
       }
       advance();
@@ -372,6 +388,7 @@ export async function createStudyController(
       if (state.phase !== "answered" || card === null || state.saving) return;
 
       publish({ saving: true, error: null });
+      let nextDue: string | undefined;
       try {
         // Запись идёт до перехода к следующей карточке: если вкладку закроют
         // на анимации, ответ уже на диске.
@@ -382,6 +399,11 @@ export async function createStudyController(
           now: clock(),
           scheduler,
         });
+        if (
+          result.progress.state === "learning" ||
+          result.progress.state === "relearning"
+        )
+          nextDue = result.progress.due;
         // Снимок снимается до `session.answer`, иначе он опишет уже
         // изменённую очередь и возврат приведёт не туда.
         if (session !== null) {
@@ -402,7 +424,7 @@ export async function createStudyController(
         return;
       }
 
-      session?.answer(grade);
+      session?.answer(grade, nextDue);
       publish({
         saving: false,
         tally: { ...state.tally, [grade]: state.tally[grade] + 1 },
@@ -452,6 +474,7 @@ export async function createStudyController(
 
       publish({
         phase: step.kind === "grade" ? "answered" : step.phase,
+        nextReviewAt: null,
         card: step.card,
         hintVisible: false,
         tally,
@@ -517,5 +540,8 @@ export async function createStudyController(
     },
 
     restart: build,
+    refresh() {
+      if (state.phase === "waiting" && !state.saving) advance();
+    },
   };
 }

@@ -17,6 +17,8 @@ from __future__ import annotations
 
 import re
 
+from .limits import MAX_EXPRESSION_CHARS, MAX_VARIANTS, require_budget
+
 # Плейсхолдеры словаря: somebody / something.
 PLACEHOLDERS = {"sb", "sth", "sb's", "sth's", "oneself", "yourself"}
 
@@ -40,9 +42,11 @@ def _expand_optional(text: str) -> list[str]:
         for item in results:
             match = _OPTIONAL_RE.search(item)
             if not match:
+                require_budget(len(grown) + 1, MAX_VARIANTS, "варианты скобок")
                 grown.append(item)
                 continue
             changed = True
+            require_budget(len(grown) + 2, MAX_VARIANTS, "варианты скобок")
             with_part = item[: match.start()] + match.group(1) + item[match.end():]
             without = item[: match.start()] + item[match.end():]
             grown.extend([with_part, without])
@@ -52,16 +56,18 @@ def _expand_optional(text: str) -> list[str]:
     return [_tidy(item) for item in results if _tidy(item)]
 
 
-def _expand_slashes(text: str) -> tuple[list[str], bool]:
+def _expand_slashes(text: str, limit: int = MAX_VARIANTS) -> tuple[list[str], bool]:
     """Раскрывает слэши по токенам. Второе значение — нужна ли проверка."""
     tokens = text.split(" ")
     slashed = [i for i, token in enumerate(tokens) if "/" in token]
     if not slashed:
+        require_budget(1, limit, "варианты слова")
         return [text], False
 
     results = [""]
     for token in tokens:
         parts = token.split("/") if "/" in token else [token]
+        require_budget(len(results) * len(parts), limit, "варианты слэшей")
         results = [f"{prefix} {part}".strip() for prefix in results for part in parts]
 
     # Слэш внутри многословной записи может относиться к куску из двух слов —
@@ -72,6 +78,7 @@ def _expand_slashes(text: str) -> tuple[list[str], bool]:
 
 def expand(word: str) -> tuple[list[str], bool]:
     """Все формы записи партнёра. Возвращает (варианты, нужна ли проверка)."""
+    require_budget(len(word), MAX_EXPRESSION_CHARS, "длина словарной записи")
     text = _tidy(word)
     if not text:
         return [], False
@@ -86,12 +93,12 @@ def expand(word: str) -> tuple[list[str], bool]:
     variants: list[str] = []
     needs_review = False
     for optional_form in _expand_optional(text) or [text]:
-        expanded, review = _expand_slashes(optional_form)
+        expanded, review = _expand_slashes(optional_form, MAX_VARIANTS - len(variants))
         variants.extend(expanded)
         needs_review = needs_review or review
 
     for item in extra:
-        expanded, review = _expand_slashes(item)
+        expanded, review = _expand_slashes(item, MAX_VARIANTS - len(variants))
         variants.extend(expanded)
         needs_review = needs_review or review
 

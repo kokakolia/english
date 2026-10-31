@@ -18,6 +18,7 @@ from __future__ import annotations
 import hashlib
 from pathlib import Path
 from ..files import atomic_write_text, read_tsv
+from ..locking import serialized_file_update
 
 # Репозиторий, а не pipeline/data: data в git не попадает.
 TRANSLATIONS_DIR = Path(__file__).resolve().parents[2] / "translations"
@@ -59,6 +60,7 @@ def _write(pairs: dict[str, tuple[str, str]]) -> None:
     atomic_write_text(TSV_PATH, "\n".join(lines) + "\n")
 
 
+@serialized_file_update(lambda: TSV_PATH)
 def save_many(items: list[tuple[str, str]]) -> tuple[int, int]:
     """Сохраняет пары (английское предложение, перевод).
 
@@ -84,6 +86,7 @@ def save_many(items: list[tuple[str, str]]) -> tuple[int, int]:
     return added, updated
 
 
+@serialized_file_update(lambda: TSV_PATH)
 def forget_unused(live_keys: set[str]) -> int:
     """Убирает переводы предложений, которых больше нет ни в одной карточке."""
     pairs = load_pairs()

@@ -13,6 +13,11 @@
 from __future__ import annotations
 
 import re
+from dataclasses import dataclass
+from functools import lru_cache
+
+from .limits import (MAX_EXAMPLE_CHARS, MAX_EXPRESSION_CHARS, MAX_PHRASE_TOKENS,
+                     MAX_TOKEN_CHARS, SearchBudget, require_budget)
 
 # Неправильные глаголы: база → прочие формы.
 _IRREGULAR_VERBS = {
@@ -160,10 +165,6 @@ _FILLERS = (
     "one's|some|any|no|such"
 )
 _WORD_CHARS = r"[A-Za-z][A-Za-z'’-]*"
-# Между частями коллокации допускаем пробел или дефис: `real life` в примере
-# нередко пишется как `real-life`.
-_JOINER = rf"[\s-]+(?:(?:{_FILLERS})[\s-]+)?"
-
 # Именная группа на месте sb/sth — не более двух слов, иначе плейсхолдер
 # «съедает» полпредложения вместе с глаголом.
 _NOUN_PHRASE = rf"{_WORD_CHARS}(?:\s+{_WORD_CHARS})?"
@@ -216,6 +217,7 @@ def _regular_forms(word: str) -> set[str]:
 
 def forms(word: str) -> set[str]:
     """Все правдоподобные словоформы."""
+    require_budget(len(word), MAX_TOKEN_CHARS, "длина токена")
     base = word.lower().strip()
     if not base:
         return set()
@@ -236,20 +238,126 @@ def _token_regex(token: str) -> str:
     return "(?:" + "|".join(re.escape(form) for form in alternatives) + ")"
 
 
-def phrase_regex(phrase: str) -> re.Pattern[str] | None:
-    """Регулярка для многословного партнёра, допускающая артикли внутри."""
+@dataclass(frozen=True)
+class PhraseMatch:
+    bounds: tuple[int, int]
+    capture: tuple[int, int]
+
+    def span(self, group: int = 0) -> tuple[int, int]:
+        if group not in (0, 1):
+            raise IndexError(group)
+        return self.capture if group else self.bounds
+
+    def start(self) -> int:
+        return self.bounds[0]
+
+    def end(self) -> int:
+        return self.bounds[1]
+
+
+_SEPARATOR = re.compile(r"[\s-]+")
+_FILLER_SEPARATOR = re.compile(rf"(?:{_FILLERS})\b[\s-]+", re.IGNORECASE)
+_BOUNDARY = re.compile(r"\b")
+_WORD = re.compile(_WORD_CHARS, re.IGNORECASE)
+
+
+class PhrasePattern:
+    """Поиск по состояниям (номер токена, позиция), без перебора всех путей.
+
+    Локальные регулярки распознают один токен/плейсхолдер. Неоднозначные
+    разделения фразы мемоизируются, в том числе неудачные; бюджет общий для
+    всех начальных позиций одного поиска.
+    """
+
+    def __init__(self, tokens: list[str], gap: tuple[int, int]):
+        require_budget(len(tokens), MAX_PHRASE_TOKENS, "токены фразы")
+        self.gap = gap
+        self.parts = []
+        self.noun_parts = []
+        for token in tokens:
+            require_budget(len(token), MAX_TOKEN_CHARS, "длина токена")
+            clean = token.lower().strip(",.;:!?\"")
+            noun = clean in ("sb", "sth", "somebody", "something", "oneself")
+            self.noun_parts.append(noun)
+            if noun:
+                # Сначала два слова, как в прежнем жадном поиске, затем одно.
+                choices = [rf"{_WORD_CHARS}\s+{_WORD_CHARS}", _WORD_CHARS]
+            else:
+                choices = [_token_regex(token)]
+            self.parts.append([re.compile(rf"(?:{choice})", re.IGNORECASE)
+                               for choice in choices])
+
+    def _find(self, text: str, full: bool, budget: SearchBudget | None) -> PhraseMatch | None:
+        require_budget(len(text), MAX_EXAMPLE_CHARS, "длина примера")
+        budget = budget if budget is not None else SearchBudget()
+        budget.scan(len(text))
+        for word in _WORD.finditer(text):
+            require_budget(len(word[0]), MAX_TOKEN_CHARS, "длина слова в примере")
+
+        @lru_cache(maxsize=None)
+        def suffix(index: int, position: int):
+            budget.advance()
+            for pattern in self.parts[index]:
+                matched = pattern.match(text, position)
+                if matched is None:
+                    continue
+                ends = [matched.end()]
+                if self.noun_parts[index]:
+                    # Дефис может быть частью имени или разделителем фразы.
+                    ends.extend(end for end in range(matched.end() - 1, position, -1)
+                                if text[end] == "-" and _BOUNDARY.match(text, end))
+                for end in ends:
+                    if index == len(self.parts) - 1:
+                        if _BOUNDARY.match(text, end) and (not full or end == len(text)):
+                            return ((position, end),)
+                        continue
+                    separator = _SEPARATOR.match(text, end)
+                    if separator is None:
+                        continue
+                    after = separator.end()
+                    filler = _FILLER_SEPARATOR.match(text, after)
+                    next_positions = [filler.end(), after] if filler else [after]
+                    for following in next_positions:
+                        # Даже попадание в кэш требует работы: повторные
+                        # переходы тоже расходуют общий бюджет.
+                        budget.advance()
+                        rest = suffix(index + 1, following)
+                        if rest is not None:
+                            return ((position, end),) + rest
+            return None
+
+        try:
+            starts = [0] if full else (match.start() for match in _BOUNDARY.finditer(text))
+            for start in starts:
+                if not _BOUNDARY.match(text, start):
+                    continue
+                spans = suffix(0, start)
+                if spans is not None:
+                    return PhraseMatch((start, spans[-1][1]),
+                                       (spans[self.gap[0]][0], spans[self.gap[1] - 1][1]))
+            return None
+        finally:
+            # Не оставляем текст и таблицу состояний в цикле замыканий до GC.
+            suffix.cache_clear()
+
+    def search(self, text: str, *, budget: SearchBudget | None = None) -> PhraseMatch | None:
+        return self._find(text, False, budget)
+
+    def fullmatch(self, text: str, *, budget: SearchBudget | None = None) -> PhraseMatch | None:
+        return self._find(text, True, budget)
+
+
+def phrase_regex(phrase: str) -> PhrasePattern | None:
+    """Совместимый поисковый интерфейс; фраза больше не является общей регуляркой."""
+    require_budget(len(phrase), MAX_EXPRESSION_CHARS, "длина фразы")
     tokens = [t for t in phrase.split() if t and t != "~"]
     if not tokens:
         return None
-    body = _JOINER.join(_token_regex(token) for token in tokens)
-    try:
-        return re.compile(rf"\b{body}\b", re.IGNORECASE)
-    except re.error:
-        return None
+    return PhrasePattern(tokens, (0, len(tokens)))
 
 
-def sequence_regex(tokens: list[str], gap: tuple[int, int]) -> re.Pattern[str] | None:
-    """Регулярка для последовательности токенов; группа 1 — место пропуска.
+def sequence_regex(tokens: list[str], gap: tuple[int, int]) -> PhrasePattern | None:
+    """Поиск последовательности токенов; span(1) — границы пропуска.
 
     Ищем коллокацию целиком, а не партнёра отдельно: иначе в предложении
     «My sister is best at cooking» предлог `at` из пары `at best` найдётся
@@ -257,22 +365,7 @@ def sequence_regex(tokens: list[str], gap: tuple[int, int]) -> re.Pattern[str] |
     """
     if not tokens or not (0 <= gap[0] < gap[1] <= len(tokens)):
         return None
-    joiner = _JOINER
-    parts = [_token_regex(token) for token in tokens]
-
-    head = joiner.join(parts[: gap[0]])
-    middle = joiner.join(parts[gap[0] : gap[1]])
-    tail = joiner.join(parts[gap[1] :])
-
-    body = f"({middle})"
-    if head:
-        body = head + joiner + body
-    if tail:
-        body = body + joiner + tail
-    try:
-        return re.compile(rf"\b{body}\b", re.IGNORECASE)
-    except re.error:
-        return None
+    return PhrasePattern(tokens, gap)
 
 
 def find_span(text: str, phrase: str) -> tuple[int, int] | None:

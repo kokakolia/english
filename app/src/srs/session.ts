@@ -1,161 +1,129 @@
-/**
- * Сессия повторения: порядок карточек внутри одного захода.
- *
- * Очередь дня отвечает на вопрос «что показать сегодня», сессия — на вопрос
- * «что показать прямо сейчас». Разница существенна: карточку, на которой
- * учащийся ошибся, нужно вернуть в этом же заходе, а не через сутки. Иначе
- * ошибка не исправляется, а просто откладывается.
- *
- * Сессия сознательно ничего не знает про планировщик и хранилище: она
- * распоряжается только порядком. Применить оценку и записать её в журнал —
- * дело вызывающего кода. Благодаря этому её поведение проверяется без часов,
- * базы и моков.
- */
-
+/** Порядок занятия и короткие повторы по времени, назначенному планировщиком. */
 import type { DeckCard, Grade } from "./types";
 
 export interface SessionOptions {
-  /**
-   * Через сколько других карточек вернуть ту, на которой ошиблись.
-   * Ноль вернёт её сразу же, и она будет угадана по свежей памяти, а не
-   * вспомнена.
-   */
-  againGap?: number;
-  /**
-   * Возвращать ли карточки, оценённые как `hard`. По умолчанию да.
-   *
-   * Формально ответ был верным, и FSRS считает это успехом, а не провалом.
-   * Но «плохо помню» означает, что вспомнилось не сразу, и второй показ в тот
-   * же заход — ровно то, ради чего эта оценка и нажимается.
-   */
-  repeatHard?: boolean;
-  /**
-   * Через сколько карточек возвращать «плохо помню».
-   *
-   * Отступ больше, чем у «не знал»: там нужно успеть забыть подсказку, здесь
-   * память уже сработала, и слишком близкий повтор превратится в списывание.
-   * По умолчанию вдвое больше `againGap`.
-   */
-  hardGap?: number;
+  clock?: () => Date;
+  pending?: readonly { card: DeckCard; due: string }[];
 }
 
 export interface SessionProgress {
-  /** Сколько карточек ещё покажут, включая возвраты. */
   remaining: number;
-  /** Сколько ответов дано, включая повторные показы одной карточки. */
   answered: number;
-  /** Сколько карточек закрыто окончательно. */
+  /** Карточки без ожидающего короткого повтора. */
   completed: number;
-  /** Сколько раз пришлось возвращать карточки. */
+  /** Дополнительные попытки, которые уже состоялись. */
   repeats: number;
+  firstAnswered: number;
+  /** С первого раза вспомнены hard/good/easy. */
+  firstRecalled: number;
 }
 
-/**
- * Полное состояние сессии на какой-то момент.
- *
- * Нужен для отмены. Отменять `answer` обратным действием («вынуть карточку
- * оттуда, куда её положили, и вернуть в начало») — значит держать в голове
- * все ветки `answer` и ошибиться на первой же правке. Снимок не зависит от
- * того, что именно делал `answer`, и потому не устаревает.
- */
+interface PendingCard {
+  card: DeckCard;
+  due: number;
+}
+
 export interface SessionSnapshot {
-  queue: readonly DeckCard[];
+  queue: readonly PendingCard[];
+  activeId: string | null;
   answered: number;
   completed: number;
-  repeats: number;
+  firstGrades: readonly (readonly [string, Grade])[];
 }
 
 export interface Session {
-  /** Текущая карточка или `null`, если сессия закончена. */
   current(): DeckCard | null;
-  /** Оценить текущую карточку и перейти к следующей. */
-  answer(grade: Grade): void;
-  /**
-   * Убрать текущую карточку из захода, не засчитывая ответ.
-   *
-   * Нужно для действий над карточкой — приостановки, закапывания, сброса.
-   * Это не ответ: счётчики занятия не должны считать выключенную карточку
-   * ни отвеченной, ни закрытой.
-   */
+  /** nextDue передаётся только для learning/relearning, без собственной эвристики. */
+  answer(grade: Grade, nextDue?: string): void;
   drop(): void;
   progress(): SessionProgress;
   isFinished(): boolean;
-  /** Снять состояние, чтобы потом вернуться к нему. */
+  nextDue(): string | null;
   snapshot(): SessionSnapshot;
-  /** Вернуться к снятому состоянию. */
   restore(snapshot: SessionSnapshot): void;
 }
-
-const DEFAULT_AGAIN_GAP = 3;
 
 export function createSession(
   cards: readonly DeckCard[],
   options: SessionOptions = {},
 ): Session {
-  const againGap = options.againGap ?? DEFAULT_AGAIN_GAP;
-  const repeatHard = options.repeatHard ?? true;
-  const hardGap = options.hardGap ?? againGap * 2;
-
-  const queue: DeckCard[] = cards.slice();
-  let answered = 0;
-  let completed = 0;
-  let repeats = 0;
-
-  function shouldRepeat(grade: Grade): boolean {
-    if (grade === "again") return true;
-    return repeatHard && grade === "hard";
+  const clock = options.clock ?? (() => new Date());
+  const queue: PendingCard[] = cards.map((card) => ({ card, due: 0 }));
+  const included = new Set(cards.map((card) => card.id));
+  for (const item of options.pending ?? []) {
+    if (!included.has(item.card.id)) {
+      queue.push({ card: item.card, due: Date.parse(item.due) });
+      included.add(item.card.id);
+    }
   }
-
-  function gapFor(grade: Grade): number {
-    return grade === "hard" ? hardGap : againGap;
+  queue.sort((a, b) => a.due - b.due);
+  let answered = 0,
+    completed = 0;
+  const firstGrades = new Map<string, Grade>();
+  let activeId: string | null = null;
+  function ready() {
+    // Уже показанная карточка закреплена: наступивший в это время повтор
+    // не должен получить оценку вместо неё.
+    if (activeId !== null)
+      return queue.findIndex((item) => item.card.id === activeId);
+    const now = clock().getTime();
+    const repeat = queue.findIndex((item) => item.due > 0 && item.due <= now);
+    const index =
+      repeat >= 0 ? repeat : queue.findIndex((item) => item.due <= now);
+    activeId = queue[index]?.card.id ?? null;
+    return index;
   }
-
   return {
-    current() {
-      return queue[0] ?? null;
+    current: () => queue[ready()]?.card ?? null,
+    answer(grade, nextDue) {
+      const index = ready();
+      if (index < 0) return;
+      const [item] = queue.splice(index, 1);
+      if (!item) return;
+      activeId = null;
+      answered++;
+      if (!firstGrades.has(item.card.id)) firstGrades.set(item.card.id, grade);
+      if (nextDue !== undefined) {
+        queue.push({ card: item.card, due: Date.parse(nextDue) });
+        queue.sort((a, b) => a.due - b.due);
+      } else completed++;
     },
-
-    answer(grade) {
-      const card = queue.shift();
-      if (card === undefined) return;
-
-      answered += 1;
-      if (shouldRepeat(grade)) {
-        repeats += 1;
-        // Ставим не в конец, а через несколько карточек: в конце длинной
-        // очереди возврат превратится в новое знакомство, а не в повторную
-        // попытку. Если очередь короче отступа, карточка встанет в конец.
-        const position = Math.min(gapFor(grade), queue.length);
-        queue.splice(position, 0, card);
-      } else {
-        completed += 1;
-      }
-    },
-
     drop() {
-      queue.shift();
+      const index = ready();
+      if (index >= 0) queue.splice(index, 1);
+      activeId = null;
     },
-
-    progress() {
-      return { remaining: queue.length, answered, completed, repeats };
-    },
-
-    isFinished() {
-      return queue.length === 0;
-    },
-
-    snapshot() {
-      // Копия списка, а не ссылка: иначе снимок будет меняться вместе с
-      // очередью и вернёт нас туда же, откуда мы уходили.
-      return { queue: queue.slice(), answered, completed, repeats };
-    },
-
+    progress: () => ({
+      remaining: queue.length,
+      answered,
+      completed,
+      repeats: answered - firstGrades.size,
+      firstAnswered: firstGrades.size,
+      firstRecalled: [...firstGrades.values()].filter(
+        (grade) => grade !== "again",
+      ).length,
+    }),
+    isFinished: () => queue.length === 0,
+    nextDue: () =>
+      queue.length
+        ? new Date(Math.min(...queue.map((item) => item.due))).toISOString()
+        : null,
+    snapshot: () => ({
+      queue: queue.slice(),
+      activeId,
+      answered,
+      completed,
+      firstGrades: [...firstGrades],
+    }),
     restore(snapshot) {
       queue.length = 0;
       queue.push(...snapshot.queue);
+      activeId = snapshot.activeId;
       answered = snapshot.answered;
       completed = snapshot.completed;
-      repeats = snapshot.repeats;
+      firstGrades.clear();
+      for (const [id, grade] of snapshot.firstGrades)
+        firstGrades.set(id, grade);
     },
   };
 }

@@ -227,6 +227,78 @@ it("разные версии с одинаковой датой не замен
   });
 });
 
+it("повторная публикация той же версии обновляет метаданные и блокирует откат копией", async () => {
+  const db = await database();
+  await importDeck(db, file());
+  await recordReview(db, {
+    cardId: card.id,
+    deckId: "audit",
+    grade: "easy",
+    now: NOW,
+    scheduler,
+  });
+  const progress = await db.progress.get(card.id);
+  const originalImportedAt = (await db.decks.get("audit"))!.importedAt;
+  const other = await database();
+  await importDeck(
+    other,
+    file(
+      "v2",
+      [{ ...card, translation: "Other answer" }],
+      new Date(NOW.getTime() + DAY),
+    ),
+  );
+  const intermediateCopy = await exportBackup(other);
+  const latest = file("v1", [card], new Date(NOW.getTime() + 2 * DAY));
+  latest.meta.name = "Updated name";
+  latest.meta.source = { edition: 2 };
+  expect((await importDeck(db, latest)).reason).toBe("same-version");
+  expect(await db.decks.get("audit")).toMatchObject({
+    builtAt: latest.meta.built_at,
+    name: "Updated name",
+    source: { edition: 2 },
+    importedAt: originalImportedAt,
+  });
+  expect(
+    (await restoreBackup(db, intermediateCopy, { mode: "merge" })).cards,
+  ).toBe(0);
+  expect((await db.decks.get("audit"))!.version).toBe("v1");
+  expect(await db.cards.get(card.id)).toMatchObject(card);
+  expect(await db.progress.get(card.id)).toEqual(progress);
+  expect(await db.reviews.count()).toBe(1);
+});
+
+it("устаревшая публикация той же версии не понижает дату и метаданные", async () => {
+  const db = await database();
+  const latest = file("v1", [card], new Date(NOW.getTime() + 2 * DAY));
+  latest.meta.name = "Current name";
+  await importDeck(db, latest);
+  await importDeck(db, file());
+  expect(await db.decks.get("audit")).toMatchObject({
+    builtAt: latest.meta.built_at,
+    name: "Current name",
+  });
+});
+
+it.each([false, true])(
+  "ремонт и принудительный импорт прежней версии сохраняют дату публикации (force=%s)",
+  async (force) => {
+    const db = await database();
+    const latest = file("v1", [card], new Date(NOW.getTime() + 2 * DAY));
+    latest.meta.name = "Current name";
+    await importDeck(db, latest);
+    await db.cards.update(card.id, { answer: "Corrupted answer" });
+    await importDeck(db, file(), { force });
+    expect((await db.cards.get(card.id))!.answer).toBe(card.answer);
+    expect((await db.decks.get("audit"))!.builtAt).toBe(latest.meta.built_at);
+    expect((await db.decks.get("audit"))!.name).toBe("Current name");
+    const old = await exportBackup(db);
+    old.decks[0]!.builtAt = NOW.toISOString();
+    await restoreBackup(db, old, { mode: "merge" });
+    expect((await db.decks.get("audit"))!.builtAt).toBe(latest.meta.built_at);
+  },
+);
+
 it("изменённая часть с прежней контрольной суммой отклоняется", async () => {
   const data = file();
   const hash = await contentHash(data.cards);

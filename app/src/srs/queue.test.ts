@@ -87,6 +87,34 @@ describe("разведение сиблингов", () => {
 });
 
 describe("очередь дня", () => {
+  it("отбирает самые старые сроки раньше новых и возобновляет новые после разгрузки", () => {
+    const reviews = makeDeck(3, 3);
+    const fresh = makeCard({ id: "new-card", position: 100 });
+    const entries = reviews.map((card, i) => dueProgress(card.id, i + 1));
+    const input = {
+      cards: [...reviews, fresh],
+      progress: progressMap(entries),
+      now: DAY,
+    };
+    const limited = buildQueue({
+      ...input,
+      settings: { reviewsPerDay: 1, newPerDay: 5, siblingGap: 0 },
+    });
+    expect(limited.cards.map((card) => card.id)).toEqual([reviews[2]!.id]);
+    expect(limited.counts.fresh).toBe(0);
+    expect(limited.backlog).toBe(2);
+    const cleared = buildQueue({
+      ...input,
+      settings: { reviewsPerDay: 3, newPerDay: 5, siblingGap: 0 },
+    });
+    expect(cleared.counts.fresh).toBe(1);
+    const used = buildQueue({
+      ...input,
+      studiedToday: { fresh: 0, review: 3 },
+      settings: { reviewsPerDay: 3, newPerDay: 5 },
+    });
+    expect(used.counts.fresh).toBe(0);
+  });
   it("соблюдает лимит новых карточек", () => {
     const cards = makeDeck(100, 10);
     const queue = buildQueue({

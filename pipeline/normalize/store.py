@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS state (
     slug          TEXT PRIMARY KEY,
     source_dict   TEXT,
     fetched_at    TEXT,
+    source_hash   TEXT,
     version       TEXT,
     n_records     INTEGER,
     normalized_at TEXT
@@ -64,23 +65,25 @@ def connect() -> sqlite3.Connection:
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(DB_PATH)
     conn.executescript(SCHEMA)
+    if "source_hash" not in {row[1] for row in conn.execute("PRAGMA table_info(state)")}:
+        conn.execute("ALTER TABLE state ADD COLUMN source_hash TEXT")
     conn.execute("PRAGMA journal_mode=WAL")
     conn.commit()
     return conn
 
 
-def is_current(conn: sqlite3.Connection, slug: str, fetched_at: str,
+def is_current(conn: sqlite3.Connection, slug: str, source_hash: str,
                version: str) -> bool:
     """Обработана ли статья теми же правилами и по той же версии сырья."""
     row = conn.execute(
-        "SELECT fetched_at, version FROM state WHERE slug = ?", (slug,)
+        "SELECT source_hash, version FROM state WHERE slug = ?", (slug,)
     ).fetchone()
-    return bool(row) and row[0] == fetched_at and row[1] == version
+    return bool(row) and bool(source_hash) and row[0] == source_hash and row[1] == version
 
 
 def replace_slug(conn: sqlite3.Connection, slug: str, source_dict: str,
                  fetched_at: str, version: str,
-                 records: list[Collocation]) -> None:
+                 records: list[Collocation], *, source_hash: str | None = None) -> None:
     """Перезаписывает все записи одной статьи разом.
 
     Именно заменяет, а не дописывает: если правила изменились и часть записей
@@ -108,7 +111,7 @@ def replace_slug(conn: sqlite3.Connection, slug: str, source_dict: str,
                 f"INSERT INTO collocations ({', '.join(_COLUMNS)}) VALUES ({placeholders})",
                 [record.to_row() for record in records],
             )
-        _write_state(conn, slug, source_dict, fetched_at, version, len(records))
+        _write_state(conn, slug, source_dict, fetched_at, version, len(records), source_hash)
     except BaseException:
         conn.execute("ROLLBACK TO SAVEPOINT replace_slug")
         raise
@@ -117,15 +120,16 @@ def replace_slug(conn: sqlite3.Connection, slug: str, source_dict: str,
 
 
 def _write_state(conn: sqlite3.Connection, slug: str, source_dict: str,
-                 fetched_at: str, version: str, count: int) -> None:
+                 fetched_at: str, version: str, count: int, source_hash: str | None) -> None:
     conn.execute(
         """
-        INSERT INTO state (slug, source_dict, fetched_at, version, n_records,
+        INSERT INTO state (slug, source_dict, fetched_at, version, n_records, source_hash,
                            normalized_at)
-        VALUES (?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
         ON CONFLICT(slug) DO UPDATE SET
             source_dict=excluded.source_dict, fetched_at=excluded.fetched_at,
             version=excluded.version, n_records=excluded.n_records,
+            source_hash=excluded.source_hash,
             normalized_at=excluded.normalized_at
         """,
         (
@@ -134,6 +138,7 @@ def _write_state(conn: sqlite3.Connection, slug: str, source_dict: str,
             fetched_at,
             version,
             count,
+            source_hash,
             datetime.now(timezone.utc).isoformat(timespec="seconds"),
         ),
     )

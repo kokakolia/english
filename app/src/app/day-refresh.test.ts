@@ -11,6 +11,26 @@ function environment() {
   };
 }
 
+it("активирует повторение в назначенный момент, не ожидая минутного опроса", async () => {
+  vi.useFakeTimers();
+  const now = new Date("2026-10-31T10:00:00Z");
+  vi.setSystemTime(now);
+  const { events, visibility } = environment();
+  const refresh = vi.fn(async () => {});
+  const stop = watchDay(
+    refresh,
+    vi.fn(),
+    events,
+    visibility,
+    new Date(now.getTime() + 5000).toISOString(),
+  );
+  await vi.advanceTimersByTimeAsync(4999);
+  expect(refresh).not.toHaveBeenCalled();
+  await vi.advanceTimersByTimeAsync(1);
+  expect(refresh).toHaveBeenCalledOnce();
+  stop();
+});
+
 it("пересчёт происходит на границе местных суток", async () => {
   vi.useFakeTimers();
   const beforeMidnight = new Date(2026, 9, 29, 23, 59, 59, 500);

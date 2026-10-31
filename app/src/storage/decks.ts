@@ -42,7 +42,7 @@ export interface DeckFile {
 export interface ImportResult {
   deckId: string;
   version: string;
-  /** Колода уже была этой версии, ничего не делали. */
+  /** Карточки не переписывались; подтверждённые метаданные могли обновиться. */
   skipped: boolean;
   reason?: "same-version" | "older-version" | "version-conflict";
   added: number;
@@ -164,6 +164,31 @@ export async function importDeck(
               sameContent(previous, card)
             );
           });
+        // Дата публикации монотонна внутри версии, в том числе при force и
+        // исправлении повреждённых карточек. Облегчённая копия её не закрепляет.
+        const keepPublication =
+          installed &&
+          existingDeck?.version === meta.version &&
+          Date.parse(existingDeck.builtAt) > Date.parse(meta.built_at);
+        const builtAt = keepPublication
+          ? existingDeck!.builtAt
+          : utcDate(meta.built_at);
+        const publication: StoredDeck = {
+          ...(keepPublication
+            ? existingDeck!
+            : {
+                id: meta.id,
+                name: meta.name,
+                version: meta.version,
+                language: meta.language,
+                cardType: meta.card_type,
+                ...(meta.source ? { source: meta.source } : {}),
+              }),
+          contentHash: hash,
+          count: cards.length,
+          builtAt,
+          importedAt: now.toISOString(),
+        };
         if ((older && !options.allowDowngrade) || (same && !options.force)) {
           result.skipped = true;
           result.version = existingDeck!.version;
@@ -173,8 +198,12 @@ export async function importDeck(
               : "older-version"
             : "same-version";
           result.unchanged = existingDeck!.count;
-          if (same && existingDeck!.contentHash !== hash)
-            await db.decks.put({ ...existingDeck!, contentHash: hash });
+          if (same) {
+            await db.decks.put({
+              ...publication,
+              importedAt: existingDeck!.importedAt,
+            });
+          }
           return;
         }
 
@@ -210,19 +239,7 @@ export async function importDeck(
           result.orphanedProgress = orphaned;
         }
 
-        const deck: StoredDeck = {
-          id: meta.id,
-          name: meta.name,
-          version: meta.version,
-          contentHash: hash,
-          language: meta.language,
-          cardType: meta.card_type,
-          count: cards.length,
-          builtAt: utcDate(meta.built_at),
-          importedAt: now.toISOString(),
-          ...(meta.source ? { source: meta.source } : {}),
-        };
-        await db.decks.put(deck);
+        await db.decks.put(publication);
       },
     );
 

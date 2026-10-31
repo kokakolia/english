@@ -8,6 +8,8 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+from ..files import atomic_write_text
+from ..locking import exclusive_file_lock
 
 PATH = Path(__file__).resolve().parents[2] / "schema" / "card-identities.json"
 
@@ -27,6 +29,7 @@ def scope(record) -> list:
 class IdentityRegistry:
     def __init__(self, entries: list[dict]):
         self.entries = entries
+        self._baseline = json.loads(json.dumps(entries))
 
     def resolve(self, record) -> str:
         alias = legacy_id(record)
@@ -59,9 +62,13 @@ class IdentityRegistry:
             " " + json.dumps(entry, ensure_ascii=False, sort_keys=True)
             for entry in sorted(self.entries, key=lambda entry: entry["id"])
         ) + "\n]\n"
-        temporary = path.with_suffix(".tmp")
-        temporary.write_text(payload, encoding="utf-8")
-        temporary.replace(path)
+        with exclusive_file_lock(path.with_name(path.name + ".lock")):
+            if path.exists() and json.loads(path.read_text(encoding="utf-8")) != self._baseline:
+                raise ValueError(f"реестр ID изменён другим процессом; повторите нормализацию: {path}")
+            if not path.exists() and self._baseline:
+                raise ValueError(f"реестр ID удалён после чтения: {path}")
+            atomic_write_text(path, payload)
+            self._baseline = json.loads(payload)
 
 
 _registry: IdentityRegistry | None = None
