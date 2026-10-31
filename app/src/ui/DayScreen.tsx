@@ -120,7 +120,7 @@ export function DayScreen({
 
       {!ready && counts.nextReviewAt && (
         <p className="quiet">
-          Ближайшее повторение:{" "}
+          Следующие карточки доступны:{" "}
           {new Date(counts.nextReviewAt).toLocaleString("ru-RU", {
             day: "numeric",
             month: "long",
@@ -128,6 +128,25 @@ export function DayScreen({
             minute: "2-digit",
           })}
           . Можно закрыть приложение и вернуться позже.
+        </p>
+      )}
+      {!ready && (counts.reviewLimitReached || counts.newLimitReached) && (
+        <p className="quiet">
+          Дневной лимит новых карточек или обычных повторений достигнут. Лимиты
+          обновляются в полночь; короткие учебные повторы остаются доступны по
+          расписанию.
+        </p>
+      )}
+      {!ready && (counts.newCardsDisabled || counts.reviewsDisabled) && (
+        <p className="quiet">
+          Дневными лимитами отключены:{" "}
+          {[
+            counts.newCardsDisabled ? "новые карточки" : "",
+            counts.reviewsDisabled ? "обычные повторения" : "",
+          ]
+            .filter(Boolean)
+            .join(" и ")}
+          . Короткие учебные повторы остаются доступны по расписанию.
         </p>
       )}
 

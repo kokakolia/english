@@ -85,17 +85,27 @@ function ProgressHeader({
   state: StudyState;
   onExit: () => void;
 }) {
-  const total = Math.max(1, state.session.remaining + state.session.answered);
-  const done = state.session.answered;
+  const total = Math.max(
+    1,
+    state.session.remaining + state.session.completed + state.session.excluded,
+  );
+  const done = state.session.completed;
   // Точки — грубая полоса прогресса: карточек за день бывает и полторы сотни,
   // и рисовать их поштучно бессмысленно. Точные числа рядом, в счётчике.
-  const filled = Math.min(DOT_COUNT, Math.round((done / total) * DOT_COUNT));
+  const filled = Math.min(DOT_COUNT, Math.floor((done / total) * DOT_COUNT));
 
   return (
     <header className="topbar">
       <div className="head">
         <UndoButton controller={controller} state={state} />
-        <div className="dots">
+        <div
+          className="dots"
+          role="progressbar"
+          aria-label="Завершённые карточки"
+          aria-valuemin={0}
+          aria-valuemax={total}
+          aria-valuenow={done}
+        >
           {Array.from({ length: DOT_COUNT }, (_, index) => (
             <span
               key={index}
@@ -105,8 +115,11 @@ function ProgressHeader({
         </div>
         <div className="counter">
           <Leaf className="counter-leaf" />
-          <span className="counter-text">
-            {done}&nbsp;/&nbsp;{total}
+          <span
+            className="counter-text"
+            aria-label={`Завершено: ${done}. Осталось: ${state.session.remaining}. Попыток: ${state.session.answered}. Убрано: ${state.session.excluded}.`}
+          >
+            {done} готово · {state.session.remaining} осталось
           </span>
           <Leaf className="counter-leaf counter-leaf--flip" />
         </div>
@@ -175,9 +188,6 @@ function Summary({
                   </div>
                 ))}
               </dl>
-              <p className="quiet">
-                Оценки выше включают все {answers} попыток.
-              </p>
 
               {session.repeats > 0 && (
                 <p className="quiet">
@@ -186,6 +196,16 @@ function Summary({
                 </p>
               )}
             </>
+          )}
+          <p className="quiet">
+            Завершено: {session.completed}. Ожидают повтора: {session.remaining}
+            . Попыток: {answers}.
+          </p>
+          {session.excluded > 0 && (
+            <p className="quiet">
+              Убрано из занятия: {session.excluded}. Эти карточки не засчитаны
+              как завершённые.
+            </p>
           )}
           {state.phase === "waiting" && state.nextReviewAt && (
             <p className="note" role="status">

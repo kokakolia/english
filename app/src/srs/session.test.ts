@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { createSession } from "./session";
+import { createSession, type SessionSnapshot } from "./session";
 import { makeDeck } from "./testing";
 
 const START = new Date("2026-10-31T10:00:00Z");
@@ -101,5 +101,106 @@ describe("занятие по расписанию", () => {
     session.answer("good");
     expect(session.isFinished()).toBe(true);
     expect(session.progress().answered).toBe(0);
+    expect(session.progress().excluded).toBe(1);
+  });
+
+  it("тысяча отмен не хранит копии всей очереди и первых оценок", () => {
+    const { session } = setup(1000);
+    const snapshots: SessionSnapshot[] = [];
+    for (let i = 0; i < 1000; i++) {
+      session.current();
+      snapshots.push(session.snapshot());
+      session.answer("easy");
+    }
+    const nodes = new Set<unknown>();
+    let change = session.snapshot().change;
+    while (change) {
+      expect(Object.values(change).some(Array.isArray)).toBe(false);
+      nodes.add(change);
+      change = change.parent;
+    }
+    expect(nodes.size).toBe(1000);
+    for (const snapshot of snapshots)
+      expect(Object.values(snapshot).some(Array.isArray)).toBe(false);
+    for (let i = 999; i >= 0; i--) {
+      session.restore(snapshots[i]!);
+      expect(session.progress()).toMatchObject({
+        remaining: 1000 - i,
+        completed: i,
+        answered: i,
+        firstAnswered: i,
+        firstRecalled: i,
+      });
+    }
+  });
+
+  it("отмена восстанавливает вставки повторов, исключения и первые оценки", () => {
+    const { session, cards, at } = setup(3);
+    const first = session.snapshot();
+    session.answer("again", new Date(START.getTime() + 60_000).toISOString());
+    const afterAnswer = session.snapshot();
+    session.drop();
+    const afterDrop = session.snapshot();
+    session.answer("hard");
+    at(1);
+    session.answer("easy");
+    session.restore(afterDrop);
+    expect(session.current()).toEqual(cards[0]); // наступивший повтор имеет приоритет
+    expect(session.progress()).toMatchObject({
+      excluded: 1,
+      answered: 1,
+      completed: 0,
+      firstRecalled: 0,
+    });
+    session.restore(afterAnswer);
+    expect(session.progress().excluded).toBe(0);
+    session.restore(first);
+    expect(session.current()).toEqual(cards[0]);
+    expect(session.progress()).toMatchObject({
+      answered: 0,
+      excluded: 0,
+      firstAnswered: 0,
+      remaining: 3,
+    });
+  });
+
+  it("чужие снимки и отменённые ветки не меняют состояние", () => {
+    const { session } = setup(2),
+      before = session.snapshot();
+    session.answer("good");
+    const branch = session.snapshot();
+    session.restore(before);
+    session.answer("hard");
+    const progress = session.progress();
+    expect(() => session.restore(branch)).toThrow(/ветка/i);
+    expect(() => session.restore(setup().session.snapshot())).toThrow(
+      /другому/,
+    );
+    expect(session.progress()).toEqual(progress);
+  });
+
+  it("девять ошибок не создают ни одной завершённой карточки", () => {
+    const { session, at } = setup(1);
+    for (let minute = 1; minute <= 9; minute++) {
+      session.answer(
+        "again",
+        new Date(START.getTime() + minute * 60_000).toISOString(),
+      );
+      at(minute);
+    }
+    expect(session.progress()).toMatchObject({
+      answered: 9,
+      completed: 0,
+      remaining: 1,
+      firstRecalled: 0,
+    });
+  });
+
+  it("неверный срок отклоняется до изменения очереди и статистики", () => {
+    const { session, cards } = setup(1),
+      before = session.progress();
+    expect(() => session.answer("again", "invalid")).toThrow();
+    expect(session.progress()).toEqual(before);
+    expect(session.current()).toEqual(cards[0]);
   });
 });

@@ -3,6 +3,7 @@ import { expect, it } from "vitest";
 import { ReviewScreen } from "./ReviewScreen";
 import { DayScreen } from "./DayScreen";
 import type { StudyController, StudyState } from "../study/controller";
+import { makeCard } from "../srs/testing";
 
 it("итоги называют первую попытку и дополнительные ответы отдельно", () => {
   const state: StudyState = {
@@ -20,6 +21,7 @@ it("итоги называют первую попытку и дополнит�
       remaining: 1,
       answered: 2,
       completed: 0,
+      excluded: 0,
       repeats: 1,
       firstAnswered: 1,
       firstRecalled: 0,
@@ -37,6 +39,34 @@ it("итоги называют первую попытку и дополнит�
   expect(text).toContain("Дополнительных попыток: 1");
   expect(text).toContain("Время для перерыва");
   expect(text).not.toContain("Занятие завершено");
+  const question = {
+    ...state,
+    phase: "question" as const,
+    card: makeCard(),
+    session: { ...state.session, answered: 9 },
+  };
+  const progress = renderToStaticMarkup(
+    <ReviewScreen
+      controller={{} as StudyController}
+      state={question}
+      onFinish={() => {}}
+    />,
+  );
+  expect(progress).toContain('aria-valuenow="0"');
+  expect(progress).toContain('aria-valuemax="1"');
+  expect(progress.replace(/<[^>]*>/g, "")).toContain("0 готово · 1 осталось");
+  const almostDone = {
+    ...question,
+    session: { ...question.session, completed: 15, remaining: 1 },
+  };
+  const almost = renderToStaticMarkup(
+    <ReviewScreen
+      controller={{} as StudyController}
+      state={almostDone}
+      onFinish={() => {}}
+    />,
+  );
+  expect(almost).toContain('class="dot dot--empty"');
 });
 
 it("экран дня не объявляет день завершённым при будущем повторении", () => {
@@ -57,7 +87,7 @@ it("экран дня не объявляет день завершённым п
       onStart={() => {}}
     />,
   );
-  expect(html).toContain("Ближайшее повторение:");
+  expect(html).toContain("Следующие карточки доступны:");
   expect(html).toContain("Сейчас карточек нет");
   expect(html).not.toContain("На сегодня всё");
 });

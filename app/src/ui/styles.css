@@ -691,6 +691,24 @@ body {
   text-transform: uppercase;
 }
 
+@media (max-width: 640px) {
+  .head .dots {
+    display: none;
+  }
+  .head .counter {
+    margin-left: auto;
+    min-width: 0;
+  }
+  .head .counter-text {
+    font-size: 14px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .head .counter-leaf {
+    display: none;
+  }
+}
+
 .rule {
   display: flex;
   align-items: center;

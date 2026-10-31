@@ -27,6 +27,7 @@ import { loadCards } from "./decks";
 import { getStudySettings } from "./settings";
 import { assertAvailableOwners } from "./ownership";
 import { validProgress, validReview } from "./validation";
+import { nextAvailableAt } from "../srs/availability";
 
 /** Прогресс по карточкам колоды, готовый к передаче в очередь дня. */
 export async function loadProgress(
@@ -211,8 +212,12 @@ export interface DeckCounts {
    * Считается только если лимит передан: без него понятия «сверх лимита» нет.
    */
   backlog: number;
-  /** Ближайшее будущее повторение видимой карточки. */
+  /** Ближайшее будущее занятие с учётом лимитов и отложенных карточек. */
   nextReviewAt: string | null;
+  reviewLimitReached?: boolean;
+  newLimitReached?: boolean;
+  newCardsDisabled?: boolean;
+  reviewsDisabled?: boolean;
   /** Карточек в колоде всего. */
   total: number;
   /** Ни разу не показанных. */
@@ -264,7 +269,7 @@ export async function deckCounts(
     studiedToday(db, deckId, now),
     getStudySettings(db),
   ]);
-  const queue = buildQueue({
+  const input = {
     cards,
     progress,
     now,
@@ -274,19 +279,13 @@ export async function deckCounts(
       newPerDay: newPerDay ?? cards.length + used.fresh,
       reviewsPerDay: reviewsPerDay ?? cards.length + used.review,
     },
-  });
+  };
+  const queue = buildQueue(input);
   let learning = 0;
   let review = 0;
-  let nextReviewAt: string | null = null;
   for (const card of cards) {
     const row = progress.get(card.id);
     if (!row || isHidden(row, now)) continue;
-    if (
-      row.state !== "new" &&
-      Date.parse(row.due) > now.getTime() &&
-      (nextReviewAt === null || Date.parse(row.due) < Date.parse(nextReviewAt))
-    )
-      nextReviewAt = row.due;
     if (row.state === "learning" || row.state === "relearning") learning++;
     if (row.state === "review") review++;
   }
@@ -297,7 +296,15 @@ export async function deckCounts(
     learning,
     review,
     backlog: reviewsPerDay === undefined ? 0 : queue.backlog,
-    nextReviewAt,
+    nextReviewAt: nextAvailableAt(input),
+    reviewLimitReached:
+      reviewsPerDay !== undefined &&
+      reviewsPerDay > 0 &&
+      used.review >= reviewsPerDay,
+    newLimitReached:
+      newPerDay !== undefined && newPerDay > 0 && used.fresh >= newPerDay,
+    newCardsDisabled: newPerDay === 0,
+    reviewsDisabled: reviewsPerDay === 0,
   };
 }
 

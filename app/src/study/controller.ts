@@ -132,6 +132,7 @@ const EMPTY_SESSION: SessionProgress = {
   remaining: 0,
   answered: 0,
   completed: 0,
+  excluded: 0,
   repeats: 0,
   firstAnswered: 0,
   firstRecalled: 0,
